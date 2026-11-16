@@ -1,0 +1,11 @@
+---
+import LegalLayout from "../../components/LegalLayout.astro";
+import legal from "../../data/legal.json";
+
+// Attio Developer Terms, copy fetched live from https://attio.com/legal/attio-developer-terms
+// on 2026-11-16 (HTTP 200). Data lives in src/data/legal.json.
+const entry = (legal as any[]).find((entry) => entry.slug === "attio-developer-terms");
+if (!entry) throw new Error("Missing legal data for attio-developer-terms");
+---
+
+<LegalLayout entry={entry} />

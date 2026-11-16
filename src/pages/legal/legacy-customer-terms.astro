@@ -1,0 +1,11 @@
+---
+import LegalLayout from "../../components/LegalLayout.astro";
+import legal from "../../data/legal.json";
+
+// Legacy Customer Terms, copy fetched live from https://attio.com/legal/legacy-customer-terms
+// on 2026-11-16 (HTTP 200). Data lives in src/data/legal.json.
+const entry = (legal as any[]).find((entry) => entry.slug === "legacy-customer-terms");
+if (!entry) throw new Error("Missing legal data for legacy-customer-terms");
+---
+
+<LegalLayout entry={entry} />

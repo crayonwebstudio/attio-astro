@@ -1,0 +1,11 @@
+---
+import LegalLayout from "../../components/LegalLayout.astro";
+import legal from "../../data/legal.json";
+
+// Attio Services Agreement, copy fetched live from https://attio.com/legal/services-agreement
+// on 2026-11-16 (HTTP 200). Data lives in src/data/legal.json.
+const entry = (legal as any[]).find((entry) => entry.slug === "services-agreement");
+if (!entry) throw new Error("Missing legal data for services-agreement");
+---
+
+<LegalLayout entry={entry} />

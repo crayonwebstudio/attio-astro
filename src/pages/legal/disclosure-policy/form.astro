@@ -1,0 +1,11 @@
+---
+import LegalForm from "../../../components/LegalForm.astro";
+import legal from "../../../data/legal.json";
+
+// Vulnerability Disclosure Form, copy fetched live from https://attio.com/legal/disclosure-policy/form
+// on 2026-11-16 (HTTP 200). Data lives in src/data/legal.json.
+const entry = (legal as any[]).find((entry) => entry.slug === "disclosure-policy/form");
+if (!entry) throw new Error("Missing legal data for disclosure-policy/form");
+---
+
+<LegalForm entry={entry} />

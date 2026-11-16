@@ -1,0 +1,11 @@
+---
+import LegalLayout from "../../components/LegalLayout.astro";
+import legal from "../../data/legal.json";
+
+// Referral Gift Card Reward Policy, copy fetched live from https://attio.com/legal/referral-gift-card-reward-policy
+// on 2026-11-16 (HTTP 200). Data lives in src/data/legal.json.
+const entry = (legal as any[]).find((entry) => entry.slug === "referral-gift-card-reward-policy");
+if (!entry) throw new Error("Missing legal data for referral-gift-card-reward-policy");
+---
+
+<LegalLayout entry={entry} />

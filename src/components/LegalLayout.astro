@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LegalBlocks from "./LegalBlocks.astro";
+
+// Shared layout for the 11 legal document pages under /legal/*.
+// Copy fetched live from https://attio.com/legal/* on 2026-11-16 (HTTP 200
+// each), stored in src/data/legal.json. All titles, headings, paragraphs,
+// lists, and tables are live Attio copy. Live em and en dashes are rendered
+// as commas, per the no em dash rule. No Attio images, logos, or fonts are
+// hotlinked or copied. Live legal pages have no standard FinalCta
+// ("Agentic revenue runs on Attio." appears 0 times in the live HTML), so
+// this layout hides the shared FinalCta. The sidebar is the live one: the
+// same 11 document links on every page, current page highlighted.
+// Note: the spec (§2.10) said to port structure only and not paste legal
+// copy without a legal review decision; the user instruction for this build
+// is to use Attio's real copy from attio.com, so the live copy is rendered
+// here as published.
+
+interface Props {
+  entry: any;
+}
+
+const { entry } = Astro.props;
+
+const sidebar = [
+  { t: "Acceptable Use", href: "/legal/acceptable-use" },
+  { t: "Attio Affiliate Program Terms", href: "/legal/attio-affiliate-program-terms" },
+  { t: "Attio Data Processing Addendum", href: "/legal/attio-data-processing-addendum" },
+  { t: "Attio Developer Terms", href: "/legal/attio-developer-terms" },
+  { t: "Cookie Policy", href: "/legal/cookies" },
+  { t: "Demo Gift Program Policy", href: "/legal/demo-gift-program" },
+  { t: "Legacy Customer Terms", href: "/legal/legacy-customer-terms" },
+  { t: "Privacy Policy", href: "/legal/privacy" },
+  { t: "Referral Gift Card Reward Policy", href: "/legal/referral-gift-card-reward-policy" },
+  { t: "Services Agreement", href: "/legal/services-agreement" },
+  { t: "Vulnerability Disclosure Policy", href: "/legal/disclosure-policy" },
+];
+---
+
+<BaseLayout title={entry.title} description={entry.description} hideFinalCta>
+  <div class="mx-auto max-w-[1200px] px-4 pb-20 pt-10 sm:px-6 lg:pt-32 xl:pb-40 xl:pt-40">
+    <h1 class="max-w-5xl text-balance font-display text-heading-lg">{entry.h1}</h1>
+    {entry.intro && (
+      <p class="mt-5 max-w-2xl text-balance text-xl leading-relaxed text-ink-600">{entry.intro}</p>
+    )}
+    {entry.updated && (
+      <p class="mt-6 text-sm text-ink-700">
+        Last updated: <span class="font-medium text-ink-100">{entry.updated}</span>
+      </p>
+    )}
+
+    <div class="mt-[72px] flex flex-col gap-x-6 gap-y-[72px] lg:mt-[120px] lg:flex-row">
+      <aside
+        class="flex flex-col gap-y-3 lg:sticky lg:top-32 lg:w-64 lg:shrink-0 lg:self-start"
+        aria-label="Legal documents"
+      >
+        {sidebar.map((item) => (
+          <a
+            href={item.href}
+            aria-current={item.href === entry.path ? "page" : undefined}
+            class={
+              item.href === entry.path
+                ? "w-fit text-sm font-medium text-ink-100"
+                : "w-fit text-sm text-ink-600 transition-colors hover:text-blue-500"
+            }
+          >
+            {item.t}
+          </a>
+        ))}
+      </aside>
+
+      <article class="min-w-0 flex-1" aria-label="Document">
+        <div class="font-normal tabular-nums leading-[1.65]">
+          <LegalBlocks blocks={entry.blocks ?? []} />
+        </div>
+      </article>
+    </div>
+  </div>
+</BaseLayout>

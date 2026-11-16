@@ -1,0 +1,279 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Vulnerability Disclosure Form at /legal/disclosure-policy/form.
+// Field labels, placeholders, error strings, and success copy are the live
+// Attio strings, verified from https://attio.com/legal/disclosure-policy/form
+// on 2026-11-16 (HTTP 200): the DOM plus the embedded i18n dictionary
+// (fiftyFormDisclosureForm, fiftyFormDisclosureSuccess). No Attio images,
+// logos, or fonts are hotlinked or copied. Live legal pages have no standard
+// FinalCta ("Agentic revenue runs on Attio." appears 0 times in the live
+// HTML), so this layout hides the shared FinalCta. The form has no backend
+// and no reCAPTCHA here: submit only validates client-side and shows the
+// live success state, with a client-generated Report ID in place of the
+// server-issued one.
+
+interface Props {
+  entry: any;
+}
+
+const { entry } = Astro.props;
+
+const inputClass =
+  "block w-full rounded-[10px] border border-paper-500 bg-white p-[10px_13px] text-sm text-ink-100 outline-none placeholder:text-ink-700 hover:shadow-[0px_1px_4px_rgba(56,62,71,0.1)] focus-visible:border-blue-500 focus-visible:ring-[3px] focus-visible:ring-blue-300";
+const labelClass = "block truncate text-xs text-ink-700";
+const errorClass = "mt-1 hidden text-xs text-red-500";
+---
+
+<BaseLayout title={entry.title} description={entry.description} hideFinalCta>
+  <div class="mx-auto max-w-[1200px] px-4 pb-20 pt-10 sm:px-6 lg:pt-16 xl:pb-40">
+    <div class="grid grid-cols-12 gap-x-6">
+      <div class="col-span-12 xl:col-start-2 xl:col-end-12">
+        <div class="flex flex-col gap-x-6 gap-y-10 xl:flex-row">
+          <div class="grid flex-1 grid-cols-5 gap-x-6 lg:self-start">
+            <div class="col-span-5">
+              <h1 class="mt-16 text-balance text-center font-display text-heading-lg lg:text-left">
+                {entry.h1}
+              </h1>
+              <p class="mt-4 text-center text-xl leading-relaxed text-ink-600 lg:text-left">
+                {entry.intro}
+              </p>
+              <div class="mt-6 flex justify-center lg:justify-start">
+                <a
+                  href="/legal/disclosure-policy"
+                  class="rounded-[10px] border border-ink-100 bg-ink-100 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-ink-200"
+                >
+                  Read the policy
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid flex-1 grid-cols-5 gap-x-6 lg:self-start">
+            <div class="col-span-5">
+              <div class="rounded-[20px] bg-paper-400 p-6 xl:p-10">
+                <form id="disclosure-form" novalidate>
+                  <div class="space-y-[17px]">
+                    <div class="flex flex-col gap-y-1.5">
+                      <label class={labelClass} for="disclosure-email">Email address*</label>
+                      <input
+                        id="disclosure-email"
+                        name="email"
+                        type="email"
+                        placeholder="e.g. nick@example.com"
+                        class={inputClass}
+                      />
+                      <p class={errorClass} data-error="email">Required</p>
+                    </div>
+                    <div class="flex flex-col gap-y-1.5">
+                      <label class={labelClass} for="disclosure-summary">Vulnerability summary*</label>
+                      <input
+                        id="disclosure-summary"
+                        name="summary"
+                        type="text"
+                        placeholder="e.g. XSS on /careers page"
+                        class={inputClass}
+                      />
+                      <p class={errorClass} data-error="summary">Required</p>
+                    </div>
+                    <div class="flex flex-col gap-y-1.5">
+                      <label class={labelClass} for="disclosure-description">
+                        Vulnerability description*
+                      </label>
+                      <input
+                        id="disclosure-description"
+                        name="description"
+                        type="text"
+                        placeholder="e.g. Reflected XSS is possible through malicious input."
+                        class={inputClass}
+                      />
+                      <p class={errorClass} data-error="description">Required</p>
+                    </div>
+                    <div class="flex flex-col gap-y-1.5">
+                      <label class={labelClass} for="disclosure-steps">Replication steps*</label>
+                      <textarea
+                        id="disclosure-steps"
+                        name="replicationSteps"
+                        rows="4"
+                        placeholder="e.g. Navigate to /careers and enter the attached text."
+                        class={inputClass}
+                      ></textarea>
+                      <p class={errorClass} data-error="replicationSteps">Required</p>
+                    </div>
+                    <div class="flex flex-col gap-y-1.5">
+                      <span class={labelClass}>Supporting files (Max. 4MB)</span>
+                      <label
+                        for="disclosure-files"
+                        class="flex cursor-pointer flex-col items-center justify-center gap-1 rounded-[10px] border border-dashed border-paper-600 bg-white px-4 py-6 text-center"
+                      >
+                        <span class="text-sm font-medium text-ink-100">
+                          Drag files here or click to select
+                        </span>
+                        <span class="text-xs text-ink-700">.csv .json .pdf .png .jpg .jpeg .txt</span>
+                        <span class="text-xs text-ink-700" data-files-label>No files selected.</span>
+                      </label>
+                      <input
+                        id="disclosure-files"
+                        name="files"
+                        type="file"
+                        multiple
+                        accept=".csv,.json,.pdf,.png,.jpg,.jpeg,.txt"
+                        class="hidden"
+                      />
+                      <p class={errorClass} data-error="files">Total file size must not exceed 4MB</p>
+                      <p class="text-xs leading-relaxed text-ink-700">
+                        Upload files over 4MB to a file-sharing service and paste the link into the
+                        replication steps.
+                      </p>
+                    </div>
+                    <button
+                      type="submit"
+                      class="w-full rounded-[10px] bg-ink-100 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-ink-200"
+                    >
+                      Submit
+                    </button>
+                    <p class="text-center text-xs leading-relaxed text-ink-700">
+                      This site is protected by reCAPTCHA and the Google{" "}
+                      <a
+                        href="https://policies.google.com/privacy"
+                        class="text-blue-500 underline underline-offset-2 hover:text-blue-600"
+                      >
+                        Privacy Policy
+                      </a>{" "}
+                      and{" "}
+                      <a
+                        href="https://policies.google.com/terms"
+                        class="text-blue-500 underline underline-offset-2 hover:text-blue-600"
+                      >
+                        Terms of Service
+                      </a>{" "}
+                      apply.
+                    </p>
+                  </div>
+                </form>
+
+                <div id="disclosure-success" class="hidden text-center">
+                  <h2 class="font-display text-2xl font-semibold text-ink-100">
+                    We&rsquo;ve received your submission.
+                  </h2>
+                  <p class="mt-4 text-sm leading-relaxed text-ink-600">
+                    Please save your Report ID if you wish to reference your submission in the
+                    future:
+                  </p>
+                  <div class="mt-6 flex items-center justify-center gap-3">
+                    <code
+                      class="rounded bg-white px-3 py-2 font-mono text-sm font-semibold text-ink-100"
+                      data-report-id
+                    ></code>
+                    <button
+                      type="button"
+                      data-copy-report-id
+                      class="rounded-[10px] border border-paper-500 bg-white px-3 py-1.5 text-xs font-medium text-ink-100 transition-colors hover:border-ink-800"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("disclosure-form") as HTMLFormElement | null;
+    const success = document.getElementById("disclosure-success");
+    const filesInput = document.getElementById("disclosure-files") as HTMLInputElement | null;
+    const filesLabel = document.querySelector("[data-files-label]");
+
+    function setError(name: string, message: string | null) {
+      const el = form?.querySelector(`[data-error="${name}"]`);
+      if (!el) return;
+      if (message) {
+        el.textContent = message;
+        el.classList.remove("hidden");
+      } else {
+        el.classList.add("hidden");
+      }
+    }
+
+    filesInput?.addEventListener("change", () => {
+      const files = filesInput.files ? Array.from(filesInput.files) : [];
+      if (filesLabel) {
+        filesLabel.textContent =
+          files.length > 0 ? files.map((f) => f.name).join(", ") : "No files selected.";
+      }
+      const total = files.reduce((sum, f) => sum + f.size, 0);
+      setError("files", total > 4 * 1024 * 1024 ? "Total file size must not exceed 4MB" : null);
+    });
+
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      let valid = true;
+      const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim();
+      const summary = (form.elements.namedItem("summary") as HTMLInputElement).value.trim();
+      const description = (form.elements.namedItem("description") as HTMLInputElement).value.trim();
+      const steps = (form.elements.namedItem("replicationSteps") as HTMLTextAreaElement).value.trim();
+      const files = filesInput?.files ? Array.from(filesInput.files) : [];
+      const total = files.reduce((sum, f) => sum + f.size, 0);
+
+      if (!email) {
+        setError("email", "Required");
+        valid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        setError("email", "Please enter a valid email address");
+        valid = false;
+      } else {
+        setError("email", null);
+      }
+      if (!summary) {
+        setError("summary", "Required");
+        valid = false;
+      } else {
+        setError("summary", null);
+      }
+      if (!description) {
+        setError("description", "Required");
+        valid = false;
+      } else {
+        setError("description", null);
+      }
+      if (!steps) {
+        setError("replicationSteps", "Required");
+        valid = false;
+      } else {
+        setError("replicationSteps", null);
+      }
+      if (total > 4 * 1024 * 1024) {
+        setError("files", "Total file size must not exceed 4MB");
+        valid = false;
+      } else {
+        setError("files", null);
+      }
+      if (!valid) return;
+
+      const reportId =
+        "ATT-" + Math.random().toString(36).slice(2, 10).toUpperCase();
+      const idEl = success?.querySelector("[data-report-id]");
+      if (idEl) idEl.textContent = reportId;
+      form.classList.add("hidden");
+      success?.classList.remove("hidden");
+    });
+
+    document.querySelector("[data-copy-report-id]")?.addEventListener("click", async (event) => {
+      const button = event.currentTarget as HTMLButtonElement;
+      const idEl = success?.querySelector("[data-report-id]");
+      try {
+        await navigator.clipboard.writeText(idEl?.textContent ?? "");
+        button.textContent = "Copied";
+        setTimeout(() => {
+          button.textContent = "Copy";
+        }, 2000);
+      } catch {
+        button.textContent = "Copy";
+      }
+    });
+  </script>
+</BaseLayout>

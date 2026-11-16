@@ -1,0 +1,90 @@
+---
+import LegalSegments from "./LegalSegments.astro";
+
+// Renders the block model in src/data/legal.json: h2, h3, p, and table.
+// Copy fetched live from https://attio.com/legal/* on 2026-11-16 (HTTP 200
+// each). Live em and en dashes are rendered as commas, per the no em dash
+// rule. No Attio images, logos, or fonts are hotlinked or copied.
+interface Props {
+  blocks: any[];
+}
+
+const { blocks } = Astro.props;
+---
+
+{
+  blocks.map((block) => {
+    if (block.kind === "h2") {
+      return (
+        <h2
+          id={block.id || undefined}
+          class="scroll-mt-32 font-display text-[28px] font-semibold leading-tight tracking-tight text-ink-100 first:mt-0 sm:text-[32px] [&:not(:first-child)]:mt-12"
+        >
+          {block.text}
+        </h2>
+      );
+    }
+    if (block.kind === "h3") {
+      return (
+        <h3
+          id={block.id || undefined}
+          class="scroll-mt-32 text-xl font-semibold leading-snug text-ink-100 [&:not(:first-child)]:mt-10"
+        >
+          {block.text}
+        </h3>
+      );
+    }
+    if (block.kind === "p") {
+      return (
+        <p class="mt-5 text-base leading-[1.65] text-ink-600 first:mt-0">
+          <LegalSegments segments={block.segments ?? []} />
+        </p>
+      );
+    }
+    if (block.kind === "table") {
+      return (
+        <div class="mt-10 overflow-x-auto">
+          <table class="w-full border-collapse text-left text-sm">
+            {block.header && block.rows && block.rows.length > 0 ? (
+              <>
+                <thead>
+                  <tr class="border-b border-paper-500">
+                    {block.rows[0].map((cell: any[]) => (
+                      <th class="px-3 py-2 align-top font-semibold text-ink-100">
+                        <LegalSegments segments={cell} />
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {block.rows.slice(1).map((row: any[]) => (
+                    <tr class="border-b border-paper-400">
+                      {row.map((cell: any[]) => (
+                        <td class="px-3 py-2 align-top leading-relaxed text-ink-600">
+                          <LegalSegments segments={cell} />
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </>
+            ) : (
+              <tbody>
+                {block.rows?.map((row: any[]) => (
+                  <tr class="border-b border-paper-400">
+                    {row.map((cell: any[]) => (
+                      <td class="px-3 py-2 align-top leading-relaxed text-ink-600">
+                        <LegalSegments segments={cell} />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            )}
+          </table>
+        </div>
+      );
+    }
+    return null;
+  })
+}

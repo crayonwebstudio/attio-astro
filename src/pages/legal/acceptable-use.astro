@@ -1,0 +1,11 @@
+---
+import LegalLayout from "../../components/LegalLayout.astro";
+import legal from "../../data/legal.json";
+
+// Acceptable use, copy fetched live from https://attio.com/legal/acceptable-use
+// on 2026-11-16 (HTTP 200). Data lives in src/data/legal.json.
+const entry = (legal as any[]).find((entry) => entry.slug === "acceptable-use");
+if (!entry) throw new Error("Missing legal data for acceptable-use");
+---
+
+<LegalLayout entry={entry} />
