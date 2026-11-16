@@ -1,0 +1,70 @@
+---
+import RoleText from "./RoleText.astro";
+
+// Renders a list of job-description items. Live uses square markers for
+// ul and numbers for ol. Nested lists go one level deep in the data
+// (e.g. the recruiter "Skills" / "Experience" / "Behaviours" groups),
+// so children are rendered inline, no recursion needed.
+interface Segment {
+  t: string;
+  b?: boolean;
+  href?: string;
+}
+
+interface ListItem {
+  segments: Segment[];
+  children?: ListItem[];
+}
+
+interface Props {
+  kind: "ul" | "ol";
+  items: ListItem[];
+}
+
+const { kind, items } = Astro.props;
+---
+
+{kind === "ol" ? (
+  <ol class="mt-5 list-decimal space-y-2 pl-6">
+    {items.map((item) => (
+      <li class="leading-relaxed text-ink-100 marker:font-semibold">
+        <RoleText segments={item.segments} />
+        {item.children && item.children.length > 0 && (
+          <ul class="mt-2 space-y-2">
+            {item.children.map((child) => (
+              <li class="flex items-baseline gap-x-3 leading-relaxed text-ink-100">
+                <span class="h-2 w-2 shrink-0 translate-y-[-1px] rounded-[2px] bg-ink-300" aria-hidden="true" />
+                <span class="min-w-0">
+                  <RoleText segments={child.segments} />
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))}
+  </ol>
+) : (
+  <ul class="mt-5 space-y-2">
+    {items.map((item) => (
+      <li class="flex items-baseline gap-x-3 leading-relaxed text-ink-100">
+        <span class="h-2 w-2 shrink-0 translate-y-[-1px] rounded-[2px] bg-ink-300" aria-hidden="true" />
+        <span class="min-w-0">
+          <RoleText segments={item.segments} />
+          {item.children && item.children.length > 0 && (
+            <ul class="mt-2 space-y-2">
+              {item.children.map((child) => (
+                <li class="flex items-baseline gap-x-3 leading-relaxed text-ink-100">
+                  <span class="h-2 w-2 shrink-0 translate-y-[-1px] rounded-[2px] bg-ink-300" aria-hidden="true" />
+                  <span class="min-w-0">
+                    <RoleText segments={child.segments} />
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </span>
+      </li>
+    ))}
+  </ul>
+)}

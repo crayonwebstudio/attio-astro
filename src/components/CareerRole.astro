@@ -1,0 +1,229 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import RoleText from "./RoleText.astro";
+import RoleList from "./RoleList.astro";
+
+// Shared layout for the 22 career role pages under /careers/*.
+// Copy fetched live from https://attio.com/careers/{slug} on 2026-11-16
+// (HTTP 200 each), stored in src/data/roles.json. All titles, taglines,
+// locations, compensation, engagement types, intro copy, section copy,
+// and the Ashby apply links are live Attio copy. Live em dashes are
+// rendered as commas, per the no em dash rule. No Attio images, logos,
+// or fonts are hotlinked or copied.
+// Live role pages have no standard FinalCta ("Agentic revenue runs on
+// Attio." appears 0 times in the live HTML), so this layout hides the
+// shared FinalCta. The live page embeds the Ashby application form
+// (<div id="ashby_embed">); this rebuild links the Apply now button to
+// the live Ashby apply URL for the role instead of embedding the
+// third-party form. Section headings are h2 on most roles and h3 on
+// Product Lead and the SDR role, rendered as live shows them.
+// Bold-only paragraphs are live subsection labels, rendered semibold.
+// The "[OP NN]" badge is the live per-role number shown beside the
+// breadcrumb. One live typo is kept verbatim: the SDR compensation
+// reads "On Target Earning s(OTE)" on attio.com.
+
+interface Segment {
+  t: string;
+  b?: boolean;
+  href?: string;
+}
+
+interface ListItem {
+  segments: Segment[];
+  children?: ListItem[];
+}
+
+interface Block {
+  type: "p" | "sub" | "ul" | "ol";
+  segments?: Segment[];
+  text?: string;
+  items?: ListItem[];
+}
+
+interface Section {
+  heading: string;
+  level: number;
+  blocks: Block[];
+}
+
+interface Role {
+  slug: string;
+  title: string;
+  tagline: string;
+  team: string;
+  op: string | null;
+  location: string;
+  badge: string | null;
+  engagement: string | null;
+  compensation: string | null;
+  metaDescription: string;
+  applyLink: string | null;
+  intro: Block[];
+  sections: Section[];
+}
+
+interface Props {
+  role: Role;
+}
+
+const { role } = Astro.props;
+---
+
+<BaseLayout title={`${role.title} | Attio Careers`} description={role.metaDescription} hideFinalCta>
+  <!-- Breadcrumb -->
+  <section class="mx-auto max-w-[1200px] px-4 pt-12 sm:px-6" aria-label="Breadcrumb">
+    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-dashed border-paper-600 pb-5">
+      <p class="text-sm font-semibold tracking-wide text-ink-600">
+        <a href="/careers" class="hover:text-blue-500">Careers</a>
+        <span aria-hidden="true"> / </span>
+        <span class="text-ink-800">{role.team}</span>
+      </p>
+      {role.op && (
+        <p class="whitespace-nowrap text-sm font-medium text-ink-600">[OP {role.op}]</p>
+      )}
+    </div>
+  </section>
+
+  <!-- Header -->
+  <header class="mx-auto max-w-[1200px] px-4 py-12 sm:px-6" aria-label="Role header">
+    <h1 class="max-w-[24ch] font-display text-[40px] font-semibold leading-[1.05] tracking-tight text-balance sm:text-[56px]">
+      {role.title}
+    </h1>
+    <p class="mt-6 max-w-[48ch] text-balance text-xl leading-relaxed text-ink-100">{role.tagline}</p>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2">
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-[0.15em] text-ink-700">Location</h3>
+        <p class="mt-2 text-sm text-ink-600">
+          {role.location}
+          {role.badge && <> [{role.badge}]</>}
+        </p>
+      </div>
+      {role.compensation && (
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-[0.15em] text-ink-700">Compensation</h3>
+          <p class="mt-2 text-sm text-ink-600">{role.compensation}</p>
+        </div>
+      )}
+    </div>
+  </header>
+
+  <!-- Sidebar + body -->
+  <div class="mx-auto grid max-w-[1200px] gap-12 px-4 pb-24 sm:px-6 lg:grid-cols-[280px_1fr]">
+    <aside aria-label="Role details">
+      <div class="grid gap-8 sm:grid-cols-2 lg:sticky lg:top-32 lg:grid-cols-1">
+        <div>
+          <h2 class="font-display text-lg font-semibold text-ink-100">{role.title}</h2>
+          <p class="mt-1 text-sm leading-relaxed text-ink-600">{role.tagline}</p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-[0.15em] text-ink-700">Location</h3>
+          <p class="mt-2 text-sm text-ink-600">
+            {role.location}
+            {role.badge && <> [{role.badge}]</>}
+          </p>
+        </div>
+        {role.engagement && (
+          <div>
+            <h3 class="text-sm font-semibold uppercase tracking-[0.15em] text-ink-700">Engagement Type</h3>
+            <p class="mt-2 text-sm text-ink-600">{role.engagement}</p>
+          </div>
+        )}
+        {role.compensation && (
+          <div>
+            <h3 class="text-sm font-semibold uppercase tracking-[0.15em] text-ink-700">Compensation</h3>
+            <p class="mt-2 text-sm text-ink-600">{role.compensation}</p>
+          </div>
+        )}
+        {role.applyLink && (
+          <div>
+            <a
+              href={role.applyLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center rounded-[10px] bg-ink-100 px-4 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+            >
+              Apply now
+            </a>
+          </div>
+        )}
+      </div>
+    </aside>
+
+    <div class="min-w-0">
+      <div class="max-w-prose">
+        {role.intro.map((block) => {
+          if (block.type === "sub") {
+            return <p class="mt-8 font-semibold leading-relaxed text-ink-100">{block.text}</p>;
+          }
+          if (block.type === "ul" || block.type === "ol") {
+            return <RoleList kind={block.type} items={block.items ?? []} />;
+          }
+          return (
+            <p class="mt-5 leading-relaxed text-ink-100">
+              <RoleText segments={block.segments ?? []} />
+            </p>
+          );
+        })}
+      </div>
+
+      {role.sections.map((section) => (
+        <section aria-label={section.heading}>
+          {section.level === 3 ? (
+            <h3 class="mt-12 scroll-mt-32 font-display text-xl font-semibold">{section.heading}</h3>
+          ) : (
+            <h2 class="mt-12 scroll-mt-32 font-display text-[28px] font-semibold leading-tight tracking-tight sm:text-[32px]">
+              {section.heading}
+            </h2>
+          )}
+          <div class="max-w-prose">
+            {section.blocks.map((block) => {
+              if (block.type === "sub") {
+                return <p class="mt-8 font-semibold leading-relaxed text-ink-100">{block.text}</p>;
+              }
+              if (block.type === "ul" || block.type === "ol") {
+                return <RoleList kind={block.type} items={block.items ?? []} />;
+              }
+              return (
+                <p class="mt-5 leading-relaxed text-ink-100">
+                  <RoleText segments={block.segments ?? []} />
+                </p>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+
+      <!-- Apply -->
+      <section aria-label="Apply for this position">
+        <h2 class="mt-16 scroll-mt-32 font-display text-[28px] font-semibold leading-tight tracking-tight sm:text-[32px]">
+          Apply for this position
+        </h2>
+        <div class="max-w-prose">
+          <p class="mt-5 leading-relaxed text-ink-100">
+            Ready to do the best work of your career? Apply now, you will be taken to
+            Ashby to complete your application.
+          </p>
+          {role.applyLink && (
+            <p class="mt-6">
+              <a
+                href={role.applyLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center rounded-[10px] bg-ink-100 px-4 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+              >
+                Apply now
+              </a>
+            </p>
+          )}
+        </div>
+      </section>
+
+      <!-- Back to open positions -->
+      <p class="mt-16 border-t border-dashed border-paper-600 pt-8">
+        <a href="/careers" class="text-sm font-semibold text-ink-100 underline underline-offset-4 hover:text-blue-500">
+          Back to all open positions
+        </a>
+      </p>
+    </div>
+  </div>
+</BaseLayout>

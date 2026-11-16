@@ -1,0 +1,10 @@
+---
+import CareerRole from "../../components/CareerRole.astro";
+import roles from "../../data/roles.json";
+
+// Live copy from https://attio.com/careers/senior-platform-engineer-united-kingdom-hybrid (HTTP 200, 2026-11-16).
+// See src/components/CareerRole.astro and src/data/roles.json.
+const role = (roles as any[]).find((r) => r.slug === "senior-platform-engineer-united-kingdom-hybrid");
+---
+
+<CareerRole role={role} />

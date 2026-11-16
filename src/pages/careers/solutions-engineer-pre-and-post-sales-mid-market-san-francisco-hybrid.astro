@@ -1,0 +1,10 @@
+---
+import CareerRole from "../../components/CareerRole.astro";
+import roles from "../../data/roles.json";
+
+// Live copy from https://attio.com/careers/solutions-engineer-pre-and-post-sales-mid-market-san-francisco-hybrid (HTTP 200, 2026-11-16).
+// See src/components/CareerRole.astro and src/data/roles.json.
+const role = (roles as any[]).find((r) => r.slug === "solutions-engineer-pre-and-post-sales-mid-market-san-francisco-hybrid");
+---
+
+<CareerRole role={role} />
