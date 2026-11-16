@@ -1,0 +1,576 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/platform/productivity on 2026-11-16 (HTTP 200).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live H1 is "Productivity", used as the eyebrow, with the headline H2
+// "Your collaboration station." as the single H1, same pattern as
+// /platform/data, /platform/custom-agents and /platform/sequences.
+// Live hero images are productivity-hero-note/email/screen/list/comment, rendered
+// here as a 5-tile CSS mock collage. The live logo strip (12 logos, same order
+// as the /customers strip) has no heading, rendered without one.
+// The live "Your customer calls..." subcopy uses an em dash, rendered with a comma
+// per the no em dash rule. "Watch your teammates type.", "Link with your calendar.",
+// "Collaborate anywhere you go.", "Perform quick actions." and
+// "Search with natural language." have titles only on the live page, rendered the same.
+const logos = [
+  "Granola",
+  "Wispr Flow",
+  "Listen Labs",
+  "Obvious",
+  "Modal",
+  "Union Square Ventures",
+  "Replicate",
+  "Railway",
+  "Taskrabbit",
+  "Public",
+  "Wordsmith",
+  "Passionfroot",
+];
+
+const callCards = [
+  {
+    title: "Everything in one place.",
+    copy: "Your customer calls live where they should, in your CRM, not scattered across tools.",
+    mockLabel: "Call with context",
+    mock: [
+      { label: "Call", value: "Product Demo w/ GreenLeaf" },
+      { label: "Record", value: "GreenLeaf, open deal" },
+      { label: "Next step", value: "Send the proposal" },
+    ],
+  },
+  {
+    title: "Personalize your insights.",
+    copy: "From discovery calls to product feedback, build personalized templates to capture the insights you need, how you need it.",
+    mockLabel: "AI templates",
+    mock: [
+      { label: "Discovery", value: "Pain, budget, timeline" },
+      { label: "Feedback", value: "Feature asks, quotes" },
+      { label: "Handoff", value: "Summary for Success" },
+    ],
+  },
+  {
+    title: "Real-time intelligence during conversations.",
+    copy: "Let AI surface insights during your calls while you focus on building the relationship.",
+    mockLabel: "Live insights",
+    mock: [
+      { label: "Signal", value: "Buying intent, annual pricing" },
+      { label: "Blocker", value: "Security review pending" },
+      { label: "Ask", value: "Annual plan, 6 seats" },
+    ],
+  },
+  {
+    title: "Review your way.",
+    copy: "Jump to key moments, focus on specific speakers, and find what you need fast.",
+    mockLabel: "Key moments",
+    mock: [
+      { label: "10:02", value: "Ashley, spreadsheets" },
+      { label: "14:40", value: "Sam, move by Monday" },
+      { label: "26:10", value: "Ashley, six seats Pro" },
+    ],
+  },
+  {
+    title: "Works where you do.",
+    copy: "Seamlessly integrate with Google Meet, Zoom, and Microsoft Teams, right out of the box.",
+    mockLabel: "Integrations",
+    mock: [
+      { label: "Google Meet", value: "Connected" },
+      { label: "Zoom", value: "Connected" },
+      { label: "Teams", value: "Connected" },
+    ],
+  },
+];
+
+const noteItems = [
+  {
+    title: "Create templates.",
+    copy: "Streamline everything from sales calls to customer check-ins and more with custom templates.",
+  },
+  { title: "Watch your teammates type.", copy: null },
+  { title: "Link with your calendar.", copy: null },
+  { title: "Collaborate anywhere you go.", copy: null },
+];
+
+const emailCards = [
+  {
+    title: "Automated, personalized outreach.",
+    copy: "Pull attributes and enriched data with variables and make your email feel personal, even at scale.",
+    mockLabel: "Variables",
+    mock: [
+      { label: "First name", value: "Ashley" },
+      { label: "Company", value: "GreenLeaf" },
+      { label: "Renewal", value: "March 12, 2027" },
+    ],
+  },
+  {
+    title: "Email templates.",
+    copy: "Streamline outreach for your entire team with custom templates built for any situation.",
+    mockLabel: "Templates",
+    mock: [
+      { label: "Intro", value: "First touch, warm" },
+      { label: "Follow-up", value: "After the demo" },
+      { label: "Renewal", value: "30 days out" },
+    ],
+  },
+  {
+    title: "Send emails at scale.",
+    copy: "Send personalized emails to everyone all at once, without missing a beat.",
+    mockLabel: "Mass sending",
+    mock: [
+      { label: "Recipients", value: "248 contacts" },
+      { label: "Personalized", value: "Every field filled" },
+      { label: "Sent", value: "All at once" },
+    ],
+  },
+];
+
+const emailExtras = [
+  {
+    glyph: "Aa",
+    title: "Rich text formatting",
+    copy: "Create emails as elegant as they are effective with painless formatting.",
+  },
+  {
+    glyph: "+",
+    title: "Add attachments",
+    copy: "Attach files to emails directly within Attio with just a single click.",
+  },
+  {
+    glyph: "↗",
+    title: "Easily shared",
+    copy: "Share entire email threads with your team, with just a link.",
+  },
+];
+
+const paletteItems = [
+  {
+    title: "Blazingly fast.",
+    copy: "Comb through all your records in milliseconds and see results in real-time.",
+  },
+  { title: "Perform quick actions.", copy: null },
+  { title: "Search with natural language.", copy: null },
+  {
+    title: "Preview contacts",
+    copy: "Quickly get an overview of contacts directly from the command palette.",
+  },
+  {
+    title: "Find connection strengths",
+    copy: "Understand the strength of each and every connection at a glance.",
+  },
+  {
+    title: "See event information",
+    copy: "Pre-populated info for each important event you have coming up.",
+  },
+];
+
+const commentCards = [
+  {
+    title: "Add comments anywhere.",
+    copy: "Make sure your teammates always have the right context for any workflow they're collaborating on.",
+    mockLabel: "On the record",
+    mock: [
+      { label: "Isla", value: "GreenLeaf wants annual pricing" },
+      { label: "George", value: "Looping in Legal today" },
+    ],
+  },
+  {
+    title: "Thread commenting.",
+    copy: "Have better discussions by creating intuitive threads around single comments.",
+    mockLabel: "Thread",
+    mock: [
+      { label: "Isla", value: "Proposal sent, waiting on sign-off" },
+      { label: "Theo", value: "Reply: chasing Ashley tomorrow" },
+    ],
+  },
+  {
+    title: "Comment history.",
+    copy: "Understand the context of every workflow with a list of all comments at your fingertips.",
+    mockLabel: "History",
+    mock: [
+      { label: "Mon", value: "3 comments on GreenLeaf" },
+      { label: "Tue", value: "1 comment on Ramp" },
+      { label: "Wed", value: "2 comments on Notion" },
+    ],
+  },
+];
+
+const flowItems = [
+  {
+    title: "Bring in data from everywhere.",
+    copy: "Add leads from X, Google Meets, and more with just a single click.",
+  },
+  { title: "Run workflows anywhere on the web.", copy: null },
+  { title: "Understand context for every lead and prospect.", copy: null },
+];
+
+const moreCards = [
+  {
+    glyph: "⚿",
+    title: "Permission controls",
+    copy: "Adjust permissions to manage access to objects, lists, dashboards, and more.",
+  },
+  {
+    glyph: "▣",
+    title: "File sharing",
+    copy: "Share the most important customer documents so that your team is always on the same page.",
+  },
+  {
+    glyph: "✎",
+    title: "Real-time notes",
+    copy: "Stop dreading the note-taking process with effortless, real-time collaboration with your teammates.",
+  },
+  {
+    glyph: "✓",
+    title: "Task management",
+    copy: "Attio's natural language task manager ensures your team will work as one single, coordinated unit.",
+  },
+  {
+    glyph: "⌘",
+    title: "APIs and webhooks",
+    copy: "Get creative by integrating the APIs and webhooks you need to enhance your work.",
+  },
+  {
+    glyph: "↗",
+    title: "Browser extension",
+    copy: "Import people and company records from X, Google Meets, and the web with just one click.",
+  },
+];
+---
+
+<BaseLayout
+  title="Work & collaboration | Attio"
+  description="Call intelligence, mass email contacts, and collaborate with notes and comments. Attio propels go-to-market teams towards new levels of productivity."
+  finalCtaDemo
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">Productivity</p>
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Your collaboration station.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Attio propels go-to-market teams towards new levels of productivity and lets you seamlessly
+      perform your daily work.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </div>
+
+    <!-- Hero product mock: 5-tile collage (note, email, screen, list, comment) -->
+    <div class="mx-auto mt-14 grid max-w-5xl gap-4 text-left sm:grid-cols-2 lg:grid-cols-3">
+      <div class="overflow-hidden rounded-2xl border border-paper-500 bg-white shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]">
+        <div class="border-b border-paper-400 bg-paper-200 px-4 py-3">
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Notes</p>
+        </div>
+        <div class="space-y-2 p-4">
+          <p class="text-sm font-semibold">Demo call, GreenLeaf</p>
+          <p class="rounded-lg bg-paper-200 px-3 py-2 text-xs leading-relaxed text-ink-600">
+            Ashley is moving the team by Monday. Six seats on the Pro plan.
+          </p>
+          <p class="text-xs text-ink-600">Isla is typing...</p>
+        </div>
+      </div>
+      <div class="overflow-hidden rounded-2xl border border-paper-500 bg-white shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]">
+        <div class="border-b border-paper-400 bg-paper-200 px-4 py-3">
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Email</p>
+        </div>
+        <div class="space-y-2 p-4">
+          <p class="text-sm font-semibold">Follow-up to Ashley</p>
+          <p class="rounded-lg bg-paper-200 px-3 py-2 text-xs leading-relaxed text-ink-600">
+            Hi Ashley, great speaking today. Here is the proposal we discussed.
+          </p>
+          <p class="text-xs text-ink-600">To: ashley@greenleaf.com</p>
+        </div>
+      </div>
+      <div class="overflow-hidden rounded-2xl border border-paper-500 bg-white shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]">
+        <div class="border-b border-paper-400 bg-paper-200 px-4 py-3">
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Record</p>
+        </div>
+        <div class="space-y-2 p-4">
+          <p class="text-sm font-semibold">GreenLeaf Inc.</p>
+          <p class="flex justify-between text-xs"><span class="text-ink-600">Stage</span><span class="font-medium">Negotiation</span></p>
+          <p class="flex justify-between text-xs"><span class="text-ink-600">Value</span><span class="font-medium">$54,000</span></p>
+          <p class="flex justify-between text-xs"><span class="text-ink-600">Owner</span><span class="font-medium">Isla Harrington</span></p>
+        </div>
+      </div>
+      <div class="overflow-hidden rounded-2xl border border-paper-500 bg-white shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]">
+        <div class="border-b border-paper-400 bg-paper-200 px-4 py-3">
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Tasks</p>
+        </div>
+        <ul class="space-y-2 p-4 text-sm">
+          <li class="flex items-center gap-2"><span class="flex h-4 w-4 items-center justify-center rounded border border-paper-500 text-[10px] text-green-600">✓</span> Send proposal to GreenLeaf</li>
+          <li class="flex items-center gap-2"><span class="h-4 w-4 rounded border border-paper-500"></span> Book technical review</li>
+          <li class="flex items-center gap-2"><span class="h-4 w-4 rounded border border-paper-500"></span> Follow up with Ramp</li>
+        </ul>
+      </div>
+      <div class="overflow-hidden rounded-2xl border border-paper-500 bg-white shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)] sm:col-span-2 lg:col-span-2">
+        <div class="border-b border-paper-400 bg-paper-200 px-4 py-3">
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Comments</p>
+        </div>
+        <div class="space-y-2 p-4">
+          <p class="rounded-lg bg-paper-200 px-3 py-2 text-xs leading-relaxed text-ink-600">
+            <span class="font-semibold text-ink-100">Isla:</span> GreenLeaf wants annual pricing, looping in Legal today.
+          </p>
+          <p class="rounded-lg bg-white px-3 py-2 text-xs leading-relaxed text-ink-600 ring-1 ring-paper-500">
+            <span class="font-semibold text-ink-100">George:</span> Proposal sent, waiting on sign-off.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logo strip, no heading on live -->
+    <ul class="mx-auto mt-14 flex max-w-5xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-semibold text-ink-700">
+      {logos.map((logo) => (
+        <li>{logo}</li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Your calls, made intelligent -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Your calls, made intelligent">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Your calls, made intelligent.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Focus on your conversations while AI surfaces insights in real-time.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {callCards.map((card) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">{card.mockLabel}</p>
+            <ul class="mt-4 space-y-2">
+              {card.mock.map((row) => (
+                <li class="flex items-baseline gap-2 rounded-lg bg-white px-3 py-2 text-sm shadow-sm">
+                  <span class="shrink-0 text-xs font-semibold uppercase tracking-wide text-ink-700">{row.label}</span>
+                  <span class="text-ink-600">{row.value}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Same team. Same page. -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Same team. Same page.">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Same team. Same page.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Attio's next-level notes allow you and your teammates to collaborate in real-time.
+    </p>
+    <div class="mt-10 grid gap-6 lg:grid-cols-2">
+      <div class="overflow-hidden rounded-2xl border border-paper-500 bg-white shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]">
+        <div class="border-b border-paper-400 bg-paper-200 px-5 py-3">
+          <p class="text-sm font-semibold">Demo call notes, GreenLeaf</p>
+        </div>
+        <div class="space-y-3 p-5 sm:p-6">
+          <p class="rounded-xl border border-paper-500 px-4 py-3 text-sm leading-relaxed text-ink-600">
+            Ashley is moving the whole team by Monday. Six seats on the Pro plan, plus onboarding
+            for the wider team.
+          </p>
+          <p class="rounded-xl border border-paper-500 px-4 py-3 text-sm leading-relaxed text-ink-600">
+            <span class="font-semibold text-ink-100">Isla is typing...</span> Deal history and
+            onboarding checklist to follow.
+          </p>
+          <p class="text-xs text-ink-600">Linked to calendar, Demo Call, Aug 29, 10:40 AM</p>
+        </div>
+      </div>
+      <ul class="space-y-4">
+        {noteItems.map((item) => (
+          <li class="rounded-2xl border border-paper-500 bg-white p-6">
+            <h3 class="font-display text-xl font-semibold">{item.title}</h3>
+            {item.copy && <p class="mt-2 text-sm leading-relaxed text-ink-600">{item.copy}</p>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Make every email relevant -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Make every email relevant">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Make every email relevant.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Use your business, customer and product data to craft emails that resonate with your prospects.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {emailCards.map((card) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">{card.mockLabel}</p>
+            <ul class="mt-4 space-y-2">
+              {card.mock.map((row) => (
+                <li class="flex items-baseline gap-2 rounded-lg bg-white px-3 py-2 text-sm shadow-sm">
+                  <span class="shrink-0 text-xs font-semibold uppercase tracking-wide text-ink-700">{row.label}</span>
+                  <span class="text-ink-600">{row.value}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="mt-6 grid gap-6 md:grid-cols-3">
+      {emailExtras.map((item) => (
+        <article class="rounded-2xl border border-paper-500 bg-white p-6">
+          <p class="flex h-9 w-9 items-center justify-center rounded-lg bg-paper-200 text-sm font-semibold text-ink-100">{item.glyph}</p>
+          <h3 class="mt-4 font-display text-xl font-semibold">{item.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{item.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- The need for speed -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="The need for speed">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">The need for speed.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Search through records, notes, and tasks and take actions at the speed of lightning with
+      Attio's command palette.
+    </p>
+    <div class="mt-10 grid gap-6 lg:grid-cols-2">
+      <div class="overflow-hidden rounded-2xl border border-paper-500 bg-white shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]">
+        <div class="flex items-center gap-3 border-b border-paper-400 bg-paper-200 px-5 py-4">
+          <span class="rounded-md border border-paper-500 bg-white px-2 py-1 text-xs font-semibold text-ink-600">⌘ K</span>
+          <p class="flex-1 rounded-lg bg-white px-3 py-2 text-sm text-ink-600 shadow-sm">Search records, notes, tasks...</p>
+        </div>
+        <ul class="space-y-2 p-5">
+          <li class="flex items-center justify-between rounded-lg bg-paper-200 px-4 py-3 text-sm">
+            <span class="font-medium">GreenLeaf Inc.</span>
+            <span class="text-xs text-ink-600">Company, open deal</span>
+          </li>
+          <li class="flex items-center justify-between rounded-lg border border-paper-500 px-4 py-3 text-sm">
+            <span class="font-medium">Ashley Lawson</span>
+            <span class="text-xs text-ink-600">Contact, GreenLeaf</span>
+          </li>
+          <li class="flex items-center justify-between rounded-lg border border-paper-500 px-4 py-3 text-sm">
+            <span class="font-medium">Send follow-up email</span>
+            <span class="text-xs text-ink-600">Quick action</span>
+          </li>
+          <li class="flex items-center justify-between rounded-lg border border-paper-500 px-4 py-3 text-sm">
+            <span class="font-medium">Demo Call, Aug 29</span>
+            <span class="text-xs text-ink-600">Event, 10:40 AM</span>
+          </li>
+        </ul>
+      </div>
+      <ul class="space-y-4">
+        {paletteItems.map((item) => (
+          <li class="rounded-2xl border border-paper-500 bg-white p-6">
+            <h3 class="font-display text-xl font-semibold">{item.title}</h3>
+            {item.copy && <p class="mt-2 text-sm leading-relaxed text-ink-600">{item.copy}</p>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Collaborate with comments -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Collaborate with comments">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Collaborate with comments.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Attio's powerful commenting features make it easy for your team to stay aligned across sales,
+      customer success, and more.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {commentCards.map((card) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">{card.mockLabel}</p>
+            <ul class="mt-4 space-y-2">
+              {card.mock.map((row) => (
+                <li class="rounded-lg bg-white px-3 py-2 text-sm shadow-sm">
+                  <span class="font-semibold">{row.label}:</span>
+                  <span class="text-ink-600"> {row.value}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Stay in the flow -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Stay in the flow">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Stay in the flow.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Attio's browser extension allows you to prospect, have context and keep your CRM up-to-date
+      at all times.
+    </p>
+    <div class="mt-8">
+      <a
+        href="https://chrome.google.com/webstore/detail/attio/legacbojjmajoedfolbjlekjjkepadph/"
+        class="inline-block rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Download extension
+      </a>
+    </div>
+    <div class="mt-10 grid gap-6 lg:grid-cols-2">
+      <div class="overflow-hidden rounded-2xl border border-paper-500 bg-white shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]">
+        <div class="flex items-center gap-2 border-b border-paper-400 bg-paper-200 px-4 py-3">
+          <span class="h-3 w-3 rounded-full bg-red-500"></span>
+          <span class="h-3 w-3 rounded-full bg-[#f5bf42]"></span>
+          <span class="h-3 w-3 rounded-full bg-green-500"></span>
+          <span class="ml-3 text-xs font-medium text-ink-600">attio.com, GreenLeaf profile</span>
+        </div>
+        <div class="space-y-3 p-5 sm:p-6">
+          <p class="rounded-xl border border-paper-500 px-4 py-3 text-sm leading-relaxed text-ink-600">
+            <span class="font-semibold text-ink-100">Ashley Lawson</span>, Head of IT at GreenLeaf.
+            Open deal, $54,000, Negotiation.
+          </p>
+          <p class="rounded-xl bg-paper-200 px-4 py-3 text-sm font-medium">Add lead to Attio, one click</p>
+          <p class="text-xs text-ink-600">Context, workflows and records, right in your browser.</p>
+        </div>
+      </div>
+      <ul class="space-y-4">
+        {flowItems.map((item) => (
+          <li class="rounded-2xl border border-paper-500 bg-white p-6">
+            <h3 class="font-display text-xl font-semibold">{item.title}</h3>
+            {item.copy && <p class="mt-2 text-sm leading-relaxed text-ink-600">{item.copy}</p>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- And that's not all -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="And that's not all">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">And that's not all...</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      From task management and templates to file sharing and more, Attio's got your entire team covered.
+    </p>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {moreCards.map((card) => (
+        <article class="rounded-2xl border border-paper-500 bg-white p-6">
+          <p class="flex h-9 w-9 items-center justify-center rounded-lg bg-paper-200 text-sm font-semibold text-ink-100">{card.glyph}</p>
+          <h3 class="mt-4 font-display text-xl font-semibold">{card.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
