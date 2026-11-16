@@ -1,0 +1,349 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/careers on 2026-11-16 (HTTP 200, 952KB).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live H1 is "Careers"; the page headline is the H2
+// "Our mission is to build the platform for agentic revenue.", used here as the
+// single H1, per the pattern used on other pages in this build.
+// Live has no standard FinalCta ("Agentic revenue runs on Attio." appears 0 times
+// in the live HTML), so hideFinalCta is used.
+// The job list is real: 22 open positions rendered as static links in the live
+// HTML (Ashby-backed), grouped by team with counts. No listings invented.
+const values = [
+  {
+    title: "Build with love.",
+    copy: "We believe in building with heart, creating something that not only works but feels thoughtfully crafted.",
+  },
+  {
+    title: "Context over control.",
+    copy: "We build trust in individuals to make decisions and move forward without rigid hierarchy.",
+  },
+  {
+    title: "Challenge ideas, not people.",
+    copy: "We always keep the focus on challenging ideas, not the individuals behind them.",
+  },
+  {
+    title: "Break it down, amp it up.",
+    copy: "We encourage bold, creative ideas that go beyond the limits of what is achievable.",
+  },
+];
+
+const alumni = ["Intercom", "Ramp", "Revolut", "Stripe", "Vercel", "Y Combinator"];
+
+const groups = [
+  {
+    name: "Engineering",
+    jobs: [
+      { n: "01", title: "Senior Platform Engineer", location: "London-Remote, United Kingdom", type: "Hybrid", href: "/careers/senior-platform-engineer-united-kingdom-hybrid" },
+      { n: "02", title: "Senior Platform Engineer", location: "London-Remote, United Kingdom", type: "Remote", href: "/careers/senior-platform-engineer-united-kingdom-remote" },
+      { n: "03", title: "Senior Platform Engineer", location: "Poland, Portugal, Ireland, Germany", type: "Remote", href: "/careers/senior-platform-engineer-europe-remote" },
+      { n: "04", title: "Senior Product Engineer [Backend]", location: "London-On-Site", type: "Hybrid", href: "/careers/senior-product-engineer-backend-london-on-site-hybrid" },
+      { n: "05", title: "Senior Product Engineer [Backend]", location: "Poland, Portugal, Ireland, Germany", type: "Remote", href: "/careers/senior-product-engineer-backend-europe-remote" },
+      { n: "06", title: "Senior Product Engineer [Backend]", location: "United Kingdom", type: "Remote", href: "/careers/senior-product-engineer-backend-united-kingdom-remote" },
+      { n: "07", title: "Staff Product Engineer", location: "London-Remote", type: "Hybrid", href: "/careers/staff-product-engineer-london-remote-hybrid" },
+      { n: "08", title: "Staff Product Engineer", location: "Poland, Portugal, Ireland, Germany", type: "Remote", href: "/careers/staff-product-engineer-europe-remote" },
+      { n: "09", title: "Staff Product Engineer", location: "United Kingdom", type: "Remote", href: "/careers/staff-product-engineer-united-kingdom-remote" },
+    ],
+  },
+  {
+    name: "GTM",
+    jobs: [
+      { n: "01", title: "Account Executive", location: "New York", type: "Hybrid", href: "/careers/account-executive-new-york-hybrid" },
+      { n: "02", title: "Account Executive", location: "San Francisco", type: "Hybrid", href: "/careers/account-executive-san-francisco-hybrid" },
+      { n: "03", title: "Sales Development Representative", location: "San Francisco", type: "Hybrid", href: "/careers/sales-development-representative-san-francisco-hybrid" },
+      { n: "04", title: "Solutions Engineer [Pre and Post-Sales] - Mid-Market", location: "New York", type: "Hybrid", href: "/careers/solutions-engineer-pre-and-post-sales-mid-market-new-york-hybrid" },
+      { n: "05", title: "Solutions Engineer [Pre and Post-Sales] - Mid-Market", location: "San Francisco", type: "Hybrid", href: "/careers/solutions-engineer-pre-and-post-sales-mid-market-san-francisco-hybrid" },
+    ],
+  },
+  {
+    name: "Marketing",
+    jobs: [
+      { n: "01", title: "Communications Lead", location: "London-On-Site", type: "Hybrid", href: "/careers/communications-lead-london-on-site-hybrid" },
+      { n: "02", title: "Communications Lead", location: "New York", type: "Hybrid", href: "/careers/communications-lead-new-york-hybrid" },
+      { n: "03", title: "Demand Generation Lead", location: "New York", type: "Hybrid", href: "/careers/demand-generation-lead-new-york-hybrid" },
+      { n: "04", title: "Startups Lead", location: "San Francisco", type: "Hybrid", href: "/careers/startups-lead-san-francisco-hybrid" },
+    ],
+  },
+  {
+    name: "Operations",
+    jobs: [
+      { n: "01", title: "GTM Recruiter", location: "London-Hybrid", type: "Hybrid", href: "/careers/gtm-recruiter-london-hybrid-hybrid" },
+      { n: "02", title: "GTM Recruiter", location: "New York", type: "Hybrid", href: "/careers/gtm-recruiter-new-york-hybrid" },
+    ],
+  },
+  {
+    name: "Product",
+    jobs: [
+      { n: "01", title: "Product Lead", location: "London-Remote, United Kingdom, Portugal, Ireland, Germany, Europe", type: "Remote", href: "/careers/product-lead-europe-and-united-kingdom-remote" },
+    ],
+  },
+  {
+    name: "Open Applications",
+    jobs: [
+      { n: "01", title: "General Application", location: "All locations", type: null, href: "/careers/open-application" },
+    ],
+  },
+];
+
+const updates = [
+  { title: "LinkedIn", copy: "Keep up to date with what the team is building.", href: "https://linkedin.com/company/attio" },
+  { title: "X", copy: "Stay in the loop with what we're working on.", href: "https://x.com/attio" },
+  { title: "Blog", copy: "Be the first to get new Attio updates.", href: "/blog" },
+  { title: "Changelog", copy: "Stay on top of all releases and new features.", href: "/changelog" },
+];
+---
+
+<BaseLayout
+  title="Careers | Attio"
+  description="Looking for your next challenge? Changing paradigms isn't easy and we're looking for more exceptional people to join the team and change CRM forever."
+  hideFinalCta
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">Careers</p>
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Our mission is to build the platform for agentic revenue.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Agents are transforming what is possible in software. We are building the platform to
+      unlock their full potential, redefining how companies grow. Join us to shape what comes next.
+    </p>
+
+    <!-- Photo collage mock: 1 large + 2 small team photos on live -->
+    <div class="mx-auto mt-14 grid max-w-4xl grid-cols-2 gap-4 text-left sm:grid-cols-3">
+      <div class="pinstripe-bg col-span-2 flex min-h-[280px] flex-col justify-end rounded-2xl bg-ink-50 p-6 text-white sm:col-span-2 sm:row-span-2 sm:min-h-[360px]">
+        <p class="font-display text-lg font-semibold">The Attio team</p>
+        <p class="mt-1 text-sm text-white/70">London, Europe, and the US</p>
+      </div>
+      <div class="flex min-h-[132px] flex-col justify-end rounded-2xl border border-paper-500 bg-paper-200 p-5 sm:min-h-[172px]">
+        <p class="font-display text-base font-semibold">Builders</p>
+        <p class="mt-1 text-sm text-ink-600">Highly ambitious people</p>
+      </div>
+      <div class="flex min-h-[132px] flex-col justify-end rounded-2xl border border-paper-500 bg-paper-200 p-5 sm:min-h-[172px]">
+        <p class="font-display text-base font-semibold">Craft</p>
+        <p class="mt-1 text-sm text-ink-600">Built with love</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Join a team of builders: video mock -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Join a team of builders">
+    <div class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+      <div class="pinstripe-bg relative flex aspect-video flex-col items-center justify-center bg-ink-50 text-white">
+        <button
+          id="video-play"
+          type="button"
+          class="flex h-16 w-16 items-center justify-center rounded-full bg-white text-ink-100 shadow-lg hover:bg-paper-200"
+          aria-label="Play video"
+        >
+          <span id="video-play-icon" class="text-xl font-semibold">&#9654;</span>
+        </button>
+        <p id="video-status" class="mt-4 text-sm font-medium text-white/80">Video preview, paused</p>
+        <div class="absolute inset-x-0 bottom-0 flex items-center gap-2 border-t border-white/15 bg-ink-50/80 px-4 py-3 text-xs font-medium text-white/80">
+          <span>Play</span>
+          <span>Pause</span>
+          <span>Mute</span>
+          <span>Unmute</span>
+          <span class="ml-auto">Enter fullscreen mode</span>
+        </div>
+      </div>
+      <div class="p-6 sm:p-8">
+        <h2 class="font-display text-heading-md font-semibold tracking-tight">Join a team of builders.</h2>
+        <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+          We are looking for highly ambitious and talented people to help us drive real change.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team stat + alumni -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 text-center sm:px-6" aria-label="Team">
+    <p class="font-display text-[56px] font-semibold leading-none tracking-tight sm:text-[72px]">190+ team members.</p>
+    <p class="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-ink-600">
+      Building from our HQ in London, and across Europe and the US.
+    </p>
+    <p class="mt-14 text-sm font-semibold uppercase tracking-[0.2em] text-ink-700">
+      We have sharpened our skills at...
+    </p>
+    <ul class="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+      {alumni.map((name) => (
+        <li class="font-display text-xl font-semibold text-ink-700">{name}</li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Our values -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Our values">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Our values.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      To build for the next era of companies, we stand by our core principles in everything we do,
+      from the features we ship to how we show up every day.
+    </p>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {values.map((value) => (
+        <article class="rounded-2xl border border-paper-500 bg-white p-6">
+          <h3 class="font-display text-xl font-semibold">{value.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{value.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Open positions -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Open positions" id="open-positions">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Open positions.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      If you want to share our mission of building the definitive CRM, we would love to hear from you.
+    </p>
+
+    <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+      <label class="flex items-center gap-2 text-sm font-semibold" for="team-filter">
+        Filter by team
+        <select
+          id="team-filter"
+          class="rounded-[10px] border border-paper-500 bg-white px-3 py-2 text-sm font-medium outline-none focus:border-blue-500"
+        >
+          <option value="all">All teams</option>
+          {groups.map((group) => (
+            <option value={group.name}>{group.name}</option>
+          ))}
+        </select>
+      </label>
+      <label class="relative flex-1 sm:max-w-sm" for="job-search">
+        <span class="sr-only">Search open positions</span>
+        <input
+          id="job-search"
+          type="text"
+          placeholder="Search open positions..."
+          autocomplete="off"
+          class="w-full rounded-[10px] border border-paper-500 bg-white px-3 py-2 pl-9 text-sm outline-none focus:border-blue-500"
+        />
+        <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-ink-700">&#128269;</span>
+      </label>
+    </div>
+    <p id="job-count" class="mt-6 text-sm font-semibold text-ink-600">22 open positions match the current filters.</p>
+
+    <div id="job-list" class="mt-4">
+      {groups.map((group) => (
+        <div class="job-group" data-team={group.name}>
+          <div class="flex items-baseline gap-2 border-y border-paper-500 bg-paper-200 px-4 py-4 sm:px-6">
+            <h3 class="font-display text-xl font-semibold sm:text-2xl">{group.name}</h3>
+            <p class="text-sm font-semibold text-ink-700">[ {group.jobs.length} ]</p>
+          </div>
+          <ul>
+            {group.jobs.map((job) => (
+              <li class="job-row border-b border-paper-500" data-title={job.title.toLowerCase()} data-location={job.location.toLowerCase()}>
+                <a href={job.href} class="group flex flex-wrap items-baseline gap-x-4 gap-y-1 px-4 py-4 transition-colors hover:bg-paper-200 sm:px-6 sm:py-5">
+                  <span class="w-8 shrink-0 font-mono text-sm font-medium text-ink-700">{job.n}</span>
+                  <span class="min-w-0 flex-1 text-base font-semibold group-hover:underline sm:text-lg">{job.title}</span>
+                  <span class="text-sm text-ink-600">{job.location}</span>
+                  {job.type && (
+                    <span class="rounded-full border border-paper-500 bg-white px-2.5 py-0.5 text-xs font-semibold">[{job.type}]</span>
+                  )}
+                  <span class="text-sm font-semibold text-ink-700" aria-hidden="true">&rarr;</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <p id="job-empty" class="mt-6 hidden text-sm text-ink-600">No open positions match the current filters.</p>
+  </section>
+
+  <!-- Right role, right time -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Right role, right time">
+    <div class="rounded-2xl border border-paper-500 bg-white p-6 sm:p-10">
+      <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Right role, right time.</h2>
+      <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+        We will share relevant opportunities when they open up.
+      </p>
+      <form id="talent-form" class="mt-6 flex max-w-md flex-col gap-3 sm:flex-row">
+        <label class="sr-only" for="talent-email">Your email address</label>
+        <input
+          id="talent-email"
+          name="email"
+          type="email"
+          required
+          placeholder="Your email address"
+          class="flex-1 rounded-[10px] border border-paper-500 bg-white px-3 py-2.5 text-sm outline-none focus:border-blue-500"
+        />
+        <button
+          id="talent-submit"
+          type="submit"
+          class="rounded-full bg-ink-100 px-6 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+        >
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Keep up to date -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Keep up to date">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Keep up to date.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Get the latest updates on what we are building.
+    </p>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {updates.map((item) => (
+        <a href={item.href} class="group rounded-2xl border border-paper-500 bg-white p-6 transition-colors hover:bg-paper-200">
+          <h3 class="font-display text-xl font-semibold group-hover:underline">{item.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{item.copy}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <script>
+    // Job filter: team dropdown + search, live count, same behaviour as live.
+    const teamFilter = document.getElementById("team-filter");
+    const jobSearch = document.getElementById("job-search");
+    const jobCount = document.getElementById("job-count");
+    const jobEmpty = document.getElementById("job-empty");
+    const groups = Array.from(document.querySelectorAll(".job-group"));
+    function applyFilter() {
+      const team = teamFilter.value;
+      const q = jobSearch.value.trim().toLowerCase();
+      let total = 0;
+      groups.forEach((group) => {
+        const teamMatch = team === "all" || group.dataset.team === team;
+        let visible = 0;
+        group.querySelectorAll(".job-row").forEach((row) => {
+          const hay = row.dataset.title + " " + row.dataset.location;
+          const show = teamMatch && (!q || hay.includes(q));
+          row.style.display = show ? "" : "none";
+          if (show) visible += 1;
+        });
+        group.style.display = visible ? "" : "none";
+        total += visible;
+      });
+      jobCount.textContent = total + " open positions match the current filters.";
+      jobEmpty.classList.toggle("hidden", total !== 0);
+    }
+    teamFilter.addEventListener("change", applyFilter);
+    jobSearch.addEventListener("input", applyFilter);
+
+    // Video mock: play/pause toggle.
+    const playBtn = document.getElementById("video-play");
+    const playIcon = document.getElementById("video-play-icon");
+    const playStatus = document.getElementById("video-status");
+    let playing = false;
+    playBtn.addEventListener("click", () => {
+      playing = !playing;
+      playIcon.innerHTML = playing ? "&#10074;&#10074;" : "&#9654;";
+      playStatus.textContent = playing ? "Video preview, playing" : "Video preview, paused";
+      playBtn.setAttribute("aria-label", playing ? "Pause video" : "Play video");
+    });
+
+    // Talent pool form: no backend, flip to Subscribed like the homepage newsletter.
+    const talentForm = document.getElementById("talent-form");
+    const talentSubmit = document.getElementById("talent-submit");
+    talentForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      talentSubmit.textContent = "Subscribed";
+      talentSubmit.disabled = true;
+    });
+  </script>
+</BaseLayout>
