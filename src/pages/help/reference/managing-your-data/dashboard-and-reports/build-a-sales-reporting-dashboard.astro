@@ -1,0 +1,11 @@
+---
+import HelpArticle from "../../../../../components/HelpArticle.astro";
+import help from "../../../../../data/help.json";
+
+// Build a sales reporting dashboard, copy fetched live from https://attio.com/help/reference/managing-your-data/dashboard-and-reports/build-a-sales-reporting-dashboard
+// on 2026-11-16 (HTTP 200). Data lives in src/data/help.json.
+const entry = (help as any[]).find((entry) => entry.slug === "reference/managing-your-data/dashboard-and-reports/build-a-sales-reporting-dashboard");
+if (!entry) throw new Error("Missing help data for reference/managing-your-data/dashboard-and-reports/build-a-sales-reporting-dashboard");
+---
+
+<HelpArticle entry={entry} />

@@ -1,0 +1,11 @@
+---
+import HelpLesson from "../../../../components/HelpLesson.astro";
+import help from "../../../../data/help.json";
+
+// Legacy Condition and Delay blocks, copy fetched live from https://attio.com/help/academy/workflows-course/condition-and-delay-blocks
+// on 2026-11-16 (HTTP 200). Data lives in src/data/help.json.
+const entry = (help as any[]).find((entry) => entry.slug === "academy/workflows-course/condition-and-delay-blocks");
+if (!entry) throw new Error("Missing help data for academy/workflows-course/condition-and-delay-blocks");
+---
+
+<HelpLesson entry={entry} />

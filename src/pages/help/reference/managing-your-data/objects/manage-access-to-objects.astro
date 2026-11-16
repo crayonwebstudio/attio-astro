@@ -1,0 +1,11 @@
+---
+import HelpArticle from "../../../../../components/HelpArticle.astro";
+import help from "../../../../../data/help.json";
+
+// Manage access to objects, copy fetched live from https://attio.com/help/reference/managing-your-data/objects/manage-access-to-objects
+// on 2026-11-16 (HTTP 200). Data lives in src/data/help.json.
+const entry = (help as any[]).find((entry) => entry.slug === "reference/managing-your-data/objects/manage-access-to-objects");
+if (!entry) throw new Error("Missing help data for reference/managing-your-data/objects/manage-access-to-objects");
+---
+
+<HelpArticle entry={entry} />

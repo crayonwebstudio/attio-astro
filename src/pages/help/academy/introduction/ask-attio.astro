@@ -1,0 +1,11 @@
+---
+import HelpLesson from "../../../../components/HelpLesson.astro";
+import help from "../../../../data/help.json";
+
+// Ask Attio, copy fetched live from https://attio.com/help/academy/introduction/ask-attio
+// on 2026-11-16 (HTTP 200). Data lives in src/data/help.json.
+const entry = (help as any[]).find((entry) => entry.slug === "academy/introduction/ask-attio");
+if (!entry) throw new Error("Missing help data for academy/introduction/ask-attio");
+---
+
+<HelpLesson entry={entry} />

@@ -1,0 +1,11 @@
+---
+import HelpLesson from "../../../../components/HelpLesson.astro";
+import help from "../../../../data/help.json";
+
+// Call Intelligence, copy fetched live from https://attio.com/help/academy/introduction/call-intelligence
+// on 2026-11-16 (HTTP 200). Data lives in src/data/help.json.
+const entry = (help as any[]).find((entry) => entry.slug === "academy/introduction/call-intelligence");
+if (!entry) throw new Error("Missing help data for academy/introduction/call-intelligence");
+---
+
+<HelpLesson entry={entry} />

@@ -1,0 +1,223 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HelpSidebar from "./HelpSidebar.astro";
+import HelpBlocks from "./HelpBlocks.astro";
+
+// Shared layout for the 171 reference article pages under /help/*.
+// Copy fetched live from https://attio.com/help/* on 2026-11-16 (HTTP 200
+// each), stored in src/data/help.json. All titles, headings, paragraphs,
+// lists, callouts, figures, tables, and FAQ answers are live Attio copy.
+// Live em dashes are rendered as commas, per the no em dash rule. Product
+// visuals are rebuilt as HTML/CSS mocks, no Attio images, logos, or fonts
+// are hotlinked or copied. Live help pages have no standard FinalCta
+// ("Agentic revenue runs on Attio." appears 0 times in the live HTML), so
+// this layout hides the shared FinalCta. The Table of Contents is the live
+// one: the mobile list shows H2 items only, the desktop sidebar shows H2
+// and H3 items, both linking to the live heading ids. The feedback widget
+// ("Did this article answer your question?") is client-side only.
+
+interface Props {
+  entry: any;
+}
+
+const { entry } = Astro.props;
+
+const tocH2 = (entry.blocks ?? []).filter((b: any) => b.kind === "h2");
+const tocH2H3 = (entry.blocks ?? []).filter((b: any) => b.kind === "h2" || b.kind === "h3");
+const crumbs = [...(entry.breadcrumb ?? []), { t: entry.h1, href: null }];
+---
+
+<BaseLayout title={`${entry.title} | Attio Help Center`} description={entry.description} hideFinalCta>
+  <div class="mx-auto grid max-w-[1200px] lg:grid-cols-[260px_1fr]">
+    <HelpSidebar current={entry.path} />
+
+    <div class="min-w-0 px-4 pb-24 sm:px-6 lg:pl-10">
+      <!-- Breadcrumb -->
+      <nav class="flex h-9 items-center gap-1.5 pt-10 text-sm text-ink-600" aria-label="Breadcrumb">
+        {crumbs.map((crumb: any, i: number) => (
+          <>
+            {i > 0 && <span aria-hidden="true">/</span>}
+            {crumb.href ? (
+              <a href={crumb.href} class="hover:text-blue-500 hover:underline">
+                {crumb.t}
+              </a>
+            ) : (
+              <span class="font-medium text-ink-100">{crumb.t}</span>
+            )}
+          </>
+        ))}
+      </nav>
+
+      <!-- Header -->
+      <header class="mt-10">
+        <h1 class="font-display text-[40px] font-semibold leading-[1.05] tracking-tight text-ink-100 sm:text-[56px]">
+          {entry.h1}
+        </h1>
+        {entry.desc && (
+          <p class="mt-6 max-w-[36em] text-lg leading-relaxed text-ink-600">{entry.desc}</p>
+        )}
+      </header>
+
+      <!-- Mobile Table of Contents, H2 items only, as on live -->
+      {tocH2.length > 0 && (
+        <section class="mt-10 border-y border-paper-500 py-6 xl:hidden" aria-label="Table of contents">
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Table of Contents</p>
+          <ul class="mt-3 flex flex-col gap-1">
+            {tocH2.map((item: any) => (
+              <li>
+                <a
+                  href={`#${item.id}`}
+                  class="block w-fit rounded-md px-2 py-1.5 text-sm text-ink-600 hover:text-blue-500"
+                >
+                  {item.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <!-- Body + desktop Table of Contents -->
+      <div class="grid gap-12 pt-12 xl:grid-cols-12 xl:pt-16">
+        <article class="min-w-0 xl:col-span-8" aria-label="Article">
+          <div class="max-w-prose">
+            <HelpBlocks blocks={entry.blocks ?? []} />
+          </div>
+
+          <!-- Frequently asked questions -->
+          {entry.faq && entry.faq.length > 0 && (
+            <section class="mt-20 border-t border-paper-500 pt-24" aria-label="Frequently asked questions">
+              <div class="flex items-start justify-between gap-4">
+                <h2 id="faq" class="font-display text-[28px] font-semibold leading-tight tracking-tight sm:text-[32px]">
+                  Frequently asked questions
+                </h2>
+                <button
+                  type="button"
+                  data-expand-all
+                  class="mt-2 shrink-0 rounded-[10px] border border-paper-500 bg-white px-3 py-1.5 text-sm font-semibold text-ink-100 transition-colors hover:border-ink-800"
+                >
+                  Expand all
+                </button>
+              </div>
+              <div class="mt-6">
+                {entry.faq.map((item: any) => (
+                  <details class="border-b border-paper-500 py-7 first:pt-0">
+                    <summary class="flex cursor-pointer items-start justify-between gap-x-6 text-left font-semibold text-ink-100">
+                      {item.q}
+                      <span class="mt-1 shrink-0 text-lg font-normal leading-none text-ink-700" aria-hidden="true">+</span>
+                    </summary>
+                    <div class="pr-2 pt-3 text-base text-ink-600 lg:pr-16">
+                      <HelpBlocks blocks={item.blocks ?? []} />
+                    </div>
+                  </details>
+                ))}
+              </div>
+              <p class="mt-8 text-sm text-ink-600">
+                Ask anything else in the{" "}
+                <a href="https://www.attio.community/" class="text-blue-500 underline underline-offset-2 hover:text-blue-600">
+                  Attio Community
+                </a>
+              </p>
+            </section>
+          )}
+
+          <!-- Feedback -->
+          <section class="mt-16 border-t border-paper-500 pt-10" aria-label="Article feedback">
+            <div data-feedback>
+              <p class="font-semibold text-ink-100">Did this article answer your question?</p>
+              <div class="mt-4 flex gap-3">
+                <button
+                  type="button"
+                  data-feedback-yes
+                  class="rounded-[10px] border border-paper-500 bg-white px-4 py-2 text-sm font-semibold text-ink-100 transition-colors hover:border-ink-800"
+                >
+                  Yes
+                </button>
+                <button
+                  type="button"
+                  data-feedback-no
+                  class="rounded-[10px] border border-paper-500 bg-white px-4 py-2 text-sm font-semibold text-ink-100 transition-colors hover:border-ink-800"
+                >
+                  No
+                </button>
+              </div>
+            </div>
+            <p data-feedback-thanks class="hidden font-semibold text-ink-100">
+              Thanks for your feedback.
+            </p>
+          </section>
+
+          <p class="mt-16 border-t border-dashed border-paper-600 pt-8">
+            <a href="/help" class="text-sm font-semibold text-ink-100 underline underline-offset-4 hover:text-blue-500">
+              Back to the Help Center
+            </a>
+          </p>
+        </article>
+
+        <!-- Desktop Table of Contents, H2 and H3 items, as on live -->
+        {tocH2H3.length > 0 && (
+          <aside class="hidden xl:col-span-4 xl:block" aria-label="Table of contents">
+            <div class="sticky top-32">
+              <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Table of Contents</p>
+              <ul class="mt-3 flex flex-col gap-1 border-l border-paper-500 pl-4">
+                {tocH2H3.map((item: any) => (
+                  <li class={item.kind === "h3" ? "pl-4" : ""}>
+                    <a
+                      href={`#${item.id}`}
+                      class="block w-fit rounded-md px-2 py-1.5 text-sm text-ink-600 hover:text-blue-500"
+                    >
+                      {item.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </aside>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Copy buttons on prompt and code cards.
+    document.querySelectorAll("button[data-copy]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const card = button.closest("div");
+        const pre = card ? card.querySelector("pre") : null;
+        if (!pre) return;
+        try {
+          await navigator.clipboard.writeText(pre.textContent ?? "");
+          button.textContent = "Copied";
+          setTimeout(() => {
+            button.textContent = "Copy";
+          }, 2000);
+        } catch {
+          button.textContent = "Copy failed";
+        }
+      });
+    });
+
+    // FAQ Expand all / Collapse all.
+    const expandButton = document.querySelector("[data-expand-all]");
+    if (expandButton) {
+      expandButton.addEventListener("click", () => {
+        const details = Array.from(document.querySelectorAll("section[aria-label='Frequently asked questions'] details"));
+        const allOpen = details.every((d) => (d as HTMLDetailsElement).open);
+        details.forEach((d) => {
+          (d as HTMLDetailsElement).open = !allOpen;
+        });
+        expandButton.textContent = allOpen ? "Expand all" : "Collapse all";
+      });
+    }
+
+    // Feedback widget, client-side only, no backend.
+    const feedback = document.querySelector("[data-feedback]");
+    const thanks = document.querySelector("[data-feedback-thanks]");
+    document.querySelectorAll("[data-feedback-yes], [data-feedback-no]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (feedback) feedback.classList.add("hidden");
+        if (thanks) thanks.classList.remove("hidden");
+      });
+    });
+  </script>
+</BaseLayout>

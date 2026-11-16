@@ -1,0 +1,11 @@
+---
+import HelpArticle from "../../../../../components/HelpArticle.astro";
+import help from "../../../../../data/help.json";
+
+// Common patterns in Zapier, copy fetched live from https://attio.com/help/reference/apps/zapier-app/common-zapier-patterns
+// on 2026-11-16 (HTTP 200). Data lives in src/data/help.json.
+const entry = (help as any[]).find((entry) => entry.slug === "reference/apps/zapier-app/common-zapier-patterns");
+if (!entry) throw new Error("Missing help data for reference/apps/zapier-app/common-zapier-patterns");
+---
+
+<HelpArticle entry={entry} />

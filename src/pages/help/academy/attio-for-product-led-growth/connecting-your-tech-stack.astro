@@ -1,0 +1,11 @@
+---
+import HelpLesson from "../../../../components/HelpLesson.astro";
+import help from "../../../../data/help.json";
+
+// Connecting your tech stack, copy fetched live from https://attio.com/help/academy/attio-for-product-led-growth/connecting-your-tech-stack
+// on 2026-11-16 (HTTP 200). Data lives in src/data/help.json.
+const entry = (help as any[]).find((entry) => entry.slug === "academy/attio-for-product-led-growth/connecting-your-tech-stack");
+if (!entry) throw new Error("Missing help data for academy/attio-for-product-led-growth/connecting-your-tech-stack");
+---
+
+<HelpLesson entry={entry} />

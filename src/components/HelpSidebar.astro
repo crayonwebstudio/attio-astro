@@ -1,0 +1,123 @@
+---
+import help from "../data/help.json";
+
+// Sidebar nav for help pages, as on live: Academy courses + Reference
+// categories, with the current category or course expanded to list its
+// articles or lessons. Hidden below the lg breakpoint, as on the /help index.
+// Nav data comes from the live category pages in src/data/help.json.
+
+interface Props {
+  current: string;
+}
+
+const { current } = Astro.props;
+
+const academy = (help as any[]).find((e) => e.slug === "academy");
+const reference = (help as any[]).find((e) => e.slug === "reference");
+const academyCourses = academy?.children ?? [];
+const referenceCats = reference?.children ?? [];
+
+interface NavChild {
+  title: string;
+  href: string;
+}
+
+let expanded: NavChild[] = [];
+let expandedSlug = "";
+if (current.startsWith("/help/reference/")) {
+  const cat = current.split("/")[3];
+  const catEntry = (help as any[]).find((e) => e.slug === `reference/${cat}`);
+  if (catEntry && catEntry.children) {
+    expanded = catEntry.children;
+    expandedSlug = catEntry.path;
+  }
+} else if (current.startsWith("/help/academy/")) {
+  const course = current.split("/")[3];
+  const lesson = (help as any[]).find(
+    (e) => e.kind === "lesson" && e.slug.startsWith(`academy/${course}/`)
+  );
+  if (lesson?.course?.lessons_list) {
+    expanded = lesson.course.lessons_list.map((l: any) => ({
+      title: l.title,
+      href: l.href,
+    }));
+    expandedSlug = `/help/academy/${course}`;
+  }
+}
+
+function isActive(href: string): boolean {
+  return current === href || current === href + "/";
+}
+---
+
+<nav class="hidden border-r border-paper-500 py-10 pr-6 lg:block" aria-label="Help Center Contents">
+  <a
+    href="/help"
+    class="flex w-full items-center justify-between rounded-xl border border-paper-500 bg-white px-4 py-2.5 text-sm font-medium text-ink-700 transition-colors hover:border-ink-800"
+  >
+    <span>Search...</span>
+    <kbd class="rounded-md border border-paper-500 bg-paper-200 px-1.5 py-0.5 text-xs font-semibold text-ink-600">
+      ⌘K
+    </kbd>
+  </a>
+
+  <p class="mt-8 text-sm font-semibold">
+    <a href="/help/academy" class="hover:underline">Academy</a>
+  </p>
+  <ul class="mt-3 space-y-1">
+    {academyCourses.map((course: any) => (
+      <li>
+        <a
+          href={course.href}
+          class={`block rounded-lg px-3 py-2 text-sm transition-colors hover:bg-paper-200 hover:text-ink-100 ${isActive(course.href) ? "bg-paper-200 font-semibold text-ink-100" : "text-ink-600"}`}
+        >
+          {course.title}
+        </a>
+        {expandedSlug === course.href && expanded.length > 0 && (
+          <ul class="mb-2 mt-1 space-y-1 border-l border-paper-500 pl-3">
+            {expanded.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class={`block rounded-lg px-3 py-1.5 text-sm transition-colors hover:bg-paper-200 hover:text-ink-100 ${isActive(item.href) ? "bg-paper-200 font-semibold text-ink-100" : "text-ink-600"}`}
+                >
+                  {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))}
+  </ul>
+
+  <p class="mt-8 text-sm font-semibold">
+    <a href="/help/reference" class="hover:underline">Reference</a>
+  </p>
+  <ul class="mt-3 space-y-1">
+    {referenceCats.map((cat: any) => (
+      <li>
+        <a
+          href={cat.href}
+          class={`block rounded-lg px-3 py-2 text-sm transition-colors hover:bg-paper-200 hover:text-ink-100 ${isActive(cat.href) ? "bg-paper-200 font-semibold text-ink-100" : "text-ink-600"}`}
+        >
+          {cat.title}
+        </a>
+        {expandedSlug === cat.href && expanded.length > 0 && (
+          <ul class="mb-2 mt-1 space-y-1 border-l border-paper-500 pl-3">
+            {expanded.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class={`block rounded-lg px-3 py-1.5 text-sm transition-colors hover:bg-paper-200 hover:text-ink-100 ${isActive(item.href) ? "bg-paper-200 font-semibold text-ink-100" : "text-ink-600"}`}
+                >
+                  {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))}
+  </ul>
+</nav>

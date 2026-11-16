@@ -1,0 +1,11 @@
+---
+import HelpArticle from "../../../../../components/HelpArticle.astro";
+import help from "../../../../../data/help.json";
+
+// Create and manage attributes, copy fetched live from https://attio.com/help/reference/managing-your-data/attributes/create-manage-attributes
+// on 2026-11-16 (HTTP 200). Data lives in src/data/help.json.
+const entry = (help as any[]).find((entry) => entry.slug === "reference/managing-your-data/attributes/create-manage-attributes");
+if (!entry) throw new Error("Missing help data for reference/managing-your-data/attributes/create-manage-attributes");
+---
+
+<HelpArticle entry={entry} />

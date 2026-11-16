@@ -1,0 +1,11 @@
+---
+import HelpCategory from "../../../components/HelpCategory.astro";
+import help from "../../../data/help.json";
+
+// Industry guides, copy fetched live from https://attio.com/help/reference/industry-guides
+// on 2026-11-16 (HTTP 200). Data lives in src/data/help.json.
+const entry = (help as any[]).find((entry) => entry.slug === "reference/industry-guides");
+if (!entry) throw new Error("Missing help data for reference/industry-guides");
+---
+
+<HelpCategory entry={entry} />

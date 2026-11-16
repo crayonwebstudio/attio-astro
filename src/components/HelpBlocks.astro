@@ -1,0 +1,286 @@
+---
+import HelpSegments from "./HelpSegments.astro";
+
+// Shared block renderer for help article bodies and FAQ answers.
+// Copy fetched live from https://attio.com/help/* on 2026-11-16 (HTTP 200
+// each), stored in src/data/help.json. Live em dashes are rendered as
+// commas, per the no em dash rule. Product visuals are rebuilt as HTML/CSS
+// mocks, no Attio images, logos, or fonts are hotlinked or copied. Figure
+// images on live are Storyblok photos, so each figure is rendered as a dark
+// pinstripe panel labelled with the live image's alt text where present, or
+// the image filename title-cased. Blacked-out visual-test placeholders on
+// live (38) are skipped, not rendered.
+
+interface Segment {
+  t: string;
+  b?: boolean;
+  i?: boolean;
+  code?: boolean;
+  href?: string;
+}
+
+interface ListItem {
+  segments: Segment[];
+  sub?: { kind: string; items: ListItem[] };
+}
+
+interface Block {
+  kind: string;
+  segments?: Segment[];
+  lines?: Segment[][];
+  text?: string;
+  id?: string;
+  items?: ListItem[];
+  label?: string;
+  alt?: string;
+  href?: string;
+  youtube?: string;
+  rows?: string[][];
+  header?: boolean;
+  title?: string;
+}
+
+interface Props {
+  blocks: Block[];
+}
+
+const { blocks } = Astro.props;
+
+function titleCase(label: string): string {
+  return label
+    .split(" ")
+    .map((word) => (word ? word[0].toUpperCase() + word.slice(1) : word))
+    .join(" ");
+}
+---
+
+{blocks.map((block) => {
+  if (block.kind === "h2") {
+    return (
+      <h2
+        id={block.id}
+        class="mt-16 scroll-mt-32 font-display text-[28px] font-semibold leading-tight tracking-tight first:mt-0 sm:text-[32px]"
+      >
+        {block.text}
+      </h2>
+    );
+  }
+  if (block.kind === "h3") {
+    return (
+      <h3 id={block.id} class="mt-12 scroll-mt-32 font-display text-xl font-semibold first:mt-0">
+        {block.text}
+      </h3>
+    );
+  }
+  if (block.kind === "h4") {
+    return (
+      <h4 id={block.id} class="mt-10 scroll-mt-32 font-display text-lg font-semibold first:mt-0">
+        {block.text}
+      </h4>
+    );
+  }
+  if (block.kind === "ul" || block.kind === "ol") {
+    return block.kind === "ul" ? (
+      <ul class="mt-5 space-y-2">
+        {block.items?.map((item) => (
+          <li class="flex items-baseline gap-x-3 leading-relaxed text-ink-100">
+            <span class="h-2 w-2 shrink-0 translate-y-[-1px] rounded-[2px] bg-ink-300" aria-hidden="true" />
+            <span class="min-w-0">
+              <HelpSegments segments={item.segments} />
+              {item.sub && item.sub.kind === "ul" && (
+                <ul class="mt-2 space-y-2">
+                  {item.sub.items.map((subItem) => (
+                    <li class="flex items-baseline gap-x-3 leading-relaxed text-ink-100">
+                      <span class="h-2 w-2 shrink-0 translate-y-[-1px] rounded-[2px] bg-ink-300" aria-hidden="true" />
+                      <span class="min-w-0">
+                        <HelpSegments segments={subItem.segments} />
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {item.sub && item.sub.kind === "ol" && (
+                <ol class="mt-2 list-decimal space-y-2 pl-6">
+                  {item.sub.items.map((subItem) => (
+                    <li class="leading-relaxed text-ink-100 marker:font-semibold">
+                      <HelpSegments segments={subItem.segments} />
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </span>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <ol class="mt-5 list-decimal space-y-2 pl-6">
+        {block.items?.map((item) => (
+          <li class="leading-relaxed text-ink-100 marker:font-semibold">
+            <HelpSegments segments={item.segments} />
+            {item.sub && item.sub.kind === "ul" && (
+              <ul class="mt-2 space-y-2">
+                {item.sub.items.map((subItem) => (
+                  <li class="flex items-baseline gap-x-3 leading-relaxed text-ink-100">
+                    <span class="h-2 w-2 shrink-0 translate-y-[-1px] rounded-[2px] bg-ink-300" aria-hidden="true" />
+                    <span class="min-w-0">
+                      <HelpSegments segments={subItem.segments} />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {item.sub && item.sub.kind === "ol" && (
+              <ol class="mt-2 list-decimal space-y-2 pl-6">
+                {item.sub.items.map((subItem) => (
+                  <li class="leading-relaxed text-ink-100 marker:font-semibold">
+                    <HelpSegments segments={subItem.segments} />
+                  </li>
+                ))}
+              </ol>
+            )}
+          </li>
+        ))}
+      </ol>
+    );
+  }
+  if (block.kind === "quote") {
+    return (
+      <blockquote class="mt-10 border-l-2 border-ink-100 pl-6 font-serif text-2xl leading-snug text-ink-100">
+        <HelpSegments segments={block.segments ?? []} />
+      </blockquote>
+    );
+  }
+  if (block.kind === "img") {
+    return (
+      <figure class="mt-10">
+        <div class="pinstripe-bg flex items-center justify-center overflow-hidden rounded-2xl bg-ink-50 px-6 py-12">
+          <p class="min-w-0 break-words text-center font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
+            {titleCase(block.label ?? "Attio")}
+          </p>
+        </div>
+      </figure>
+    );
+  }
+  if (block.kind === "callout") {
+    return (
+      <div class="mt-10 rounded-2xl border border-paper-500 bg-paper-200 p-5 text-sm leading-relaxed text-ink-100">
+        {block.lines?.map((line, i) => (
+          <p class={i > 0 ? "mt-3 flex items-start gap-2" : "flex items-start gap-2"}>
+            <span
+              class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-ink-100 text-[11px] font-bold text-white"
+              aria-hidden="true"
+            >
+              i
+            </span>
+            <span class="min-w-0">
+              <HelpSegments segments={line} />
+            </span>
+          </p>
+        ))}
+      </div>
+    );
+  }
+  if (block.kind === "video") {
+    return (
+      <div class="mt-10 flex flex-col gap-4 rounded-2xl border border-paper-500 bg-paper-200 p-5 sm:flex-row sm:items-center sm:gap-6">
+        <a
+          href={block.href ?? "#"}
+          class="pinstripe-bg relative flex h-16 w-28 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-ink-50"
+          aria-label="Watch video in Attio Academy"
+        >
+          <span class="flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-sm font-bold text-ink-100" aria-hidden="true">
+            ▶
+          </span>
+        </a>
+        <p class="min-w-0 flex-1 text-sm leading-relaxed text-ink-100">
+          <HelpSegments segments={block.segments ?? []} />
+        </p>
+        {block.href && (
+          <a
+            href={block.href}
+            class="shrink-0 rounded-[10px] border border-ink-100 bg-ink-100 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-ink-200"
+          >
+            {block.label ?? "Watch"}
+          </a>
+        )}
+      </div>
+    );
+  }
+  if (block.kind === "code" || block.kind === "prompt") {
+    return (
+      <div class="relative mt-10 overflow-hidden rounded-xl bg-ink-50">
+        {block.label && (
+          <p class="px-4 pt-4 text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
+            {block.label}
+          </p>
+        )}
+        <pre class="max-h-[17rem] overflow-y-auto whitespace-pre-wrap px-4 pb-16 pt-4 font-mono text-xs leading-relaxed text-white/80">
+          {block.text}
+        </pre>
+        <button
+          type="button"
+          data-copy
+          class="absolute bottom-4 right-4 rounded-[10px] border border-white/20 bg-white/10 px-2.5 py-1.5 text-xs font-medium text-white backdrop-blur hover:bg-white/20"
+        >
+          Copy
+        </button>
+      </div>
+    );
+  }
+  if (block.kind === "details") {
+    return (
+      <details class="mt-10 rounded-2xl border border-paper-500 bg-white p-5">
+        <summary class="cursor-pointer font-semibold text-ink-100">{block.title}</summary>
+        <p class="mt-3 text-sm leading-relaxed text-ink-600">
+          <HelpSegments segments={block.segments ?? []} />
+        </p>
+      </details>
+    );
+  }
+  if (block.kind === "hr") {
+    return <hr class="my-10 border-t border-dashed border-paper-600" />;
+  }
+  if (block.kind === "table") {
+    return (
+      <div class="mt-10 overflow-x-auto">
+        <table class="w-full border-collapse text-left text-sm">
+          {block.header && block.rows && block.rows.length > 0 ? (
+            <>
+              <thead>
+                <tr class="border-b border-paper-500">
+                  {block.rows[0].map((cell) => (
+                    <th class="px-3 py-2 font-semibold">{cell}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {block.rows.slice(1).map((row) => (
+                  <tr class="border-b border-paper-400">
+                    {row.map((cell) => (
+                      <td class="px-3 py-2 align-top leading-relaxed text-ink-600">{cell}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </>
+          ) : (
+            <tbody>
+              {block.rows?.map((row) => (
+                <tr class="border-b border-paper-400">
+                  {row.map((cell) => (
+                    <td class="px-3 py-2 align-top leading-relaxed text-ink-600">{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          )}
+        </table>
+      </div>
+    );
+  }
+  return (
+    <p class="mt-5 leading-relaxed text-ink-100 first:mt-0">
+      <HelpSegments segments={block.segments ?? []} />
+    </p>
+  );
+})}

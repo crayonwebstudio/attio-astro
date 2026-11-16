@@ -1,0 +1,11 @@
+---
+import HelpLesson from "../../../../components/HelpLesson.astro";
+import help from "../../../../data/help.json";
+
+// Legacy Trigger blocks, copy fetched live from https://attio.com/help/academy/workflows-course/trigger-blocks
+// on 2026-11-16 (HTTP 200). Data lives in src/data/help.json.
+const entry = (help as any[]).find((entry) => entry.slug === "academy/workflows-course/trigger-blocks");
+if (!entry) throw new Error("Missing help data for academy/workflows-course/trigger-blocks");
+---
+
+<HelpLesson entry={entry} />

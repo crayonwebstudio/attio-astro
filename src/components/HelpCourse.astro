@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HelpSidebar from "./HelpSidebar.astro";
+import help from "../data/help.json";
+
+// Shared layout for the 4 Academy course pages under /help/academy/*
+// (Introductions, Workflows, Sequences, Reports, Attio for product-led
+// growth). The live course pages render their main content client-side
+// (a video lesson viewer), so the static HTML carries no course
+// description; this page renders what can be verified statically: the
+// course title, lesson count and length, the lesson list with live
+// durations, and the first lesson's video panel linking to that lesson.
+// All titles, durations, and lesson links are live Attio copy from
+// https://attio.com/help/academy/* on 2026-11-16, stored in
+// src/data/help.json. Live help pages have no standard FinalCta
+// ("Agentic revenue runs on Attio." appears 0 times in the live HTML), so
+// this layout hides the shared FinalCta.
+
+interface Props {
+  entry: any;
+}
+
+const { entry } = Astro.props;
+const lessons = entry.lessons_list ?? [];
+const firstSlug = lessons[0] ? lessons[0].href.replace(/^\/help\//, "") : null;
+const firstLesson = firstSlug
+  ? (help as any[]).find((e) => e.slug === firstSlug)
+  : null;
+const crumbs = [
+  { t: "Help", href: "/help" },
+  { t: "Academy", href: "/help/academy" },
+  { t: entry.h1, href: null },
+];
+---
+
+<BaseLayout title={`${entry.title} | Attio Help Center`} description={entry.description} hideFinalCta>
+  <div class="mx-auto grid max-w-[1200px] lg:grid-cols-[260px_1fr]">
+    <HelpSidebar current={entry.path} />
+
+    <div class="min-w-0 px-4 pb-24 sm:px-6 lg:pl-10">
+      <!-- Breadcrumb -->
+      <nav class="flex h-9 items-center gap-1.5 pt-10 text-sm text-ink-600" aria-label="Breadcrumb">
+        {crumbs.map((crumb: any, i: number) => (
+          <>
+            {i > 0 && <span aria-hidden="true">/</span>}
+            {crumb.href ? (
+              <a href={crumb.href} class="hover:text-blue-500 hover:underline">
+                {crumb.t}
+              </a>
+            ) : (
+              <span class="font-medium text-ink-100">{crumb.t}</span>
+            )}
+          </>
+        ))}
+      </nav>
+
+      <!-- Header -->
+      <header class="mt-10">
+        <h1 class="font-display text-[40px] font-semibold leading-[1.05] tracking-tight text-ink-100 sm:text-[56px]">
+          {entry.h1}
+        </h1>
+        <p class="mt-6 text-lg leading-relaxed text-ink-600">
+          {entry.lessons_count} lessons · Approx. {entry.minutes} min
+        </p>
+      </header>
+
+      <!-- First lesson video -->
+      {firstLesson?.video && (
+        <a
+          href={`/help/${firstSlug}`}
+          class="pinstripe-bg relative mt-10 flex aspect-video w-full items-center justify-center overflow-hidden rounded-2xl bg-ink-50"
+          aria-label={`Start the course with ${lessons[0].title}`}
+        >
+          <span class="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-xl font-bold text-ink-100" aria-hidden="true">
+            ▶
+          </span>
+          <span class="absolute bottom-4 left-4 max-w-[80%] truncate rounded-lg bg-ink-50/80 px-3 py-1.5 text-sm font-semibold text-white">
+            {lessons[0].title}
+          </span>
+        </a>
+      )}
+
+      <!-- Lesson list -->
+      <ol class="mt-12 space-y-1">
+        {lessons.map((lesson: any, i: number) => (
+          <li>
+            <a
+              href={lesson.href}
+              class="flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm text-ink-600 transition-colors hover:bg-paper-200 hover:text-ink-100"
+            >
+              <span class="flex min-w-0 items-center gap-3">
+                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-paper-200 text-xs font-semibold text-ink-100">
+                  {i + 1}
+                </span>
+                <span class="min-w-0 font-medium text-ink-100">{lesson.title}</span>
+              </span>
+              <span class="flex shrink-0 items-center gap-2 text-xs">
+                <span>{lesson.duration}</span>
+                <span>View</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ol>
+
+      <p class="mt-16 border-t border-dashed border-paper-600 pt-8">
+        <a href="/help" class="text-sm font-semibold text-ink-100 underline underline-offset-4 hover:text-blue-500">
+          Back to the Help Center
+        </a>
+      </p>
+    </div>
+  </div>
+</BaseLayout>
