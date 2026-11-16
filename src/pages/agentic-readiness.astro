@@ -1,0 +1,334 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+/*
+ * Agentic Readiness audit. Real copy fetched live from
+ * https://attio.com/agentic-readiness on 2026-11-16 (HTTP 200).
+ * Routing logic verified from the live JS bundle (chunk 3fum0kq1fdf8u.js):
+ *   all 3 sections fully checked -> orchestration
+ *   foundations fully checked AND at least 1 checked in workload AND
+ *   at least 1 checked in signals -> scaling
+ *   otherwise -> foundations
+ * Answers persist in localStorage under "agentic-readiness-audit-v1",
+ * the same key the live page uses. Result pages are not built yet, so
+ * submitting shows the outcome inline with a link to the result page.
+ */
+
+const steps = [
+  {
+    id: "foundations",
+    title: "Agentic foundations",
+    intro:
+      "Get these right and everything after compounds. Check what's already true, and we'll point you to the right next step.",
+    items: [
+      "My data is structured so an agent can query it",
+      "A qualified lead is defined in terms that don't depend on a rep's instinct",
+      "There is a consistent, structured way of capturing signal across deals",
+      "Funnel stages are defined clearly enough that two reps would move a deal the same way",
+      "There is a named person accountable for the quality of agent output",
+    ],
+  },
+  {
+    id: "workload",
+    title: "What agents take on",
+    intro:
+      "Once the foundations hold, this is the work that stops being yours. Check what's already running. None of it is something reps should still be doing alone.",
+    items: [
+      "Enrichments keep company and contact data current and in sync",
+      "Data that is missing, stale, or wrong gets surfaced, not discovered by accident",
+      "Account and persona research is pulled in by agents and added to each record",
+      "Post-call CRM updates are drafted from the call, not typed up or implemented by the rep",
+    ],
+  },
+  {
+    id: "signals",
+    title: "How you'll know it's working",
+    intro:
+      "Once agents are running, these tell you whether you targeted the right problem or not.",
+    items: [
+      "Agents are being used consistently, and my team isn't defaulting to the old process",
+      "Output isn't edited or discarded at a rate that suggests low trust",
+      "The automated job has measurably improved a funnel metric",
+      "My team has moved to higher-judgment work",
+    ],
+  },
+];
+
+const outcomes = {
+  foundations: {
+    heading: "Start with your data foundation",
+    text: "Your foundations are not all in place yet. The best entry point is setting up your data foundation, so agents have something solid to work from.",
+  },
+  scaling: {
+    heading: "You're ready to build more robust agentic workflows",
+    text: "Your foundations hold and agents are already taking on work. The next step is building more robust agentic workflows on top of what is running.",
+  },
+  orchestration: {
+    heading: "You're past readiness",
+    text: "Every box is checked. You are past readiness, and the next step is orchestrating agents across your whole revenue motion.",
+  },
+};
+---
+
+<BaseLayout
+  title="Agentic Sales Readiness Audit | Attio"
+  description="A short self-assessment to gauge how ready your team is to put AI agents to work in your CRM, and the next step to take based on where you are."
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pt-16 pb-10 text-center sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold tracking-wide text-ink-600 uppercase">Agentic readiness</p>
+    <h1 class="mx-auto mt-4 max-w-4xl font-display text-[40px] font-semibold leading-[1.05] tracking-tight sm:text-[56px]">
+      The Agentic Sales Readiness Audit
+    </h1>
+    <p class="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-ink-600">
+      An agentic revenue motion means you stop trading speed, scale, and quality against each other, and start deploying the intelligence and judgment of agents across every stage of your funnel.
+    </p>
+    <p class="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">
+      This audit points you to the best entry point from where you stand, from setting up your data foundation to building a more robust agentic sales process.
+    </p>
+  </section>
+
+  <!-- Audit -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Agentic Sales Readiness Audit">
+    <!-- Overall progress -->
+    <div class="mx-auto max-w-3xl">
+      <div class="flex items-baseline justify-between text-sm font-medium">
+        <span id="progress-label">0 of 13 checked</span>
+        <span id="progress-percent">0%</span>
+      </div>
+      <div class="mt-2 h-2 overflow-hidden rounded-full bg-paper-400" role="progressbar" aria-label="Audit progress" aria-valuemin="0" aria-valuemax="13" aria-valuenow="0" id="progress-bar">
+        <div id="progress-fill" class="h-full w-0 rounded-full bg-blue-500 transition-all duration-300"></div>
+      </div>
+    </div>
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-12">
+      <!-- Step nav -->
+      <nav class="lg:col-span-4" aria-label="Audit steps">
+        <p class="text-sm font-semibold tracking-wide text-ink-600 uppercase">Audit steps</p>
+        <ol class="mt-4 space-y-3" id="step-nav">
+          {steps.map((step, i) => (
+            <li>
+              <button
+                type="button"
+                data-step-nav={i}
+                aria-label={`Return to step ${i + 1}: ${step.title}`}
+                class="step-nav-btn flex w-full items-start justify-between gap-3 rounded-xl border border-paper-500 bg-white px-4 py-4 text-left transition hover:border-ink-300"
+              >
+                <span>
+                  <span class="block text-xs font-semibold text-ink-600">Step {i + 1}</span>
+                  <span class="mt-1 block font-semibold text-ink-100">{step.title}</span>
+                </span>
+                <span class="step-count shrink-0 rounded-full bg-paper-300 px-2.5 py-1 text-xs font-semibold tabular-nums text-ink-600" data-step-count={i}>
+                  0 / {step.items.length}
+                </span>
+              </button>
+            </li>
+          ))}
+        </ol>
+      </nav>
+
+      <!-- Step panels -->
+      <div class="lg:col-span-8">
+        <form id="audit-form" novalidate>
+          {steps.map((step, i) => (
+            <div class="step-panel hidden rounded-2xl border border-paper-500 bg-white p-6 sm:p-8" data-step-panel={i} aria-label={`Step ${i + 1}: ${step.title}`}>
+              <h2 class="font-display text-heading-sm font-semibold tracking-tight">
+                Step {i + 1}: {step.title}
+              </h2>
+              <p class="mt-3 leading-relaxed text-ink-600">{step.intro}</p>
+              <fieldset class="mt-6">
+                <legend class="sr-only">{step.title} checklist</legend>
+                <ul class="space-y-3">
+                  {step.items.map((item, j) => (
+                    <li>
+                      <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-paper-500 px-4 py-3 transition hover:border-ink-300 has-checked:border-blue-500 has-checked:bg-blue-100/40">
+                        <input
+                          type="checkbox"
+                          class="audit-check mt-1 h-5 w-5 shrink-0 accent-[#266df0]"
+                          data-section={step.id}
+                          data-item={`${step.id}--${j}`}
+                        />
+                        <span class="leading-relaxed">{item}</span>
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </fieldset>
+            </div>
+          ))}
+
+          <!-- Stepper footer -->
+          <div class="mt-6 flex items-center justify-between gap-3">
+            <span class="text-sm font-semibold tabular-nums text-ink-600">
+              <span id="step-indicator">1</span> / 3
+            </span>
+            <div class="flex items-center gap-3">
+              <button
+                type="button"
+                id="prev-btn"
+                class="invisible rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-300"
+              >
+                Previous
+              </button>
+              <button
+                type="button"
+                id="next-btn"
+                class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-400"
+              >
+                Next
+              </button>
+              <button
+                type="submit"
+                id="result-btn"
+                class="hidden rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-400"
+              >
+                See your result
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Result -->
+        <div id="result-panel" class="hidden rounded-2xl border border-paper-500 bg-paper-200 p-6 sm:p-8" role="status">
+          <p class="text-sm font-semibold tracking-wide text-ink-600 uppercase">Your result</p>
+          <h2 id="result-heading" class="mt-3 font-display text-heading-sm font-semibold tracking-tight"></h2>
+          <p id="result-text" class="mt-3 leading-relaxed text-ink-600"></p>
+          <p id="result-count" class="mt-4 text-sm font-semibold tabular-nums text-ink-600"></p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a
+              id="result-link"
+              href="/agentic-readiness/foundations"
+              class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-400"
+            >
+              See your next steps
+            </a>
+            <button
+              type="button"
+              id="retake-btn"
+              class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-white"
+            >
+              Retake the audit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script define:vars={{ steps, outcomes }}>
+    const STORAGE_KEY = "agentic-readiness-audit-v1";
+    const form = document.getElementById("audit-form");
+    const panels = Array.from(document.querySelectorAll("[data-step-panel]"));
+    const navBtns = Array.from(document.querySelectorAll("[data-step-nav]"));
+    const checks = Array.from(document.querySelectorAll(".audit-check"));
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const resultBtn = document.getElementById("result-btn");
+    const indicator = document.getElementById("step-indicator");
+    const progressLabel = document.getElementById("progress-label");
+    const progressPercent = document.getElementById("progress-percent");
+    const progressFill = document.getElementById("progress-fill");
+    const progressBar = document.getElementById("progress-bar");
+    const resultPanel = document.getElementById("result-panel");
+    const resultHeading = document.getElementById("result-heading");
+    const resultText = document.getElementById("result-text");
+    const resultCount = document.getElementById("result-count");
+    const resultLink = document.getElementById("result-link");
+    const retakeBtn = document.getElementById("retake-btn");
+
+    let current = 0;
+    let answers = {};
+    try {
+      answers = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}") || {};
+    } catch {
+      answers = {};
+    }
+
+    function sectionCount(id) {
+      const step = steps.find((s) => s.id === id);
+      return step.items.filter((_, j) => answers[`${id}--${j}`]).length;
+    }
+
+    function totalChecked() {
+      return checks.filter((c) => c.checked).length;
+    }
+
+    function routeOutcome() {
+      const allComplete = (id) => {
+        const step = steps.find((s) => s.id === id);
+        return step && sectionCount(id) === step.items.length && step.items.length > 0;
+      };
+      const anyChecked = (id) => sectionCount(id) > 0;
+      if (allComplete("foundations") && allComplete("workload") && allComplete("signals")) return "orchestration";
+      if (allComplete("foundations") && anyChecked("workload") && anyChecked("signals")) return "scaling";
+      return "foundations";
+    }
+
+    function render() {
+      panels.forEach((p, i) => p.classList.toggle("hidden", i !== current));
+      navBtns.forEach((b, i) => {
+        b.classList.toggle("border-ink-100", i === current);
+        b.classList.toggle("ring-1", i === current);
+        b.classList.toggle("ring-ink-100", i === current);
+      });
+      steps.forEach((step, i) => {
+        const el = document.querySelector(`[data-step-count="${i}"]`);
+        if (el) el.textContent = `${sectionCount(step.id)} / ${step.items.length}`;
+      });
+      const total = totalChecked();
+      progressLabel.textContent = `${total} of 13 checked`;
+      progressPercent.textContent = `${Math.round((total / 13) * 100)}%`;
+      progressFill.style.width = `${(total / 13) * 100}%`;
+      progressBar.setAttribute("aria-valuenow", String(total));
+      indicator.textContent = String(current + 1);
+      prevBtn.classList.toggle("invisible", current === 0);
+      nextBtn.classList.toggle("hidden", current === steps.length - 1);
+      resultBtn.classList.toggle("hidden", current !== steps.length - 1);
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
+      } catch {}
+    }
+
+    function goTo(i) {
+      current = Math.max(0, Math.min(steps.length - 1, i));
+      render();
+      panels[current].scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    checks.forEach((c) => {
+      const key = c.getAttribute("data-item");
+      c.checked = !!answers[key];
+      c.addEventListener("change", () => {
+        if (c.checked) answers[key] = true;
+        else delete answers[key];
+        render();
+      });
+    });
+    navBtns.forEach((b, i) => b.addEventListener("click", () => goTo(i)));
+    prevBtn.addEventListener("click", () => goTo(current - 1));
+    nextBtn.addEventListener("click", () => goTo(current + 1));
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const outcome = routeOutcome();
+      const data = outcomes[outcome];
+      resultHeading.textContent = data.heading;
+      resultText.textContent = data.text;
+      resultCount.textContent = `You checked ${totalChecked()} of 13 items.`;
+      resultLink.setAttribute("href", `/agentic-readiness/${outcome}`);
+      resultPanel.classList.remove("hidden");
+      form.classList.add("hidden");
+      resultPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+
+    retakeBtn.addEventListener("click", () => {
+      answers = {};
+      checks.forEach((c) => (c.checked = false));
+      resultPanel.classList.add("hidden");
+      form.classList.remove("hidden");
+      goTo(0);
+    });
+
+    render();
+  </script>
+</BaseLayout>
