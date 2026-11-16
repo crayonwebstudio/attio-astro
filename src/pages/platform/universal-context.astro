@@ -1,0 +1,399 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/platform/universal-context on 2026-11-16 (HTTP 200, 453KB).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live H1 is "Universal Context™" (duplicated desktop/mobile); rendered once here.
+// "Open Attio" is a header button (/go/), not a hero eyebrow, so the hero has no eyebrow.
+// The signals items (Writes itself / Lives on the record / Sharpens over time) are
+// buttons on live and switch product images (captured/customer/compounding); rendered
+// here as a switcher with CSS mock panels. The seats section is tabs on live.
+const signals = [
+  {
+    id: "writes",
+    title: "Writes itself.",
+    copy: "Every email, call, and meeting arrives as it happens.",
+  },
+  {
+    id: "record",
+    title: "Lives on the record.",
+    copy: "The whole customer picture, always current.",
+  },
+  {
+    id: "sharpens",
+    title: "Sharpens over time.",
+    copy: "The longer it runs, the less you have to explain.",
+  },
+];
+
+const trustCards = [
+  {
+    title: "Sourced answers.",
+    copy: "Traced back to a record, call, or event.",
+    mock: [
+      "Answer: GreenLeaf is ready to close",
+      "Source: Call, Aug 29, 10:40 AM",
+      "Source: Email from Ashley, 0:02",
+    ],
+  },
+  {
+    title: "Scoped access.",
+    copy: "An agent reaches only what you can.",
+    mock: ["Role: Sales rep", "Can see: Own deals", "Blocked: Finance records"],
+  },
+  {
+    title: "Your sign-off.",
+    copy: "Nothing changes without your go-ahead.",
+    mock: ["Draft: Follow-up email", "Waiting for approval", "Approve / Edit / Discard"],
+  },
+];
+
+const infraCards = [
+  {
+    title: "Read your own writes.",
+    copy: "The first CRM with external consistency.",
+    mock: ["Write: Deal stage -> Negotiation", "Read: Negotiation, everywhere", "Lag: none"],
+  },
+  {
+    title: "Query in SQL.",
+    copy: "Your whole workspace. No export or warehouse.",
+    mock: ["SELECT * FROM deals", "WHERE stage = 'Negotiation'", "1452 rows in 6.2s"],
+  },
+  {
+    title: "Search by meaning.",
+    copy: "Semantic and full-text, over one index.",
+    mock: ["Query: deals going quiet", "Match: GreenLeaf, 14 days", "Match: Helix, 9 days"],
+  },
+  {
+    title: "Connect over MCP.",
+    copy: "External agents get the same guarantees you set.",
+    mock: ["MCP server: connected", "Tools: 30M calls / month", "Scopes: as you set them"],
+  },
+  {
+    title: "Build with TypeScript.",
+    copy: "App SDK, UI components, workflow blocks.",
+    mock: ["import { attio } from '@attio/sdk'", "attio.records.list('deals')", "Typed, end to end"],
+  },
+];
+
+const seats = [
+  {
+    id: "sales",
+    label: "Sales",
+    title: "Walk in ready.",
+    copy: "Get briefed with buyer context before you join the call.",
+    mock: ["Demo Call, GreenLeaf, 10:40 AM", "Buyer: Ashley, prefers email", "Open: pricing question, 2 days ago"],
+  },
+  {
+    id: "marketing",
+    label: "Marketing",
+    title: "Know which bets close.",
+    copy: "Campaign to pipeline to closed-won, in one system.",
+    mock: ["Campaign: Q4 launch", "Pipeline: $620K sourced", "Closed-won: 34% win rate"],
+  },
+  {
+    id: "success",
+    label: "Customer Success",
+    title: "See churn coming.",
+    copy: "Cooling accounts surfaced before they slip.",
+    mock: ["Brightloop: usage down 40%", "Vela: no login in 14 days", "Risk: $107K ARR"],
+  },
+  {
+    id: "revops",
+    label: "RevOps",
+    title: "Numbers you can trust.",
+    copy: "Live, consistent data. No warehouse to wrangle.",
+    mock: ["Weighted pipeline: $4.28M", "Win rate: 34%", "Sales cycle: 41 days"],
+  },
+];
+---
+
+<BaseLayout
+  title="Universal Context | Attio"
+  description="Every live signal captured and ready to act on. The deepest context layer in agentic revenue."
+  finalCta="Ask more from CRM. Ask Attio."
+  finalCtaDemo={true}
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Universal Context&trade;
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Every signal you and your agents need. Captured, connected, and ready to act on.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </div>
+
+    <!-- Hero showcase mock: signals flow into Universal Context, then out to agents -->
+    <div class="mx-auto mt-14 overflow-hidden rounded-2xl border border-paper-500 bg-paper-200 text-left shadow-sm">
+      <div class="flex items-center gap-2 border-b border-paper-400 bg-white px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-500"></span>
+        <span class="h-3 w-3 rounded-full bg-[#f5bf42]"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500"></span>
+        <span class="ml-2 text-sm font-semibold text-ink-600">Universal Context</span>
+        <span class="ml-auto rounded-full bg-blue-100 px-2 py-0.5 text-xs font-semibold text-blue-600">Live</span>
+      </div>
+      <div class="grid gap-4 p-5 sm:grid-cols-3 sm:p-6">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Signals in</p>
+          <ul class="mt-3 space-y-2">
+            {["Emails", "Meetings", "Product usage", "Billing", "Support", "Agent activity"].map((s) => (
+              <li class="rounded-lg bg-white px-3 py-2 text-sm font-medium text-ink-600 shadow-sm">{s}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="flex flex-col justify-center rounded-xl bg-ink-50 p-5 text-white">
+          <p class="font-display text-lg font-semibold">Universal Context</p>
+          <p class="mt-2 text-sm leading-relaxed text-white/70">
+            Every signal captured, connected, and ready to act on. One layer, every agent.
+          </p>
+          <p class="mt-4 rounded-lg bg-white/10 px-3 py-2 font-mono text-xs text-white/80">
+            context.query("GreenLeaf deal")
+          </p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Agents out</p>
+          <ul class="mt-3 space-y-2">
+            {["Ask Attio", "Custom Agents", "Workflows", "Sequences", "Web Agent"].map((s) => (
+              <li class="rounded-lg bg-white px-3 py-2 text-sm font-medium text-ink-600 shadow-sm">{s}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All of the signals. None of the noise. -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="All of the signals. None of the noise.">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      All of the signals. None of the noise.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Emails, meetings, product usage, billing, support, agent activity.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-3" role="tablist" aria-label="How context is captured">
+      {signals.map((s, i) => (
+        <button
+          type="button"
+          data-signal-tab={s.id}
+          aria-selected={i === 0 ? "true" : "false"}
+          class:list={[
+            "rounded-full px-5 py-2.5 text-sm font-semibold",
+            i === 0 ? "bg-ink-100 text-white" : "border border-paper-500 bg-white text-ink-600",
+          ]}
+        >
+          {s.title}
+        </button>
+      ))}
+    </div>
+
+    <div class="mt-8 grid gap-6 lg:grid-cols-2 lg:items-start">
+      <div>
+        {signals.map((s, i) => (
+          <div data-signal-panel={s.id} class:list={["rounded-2xl border border-paper-500 bg-white p-6", i !== 0 && "hidden"]}>
+            <p class="font-display text-2xl font-semibold">{s.title}</p>
+            <p class="mt-2 leading-relaxed text-ink-600">{s.copy}</p>
+          </div>
+        ))}
+      </div>
+      <div class="overflow-hidden rounded-2xl border border-paper-500 bg-paper-200">
+        <div data-signal-panel="writes" class="p-5">
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Arriving now</p>
+          <ul class="mt-3 space-y-2">
+            <li class="rounded-lg bg-white px-3 py-2.5 text-sm shadow-sm"><span class="font-semibold">Email</span> <span class="text-ink-600">Ashley, GreenLeaf: pricing follow-up</span></li>
+            <li class="rounded-lg bg-white px-3 py-2.5 text-sm shadow-sm"><span class="font-semibold">Call</span> <span class="text-ink-600">Demo Call, Aug 29, 10:40 AM, transcribed</span></li>
+            <li class="rounded-lg bg-white px-3 py-2.5 text-sm shadow-sm"><span class="font-semibold">Meeting</span> <span class="text-ink-600">Pipeline review, notes synced</span></li>
+          </ul>
+        </div>
+        <div data-signal-panel="record" class="hidden p-5">
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">GreenLeaf Inc, record</p>
+          <ul class="mt-3 space-y-2">
+            <li class="rounded-lg bg-white px-3 py-2.5 text-sm shadow-sm"><span class="font-semibold">Deal</span> <span class="text-ink-600">Negotiation, $54,000</span></li>
+            <li class="rounded-lg bg-white px-3 py-2.5 text-sm shadow-sm"><span class="font-semibold">Last touch</span> <span class="text-ink-600">Call, Aug 29, 10:40 AM</span></li>
+            <li class="rounded-lg bg-white px-3 py-2.5 text-sm shadow-sm"><span class="font-semibold">Next step</span> <span class="text-ink-600">Send revised pricing</span></li>
+          </ul>
+        </div>
+        <div data-signal-panel="sharpens" class="hidden p-5">
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Context over time</p>
+          <ul class="mt-3 space-y-2">
+            <li class="rounded-lg bg-white px-3 py-2.5 text-sm shadow-sm"><span class="font-semibold">Week 1</span> <span class="text-ink-600">Inbox and calendar connected</span></li>
+            <li class="rounded-lg bg-white px-3 py-2.5 text-sm shadow-sm"><span class="font-semibold">Week 4</span> <span class="text-ink-600">Enrichment fills every record</span></li>
+            <li class="rounded-lg bg-white px-3 py-2.5 text-sm shadow-sm"><span class="font-semibold">Week 12</span> <span class="text-ink-600">Agents act without being asked</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The engine behind every agent. -->
+  <section class="pinstripe-bg bg-ink-50 py-20 text-white" aria-label="The engine behind every agent.">
+    <div class="mx-auto max-w-[1200px] px-4 sm:px-6">
+      <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+        The engine behind every agent.
+      </h2>
+      <p class="mt-3 max-w-2xl text-lg leading-relaxed text-white/70">
+        Ask Attio, Custom Agents, and every workflow in between.
+      </p>
+      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {[
+          { name: "Ask Attio", copy: "Analyze and create with AI." },
+          { name: "Custom Agents", copy: "Agents ready for any task." },
+          { name: "Workflows", copy: "Orchestrate any revenue motion." },
+          { name: "Sequences", copy: "Personalized outreach at scale." },
+          { name: "Web Agent", copy: "Research the web on autopilot." },
+        ].map((a) => (
+          <article class="rounded-2xl bg-white/10 p-5 ring-1 ring-white/15">
+            <p class="font-display text-lg font-semibold">{a.name}</p>
+            <p class="mt-2 text-sm leading-relaxed text-white/70">{a.copy}</p>
+            <p class="mt-4 font-mono text-xs text-white/50">runs on Universal Context</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust every answer. Control every action. -->
+  <section class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6" aria-label="Trust every answer. Control every action.">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      Trust every answer. Control every action.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Sourced answers, scoped access, and your sign-off on every change.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {trustCards.map((card) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <ul class="space-y-2">
+              {card.mock.map((line) => (
+                <li class="rounded-lg bg-white px-3 py-2 text-sm leading-relaxed text-ink-600 shadow-sm">{line}</li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-5">
+            <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+            <p class="mt-2 leading-relaxed text-ink-600">{card.copy}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Built like infrastructure. -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Built like infrastructure.">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      Built like infrastructure.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Query it, extend it, and trust what it returns.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {infraCards.map((card) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <ul class="space-y-2">
+              {card.mock.map((line) => (
+                <li class="rounded-lg bg-white px-3 py-2 font-mono text-xs leading-relaxed text-ink-600 shadow-sm">{line}</li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-5">
+            <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+            <p class="mt-2 leading-relaxed text-ink-600">{card.copy}</p>
+          </div>
+        </article>
+      ))}
+      <article class="rounded-2xl bg-ink-50 p-6 text-white">
+        <h3 class="font-display text-xl font-semibold">One layer, every tool.</h3>
+        <p class="mt-2 leading-relaxed text-white/70">
+          The same context powers Ask Attio, your agents, your workflows, and your reports.
+        </p>
+        <p class="mt-4 font-mono text-xs text-white/50">SDK. API. MCP. Build anything on Attio.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- A win in every seat. -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="A win in every seat.">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      A win in every seat.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Sales, marketing, success, RevOps, each with a different edge.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-3" role="tablist" aria-label="Roles">
+      {seats.map((seat, i) => (
+        <button
+          type="button"
+          data-seat-tab={seat.id}
+          aria-selected={i === 0 ? "true" : "false"}
+          class:list={[
+            "rounded-full px-5 py-2.5 text-sm font-semibold",
+            i === 0 ? "bg-ink-100 text-white" : "border border-paper-500 bg-white text-ink-600",
+          ]}
+        >
+          {seat.label}
+        </button>
+      ))}
+    </div>
+    {seats.map((seat, i) => (
+      <div data-seat-panel={seat.id} class:list={["mt-8 grid gap-6 lg:grid-cols-2 lg:items-start", i !== 0 && "hidden"]}>
+        <div class="rounded-2xl border border-paper-500 bg-white p-6">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">{seat.label}</p>
+          <p class="mt-3 font-display text-2xl font-semibold">{seat.title}</p>
+          <p class="mt-2 leading-relaxed text-ink-600">{seat.copy}</p>
+        </div>
+        <div class="rounded-2xl border border-paper-500 bg-paper-200 p-5">
+          <ul class="space-y-2">
+            {seat.mock.map((line) => (
+              <li class="rounded-lg bg-white px-3 py-2.5 text-sm shadow-sm">{line}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <script>
+    function setupTabs(tabAttr, panelAttr) {
+      const tabs = document.querySelectorAll("[" + tabAttr + "]");
+      const panels = document.querySelectorAll("[" + panelAttr + "]");
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const id = tab.getAttribute(tabAttr);
+          tabs.forEach((t) => {
+            const active = t === tab;
+            t.setAttribute("aria-selected", active ? "true" : "false");
+            t.classList.toggle("bg-ink-100", active);
+            t.classList.toggle("text-white", active);
+            t.classList.toggle("border", !active);
+            t.classList.toggle("border-paper-500", !active);
+            t.classList.toggle("bg-white", !active);
+            t.classList.toggle("text-ink-600", !active);
+          });
+          panels.forEach((panel) => {
+            panel.classList.toggle("hidden", panel.getAttribute(panelAttr) !== id);
+          });
+        });
+      });
+    }
+    setupTabs("data-signal-tab", "data-signal-panel");
+    setupTabs("data-seat-tab", "data-seat-panel");
+  </script>
+</BaseLayout>
