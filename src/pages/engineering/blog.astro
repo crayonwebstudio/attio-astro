@@ -1,0 +1,190 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import EngineeringClosing from "../../components/EngineeringClosing.astro";
+import data from "../../data/engineering.json";
+
+// Copy fetched live from https://attio.com/engineering/blog on 2026-11-16
+// (HTTP 200, 679KB). Product visuals are rebuilt as HTML/CSS mocks, no
+// Attio images are hotlinked or copied. The live page has an empty H1 and
+// NO standard FinalCta ("Agentic revenue runs on Attio." appears 0 times
+// in the live HTML), so this page hides the shared FinalCta and uses
+// "Engineering Blog" as the single H1, taken from the page title
+// "Engineering Blog | Attio". The live page has no hero headline: the
+// featured cards start at the top, rendered here once (the live DOM
+// duplicates them for desktop and mobile markup). Featured cards are the
+// 3 live ones in live order, with tag, date, title, excerpt, and author
+// plus role. "Latest articles" lists all 13 posts in live order with
+// title, date, tag, and excerpt. Filter chips are buttons with the live
+// counts; filtering is client side. The live page ends with the
+// "14,810 pull requests merged in the past year" section and the
+// "Ready to redefine the world's largest software category?" careers
+// section, rendered by EngineeringClosing.
+
+const posts = data.posts as {
+  slug: string;
+  title: string;
+  tag: string;
+  date: string;
+  authors: { name: string; role: string }[];
+  indexDate: string;
+  indexTag: string;
+  indexExcerpt: string;
+}[];
+
+const bySlug = new Map(posts.map((post) => [post.slug, post]));
+const cardBySlug = new Map(
+  (data.index.cards as { slug: string; title: string; date: string; tag: string; excerpt: string }[]).map((card) => [card.slug, card])
+);
+// Featured cards use the index card titles (the live post <title> for
+// "Introducing Universal Context" carries a trailing trademark mark that
+// the live index card title does not).
+const featured = (data.index.featured as string[]).map((slug) => ({
+  ...bySlug.get(slug)!,
+  title: cardBySlug.get(slug)!.title,
+}));
+const cards = (data.index.cards as { slug: string; title: string; date: string; tag: string; excerpt: string }[]).map(
+  (card) => ({ ...card, post: bySlug.get(card.slug)! })
+);
+const filters = data.index.filters as { label: string; count: number }[];
+---
+
+<BaseLayout
+  title="Engineering Blog | Attio"
+  description="How our engineering team builds the infrastructure, systems, and interfaces on our mission to redefine CRM."
+  hideFinalCta
+>
+  <!-- Page heading -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-10 pt-16 sm:px-6 sm:pt-24">
+    <h1 class="font-display text-[44px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Engineering Blog
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      How our engineering team builds the infrastructure, systems, and
+      interfaces on our mission to redefine CRM.
+    </p>
+  </section>
+
+  <!-- Featured cards -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 sm:px-6" aria-label="Featured articles">
+    <div class="grid gap-6 md:grid-cols-3">
+      {featured.map((post) => (
+        <a
+          href={`/engineering/blog/${post.slug}`}
+          class="group flex flex-col overflow-hidden rounded-2xl border border-paper-500 bg-white transition-shadow hover:shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]"
+        >
+          <div class="flex flex-1 flex-col p-6">
+            <p class="flex items-center justify-between gap-4 text-sm font-medium text-ink-600">
+              <span>[ {post.indexTag} ]</span>
+              <span>{post.indexDate}</span>
+            </p>
+            <h2 class="mt-4 font-display text-2xl font-semibold tracking-tight">
+              {post.title}
+            </h2>
+            <p class="mt-3 line-clamp-2 text-sm leading-relaxed text-ink-600">
+              {post.indexExcerpt}
+            </p>
+            <div class="mt-5 space-y-1">
+              {post.authors.map((author) => (
+                <p class="truncate text-sm">
+                  <span class="font-semibold">{author.name}</span>
+                  <span class="text-ink-600">, {author.role}</span>
+                </p>
+              ))}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Latest articles -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Latest articles">
+    <div class="border-t border-paper-500 pt-10">
+      <h2 class="font-display text-heading-md font-semibold tracking-tight">Latest articles</h2>
+    </div>
+
+    <!-- Filter chips, live labels and counts -->
+    <ul id="engineering-filters" class="mt-8 flex flex-wrap gap-2" aria-label="Filter articles by category">
+      {filters.map((filter, i) => (
+        <li>
+          <button
+            type="button"
+            data-filter={filter.label}
+            aria-pressed={i === 0 ? "true" : "false"}
+            class:list={[
+              "rounded-xl border px-3.5 py-2 text-lg font-medium transition-colors",
+              i === 0
+                ? "border-ink-100 bg-ink-100 text-white"
+                : "border-paper-500 bg-white text-ink-100 hover:border-ink-800",
+            ]}
+          >
+            {filter.label}
+            <span class="align-super text-xs">[{filter.count}]</span>
+          </button>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Article list, live order, newest first -->
+    <div id="engineering-list" class="mt-10">
+      {cards.map((card) => (
+        <article
+          class="engineering-card group border-t border-paper-500 first:border-t-0"
+          data-tag={card.tag}
+        >
+          <a href={`/engineering/blog/${card.slug}`} class="block py-7">
+            <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <h3 class="font-display text-lg font-semibold tracking-tight group-hover:text-blue-500 sm:text-xl">
+                {card.title}
+              </h3>
+              <p class="flex items-center gap-3 text-sm font-medium text-ink-600">
+                <span>{card.date}</span>
+                <span>[ {card.tag} ]</span>
+                <span aria-hidden="true" class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
+              </p>
+            </div>
+            <p class="mt-2 line-clamp-2 max-w-[28em] text-sm leading-relaxed text-ink-600">
+              {card.excerpt}
+            </p>
+          </a>
+        </article>
+      ))}
+    </div>
+    <p id="engineering-empty" class="mt-10 hidden text-base text-ink-600">
+      No articles in this category yet.
+    </p>
+  </section>
+
+  <EngineeringClosing />
+</BaseLayout>
+
+<script>
+  // Filter the article list by category, as on live. Counts are the live totals.
+  const filterList = document.getElementById("engineering-filters");
+  const cards = Array.from(document.querySelectorAll(".engineering-card"));
+  const empty = document.getElementById("engineering-empty");
+  if (filterList) {
+    filterList.addEventListener("click", (event) => {
+      const button = (event.target as HTMLElement).closest("button[data-filter]");
+      if (!button) return;
+      const tag = button.getAttribute("data-filter");
+      let visible = 0;
+      cards.forEach((card) => {
+        const show = tag === "All articles" || card.getAttribute("data-tag") === tag;
+        card.classList.toggle("hidden", !show);
+        if (show) visible += 1;
+      });
+      if (empty) empty.classList.toggle("hidden", visible > 0);
+      filterList.querySelectorAll("button[data-filter]").forEach((other) => {
+        const active = other === button;
+        other.setAttribute("aria-pressed", active ? "true" : "false");
+        other.classList.toggle("border-ink-100", active);
+        other.classList.toggle("bg-ink-100", active);
+        other.classList.toggle("text-white", active);
+        other.classList.toggle("border-paper-500", !active);
+        other.classList.toggle("bg-white", !active);
+        other.classList.toggle("text-ink-100", !active);
+      });
+    });
+  }
+</script>

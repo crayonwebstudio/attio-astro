@@ -1,0 +1,11 @@
+---
+import EngineeringPost from "../../../components/EngineeringPost.astro";
+import data from "../../../data/engineering.json";
+
+// Tracking down OTA-related crashes in our mobile app, copy fetched live from https://attio.com/engineering/blog/tracking-down-ota-related-crashes-in-our-mobile-app
+// on 2026-11-16 (HTTP 200). Data lives in src/data/engineering.json.
+const post = data.posts.find((entry) => entry.slug === "tracking-down-ota-related-crashes-in-our-mobile-app");
+if (!post) throw new Error("Missing engineering post data for tracking-down-ota-related-crashes-in-our-mobile-app");
+---
+
+<EngineeringPost post={post} />

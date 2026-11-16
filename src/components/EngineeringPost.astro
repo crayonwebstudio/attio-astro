@@ -1,0 +1,524 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EngineeringClosing from "./EngineeringClosing.astro";
+
+// Shared layout for the 13 engineering blog post pages under
+// /engineering/blog/*. Copy fetched live from
+// https://attio.com/engineering/blog/{slug} on 2026-11-16 (HTTP 200 each),
+// stored in src/data/engineering.json. All titles, dates, authors,
+// headings, paragraphs, lists, quotes, code, and figures are live Attio
+// copy. Live em dashes are rendered as commas, per the no em dash rule,
+// except inside code blocks, which are verbatim live code (one code sample
+// in the OTA crashes post uses a line of em dashes as a visual separator).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images, logos,
+// or fonts are hotlinked or copied. Figure images on live are Storyblok
+// photos, so each figure is rendered as a dark pinstripe panel labelled
+// with the live image's own filename, as on the blog posts. The OTA
+// crashes post has an interactive SVG flowchart on live; it is rendered
+// as a diagram panel listing the live flow labels in order. Live post
+// pages have no standard FinalCta ("Agentic revenue runs on Attio."
+// appears 0 times in the live HTML), so this layout hides the shared
+// FinalCta and renders the live careers closing section instead. The
+// Table of Contents is the live one: buttons on live, rendered here as
+// links, the mobile list shows H2 items only, the desktop sidebar shows
+// H2 and H3 items, both linking to the live heading ids.
+
+interface Segment {
+  t: string;
+  b?: boolean;
+  i?: boolean;
+  u?: boolean;
+  code?: boolean;
+  href?: string;
+}
+
+interface ListItem {
+  segments: Segment[];
+  children?: ListItem[];
+}
+
+interface Block {
+  kind:
+    | "p"
+    | "h2"
+    | "h3"
+    | "h4"
+    | "ul"
+    | "ol"
+    | "quote"
+    | "img"
+    | "caption"
+    | "code"
+    | "diagram"
+    | "hr"
+    | "table";
+  segments?: Segment[];
+  text?: string;
+  id?: string;
+  items?: ListItem[];
+  label?: string;
+  alt?: string;
+  aspect?: string;
+  caption?: string;
+  lang?: string;
+  rows?: string[][];
+}
+
+interface Author {
+  name: string;
+  role: string;
+}
+
+interface Post {
+  slug: string;
+  title: string;
+  description: string;
+  h1: string;
+  tag: string;
+  date: string;
+  datetime: string;
+  published: string;
+  readTime: string;
+  authors: Author[];
+  toc: string[];
+  excerpt: string;
+  blocks: Block[];
+}
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+
+function initials(name: string): string {
+  const parts = name.split(" ").filter(Boolean);
+  return parts
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+}
+
+function titleCase(label: string): string {
+  return label
+    .split(" ")
+    .map((word) => (word ? word[0].toUpperCase() + word.slice(1) : word))
+    .join(" ");
+}
+
+// Map heading text to its live id and kind, for the Table of Contents.
+const headingByText = new Map<string, { id: string; kind: string }>();
+for (const block of post.blocks) {
+  if ((block.kind === "h2" || block.kind === "h3" || block.kind === "h4") && block.id) {
+    headingByText.set(block.text ?? "", { id: block.id, kind: block.kind });
+    headingByText.set((block.text ?? "").replace(/\.$/, ""), { id: block.id, kind: block.kind });
+  }
+}
+
+const tocH2 = post.toc.filter((item) => headingByText.get(item)?.kind === "h2");
+---
+
+<BaseLayout title={post.title} description={post.description} hideFinalCta>
+  <!-- Header -->
+  <section class="mx-auto max-w-[1200px] px-4 pt-16 sm:px-6 sm:pt-24" aria-label="Article header">
+    <div class="flex flex-wrap items-end justify-between gap-4 border-b border-dashed border-paper-600 pb-5">
+      <p class="text-sm font-semibold tracking-wide text-ink-600">
+        <a href="/engineering/blog" class="hover:text-blue-500">engineering blog</a>
+        <span aria-hidden="true"> / </span>
+        {post.tag}
+      </p>
+      <p class="text-sm font-medium text-ink-600">
+        Published {post.published}
+        <span class="mx-1 text-ink-800">&middot;</span>
+        {post.readTime}
+      </p>
+    </div>
+
+    <h1 class="mt-10 max-w-4xl font-display text-[40px] font-semibold leading-[1.05] tracking-tight sm:text-[56px]">
+      {post.h1}
+    </h1>
+
+    <!-- Authors -->
+    <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+      {post.authors.map((author) => (
+        <div class="flex items-center gap-4">
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-ink-100 font-display text-base font-semibold text-white">
+            {initials(author.name)}
+          </span>
+          <div>
+            <p class="font-semibold">{author.name}</p>
+            <p class="mt-0.5 text-sm text-ink-600">{author.role}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Mobile Table of Contents, H2 items only, as on live -->
+  {tocH2.length > 0 && (
+    <section class="mx-auto max-w-[1200px] px-4 pt-12 sm:px-6 xl:hidden" aria-label="Table of contents">
+      <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Table of Contents</p>
+      <ul class="mt-3 flex flex-col gap-1">
+        {tocH2.map((item) => (
+          <li>
+            <a
+              href={`#${headingByText.get(item)?.id}`}
+              class="block w-fit rounded-md px-2 py-1.5 text-sm text-ink-600 hover:text-blue-500"
+            >
+              {item}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <!-- Body + desktop Table of Contents -->
+  <div class="mx-auto grid max-w-[1200px] gap-12 px-4 pb-24 pt-12 sm:px-6 xl:grid-cols-12 xl:pt-16">
+    <article class="min-w-0 xl:col-span-8" aria-label="Article">
+      <div class="max-w-prose">
+        {post.blocks.map((block) => {
+          if (block.kind === "h2") {
+            return (
+              <h2
+                id={block.id}
+                class="mt-16 scroll-mt-32 font-display text-[28px] font-semibold leading-tight tracking-tight first:mt-0 sm:text-[32px]"
+              >
+                {block.text}
+              </h2>
+            );
+          }
+          if (block.kind === "h3") {
+            return (
+              <h3 id={block.id} class="mt-12 scroll-mt-32 font-display text-xl font-semibold first:mt-0">
+                {block.text}
+              </h3>
+            );
+          }
+          if (block.kind === "h4") {
+            return (
+              <h4 id={block.id} class="mt-10 scroll-mt-32 font-display text-lg font-semibold first:mt-0">
+                {block.text}
+              </h4>
+            );
+          }
+          if (block.kind === "ul" || block.kind === "ol") {
+            return block.kind === "ul" ? (
+              <ul class="mt-5 space-y-2">
+                {block.items?.map((item) => (
+                  <li class="leading-relaxed text-ink-100">
+                    <span class="flex items-baseline gap-x-3">
+                      <span class="h-2 w-2 shrink-0 translate-y-[-1px] rounded-[2px] bg-ink-300" aria-hidden="true" />
+                      <span>
+                        {item.segments.map((part) =>
+                          part.href ? (
+                            <a href={part.href} class="text-blue-500 underline underline-offset-2 hover:text-blue-600">
+                              {part.t}
+                            </a>
+                          ) : part.code ? (
+                            <code class="rounded bg-paper-200 px-1 py-0.5 font-mono text-[0.9em]">{part.t}</code>
+                          ) : part.b ? (
+                            <strong class="font-semibold">{part.t}</strong>
+                          ) : part.i ? (
+                            <em>{part.t}</em>
+                          ) : part.u ? (
+                            <u>{part.t}</u>
+                          ) : (
+                            part.t
+                          )
+                        )}
+                      </span>
+                    </span>
+                    {item.children && (
+                      <ul class="ml-5 mt-2 space-y-2">
+                        {item.children.map((child) => (
+                          <li class="flex items-baseline gap-x-3 leading-relaxed text-ink-100">
+                            <span class="h-1.5 w-1.5 shrink-0 translate-y-[-1px] rounded-full bg-ink-300" aria-hidden="true" />
+                            <span>
+                              {child.segments.map((part) =>
+                                part.href ? (
+                                  <a href={part.href} class="text-blue-500 underline underline-offset-2 hover:text-blue-600">
+                                    {part.t}
+                                  </a>
+                                ) : part.code ? (
+                                  <code class="rounded bg-paper-200 px-1 py-0.5 font-mono text-[0.9em]">{part.t}</code>
+                                ) : part.b ? (
+                                  <strong class="font-semibold">{part.t}</strong>
+                                ) : part.i ? (
+                                  <em>{part.t}</em>
+                                ) : part.u ? (
+                                  <u>{part.t}</u>
+                                ) : (
+                                  part.t
+                                )
+                              )}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <ol class="mt-5 list-decimal space-y-2 pl-6">
+                {block.items?.map((item) => (
+                  <li class="leading-relaxed text-ink-100 marker:font-semibold">
+                    {item.segments.map((part) =>
+                      part.href ? (
+                        <a href={part.href} class="text-blue-500 underline underline-offset-2 hover:text-blue-600">
+                          {part.t}
+                        </a>
+                      ) : part.code ? (
+                        <code class="rounded bg-paper-200 px-1 py-0.5 font-mono text-[0.9em]">{part.t}</code>
+                      ) : part.b ? (
+                        <strong class="font-semibold">{part.t}</strong>
+                      ) : part.i ? (
+                        <em>{part.t}</em>
+                      ) : part.u ? (
+                        <u>{part.t}</u>
+                      ) : (
+                        part.t
+                      )
+                    )}
+                    {item.children && (
+                      <ol class="mt-2 list-decimal space-y-2 pl-6">
+                        {item.children.map((child) => (
+                          <li class="leading-relaxed text-ink-100 marker:font-semibold">
+                            {child.segments.map((part) =>
+                              part.href ? (
+                                <a href={part.href} class="text-blue-500 underline underline-offset-2 hover:text-blue-600">
+                                  {part.t}
+                                </a>
+                              ) : part.code ? (
+                                <code class="rounded bg-paper-200 px-1 py-0.5 font-mono text-[0.9em]">{part.t}</code>
+                              ) : part.b ? (
+                                <strong class="font-semibold">{part.t}</strong>
+                              ) : part.i ? (
+                                <em>{part.t}</em>
+                              ) : part.u ? (
+                                <u>{part.t}</u>
+                              ) : (
+                                part.t
+                              )
+                            )}
+                          </li>
+                        ))}
+                      </ol>
+                    )}
+                  </li>
+                ))}
+              </ol>
+            );
+          }
+          if (block.kind === "quote") {
+            return (
+              <blockquote class="mt-10 border-l-2 border-ink-100 pl-6 font-serif text-2xl leading-snug text-ink-100">
+                {block.segments?.map((part) =>
+                  part.href ? (
+                    <a href={part.href} class="text-blue-500 underline underline-offset-2 hover:text-blue-600">
+                      {part.t}
+                    </a>
+                  ) : part.b ? (
+                    <strong class="font-semibold">{part.t}</strong>
+                  ) : part.i ? (
+                    <em>{part.t}</em>
+                  ) : part.u ? (
+                    <u>{part.t}</u>
+                  ) : (
+                    part.t
+                  )
+                )}
+              </blockquote>
+            );
+          }
+          if (block.kind === "img") {
+            // Very wide banner images (ratio above 4, e.g. the 2072x166
+            // strip in the OTA crashes post) break aspect-ratio sizing:
+            // the fixed py-12 padding forces the height, and the ratio
+            // then derives a width far beyond the viewport. Render those
+            // as a fixed-height panel instead.
+            const ratioParts = (block.aspect ?? "").split("/").map((part) => Number(part.trim()));
+            const ratio = ratioParts.length === 2 && ratioParts[1] ? ratioParts[0] / ratioParts[1] : 0;
+            const wideBanner = ratio > 4;
+            return (
+              <figure class="mt-10">
+                <div
+                  class:list={[
+                    "pinstripe-bg flex items-center justify-center overflow-hidden rounded-2xl bg-ink-50 px-6 py-12",
+                    wideBanner && "h-32 py-0",
+                  ]}
+                  style={!wideBanner && block.aspect ? `aspect-ratio: ${block.aspect}` : undefined}
+                >
+                  <p class="min-w-0 break-words text-center font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
+                    {titleCase(block.label ?? "Attio")}
+                  </p>
+                </div>
+                {block.caption && (
+                  <figcaption class="mt-3 text-sm text-ink-600">{block.caption}</figcaption>
+                )}
+              </figure>
+            );
+          }
+          if (block.kind === "caption") {
+            return (
+              <p class="mt-3 text-sm text-ink-600">
+                {block.segments?.map((part) =>
+                  part.href ? (
+                    <a href={part.href} class="text-blue-500 underline underline-offset-2 hover:text-blue-600">
+                      {part.t}
+                    </a>
+                  ) : part.b ? (
+                    <strong class="font-semibold">{part.t}</strong>
+                  ) : (
+                    part.t
+                  )
+                )}
+              </p>
+            );
+          }
+          if (block.kind === "code") {
+            return (
+              <div class="relative mt-10 overflow-hidden rounded-xl bg-ink-50">
+                {block.lang && (
+                  <p class="px-4 pt-4 text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
+                    {block.lang}
+                  </p>
+                )}
+                <pre class="max-h-[24rem] overflow-y-auto whitespace-pre-wrap px-4 pb-16 pt-4 font-mono text-xs leading-relaxed text-white/80">
+                  {block.text}
+                </pre>
+                <button
+                  type="button"
+                  data-copy
+                  class="absolute bottom-4 right-4 rounded-[10px] border border-white/20 bg-white/10 px-2.5 py-1.5 text-xs font-medium text-white backdrop-blur hover:bg-white/20"
+                >
+                  Copy
+                </button>
+              </div>
+            );
+          }
+          if (block.kind === "diagram") {
+            return (
+              <figure class="mt-10">
+                <div class="pinstripe-bg overflow-hidden rounded-2xl bg-ink-50 px-6 py-10">
+                  <p class="text-center font-display text-xl font-semibold tracking-tight text-white">
+                    Diagram
+                  </p>
+                  <ol class="mx-auto mt-6 max-w-md list-decimal space-y-1.5 pl-6 text-sm leading-relaxed text-white/80">
+                    {block.items?.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ol>
+                </div>
+              </figure>
+            );
+          }
+          if (block.kind === "hr") {
+            return <hr class="my-10 border-t border-dashed border-paper-600" />;
+          }
+          if (block.kind === "table") {
+            return (
+              <div class="mt-10 overflow-x-auto">
+                <table class="w-full border-collapse text-left text-sm">
+                  <thead>
+                    <tr class="border-b border-paper-500">
+                      {block.rows?.[0].map((cell) => (
+                        <th class="px-3 py-2 font-semibold">{cell}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {block.rows?.slice(1).map((row) => (
+                      <tr class="border-b border-paper-400">
+                        {row.map((cell) => (
+                          <td class="px-3 py-2 align-top leading-relaxed text-ink-600">{cell}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
+          }
+          return (
+            <p class="mt-5 leading-relaxed text-ink-100 first:mt-0">
+              {block.segments?.map((part) =>
+                part.href ? (
+                  <a href={part.href} class="text-blue-500 underline underline-offset-2 hover:text-blue-600">
+                    {part.t}
+                  </a>
+                ) : part.code ? (
+                  <code class="rounded bg-paper-200 px-1 py-0.5 font-mono text-[0.9em]">{part.t}</code>
+                ) : part.b ? (
+                  <strong class="font-semibold">{part.t}</strong>
+                ) : part.i ? (
+                  <em>{part.t}</em>
+                ) : part.u ? (
+                  <u>{part.t}</u>
+                ) : (
+                  part.t
+                )
+              )}
+            </p>
+          );
+        })}
+      </div>
+
+      <!-- Back to the engineering blog index -->
+      <p class="mt-16 border-t border-dashed border-paper-600 pt-8">
+        <a href="/engineering/blog" class="text-sm font-semibold text-ink-100 underline underline-offset-4 hover:text-blue-500">
+          Back to the engineering blog
+        </a>
+      </p>
+    </article>
+
+    <!-- Desktop Table of Contents, H2 and H3 items, as on live -->
+    {post.toc.length > 0 && (
+      <aside class="hidden xl:col-span-4 xl:block" aria-label="Table of contents">
+        <div class="sticky top-32">
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Table of Contents</p>
+          <ul class="mt-3 flex flex-col gap-1 border-l border-paper-500 pl-4">
+            {post.toc.map((item) => {
+              const heading = headingByText.get(item);
+              const isH3 = heading?.kind === "h3" || heading?.kind === "h4";
+              return (
+                <li class={isH3 ? "pl-4" : ""}>
+                  <a
+                    href={`#${heading?.id}`}
+                    class="block w-fit rounded-md px-2 py-1.5 text-sm text-ink-600 hover:text-blue-500"
+                  >
+                    {item}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </aside>
+    )}
+  </div>
+
+  <EngineeringClosing />
+
+  <script>
+    // Copy buttons on code cards, as on live.
+    document.querySelectorAll("button[data-copy]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const card = button.closest("div");
+        const pre = card ? card.querySelector("pre") : null;
+        if (!pre) return;
+        try {
+          await navigator.clipboard.writeText(pre.textContent ?? "");
+          button.textContent = "Copied";
+          setTimeout(() => {
+            button.textContent = "Copy";
+          }, 2000);
+        } catch {
+          button.textContent = "Copy failed";
+        }
+      });
+    });
+  </script>
+</BaseLayout>

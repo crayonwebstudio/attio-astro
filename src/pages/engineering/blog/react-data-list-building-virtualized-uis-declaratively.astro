@@ -1,0 +1,11 @@
+---
+import EngineeringPost from "../../../components/EngineeringPost.astro";
+import data from "../../../data/engineering.json";
+
+// React Data List: Building virtualized UIs declaratively, copy fetched live from https://attio.com/engineering/blog/react-data-list-building-virtualized-uis-declaratively
+// on 2026-11-16 (HTTP 200). Data lives in src/data/engineering.json.
+const post = data.posts.find((entry) => entry.slug === "react-data-list-building-virtualized-uis-declaratively");
+if (!post) throw new Error("Missing engineering post data for react-data-list-building-virtualized-uis-declaratively");
+---
+
+<EngineeringPost post={post} />

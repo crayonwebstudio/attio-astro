@@ -1,0 +1,11 @@
+---
+import EngineeringPost from "../../../components/EngineeringPost.astro";
+import data from "../../../data/engineering.json";
+
+// Where’s the technical challenge in CRM anyway?, copy fetched live from https://attio.com/engineering/blog/where-s-the-technical-challenge-in-crm-anyway-
+// on 2026-11-16 (HTTP 200). Data lives in src/data/engineering.json.
+const post = data.posts.find((entry) => entry.slug === "where-s-the-technical-challenge-in-crm-anyway-");
+if (!post) throw new Error("Missing engineering post data for where-s-the-technical-challenge-in-crm-anyway-");
+---
+
+<EngineeringPost post={post} />

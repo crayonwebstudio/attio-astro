@@ -1,0 +1,44 @@
+---
+// Closing section shared by the engineering blog index and post pages.
+// Copy fetched live from https://attio.com/engineering/blog on 2026-11-16
+// (HTTP 200): "14,810 pull requests merged in the past year" plus the
+// contribution chart (a 52 week by 7 day grid, blacked out on live for
+// visual tests, rendered here as a decorative CSS grid of squares) and
+// "Ready to redefine the world's largest software category?" with a
+// "Careers at Attio" link to /careers.
+---
+
+<section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Careers at Attio">
+  <div class="border-t border-dashed border-paper-600 pt-10">
+    <p class="text-sm text-ink-600">14,810 pull requests merged in the past year</p>
+    <div
+      class="mt-6 grid grid-flow-col grid-rows-7 gap-[3px] overflow-hidden"
+      style="grid-template-columns: repeat(52, minmax(0, 1fr));"
+      aria-hidden="true"
+    >
+      {
+        Array.from({ length: 52 * 7 }).map((_, i) => {
+          const level = [0.08, 0.18, 0.35, 0.6, 0.9][(i * 7 + Math.floor(i / 13)) % 5];
+          return (
+            <span
+              class="aspect-square rounded-[30%] bg-ink-100"
+              style={`opacity: ${level};`}
+            />
+          );
+        })
+      }
+    </div>
+    <h2 class="mt-10 max-w-2xl font-display text-heading-sm font-semibold tracking-tight sm:text-heading-md">
+      Ready to redefine the world&rsquo;s largest software category?
+    </h2>
+    <p class="mt-4">
+      <a
+        href="/careers"
+        class="inline-flex items-center gap-2 rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-ink-200"
+      >
+        Careers at Attio
+        <span aria-hidden="true">&rarr;</span>
+      </a>
+    </p>
+  </div>
+</section>

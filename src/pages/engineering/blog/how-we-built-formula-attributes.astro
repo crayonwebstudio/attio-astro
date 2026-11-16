@@ -1,0 +1,11 @@
+---
+import EngineeringPost from "../../../components/EngineeringPost.astro";
+import data from "../../../data/engineering.json";
+
+// How we built formula attributes, copy fetched live from https://attio.com/engineering/blog/how-we-built-formula-attributes
+// on 2026-11-16 (HTTP 200). Data lives in src/data/engineering.json.
+const post = data.posts.find((entry) => entry.slug === "how-we-built-formula-attributes");
+if (!post) throw new Error("Missing engineering post data for how-we-built-formula-attributes");
+---
+
+<EngineeringPost post={post} />
