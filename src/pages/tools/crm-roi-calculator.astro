@@ -1,0 +1,552 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy and calculator logic fetched live from https://attio.com/tools/crm-roi-calculator
+// on 2026-11-16 (HTTP 200, 390KB). Title "CRM ROI calculator | Attio",
+// meta description verified. One H1 "What is CRM admin costing your sales team?".
+// The formulas below are the real ones from the live page's JS chunk
+// (/_next/static/immutable/chunks/0b2h4_n2is9a8.js):
+//   Hours per rep per week by area and state:
+//     dataEntry: {manual: 4, partial: 2, automatic: 0.5}
+//     reporting: {manual: 2, partial: 1, automatic: 0.25}
+//     search:    {manual: 2, partial: 1, automatic: 0.25}
+//   hoursSavedByArea = hours[state] - hours.automatic
+//   hoursPerRepPerWeek = sum of hoursSavedByArea
+//   valueByArea = hoursSavedByArea * teamSize * hourlyCost * 52
+//   valuePerYear = hoursPerRepPerWeek * teamSize * hourlyCost * 52
+//   repsWorth = hoursPerRepPerWeek * teamSize / 40
+// Verdict tiers (repsWorth <= upToReps): alreadyTight 0.05, partTime 0.5,
+// mostOfARep 1, aRepsWorth 3, aTeamsWorth 10, else aDepartment.
+// Defaults {dataEntry: "partial", reporting: "partial", search: "partial",
+// teamSize: 10, hourlyCost: 50} give 3.0 hours a week per rep, 0.8 reps worth,
+// $78,000 a year (data entry $39,000, reporting $19,500, finding context
+// $19,500), verdict "Most of a rep.", matching the live defaults exactly.
+// Dial stops, markers, area labels and descriptions are also from the live JS
+// (maturityPicker dictionary). The CTA is "Talk to sales" when teamSize >= 20,
+// otherwise "Start for free" with utm_content set to the verdict id, as on live.
+// Live has no standard FinalCta ("Agentic revenue runs on Attio." appears 0 times
+// in the live HTML), so hideFinalCta is used. Product visuals are rebuilt as
+// HTML/CSS, no Attio images are hotlinked or copied.
+const DIALS = [
+  {
+    id: "teamSize",
+    label: "How many reps are on your team",
+    stops: [1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25, 30, 40, 50, 60, 80, 100, 120, 150, 200, 250, 300, 400, 500],
+    markers: [
+      { value: 1, label: "1" },
+      { value: 10, label: "10" },
+      { value: 50, label: "50" },
+      { value: 150, label: "150" },
+      { value: 500, label: "500" },
+    ],
+    defaultIndex: 7,
+    format: "reps",
+  },
+  {
+    id: "hourlyCost",
+    label: "What an hour of a rep's time costs",
+    stops: [15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 120, 150, 200],
+    markers: [
+      { value: 15, label: "$15" },
+      { value: 30, label: "$30" },
+      { value: 60, label: "$60" },
+      { value: 100, label: "$100" },
+      { value: 200, label: "$200" },
+    ],
+    defaultIndex: 7,
+    format: "cost",
+  },
+];
+
+const AREAS = [
+  {
+    id: "dataEntry",
+    label: "Data entry",
+    defaultValue: "$39,000",
+    defaultBar: 0.4286,
+    options: [
+      { id: "manual", label: "By hand", description: "Reps log calls, emails and notes by hand." },
+      { id: "partial", label: "Partly automatic", description: "Some activity is captured for them, and reps fill in the gaps." },
+      { id: "automatic", label: "Automatic", description: "Activity and enrichment are captured without anyone typing." },
+    ],
+  },
+  {
+    id: "reporting",
+    label: "Reporting",
+    defaultValue: "$19,500",
+    defaultBar: 0.2143,
+    options: [
+      { id: "manual", label: "By hand", description: "Pipeline and forecast reports are built by hand in spreadsheets." },
+      { id: "partial", label: "Partly automatic", description: "Reports are partly automated but still need cleaning up." },
+      { id: "automatic", label: "Automatic", description: "Live dashboards have replaced building reports." },
+    ],
+  },
+  {
+    id: "search",
+    label: "Finding context",
+    defaultValue: "$19,500",
+    defaultBar: 0.2143,
+    options: [
+      { id: "manual", label: "By hand", description: "Reps hop between tools and tabs to piece an account together." },
+      { id: "partial", label: "Partly automatic", description: "Most context lives in the CRM, but some is still scattered." },
+      { id: "automatic", label: "Automatic", description: "Everything about an account is in one place and searchable." },
+    ],
+  },
+];
+
+const VERDICTS = [
+  { id: "alreadyTight", title: "Already tight.", body: "Your setup is doing most of the work. What is left is the admin no tool removes." },
+  { id: "partTime", title: "A part-time job.", body: "Small, but it comes round every week, and it is the dullest part of the job." },
+  { id: "mostOfARep", title: "Most of a rep.", body: "Add it up and someone on the team spends most of their week on admin." },
+  { id: "aRepsWorth", title: "A rep's worth.", body: "You are paying for at least one rep who only does admin." },
+  { id: "aTeamsWorth", title: "A team's worth.", body: "That is a whole team of reps who never get to sell." },
+  { id: "aDepartment", title: "A department.", body: "Somewhere in your org chart is an admin team nobody hired." },
+];
+---
+
+<BaseLayout
+  title="CRM ROI calculator | Attio"
+  description="Rate how your sales team handles data entry, reporting and finding account context today, and see the hours and money a better CRM setup gives back each year."
+  hideFinalCta
+>
+  <style>
+    .tool-range {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 9999px;
+      background: linear-gradient(
+        to right,
+        #1c1d1f 0%,
+        #1c1d1f var(--fill, 50%),
+        #edeff3 var(--fill, 50%),
+        #edeff3 100%
+      );
+      outline: none;
+      cursor: pointer;
+    }
+    .tool-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 9999px;
+      background: #ffffff;
+      border: 1px solid #d3d8df;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.15);
+      cursor: grab;
+    }
+    .tool-range::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 9999px;
+      background: #ffffff;
+      border: 1px solid #d3d8df;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.15);
+      cursor: grab;
+    }
+    .tool-range:focus-visible {
+      outline: 2px solid #266df0;
+      outline-offset: 6px;
+    }
+  </style>
+
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-10 pt-16 sm:px-6 sm:pt-24">
+    <h1 class="max-w-[15em] text-balance font-display text-[40px] font-semibold leading-[1.08] tracking-tight sm:text-[56px]">
+      What is CRM admin costing your sales team?
+    </h1>
+    <p class="mt-5 max-w-[38em] text-pretty text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Rate how your team handles three everyday jobs and see the time and money a better setup gives back.
+    </p>
+  </section>
+
+  <!-- Calculator -->
+  <div class="mx-auto max-w-[1200px] px-4 sm:px-6">
+    <div class="border-t border-paper-500">
+      <div class="grid lg:grid-cols-2">
+        <!-- Left column: dials + areas -->
+        <div class="flex flex-col">
+          <div class="flex flex-col gap-10 px-4 py-10 sm:px-6">
+            {
+              DIALS.map((dial) => (
+                <div class="flex flex-col" data-dial={dial.id}>
+                  <div class="flex items-baseline justify-between gap-x-6">
+                    <label for={"dial-" + dial.id} class="text-base text-ink-600">
+                      {dial.label}
+                    </label>
+                    <span data-readout class="shrink-0 text-base font-medium tabular-nums text-ink-100" />
+                  </div>
+                  <div class="relative z-10 mt-4 flex h-4 w-full touch-none select-none items-center">
+                    <input
+                      id={"dial-" + dial.id}
+                      type="range"
+                      min="0"
+                      max={dial.stops.length - 1}
+                      step="1"
+                      value={dial.defaultIndex}
+                      data-stops={JSON.stringify(dial.stops)}
+                      data-format={dial.format}
+                      aria-label={dial.label}
+                      class="tool-range"
+                    />
+                  </div>
+                  <div aria-hidden="true" class="relative -mt-1 h-6">
+                    {dial.markers.map((marker) => {
+                      const index = dial.stops.indexOf(marker.value);
+                      const left = (index / (dial.stops.length - 1)) * 100;
+                      const align =
+                        left === 0 ? "items-start" : left === 100 ? "items-end -translate-x-full" : "items-center -translate-x-1/2";
+                      return (
+                        <span style={`left: ${left}%`} class={`absolute top-0 flex flex-col whitespace-nowrap text-xs text-ink-700 ${align}`}>
+                          <span class="h-1 w-px bg-paper-500" />
+                          <span class="mt-1">{marker.label}</span>
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))
+            }
+
+            <!-- Mobile sticky results bar, as on live -->
+            <div class="sticky bottom-0 flex items-baseline justify-between gap-x-4 border-t border-paper-500 bg-white py-4 lg:hidden">
+              <p class="flex items-baseline gap-x-1.5 text-base text-ink-100">
+                <span data-mobile-yearly class="font-medium tabular-nums">$78,000</span>
+                <span class="text-ink-600">a year</span>
+              </p>
+              <p class="flex items-baseline gap-x-1 text-sm text-ink-600">
+                <span data-mobile-reps class="font-medium tabular-nums text-ink-100">0.8</span>
+                <span>reps&rsquo; worth of time</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-8 border-t border-paper-500 px-4 py-10 sm:px-6">
+            <h2 class="text-sm text-ink-600">How does your team handle these today?</h2>
+            {
+              AREAS.map((area) => (
+                <div class="flex flex-col" data-area={area.id}>
+                  <p class="text-base text-ink-600">{area.label}</p>
+                  <div role="radiogroup" aria-label={area.label} class="mt-3 flex flex-wrap gap-2">
+                    {area.options.map((option) => (
+                      <button
+                        type="button"
+                        role="radio"
+                        aria-checked={option.id === "partial" ? "true" : "false"}
+                        data-area-option={option.id}
+                        class={
+                          "h-8 rounded-[10px] border px-2.5 text-xs font-medium transition-colors " +
+                          (option.id === "partial"
+                            ? "border-ink-100 bg-ink-100 text-white"
+                            : "border-paper-500 text-ink-100 hover:bg-paper-300")
+                        }
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                  <p data-area-description class="mt-3 text-sm leading-relaxed text-ink-600">
+                    {area.options.find((o) => o.id === "partial")?.description}
+                  </p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Right column: results -->
+        <div class="flex flex-col border-t border-paper-500 lg:col-start-2 lg:row-start-1 lg:border-l lg:border-t-0">
+          <p aria-live="polite" class="sr-only" data-announce>
+            $78,000 back a year. 3.0 hours a week for each rep, about 0.8 reps&rsquo; worth of time. Most of a rep.
+          </p>
+          <div class="flex flex-col justify-center px-4 py-10 sm:px-6">
+            <h2 class="text-sm text-ink-600">Won back from admin</h2>
+            <p class="mt-4 flex flex-wrap items-baseline gap-x-2.5">
+              <span data-yearly class="font-display text-heading-md font-semibold tracking-tight tabular-nums">$78,000</span>
+              <span class="text-xl text-ink-600">a year</span>
+            </p>
+          </div>
+          <div class="flex flex-col divide-y divide-paper-500 border-t border-paper-500">
+            <section class="px-4 py-10 sm:px-6">
+              <h3 class="text-sm text-ink-600">Where it comes from</h3>
+              <ul class="mt-4 flex flex-col gap-4">
+                {
+                  AREAS.map((area) => (
+                    <li data-breakdown={area.id}>
+                      <div class="flex items-baseline justify-between gap-x-4 text-base">
+                        <span class="text-ink-600">{area.label}</span>
+                        <span data-breakdown-value class="font-medium tabular-nums text-ink-100">{area.defaultValue}</span>
+                      </div>
+                      <div aria-hidden="true" class="mt-2 h-1 overflow-hidden rounded-full bg-paper-300">
+                        <div
+                          data-breakdown-bar
+                          class="h-full origin-left rounded-full bg-blue-500/70 transition-transform duration-200 ease-out"
+                          style={`transform: scaleX(${area.defaultBar})`}
+                        />
+                      </div>
+                    </li>
+                  ))
+                }
+              </ul>
+            </section>
+            <dl class="grid grid-cols-2 max-lg:grid-cols-1 max-lg:divide-y max-lg:divide-paper-500 lg:divide-x lg:divide-paper-500">
+              <div class="px-4 py-10 sm:px-6">
+                <dt class="text-sm text-ink-600">Back for each rep every week</dt>
+                <dd class="mt-3 flex items-baseline gap-x-1.5">
+                  <span data-hours class="font-display text-heading-xs font-semibold tracking-tight tabular-nums">3.0</span>
+                  <span class="text-base text-ink-600">hours</span>
+                </dd>
+              </div>
+              <div class="px-4 py-10 sm:px-6">
+                <dt class="text-sm text-ink-600">The same as hiring</dt>
+                <dd class="mt-3 flex items-baseline gap-x-1.5">
+                  <span data-reps class="font-display text-heading-xs font-semibold tracking-tight tabular-nums">0.8</span>
+                  <span class="text-base text-ink-600">reps</span>
+                </dd>
+              </div>
+            </dl>
+            <div class="px-4 py-10 sm:px-6">
+              <p data-verdict-title class="text-base font-medium text-ink-100">Most of a rep.</p>
+              <p data-verdict-body class="mt-2 text-balance text-base leading-relaxed text-ink-600">
+                Add it up and someone on the team spends most of their week on admin.
+              </p>
+            </div>
+            <div class="flex flex-wrap justify-end gap-2 px-4 py-10 sm:px-6">
+              <button
+                type="button"
+                data-copy-link
+                class="flex h-9 items-center gap-x-1.5 rounded-[10px] px-3 text-sm font-medium text-ink-100 transition-colors hover:bg-paper-300"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path
+                    d="M3.38306 5.9104C4.75706 4.53659 6.99219 4.61514 8.26978 6.04517L8.39087 6.18774L8.44556 6.27271C8.55146 6.47973 8.50139 6.73993 8.31274 6.89087C8.12421 7.0417 7.85964 7.03348 7.68091 6.88501L7.60962 6.81274L7.43579 6.61841C6.52607 5.70494 5.02475 5.68296 4.09009 6.61743L2.85376 7.85376C1.94445 8.76307 1.94445 10.2374 2.85376 11.1467C3.76308 12.0558 5.23749 12.056 6.14673 11.1467L7.14673 10.1467C7.34199 9.95147 7.6585 9.95147 7.85376 10.1467C8.04881 10.342 8.04895 10.6586 7.85376 10.8538L6.85376 11.8538C5.554 13.1535 3.44658 13.1534 2.14673 11.8538C0.846897 10.5539 0.846897 8.44656 2.14673 7.14673L3.38306 5.9104ZM7.14673 2.14673C8.44656 0.846898 10.5539 0.846897 11.8538 2.14673C13.1534 3.44658 13.1535 5.554 11.8538 6.85376L10.6174 8.09009C9.2435 9.46382 7.00834 9.38513 5.73071 7.95532L5.60962 7.81274L5.55493 7.72778C5.44885 7.52071 5.499 7.26062 5.68774 7.10962C5.87636 6.95875 6.14085 6.96683 6.31958 7.11548L6.39087 7.18774L6.5647 7.38208C7.47444 8.29534 8.97581 8.31745 9.9104 7.38306L11.1467 6.14673C12.056 5.23749 12.0558 3.76308 11.1467 2.85376C10.2374 1.94445 8.76307 1.94445 7.85376 2.85376L6.85376 3.85376C6.65857 4.04895 6.34201 4.04881 6.14673 3.85376C5.95147 3.6585 5.95147 3.34199 6.14673 3.14673L7.14673 2.14673Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                <span data-copy-label>Copy share link</span>
+              </button>
+              <a
+                href="/go/welcome/sign-in?utm_campaign=crm-roi-calculator&utm_content=mostOfARep&utm_medium=tool&utm_source=website"
+                data-cta
+                class="flex h-9 items-center rounded-[10px] bg-ink-100 px-4 text-sm font-semibold text-white transition-colors hover:bg-ink-300"
+              >
+                Start for free
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="border-t border-paper-500 px-4 py-6 text-sm leading-relaxed text-ink-600 sm:px-6">
+        The numbers are estimates, built on typical hours for each way of working rather than measured from your
+        team. They assume the time comes back as selling, not as a longer lunch.
+      </p>
+    </div>
+  </div>
+
+  <script define:vars={{ areas: AREAS, verdicts: VERDICTS }}>
+    const DEFAULTS = { dataEntry: "partial", reporting: "partial", search: "partial", teamSize: 10, hourlyCost: 50 };
+    const HOURS = {
+      dataEntry: { manual: 4, partial: 2, automatic: 0.5 },
+      reporting: { manual: 2, partial: 1, automatic: 0.25 },
+      search: { manual: 2, partial: 1, automatic: 0.25 },
+    };
+    const AREA_IDS = ["dataEntry", "reporting", "search"];
+    const VERDICT_TIERS = [
+      { id: "alreadyTight", upToReps: 0.05 },
+      { id: "partTime", upToReps: 0.5 },
+      { id: "mostOfARep", upToReps: 1 },
+      { id: "aRepsWorth", upToReps: 3 },
+      { id: "aTeamsWorth", upToReps: 10 },
+    ];
+    const MAX_HOURS = Math.max(...AREA_IDS.map((a) => HOURS[a].manual - HOURS[a].automatic));
+    const intFmt = new Intl.NumberFormat("en-US");
+    const usdFmt = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+
+    const params = new URLSearchParams(window.location.search);
+    const dials = {};
+    document.querySelectorAll("[data-dial]").forEach((wrap) => {
+      const input = wrap.querySelector('input[type="range"]');
+      const stops = JSON.parse(input.getAttribute("data-stops"));
+      const id = wrap.getAttribute("data-dial");
+      const readout = wrap.querySelector("[data-readout]");
+      const raw = params.get(id);
+      let index = Number(input.value);
+      if (raw !== null) {
+        const value = Number(raw);
+        if (!Number.isNaN(value)) {
+          index = stops.reduce((best, stop, i) =>
+            Math.abs(stop - value) < Math.abs(stops[best] - value) ? i : best, 0);
+        }
+      }
+      dials[id] = { input, stops, readout, format: input.getAttribute("data-format"), index };
+      input.value = String(index);
+    });
+
+    const states = {};
+    AREA_IDS.forEach((id) => {
+      const raw = params.get(id);
+      states[id] = ["manual", "partial", "automatic"].includes(raw) ? raw : DEFAULTS[id];
+    });
+
+    function formatValue(id, value) {
+      const format = dials[id].format;
+      if (format === "reps") return intFmt.format(value) + (value === 1 ? " rep" : " reps");
+      if (format === "cost") return "$" + intFmt.format(value);
+      return String(value);
+    }
+    // Live: b(e) rounds to 1 decimal under 10, otherwise to a whole number.
+    function round1(e) {
+      return Math.abs(e) < 10 ? Math.round(10 * e) / 10 : Math.round(e);
+    }
+    function fractionDigits(e) {
+      return Math.abs(e) < 10 ? 1 : 0;
+    }
+    // Live: M(e) rounds the yearly value to 3 significant figures.
+    function sig3(e) {
+      return e === 0 ? 0 : Number(e.toPrecision(3));
+    }
+
+    // Live function D: the real calculator.
+    function calc() {
+      const teamSize = dials.teamSize.stops[dials.teamSize.index];
+      const hourlyCost = dials.hourlyCost.stops[dials.hourlyCost.index];
+      const hoursByArea = Object.fromEntries(
+        AREA_IDS.map((a) => [a, HOURS[a][states[a]] - HOURS[a].automatic])
+      );
+      const hoursPerRepPerWeek = AREA_IDS.reduce((sum, a) => sum + hoursByArea[a], 0);
+      const valueByArea = Object.fromEntries(
+        AREA_IDS.map((a) => [a, hoursByArea[a] * teamSize * hourlyCost * 52])
+      );
+      const valuePerYear = hoursPerRepPerWeek * teamSize * hourlyCost * 52;
+      const repsWorth = (hoursPerRepPerWeek * teamSize) / 40;
+      return { teamSize, hourlyCost, hoursByArea, hoursPerRepPerWeek, valueByArea, valuePerYear, repsWorth };
+    }
+
+    const yearlyEl = document.querySelector("[data-yearly]");
+    const hoursEl = document.querySelector("[data-hours]");
+    const repsEl = document.querySelector("[data-reps]");
+    const verdictTitleEl = document.querySelector("[data-verdict-title]");
+    const verdictBodyEl = document.querySelector("[data-verdict-body]");
+    const announceEl = document.querySelector("[data-announce]");
+    const ctaEl = document.querySelector("[data-cta]");
+    const mobileYearlyEl = document.querySelector("[data-mobile-yearly]");
+    const mobileRepsEl = document.querySelector("[data-mobile-reps]");
+
+    function render() {
+      const c = calc();
+      const hours = round1(c.hoursPerRepPerWeek);
+      const reps = round1(c.repsWorth);
+      const yearly = sig3(c.valuePerYear);
+      const verdict = verdicts.find(
+        (x) => x.id === (VERDICT_TIERS.find((t) => c.repsWorth <= t.upToReps)?.id || "aDepartment")
+      );
+      const hoursText = hours.toFixed(fractionDigits(hours));
+      const repsText = reps.toFixed(fractionDigits(reps));
+      const yearlyText = usdFmt.format(yearly);
+
+      yearlyEl.textContent = yearlyText;
+      hoursEl.textContent = hoursText;
+      repsEl.textContent = repsText;
+      verdictTitleEl.textContent = verdict.title;
+      verdictBodyEl.textContent = verdict.body;
+      announceEl.textContent =
+        yearlyText + " back a year. " + hoursText + " hours a week for each rep, about " + repsText +
+        " reps' worth of time. " + verdict.title;
+      mobileYearlyEl.textContent = yearlyText;
+      mobileRepsEl.textContent = repsText;
+
+      AREA_IDS.forEach((id) => {
+        const row = document.querySelector('[data-breakdown="' + id + '"]');
+        const valueEl = row.querySelector("[data-breakdown-value]");
+        const barEl = row.querySelector("[data-breakdown-bar]");
+        valueEl.textContent = usdFmt.format(sig3(c.valueByArea[id]));
+        barEl.style.transform = "scaleX(" + c.hoursByArea[id] / MAX_HOURS + ")";
+      });
+
+      // CTA: Talk to sales at 20+ reps, otherwise Start for free, as on live.
+      if (c.teamSize >= 20) {
+        ctaEl.textContent = "Talk to sales";
+        ctaEl.href = "/contact/sales";
+      } else {
+        ctaEl.textContent = "Start for free";
+        ctaEl.href =
+          "/go/welcome/sign-in?utm_campaign=crm-roi-calculator&utm_content=" + verdict.id +
+          "&utm_medium=tool&utm_source=website";
+      }
+
+      Object.entries(dials).forEach(([id, d]) => {
+        d.readout.textContent = formatValue(id, d.stops[d.index]);
+        d.input.style.setProperty("--fill", (d.index / (d.stops.length - 1)) * 100 + "%");
+        d.input.setAttribute("aria-valuenow", String(d.index));
+        d.input.setAttribute("aria-valuetext", formatValue(id, d.stops[d.index]));
+      });
+
+      const next = new URLSearchParams();
+      AREA_IDS.forEach((id) => {
+        if (states[id] !== DEFAULTS[id]) next.set(id, states[id]);
+      });
+      Object.entries(dials).forEach(([id, d]) => {
+        const value = d.stops[d.index];
+        if (value !== DEFAULTS[id]) next.set(id, String(value));
+      });
+      const query = next.toString();
+      history.replaceState(null, "", query ? "?" + query : window.location.pathname);
+    }
+
+    function renderArea(id) {
+      const wrap = document.querySelector('[data-area="' + id + '"]');
+      const area = areas.find((a) => a.id === id);
+      wrap.querySelectorAll("[data-area-option]").forEach((button) => {
+        const active = button.getAttribute("data-area-option") === states[id];
+        button.setAttribute("aria-checked", String(active));
+        button.classList.toggle("border-ink-100", active);
+        button.classList.toggle("bg-ink-100", active);
+        button.classList.toggle("text-white", active);
+        button.classList.toggle("border-paper-500", !active);
+        button.classList.toggle("text-ink-100", !active);
+      });
+      const desc = area.options.find((o) => o.id === states[id]);
+      wrap.querySelector("[data-area-description]").textContent = desc ? desc.description : "";
+    }
+
+    Object.values(dials).forEach((d) => {
+      d.input.addEventListener("input", () => {
+        d.index = Number(d.input.value);
+        render();
+      });
+    });
+
+    AREA_IDS.forEach((id) => {
+      const wrap = document.querySelector('[data-area="' + id + '"]');
+      wrap.querySelectorAll("[data-area-option]").forEach((button) => {
+        button.addEventListener("click", () => {
+          states[id] = button.getAttribute("data-area-option");
+          renderArea(id);
+          render();
+        });
+      });
+      renderArea(id);
+    });
+
+    const copyButton = document.querySelector("[data-copy-link]");
+    const copyLabel = document.querySelector("[data-copy-label]");
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+      } catch {
+        const ta = document.createElement("textarea");
+        ta.value = window.location.href;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
+      copyLabel.textContent = "Share link copied";
+      setTimeout(() => { copyLabel.textContent = "Copy share link"; }, 2000);
+    });
+
+    render();
+  </script>
+</BaseLayout>

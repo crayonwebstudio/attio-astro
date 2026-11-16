@@ -1,0 +1,639 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy and calculator logic fetched live from https://attio.com/tools/automation-calculator
+// on 2026-11-16 (HTTP 200, 390KB). Title "Automation payback calculator | Attio",
+// meta description verified. One H1 "Calculate your return on AI automation".
+// The formulas below are the real ones from the live page's JS chunk
+// (/_next/static/immutable/chunks/2do_79d45w00v.js, module 910673):
+//   minutesSavedPerRun = minutesPerRun * coveragePercent / 100
+//   runsToPayoff = ceil(setupMinutes / minutesSavedPerRun)
+//   daysToPayoff = runsToPayoff / runsPerMonth * (365 / 12)
+//   hoursSavedPerMonth = minutesSavedPerRun * runsPerMonth / 60
+//   chart net at month m = hoursSavedPerMonth * m - setupMinutes / 60
+// Verdict tiers (daysToPayoff <= upToDays): beforeLunch 1.5, thisMorning 7,
+// buildIt 31, worthDoing 92, slowBurn 365, hereToStay 1095, else byHand.
+// Defaults {coveragePercent: 80, minutesPerRun: 15, runsPerMonth: 60,
+// setupMinutes: 240} give 12 hours a month, 20 runs, 10 days, verdict "Build it.",
+// matching the live defaults exactly. Dial stops, markers, and the 3 presets
+// (researchLead, summariseAccount, writeUpLostDeal) are also from the live JS.
+// Live has no standard FinalCta ("Agentic revenue runs on Attio." appears 0 times
+// in the live HTML), so hideFinalCta is used. Product visuals are rebuilt as
+// HTML/CSS, no Attio images are hotlinked or copied.
+// The "Work it out" describe-a-task feature on live calls POST
+// /api/tools/classify-task, an Attio AI backend that does not exist in this
+// rebuild, so submitting a description shows the live failure copy
+// ("Something went wrong, try using the dials instead."). No data is sent anywhere.
+const DIALS = [
+  {
+    id: "minutesPerRun",
+    label: "How long does this task currently take",
+    stops: [1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25, 30, 40, 45, 60, 75, 90, 120, 150, 180, 240, 300, 360, 480],
+    markers: [
+      { value: 1, label: "1 min" },
+      { value: 8, label: "8 min" },
+      { value: 30, label: "30 min" },
+      { value: 120, label: "2 hr" },
+      { value: 480, label: "8 hr" },
+    ],
+    defaultIndex: 9,
+    format: "duration",
+  },
+  {
+    id: "runsPerMonth",
+    label: "How frequently is this task run",
+    stops: [1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25, 30, 40, 50, 60, 80, 100, 120, 150, 200, 250, 300, 400, 500, 600, 800, 1000, 1200, 1500, 2000],
+    markers: [
+      { value: 1, label: "1" },
+      { value: 10, label: "10" },
+      { value: 60, label: "60" },
+      { value: 400, label: "400" },
+      { value: 2000, label: "2,000" },
+    ],
+    defaultIndex: 15,
+    format: "runs",
+  },
+  {
+    id: "setupMinutes",
+    label: "How long to set up the automation",
+    stops: [5, 6, 8, 10, 12, 15, 20, 25, 30, 40, 45, 60, 75, 90, 120, 150, 180, 240, 300, 360, 480, 600, 720, 960, 1200, 1440, 1800, 2400],
+    markers: [
+      { value: 5, label: "5 min" },
+      { value: 30, label: "30 min" },
+      { value: 120, label: "2 hr" },
+      { value: 480, label: "8 hr" },
+      { value: 2400, label: "40 hr" },
+    ],
+    defaultIndex: 17,
+    format: "duration",
+  },
+  {
+    id: "coveragePercent",
+    label: "Proportion of the task completed by an agent",
+    stops: [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100],
+    markers: [
+      { value: 10, label: "10%" },
+      { value: 25, label: "25%" },
+      { value: 50, label: "50%" },
+      { value: 75, label: "75%" },
+      { value: 100, label: "100%" },
+    ],
+    defaultIndex: 14,
+    format: "percent",
+  },
+];
+
+const PRESETS = [
+  { id: "researchLead", label: "Researching a lead", values: { coveragePercent: 90, minutesPerRun: 10, runsPerMonth: 200, setupMinutes: 120 } },
+  { id: "summariseAccount", label: "Summarising an account", values: { coveragePercent: 60, minutesPerRun: 180, runsPerMonth: 2, setupMinutes: 720 } },
+  { id: "writeUpLostDeal", label: "Writing up a lost deal", values: { coveragePercent: 40, minutesPerRun: 60, runsPerMonth: 20, setupMinutes: 720 } },
+];
+
+const EXAMPLES = [
+  "Researching a company before a first call",
+  "Writing the follow-up after a demo",
+  "Working out why a deal has gone quiet",
+  "Pulling together a weekly pipeline update",
+  "Checking whether an inbound lead is a fit",
+  "Logging what was said on a call",
+];
+
+const VERDICTS = [
+  { id: "beforeLunch", title: "Build it before lunch.", body: "It will have paid for itself by the time you get back to your desk." },
+  { id: "thisMorning", title: "Build it this morning.", body: "You are in profit before the week is out, and in profit every week after that." },
+  { id: "buildIt", title: "Build it.", body: "The time you spend building it is back in your pocket inside the month." },
+  { id: "worthDoing", title: "Worth doing.", body: "A quarter from now you will wonder why this was ever a question." },
+  { id: "slowBurn", title: "A slow burn.", body: "It takes a while to get going, but it is still ahead before this time next year." },
+  { id: "hereToStay", title: "Only if this task is here to stay.", body: "The payback lands past year one, so it comes down to how permanent the process is." },
+  { id: "byHand", title: "Honestly? Keep doing this one by hand.", body: "Some tasks are too small or too rare to be worth wiring up. Try it on a bigger one." },
+];
+---
+
+<BaseLayout
+  title="Automation payback calculator | Attio"
+  description="Set the dials to a task your team still does by hand and see the time automating it gives back, and how many runs it takes to pay off the hour you spend setting it up."
+  hideFinalCta
+>
+  <style>
+    .tool-range {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 9999px;
+      background: linear-gradient(
+        to right,
+        #1c1d1f 0%,
+        #1c1d1f var(--fill, 50%),
+        #edeff3 var(--fill, 50%),
+        #edeff3 100%
+      );
+      outline: none;
+      cursor: pointer;
+    }
+    .tool-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 9999px;
+      background: #ffffff;
+      border: 1px solid #d3d8df;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.15);
+      cursor: grab;
+    }
+    .tool-range::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 9999px;
+      background: #ffffff;
+      border: 1px solid #d3d8df;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.15);
+      cursor: grab;
+    }
+    .tool-range:focus-visible {
+      outline: 2px solid #266df0;
+      outline-offset: 6px;
+    }
+  </style>
+
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-10 pt-16 sm:px-6 sm:pt-24">
+    <h1 class="max-w-[15em] text-balance font-display text-[40px] font-semibold leading-[1.08] tracking-tight sm:text-[56px]">
+      Calculate your return on AI automation
+    </h1>
+    <p class="mt-5 max-w-[38em] text-pretty text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Plug in your manual workflow and see how much time you&rsquo;ll get back
+    </p>
+  </section>
+
+  <!-- Calculator -->
+  <div class="mx-auto max-w-[1200px] px-4 sm:px-6">
+    <div class="border-t border-paper-500">
+      <div class="grid lg:grid-cols-2">
+        <!-- Left column: task entry + dials -->
+        <div class="flex flex-col">
+          <section class="px-4 pb-6 pt-10 sm:px-6">
+            <h2 class="text-sm text-ink-600">What does your team still do by hand?</h2>
+            <div class="mt-3 flex flex-wrap gap-2">
+              {
+                PRESETS.map((preset) => (
+                  <button
+                    type="button"
+                    data-preset={preset.id}
+                    aria-pressed="false"
+                    class="rounded-[10px] border border-paper-500 px-3 py-2 text-sm font-medium text-ink-100 transition-colors hover:bg-paper-300"
+                  >
+                    {preset.label}
+                  </button>
+                ))
+              }
+            </div>
+            <form id="describe-form" class="mt-3 flex items-center gap-2 max-sm:flex-col max-sm:items-stretch">
+              <div class="relative flex-1">
+                <input
+                  id="describe-task"
+                  type="text"
+                  maxlength="300"
+                  autocomplete="off"
+                  aria-label="Describe a task of your own"
+                  aria-invalid="false"
+                  aria-describedby="describe-task-problem"
+                  class="h-9 w-full rounded-[10px] border border-paper-500 bg-white px-3 text-base text-ink-100 placeholder:text-ink-700 focus-visible:border-blue-500 focus-visible:outline-none sm:text-sm"
+                />
+                <span
+                  id="describe-example"
+                  aria-hidden="true"
+                  class="pointer-events-none absolute inset-y-0 left-3 right-3 flex items-center overflow-hidden whitespace-nowrap text-base text-ink-700 [mask-image:linear-gradient(to_right,black_calc(100%-2rem),transparent)] sm:text-sm"
+                >
+                  {EXAMPLES[0]}
+                </span>
+              </div>
+              <button
+                id="describe-submit"
+                type="submit"
+                disabled
+                class="h-9 shrink-0 rounded-[10px] px-3 text-sm font-medium text-ink-100 transition-colors hover:bg-paper-300 disabled:pointer-events-none disabled:opacity-50 max-sm:self-end"
+              >
+                Work it out
+              </button>
+            </form>
+            <p id="describe-task-problem" aria-live="polite" class="mt-2 text-sm"></p>
+          </section>
+
+          <div class="flex flex-col gap-10 border-t border-paper-500 px-4 py-10 sm:px-6">
+            {
+              DIALS.map((dial) => (
+                <div class="flex flex-col" data-dial={dial.id}>
+                  <div class="flex items-baseline justify-between gap-x-6">
+                    <label for={"dial-" + dial.id} class="text-base text-ink-600">
+                      {dial.label}
+                    </label>
+                    <span data-readout class="shrink-0 text-base font-medium tabular-nums text-ink-100" />
+                  </div>
+                  <div class="relative z-10 mt-4 flex h-4 w-full touch-none select-none items-center">
+                    <input
+                      id={"dial-" + dial.id}
+                      type="range"
+                      min="0"
+                      max={dial.stops.length - 1}
+                      step="1"
+                      value={dial.defaultIndex}
+                      data-stops={JSON.stringify(dial.stops)}
+                      data-format={dial.format}
+                      aria-label={dial.label}
+                      class="tool-range"
+                    />
+                  </div>
+                  <div aria-hidden="true" class="relative -mt-1 h-6">
+                    {dial.markers.map((marker) => {
+                      const index = dial.stops.indexOf(marker.value);
+                      const left = (index / (dial.stops.length - 1)) * 100;
+                      const align =
+                        left === 0 ? "items-start" : left === 100 ? "items-end -translate-x-full" : "items-center -translate-x-1/2";
+                      return (
+                        <span style={`left: ${left}%`} class={`absolute top-0 flex flex-col whitespace-nowrap text-xs text-ink-700 ${align}`}>
+                          <span class="h-1 w-px bg-paper-500" />
+                          <span class="mt-1">{marker.label}</span>
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))
+            }
+
+            <!-- Mobile sticky results bar, as on live -->
+            <div class="sticky bottom-0 flex items-baseline justify-between gap-x-4 border-t border-paper-500 bg-white py-4 lg:hidden">
+              <p class="flex items-baseline gap-x-1.5 text-base text-ink-100">
+                <span data-mobile-saved class="font-medium tabular-nums">12</span>
+                <span class="text-ink-600">hours a month</span>
+              </p>
+              <p class="flex items-baseline gap-x-1 text-sm text-ink-600">
+                Pays off in
+                <span data-mobile-payoff class="font-medium tabular-nums text-ink-100">10</span>
+                <span data-mobile-payoff-unit>days</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column: results -->
+        <div class="flex flex-col border-t border-paper-500 lg:col-start-2 lg:row-start-1 lg:border-l lg:border-t-0">
+          <p aria-live="polite" class="sr-only" data-announce>
+            12 hours a month. Pays for itself after 20 runs, about 10 days. Build it.
+          </p>
+          <div class="flex flex-col justify-center px-4 py-10 sm:px-6">
+            <h2 class="text-sm text-ink-600">Total time saved</h2>
+            <p class="mt-4 flex flex-wrap items-baseline gap-x-2.5">
+              <span data-saved-value class="font-display text-heading-md font-semibold tracking-tight tabular-nums">12</span>
+              <span data-saved-unit class="text-xl text-ink-600">hours a month</span>
+            </p>
+          </div>
+          <div class="flex flex-col divide-y divide-paper-500 border-t border-paper-500">
+            <figure class="flex w-full flex-col px-4 py-10 sm:px-6">
+              <figcaption class="flex items-baseline justify-between gap-x-4">
+                <h3 class="text-xs text-ink-600">Hours in hand</h3>
+                <p class="flex items-baseline gap-x-1 text-xs text-ink-100">
+                  <span data-chart-total class="font-medium tabular-nums">140</span>
+                  <span class="text-ink-600">h by month 12</span>
+                </p>
+              </figcaption>
+              <div aria-hidden="true" class="relative mt-3 flex h-36 w-full items-end gap-0.5 overflow-hidden">
+                {
+                  Array.from({ length: 12 }, (_, i) => (
+                    <div class="relative flex h-full flex-1 items-end">
+                      <div data-chart-bar={i} class="w-full rounded-t bg-blue-500/70" style="height: 0%" />
+                    </div>
+                  ))
+                }
+              </div>
+              <div class="sr-only">
+                <table>
+                  <caption>Hours in hand at the end of each month, net of the build</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Month</th>
+                      <th scope="col">Hours</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      Array.from({ length: 12 }, (_, i) => (
+                        <tr>
+                          <th scope="row">{i + 1}</th>
+                          <td data-chart-net={i}>0</td>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </figure>
+            <dl class="grid grid-cols-2 max-lg:grid-cols-1 max-lg:divide-y max-lg:divide-paper-500 lg:divide-x lg:divide-paper-500">
+              <div class="px-4 py-10 sm:px-6">
+                <dt class="text-sm text-ink-600">Pays for itself after</dt>
+                <dd class="mt-3 flex items-baseline gap-x-1.5">
+                  <span data-runs class="font-display text-heading-xs font-semibold tracking-tight tabular-nums">20</span>
+                  <span data-runs-unit class="text-base text-ink-600">runs</span>
+                </dd>
+              </div>
+              <div class="px-4 py-10 sm:px-6">
+                <dt class="text-sm text-ink-600">Which takes about</dt>
+                <dd class="mt-3 flex items-baseline gap-x-1.5">
+                  <span data-payoff-value class="font-display text-heading-xs font-semibold tracking-tight tabular-nums">10</span>
+                  <span data-payoff-unit class="text-base text-ink-600">days</span>
+                </dd>
+              </div>
+            </dl>
+            <div class="px-4 py-10 sm:px-6">
+              <p data-verdict-title class="text-base font-medium text-ink-100">Build it.</p>
+              <p data-verdict-body class="mt-2 text-balance text-base leading-relaxed text-ink-600">
+                The time you spend building it is back in your pocket inside the month.
+              </p>
+            </div>
+            <div class="flex flex-wrap justify-end gap-2 px-4 py-10 sm:px-6">
+              <button
+                type="button"
+                data-copy-link
+                class="flex h-9 items-center gap-x-1.5 rounded-[10px] px-3 text-sm font-medium text-ink-100 transition-colors hover:bg-paper-300"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path
+                    d="M3.38306 5.9104C4.75706 4.53659 6.99219 4.61514 8.26978 6.04517L8.39087 6.18774L8.44556 6.27271C8.55146 6.47973 8.50139 6.73993 8.31274 6.89087C8.12421 7.0417 7.85964 7.03348 7.68091 6.88501L7.60962 6.81274L7.43579 6.61841C6.52607 5.70494 5.02475 5.68296 4.09009 6.61743L2.85376 7.85376C1.94445 8.76307 1.94445 10.2374 2.85376 11.1467C3.76308 12.0558 5.23749 12.056 6.14673 11.1467L7.14673 10.1467C7.34199 9.95147 7.6585 9.95147 7.85376 10.1467C8.04881 10.342 8.04895 10.6586 7.85376 10.8538L6.85376 11.8538C5.554 13.1535 3.44658 13.1534 2.14673 11.8538C0.846897 10.5539 0.846897 8.44656 2.14673 7.14673L3.38306 5.9104ZM7.14673 2.14673C8.44656 0.846898 10.5539 0.846897 11.8538 2.14673C13.1534 3.44658 13.1535 5.554 11.8538 6.85376L10.6174 8.09009C9.2435 9.46382 7.00834 9.38513 5.73071 7.95532L5.60962 7.81274L5.55493 7.72778C5.44885 7.52071 5.499 7.26062 5.68774 7.10962C5.87636 6.95875 6.14085 6.96683 6.31958 7.11548L6.39087 7.18774L6.5647 7.38208C7.47444 8.29534 8.97581 8.31745 9.9104 7.38306L11.1467 6.14673C12.056 5.23749 12.0558 3.76308 11.1467 2.85376C10.2374 1.94445 8.76307 1.94445 7.85376 2.85376L6.85376 3.85376C6.65857 4.04895 6.34201 4.04881 6.14673 3.85376C5.95147 3.6585 5.95147 3.34199 6.14673 3.14673L7.14673 2.14673Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                <span data-copy-label>Copy share link</span>
+              </button>
+              <a
+                href="/go/welcome/sign-in?utm_campaign=automation-calculator&utm_content=days&utm_medium=tool&utm_source=website"
+                data-build-link
+                class="flex h-9 items-center rounded-[10px] bg-ink-100 px-4 text-sm font-semibold text-white transition-colors hover:bg-ink-300"
+              >
+                Build this in Attio
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="border-t border-paper-500 px-4 py-6 text-sm leading-relaxed text-ink-600 sm:px-6">
+        The numbers are estimates. They assume the task keeps happening, the automation keeps working, and nobody
+        spends the time they get back in a meeting about automations.
+      </p>
+    </div>
+  </div>
+
+  <script define:vars={{ presets: PRESETS, examples: EXAMPLES, verdicts: VERDICTS }}>
+    const DAYS_PER_MONTH = 365 / 12;
+    const DEFAULTS = { coveragePercent: 80, minutesPerRun: 15, runsPerMonth: 60, setupMinutes: 240 };
+    const VERDICT_TIERS = [
+      { id: "beforeLunch", upToDays: 1.5 },
+      { id: "thisMorning", upToDays: 7 },
+      { id: "buildIt", upToDays: 31 },
+      { id: "worthDoing", upToDays: 92 },
+      { id: "slowBurn", upToDays: 365 },
+      { id: "hereToStay", upToDays: 1095 },
+    ];
+    const intFmt = new Intl.NumberFormat("en-US");
+
+    // Read initial values from the URL query params, as on live (nuqs, clearOnDefault).
+    const params = new URLSearchParams(window.location.search);
+    const dials = {};
+    document.querySelectorAll("[data-dial]").forEach((wrap) => {
+      const input = wrap.querySelector('input[type="range"]');
+      const stops = JSON.parse(input.getAttribute("data-stops"));
+      const id = wrap.getAttribute("data-dial");
+      const readout = wrap.querySelector("[data-readout]");
+      const raw = params.get(id);
+      let index = Number(input.value);
+      if (raw !== null) {
+        const value = Number(raw);
+        if (!Number.isNaN(value)) {
+          // Nearest stop, as on live.
+          index = stops.reduce((best, stop, i) =>
+            Math.abs(stop - value) < Math.abs(stops[best] - value) ? i : best, 0);
+        }
+      }
+      dials[id] = { input, stops, readout, format: input.getAttribute("data-format"), index };
+      input.value = String(index);
+    });
+
+    const values = () => ({
+      minutesPerRun: dials.minutesPerRun.stops[dials.minutesPerRun.index],
+      runsPerMonth: dials.runsPerMonth.stops[dials.runsPerMonth.index],
+      setupMinutes: dials.setupMinutes.stops[dials.setupMinutes.index],
+      coveragePercent: dials.coveragePercent.stops[dials.coveragePercent.index],
+    });
+
+    function formatDuration(minutes) {
+      const hours = Math.floor(minutes / 60);
+      const mins = minutes % 60;
+      const parts = [];
+      if (hours > 0) parts.push(hours + " hr");
+      if (mins > 0 || hours === 0) parts.push(mins + " min");
+      return parts.join(" ");
+    }
+    function formatValue(id, value) {
+      const format = dials[id].format;
+      if (format === "duration") return formatDuration(value);
+      if (format === "runs") return intFmt.format(value) + "× a month";
+      if (format === "percent") return value + "%";
+      return String(value);
+    }
+    function plural(unit, value) {
+      return value === 1 ? unit : unit + "s";
+    }
+
+    // Live module 910673, function a: the real calculator.
+    function calc(v) {
+      const minutesSavedPerRun = (v.minutesPerRun * v.coveragePercent) / 100;
+      const runsToPayoff = Math.ceil(v.setupMinutes / minutesSavedPerRun);
+      const daysToPayoff = (runsToPayoff / v.runsPerMonth) * DAYS_PER_MONTH;
+      const hoursSavedPerMonth = (minutesSavedPerRun * v.runsPerMonth) / 60;
+      return { minutesSavedPerRun, runsToPayoff, daysToPayoff, hoursSavedPerMonth };
+    }
+    function fmtSaved(hours) {
+      const isMinute = hours < 1;
+      const raw = isMinute ? 60 * hours : hours;
+      const value = Math.abs(raw) < 10 ? Math.round(10 * raw) / 10 : Math.round(raw);
+      return { value, fractionDigits: Math.abs(value) < 10 ? 1 : 0, unit: isMinute ? "minute" : "hour" };
+    }
+    function fmtPayoff(days) {
+      if (days < 1.5) return { unit: "day", value: 1 };
+      if (days < 14) return { unit: "day", value: Math.round(days) };
+      if (days < 56) return { unit: "week", value: Math.round(days / 7) };
+      if (days < 730) return { unit: "month", value: Math.round(days / DAYS_PER_MONTH) };
+      return { unit: "year", value: Math.round(days / 365) };
+    }
+
+    const savedValueEl = document.querySelector("[data-saved-value]");
+    const savedUnitEl = document.querySelector("[data-saved-unit]");
+    const runsEl = document.querySelector("[data-runs]");
+    const runsUnitEl = document.querySelector("[data-runs-unit]");
+    const payoffValueEl = document.querySelector("[data-payoff-value]");
+    const payoffUnitEl = document.querySelector("[data-payoff-unit]");
+    const verdictTitleEl = document.querySelector("[data-verdict-title]");
+    const verdictBodyEl = document.querySelector("[data-verdict-body]");
+    const chartTotalEl = document.querySelector("[data-chart-total]");
+    const announceEl = document.querySelector("[data-announce]");
+    const buildLinkEl = document.querySelector("[data-build-link]");
+    const mobileSavedEl = document.querySelector("[data-mobile-saved]");
+    const mobilePayoffEl = document.querySelector("[data-mobile-payoff]");
+    const mobilePayoffUnitEl = document.querySelector("[data-mobile-payoff-unit]");
+
+    function render() {
+      const v = values();
+      const c = calc(v);
+      const saved = fmtSaved(c.hoursSavedPerMonth);
+      const payoff = fmtPayoff(c.daysToPayoff);
+      const verdict = verdicts.find((x) => x.id === (VERDICT_TIERS.find((t) => c.daysToPayoff <= t.upToDays)?.id || "byHand"));
+      const savedText = saved.value.toFixed(saved.fractionDigits);
+      const savedUnitText = saved.unit === "hour" ? "hours a month" : "minutes a month";
+
+      savedValueEl.textContent = savedText;
+      savedUnitEl.textContent = savedUnitText;
+      runsEl.textContent = intFmt.format(c.runsToPayoff);
+      runsUnitEl.textContent = plural("run", c.runsToPayoff);
+      payoffValueEl.textContent = String(payoff.value);
+      payoffUnitEl.textContent = plural(payoff.unit, payoff.value);
+      verdictTitleEl.textContent = verdict.title;
+      verdictBodyEl.textContent = verdict.body;
+      announceEl.textContent =
+        savedText + " " + savedUnitText + ". Pays for itself after " + c.runsToPayoff + " " +
+        plural("run", c.runsToPayoff) + ", about " + payoff.value + " " + plural(payoff.unit, payoff.value) +
+        ". " + verdict.title;
+      buildLinkEl.href =
+        "/go/welcome/sign-in?utm_campaign=automation-calculator&utm_content=" +
+        plural(payoff.unit, payoff.value) + "&utm_medium=tool&utm_source=website";
+      mobileSavedEl.textContent = savedText;
+      mobilePayoffEl.textContent = String(payoff.value);
+      mobilePayoffUnitEl.textContent = plural(payoff.unit, payoff.value);
+
+      // Hours in hand chart: net at month m = hoursSavedPerMonth * m - setup hours.
+      const setupHours = v.setupMinutes / 60;
+      const nets = Array.from({ length: 12 }, (_, i) => c.hoursSavedPerMonth * (i + 1) - setupHours);
+      const maxAbs = Math.max(...nets.map((n) => Math.abs(n)), 1);
+      nets.forEach((net, i) => {
+        const bar = document.querySelector('[data-chart-bar="' + i + '"]');
+        const cell = document.querySelector('[data-chart-net="' + i + '"]');
+        if (bar) {
+          bar.style.height = Math.round((Math.abs(net) / maxAbs) * 100) + "%";
+          bar.classList.toggle("bg-blue-500/70", net >= 0);
+          bar.classList.toggle("bg-paper-500", net < 0);
+        }
+        if (cell) cell.textContent = String(Math.round(net));
+      });
+      chartTotalEl.textContent = String(Math.round(nets[11]));
+
+      // Dial readouts and track fill.
+      Object.entries(dials).forEach(([id, d]) => {
+        d.readout.textContent = formatValue(id, d.stops[d.index]);
+        d.input.style.setProperty("--fill", (d.index / (d.stops.length - 1)) * 100 + "%");
+        d.input.setAttribute("aria-valuenow", String(d.index));
+        d.input.setAttribute("aria-valuetext", formatValue(id, d.stops[d.index]));
+      });
+
+      // Sync state to the URL query params, omitting defaults, as on live.
+      const next = new URLSearchParams();
+      Object.entries(values()).forEach(([key, value]) => {
+        if (value !== DEFAULTS[key]) next.set(key, String(value));
+      });
+      const query = next.toString();
+      history.replaceState(null, "", query ? "?" + query : window.location.pathname);
+    }
+
+    const presetButtons = Array.from(document.querySelectorAll("[data-preset]"));
+    function markPreset(id) {
+      presetButtons.forEach((button) => {
+        const active = button.getAttribute("data-preset") === id;
+        button.setAttribute("aria-pressed", String(active));
+        button.classList.toggle("bg-ink-100", active);
+        button.classList.toggle("text-white", active);
+        button.classList.toggle("text-ink-100", !active);
+      });
+    }
+    presetButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const preset = presets.find((p) => p.id === button.getAttribute("data-preset"));
+        if (!preset) return;
+        Object.entries(preset.values).forEach(([id, value]) => {
+          const d = dials[id];
+          d.index = d.stops.indexOf(value);
+          d.input.value = String(d.index);
+        });
+        markPreset(preset.id);
+        render();
+      });
+    });
+
+    Object.values(dials).forEach((d) => {
+      d.input.addEventListener("input", () => {
+        d.index = Number(d.input.value);
+        markPreset(null);
+        render();
+      });
+    });
+
+    // Describe a task: live calls POST /api/tools/classify-task, an Attio AI
+    // backend that does not exist in this rebuild, so the live failure copy is
+    // shown and no data is sent anywhere.
+    const describeForm = document.getElementById("describe-form");
+    const describeInput = document.getElementById("describe-task");
+    const describeSubmit = document.getElementById("describe-submit");
+    const describeExample = document.getElementById("describe-example");
+    const describeProblem = document.getElementById("describe-task-problem");
+    let exampleIndex = 0;
+    let exampleTicks = 0;
+    let everFocused = false;
+    const exampleTimer = setInterval(() => {
+      if (everFocused || describeInput.value !== "" || exampleTicks >= 2 * examples.length) return;
+      exampleTicks += 1;
+      exampleIndex = exampleTicks % examples.length;
+      describeExample.textContent = examples[exampleIndex];
+    }, 3200);
+    describeInput.addEventListener("focus", () => { everFocused = true; });
+    describeInput.addEventListener("input", () => {
+      describeSubmit.disabled = describeInput.value.trim().length < 3;
+      describeExample.style.visibility = describeInput.value === "" ? "visible" : "hidden";
+      if (describeProblem.textContent) {
+        describeProblem.textContent = "";
+        describeInput.setAttribute("aria-invalid", "false");
+      }
+    });
+    describeForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (describeInput.value.trim().length < 3) return;
+      describeSubmit.disabled = true;
+      describeSubmit.textContent = "Working…";
+      setTimeout(() => {
+        describeSubmit.disabled = false;
+        describeSubmit.textContent = "Work it out";
+        describeProblem.textContent = "Something went wrong, try using the dials instead.";
+        describeProblem.classList.add("text-ink-600");
+        describeInput.setAttribute("aria-invalid", "true");
+        describeInput.select();
+      }, 600);
+    });
+
+    // Copy share link: copies the current URL, which carries the dial state.
+    const copyButton = document.querySelector("[data-copy-link]");
+    const copyLabel = document.querySelector("[data-copy-label]");
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+      } catch {
+        const ta = document.createElement("textarea");
+        ta.value = window.location.href;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
+      copyLabel.textContent = "Share link copied";
+      setTimeout(() => { copyLabel.textContent = "Copy share link"; }, 2000);
+    });
+
+    render();
+  </script>
+</BaseLayout>
