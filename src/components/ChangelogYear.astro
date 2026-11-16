@@ -1,0 +1,284 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import changelogIndex from "../data/changelog.json";
+
+// Shared layout for the 6 changelog year pages (/changelog/2021 ... 2026).
+// Copy fetched live from https://attio.com/changelog/<year> on 2026-11-16
+// (HTTP 200 each), stored in src/data/changelog-entries.json. The year pages
+// match the /changelog index layout: hero "What's new", the same subcopy and
+// Subscribe form, the same draggable year histogram (the exact 1,132 live
+// bar positions, from src/data/changelog.json), and the year's entries with
+// live dates, titles, excerpts, and Design / Feature / Enhancement tags.
+// Unlike the index, the live year pages show no "N updates" count line, so
+// none is rendered. Live has no standard FinalCta on year pages, so
+// hideFinalCta is used. The Subscribe form has no backend, submit flips to
+// a Subscribed state client-side, as on the index. Live em dashes in
+// excerpts are rendered as commas, per the no em dash rule.
+
+interface Props {
+  yearData: any;
+}
+
+const { yearData } = Astro.props;
+const entries = yearData.entries;
+const bars = (changelogIndex as any).bars;
+const years = [
+  { year: 2021, left: 452 },
+  { year: 2022, left: 596 },
+  { year: 2023, left: 740 },
+  { year: 2024, left: 884 },
+  { year: 2025, left: 1028 },
+  { year: 2026, left: 1172 },
+];
+const tagColor: Record<string, string> = {
+  Design: "bg-tag-design",
+  Feature: "bg-tag-feature",
+  Enhancement: "bg-tag-enhancement",
+};
+---
+
+<BaseLayout
+  title={`${yearData.year} | Attio Changelog`}
+  description={`All Attio product updates, feature releases, and improvements from ${yearData.year}.`}
+  hideFinalCta
+>
+  <div class="mx-auto max-w-[1200px] px-4 sm:px-6">
+    <!-- Hero -->
+    <header class="flex flex-col items-center pb-10 pt-20 text-center md:pb-10 lg:pt-20">
+      <h1 class="mt-4 max-w-[15em] font-display text-[44px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+        What&rsquo;s new
+      </h1>
+      <p class="mt-4 max-w-xl text-balance text-lg leading-relaxed text-ink-600 lg:text-xl">
+        The latest Attio releases, updates, and fixes.
+      </p>
+
+      <form
+        id="changelog-subscribe-form"
+        class="mt-6 grid min-h-16 w-full max-w-sm items-start gap-2 md:grid-cols-[1fr_min-content]"
+      >
+        <div>
+          <input
+            type="email"
+            name="email"
+            placeholder="Your email address"
+            aria-label="Your email address"
+            required
+            class="block h-10 w-full rounded-[10px] border border-paper-500 bg-white p-[10px_13px] text-base text-ink-100 outline-none transition-all placeholder:text-ink-700 hover:border-ink-800 focus-visible:border-blue-500 focus-visible:ring-[3px] focus-visible:ring-blue-300"
+          />
+        </div>
+        <button
+          type="submit"
+          class="inline-flex h-10 cursor-pointer items-center justify-center gap-x-2 whitespace-nowrap rounded-xl bg-ink-100 px-3.5 text-base font-medium text-white transition-colors hover:bg-ink-200"
+        >
+          <span data-subscribe-label>Subscribe</span>
+        </button>
+      </form>
+      <p
+        id="changelog-subscribe-done"
+        class="mt-6 hidden text-base font-medium text-ink-100"
+      >
+        You&rsquo;re subscribed.
+      </p>
+    </header>
+
+    <!-- Browse by year: draggable histogram, as on live -->
+    <nav aria-label="Browse changelog by year" class="relative mb-10 lg:mb-14">
+      <!-- Desktop chart -->
+      <div class="relative hidden lg:block">
+        <div
+          class="flex w-full items-end justify-center overflow-hidden pb-9 pt-8"
+          style="mask-image: linear-gradient(90deg, transparent 0, black 40px, black calc(100% - 40px), transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, black 40px, black calc(100% - 40px), transparent 100%);"
+        >
+          <div class="relative shrink-0" style="height: 48px; width: 1624px;">
+            {years.map((y) => (
+              <span
+                class={`absolute bottom-full -translate-x-1/2 -translate-y-3.5 whitespace-nowrap text-xs font-semibold uppercase tracking-wide ${y.year === yearData.year ? "text-ink-100" : "text-ink-700"}`}
+                style={`left: ${y.left}px;`}
+              >
+                {y.year}
+              </span>
+            ))}
+            <div aria-hidden="true" class="relative h-12 w-[1624px]">
+              {bars.map((x: number) => (
+                <span
+                  class="absolute top-0 block h-12 w-px bg-paper-700"
+                  style={`transform: translateX(${x}px);`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+        <div class="absolute left-1/2 top-0 flex w-[864px] -translate-x-1/2" style="height: 80px;">
+          {years.map((y) => (
+            <a
+              aria-label={`Browse changelog for ${y.year}`}
+              aria-current={y.year === yearData.year ? "page" : undefined}
+              class="flex-1"
+              href={`/changelog/${y.year}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      <!-- Mobile chart, draggable -->
+      <div class="relative lg:hidden">
+        <div
+          class="relative flex w-full items-end overflow-hidden pb-9 pt-8"
+          style="mask-image: linear-gradient(90deg, transparent 0, black 40px, black calc(100% - 40px), transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, black 40px, black calc(100% - 40px), transparent 100%);"
+        >
+          <span aria-hidden="true" class="invisible w-px shrink-0" style="height: 48px;" />
+          <div
+            id="changelog-chart-mobile"
+            class="absolute bottom-9 left-1/2 -translate-x-1/2 cursor-grab active:cursor-grabbing"
+            style="height: 48px; width: 1624px; touch-action: pan-y; transform: translateX(-360px);"
+          >
+            {years.map((y) => (
+              <span
+                class={`absolute bottom-full -translate-x-1/2 -translate-y-3.5 whitespace-nowrap text-xs font-semibold uppercase tracking-wide ${y.year === yearData.year ? "text-ink-100" : "text-ink-700"}`}
+                style={`left: ${y.left}px;`}
+              >
+                {y.year}
+              </span>
+            ))}
+            <div aria-hidden="true" class="relative h-12 w-[1624px]">
+              {bars.map((x: number) => (
+                <span
+                  class="absolute top-0 block h-12 w-px bg-paper-700"
+                  style={`transform: translateX(${x}px);`}
+                />
+              ))}
+            </div>
+            <div class="absolute left-0 top-0 flex h-20 w-[864px]" style="left: 380px;">
+              {years.map((y) => (
+                <a
+                  aria-label={`Browse changelog for ${y.year}`}
+                  aria-current={y.year === yearData.year ? "page" : undefined}
+                  class="flex-1"
+                  href={`/changelog/${y.year}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Entry list -->
+    <div class="grid grid-cols-12 content-start pb-20">
+      {entries.map((entry: any, i: number) => (
+        <article class="col-[1/-1]">
+          <a
+            href={entry.href}
+            class="group relative grid grid-cols-12 items-baseline gap-y-2 py-5 lg:h-[108px] lg:gap-y-0 lg:py-6"
+          >
+            <div class="pointer-events-none absolute inset-0 bg-paper-200 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-80 group-active:opacity-100" />
+            <time
+              datetime={entry.datetime}
+              class="relative col-[2/-2] text-xs font-semibold uppercase tracking-wide tabular-nums text-ink-700 lg:col-[2/4] lg:row-1"
+            >
+              {entry.date}
+            </time>
+            <h2 class="relative col-[2/-2] line-clamp-1 text-pretty text-base font-semibold text-ink-600 transition-colors duration-150 group-hover:text-ink-100 lg:col-[4/-5] lg:row-1 lg:min-h-5 lg:leading-5">
+              {entry.title}
+            </h2>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              class="relative col-[-2/-1] hidden self-center justify-self-center text-ink-700 transition-all duration-150 group-hover:translate-x-0.5 group-hover:text-ink-600 lg:row-1 lg:flex"
+              aria-hidden="true"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.1"
+                d="M2.25 7h9.5m0 0L8.357 3.5M11.75 7l-3.393 3.5"
+              />
+            </svg>
+            <p class="relative col-[2/-2] line-clamp-2 max-w-[28em] text-pretty text-sm leading-5 text-ink-600 lg:col-[4/-5] lg:row-[2/4] lg:min-h-10 lg:self-start">
+              {entry.excerpt}
+            </p>
+            <div class="relative col-[2/-2] flex flex-wrap items-center gap-x-3 gap-y-1 lg:col-[-5/-2] lg:row-[1/4] lg:flex-col lg:items-start lg:gap-y-0">
+              {entry.tags.map((tag: string) => (
+                <div class="flex items-center gap-x-1.5">
+                  <div aria-hidden="true" class={`h-1.5 w-1.5 rounded-full ${tagColor[tag]}`} />
+                  <span class="text-sm leading-5 text-ink-700">{tag}</span>
+                </div>
+              ))}
+            </div>
+          </a>
+          {i < entries.length - 1 && (
+            <svg width="100%" height="1" class="col-[1/-1] text-paper-500" aria-hidden="true">
+              <line
+                x1="0"
+                y1="0.5"
+                x2="100%"
+                y2="0.5"
+                stroke="currentColor"
+                stroke-dasharray="4 6"
+                stroke-linecap="round"
+              />
+            </svg>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Subscribe form: no backend, flip to a Subscribed state client-side,
+  // as on the /changelog index.
+  const form = document.getElementById("changelog-subscribe-form");
+  const done = document.getElementById("changelog-subscribe-done");
+  if (form) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const input = form.querySelector('input[name="email"]');
+      const label = form.querySelector("[data-subscribe-label]");
+      const button = form.querySelector('button[type="submit"]');
+      if (!input || !(input as HTMLInputElement).value.trim()) return;
+      if (label) label.textContent = "Subscribed";
+      if (button) button.setAttribute("disabled", "");
+      if (input) input.setAttribute("disabled", "");
+      if (done) done.classList.remove("hidden");
+    });
+  }
+
+  // Mobile year chart: horizontal drag, as on live. Clamped so the 1624px
+  // chart cannot be dragged past either edge of its container.
+  const chart = document.getElementById("changelog-chart-mobile");
+  if (chart) {
+    let startX = 0;
+    let startOffset = -360;
+    let offset = -360;
+    let dragging = false;
+    const apply = () => {
+      chart.style.transform = `translateX(${offset}px)`;
+    };
+    const clamp = () => {
+      const max = 0;
+      const min = -(1624 - chart.parentElement!.clientWidth);
+      offset = Math.max(min, Math.min(max, offset));
+    };
+    chart.addEventListener("pointerdown", (event) => {
+      dragging = true;
+      startX = event.clientX;
+      startOffset = offset;
+      chart.setPointerCapture(event.pointerId);
+    });
+    chart.addEventListener("pointermove", (event) => {
+      if (!dragging) return;
+      offset = startOffset + (event.clientX - startX);
+      clamp();
+      apply();
+    });
+    const endDrag = () => {
+      dragging = false;
+    };
+    chart.addEventListener("pointerup", endDrag);
+    chart.addEventListener("pointercancel", endDrag);
+  }
+</script>

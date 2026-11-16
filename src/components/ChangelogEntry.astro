@@ -1,0 +1,202 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ChangelogSegments from "./ChangelogSegments.astro";
+
+// Shared layout for the 227 changelog entry pages under /changelog/*.
+// Copy fetched live from https://attio.com/changelog/* on 2026-11-16 (HTTP 200
+// each), stored in src/data/changelog-entries.json. All titles, dates, tags,
+// body paragraphs, lists, and prev/next links are live Attio copy. Live em
+// and en dashes are rendered as commas, per the no em dash rule. Product
+// visuals are rebuilt as HTML/CSS mocks, no Attio images, logos, or fonts
+// are hotlinked or copied: each live figure is a Storyblok product
+// screenshot, rendered as a dark pinstripe panel labelled with the image
+// filename title-cased. Live entry pages have no standard FinalCta
+// ("Agentic revenue runs on Attio." appears 0 times in the live HTML), so
+// this layout hides the shared FinalCta. The H1 is the live size
+// (text-xl, lg:text-2xl) with the live copy-link button beside it.
+
+interface Props {
+  entry: any;
+}
+
+const { entry } = Astro.props;
+
+const tagColor: Record<string, string> = {
+  Design: "bg-tag-design",
+  Feature: "bg-tag-feature",
+  Enhancement: "bg-tag-enhancement",
+};
+
+function titleCase(label: string): string {
+  return label
+    .replace(/\.[^.]+$/, "")
+    .replace(/[-_]+/g, " ")
+    .split(" ")
+    .map((word) => (word ? word[0].toUpperCase() + word.slice(1) : word))
+    .join(" ");
+}
+---
+
+<BaseLayout title={`${entry.h1} | Attio Changelog`} description={entry.description} hideFinalCta>
+  <div class="mx-auto max-w-[1200px] px-4 sm:px-6">
+    <div class="grid grid-cols-12">
+      <!-- Breadcrumb, as on live: Changelog / year / date -->
+      <nav
+        class="col-[2/-2] flex h-28 items-end gap-1.5 pb-5 text-sm text-ink-700"
+        aria-label="Breadcrumb"
+      >
+        <a href="/changelog" class="transition-colors hover:text-ink-100">Changelog</a>
+        <span aria-hidden="true">/</span>
+        <a href={`/changelog/${entry.year}`} class="tabular-nums transition-colors hover:text-ink-100">
+          {entry.year}
+        </a>
+        <span aria-hidden="true">/</span>
+        <time datetime={entry.datetime} class="font-medium text-ink-100">
+          {entry.dateLabel}
+        </time>
+      </nav>
+
+      <article class="col-[2/-2] pt-15">
+        <h1 class="group/permalink text-xl font-semibold text-ink-100 lg:text-2xl">
+          <span class="inline-flex items-center gap-2">
+            {entry.h1}
+            <button
+              type="button"
+              data-copy-link
+              class="relative -translate-x-0.5 cursor-pointer rounded-md bg-paper-200 p-1 text-xs font-medium text-ink-700 opacity-0 transition-all duration-150 group-hover/permalink:translate-x-0 group-hover/permalink:opacity-100 active:scale-95 active:bg-blue-100 active:text-blue-600 max-lg:hidden"
+              aria-label="Copy link to this entry"
+              tabindex="-1"
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path
+                  d="M3.38306 5.9104C4.75706 4.53659 6.99219 4.61514 8.26978 6.04517L8.39087 6.18774L8.44556 6.27271C8.55146 6.47973 8.50139 6.73993 8.31274 6.89087C8.12421 7.0417 7.85964 7.03348 7.68091 6.88501L7.60962 6.81274L7.43579 6.61841C6.52607 5.70494 5.02475 5.68296 4.09009 6.61743L2.85376 7.85376C1.94445 8.76307 1.94445 10.2374 2.85376 11.1467C3.76308 12.0558 5.23749 12.056 6.14673 11.1467L7.14673 10.1467C7.34199 9.95147 7.6585 9.95147 7.85376 10.1467C8.04881 10.342 8.04895 10.6586 7.85376 10.8538L6.85376 11.8538C5.554 13.1535 3.44658 13.1534 2.14673 11.8538C0.846897 10.5539 0.846897 8.44656 2.14673 7.14673L3.38306 5.9104ZM7.14673 2.14673C8.44656 0.846898 10.5539 0.846897 11.8538 2.14673C13.1534 3.44658 13.1535 5.554 11.8538 6.85376L10.6174 8.09009C9.2435 9.46382 7.00834 9.38513 5.73071 7.95532L5.60962 7.81274L5.55493 7.72778C5.44885 7.52071 5.499 7.26062 5.68774 7.10962C5.87636 6.95875 6.14085 6.96683 6.31958 7.11548L6.39087 7.18774L6.5647 7.38208C7.47444 8.29534 8.97581 8.31745 9.9104 7.38306L11.1467 6.14673C12.056 5.23749 12.0558 3.76308 11.1467 2.85376C10.2374 1.94445 8.76307 1.94445 7.85376 2.85376L6.85376 3.85376C6.65857 4.04895 6.34201 4.04881 6.14673 3.85376C5.95147 3.6585 5.95147 3.34199 6.14673 3.14673L7.14673 2.14673Z"
+                  fill="currentColor"
+                />
+              </svg>
+              <span class="sr-only">Copy link to this entry</span>
+            </button>
+          </span>
+        </h1>
+
+        <!-- Tags, as on live (ISO 27001 has none) -->
+        {entry.tags.length > 0 && (
+          <aside class="mt-6 flex flex-wrap gap-x-[18px] gap-y-1 lg:gap-x-5">
+            {entry.tags.map((tag: string) => (
+              <div class="flex items-center gap-x-1.5">
+                <div aria-hidden="true" class={`h-2 w-2 rounded-full ${tagColor[tag]}`} />
+                <div class="text-xs text-ink-700 lg:text-sm">{tag}</div>
+              </div>
+            ))}
+          </aside>
+        )}
+
+        <!-- Body -->
+        <div class="mt-10 font-normal leading-6.5 text-ink-600 [&>div>*:not([data-full-width])]:max-w-prose">
+          <div>
+            {entry.blocks.map((block: any, i: number) => {
+              if (block.kind === "p") {
+                return (
+                  <p class:list={["text-pretty", i > 0 && "mt-5"]}>
+                    <ChangelogSegments segments={block.segments} />
+                  </p>
+                );
+              }
+              if (block.kind === "ul") {
+                return (
+                  <ul class:list={["list-disc space-y-2 pl-6 marker:text-ink-700", i > 0 && "mt-5"]}>
+                    {block.items.map((item: any) => (
+                      <li class="text-pretty">
+                        <ChangelogSegments segments={item.segments} />
+                        {item.sub && (
+                          <ul class="mt-2 list-[circle] space-y-2 pl-6 marker:text-ink-700">
+                            {item.sub.items.map((sub: any) => (
+                              <li class="text-pretty">
+                                <ChangelogSegments segments={sub.segments} />
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                );
+              }
+              return null;
+            })}
+          </div>
+        </div>
+
+        <!-- Figure mock, as on live (152 entries have one) -->
+        {entry.figure && (
+          <div class="max-w-prose">
+            <figure class="mt-10">
+              <div class="pinstripe-bg flex items-center justify-center overflow-hidden rounded-2xl bg-ink-50 px-6 py-12">
+                <p class="min-w-0 break-words text-center font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
+                  {titleCase(entry.figure.file)}
+                </p>
+              </div>
+            </figure>
+          </div>
+        )}
+
+        <!-- Previous / Next, as on live -->
+        <nav aria-label="Changelog entries" class="mt-10 flex max-w-prose items-center justify-between gap-4 pb-20">
+          {entry.prev && (
+            <a
+              aria-label={`Previous update: ${entry.prev.title}`}
+              class="relative inline-flex h-9 cursor-pointer items-center justify-center gap-x-1.5 whitespace-nowrap rounded-[10px] border border-paper-500 px-3 text-sm text-ink-100 transition-colors duration-300 ease-in-out hover:bg-paper-200"
+              href={entry.prev.href}
+              rel="prev"
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path
+                  d="M11.75 7h-9.5m0 0L5.643 3.5M2.25 7l3.393 3.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.1"
+                />
+              </svg>
+              <span>Previous</span>
+            </a>
+          )}
+          {entry.next && (
+            <a
+              aria-label={`Next update: ${entry.next.title}`}
+              class="relative ml-auto inline-flex h-9 cursor-pointer items-center justify-center gap-x-1.5 whitespace-nowrap rounded-[10px] border border-paper-500 px-3 text-sm text-ink-100 transition-colors duration-300 ease-in-out hover:bg-paper-200"
+              href={entry.next.href}
+              rel="next"
+            >
+              <span>Next</span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path
+                  d="M2.25 7h9.5m0 0L8.357 3.5M11.75 7l-3.393 3.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.1"
+                />
+              </svg>
+            </a>
+          )}
+        </nav>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Copy-link button beside the H1, as on live: copies the page URL.
+  const button = document.querySelector("[data-copy-link]");
+  if (button) {
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        button.setAttribute("aria-label", "Link copied");
+        window.setTimeout(() => button.setAttribute("aria-label", "Copy link to this entry"), 2000);
+      } catch {
+        // Clipboard unavailable, leave the button as is.
+      }
+    });
+  }
+</script>

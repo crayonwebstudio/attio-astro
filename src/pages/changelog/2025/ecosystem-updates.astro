@@ -1,0 +1,11 @@
+---
+import ChangelogEntry from "../../../components/ChangelogEntry.astro";
+import data from "../../../data/changelog-entries.json";
+
+// Ecosystem updates, copy fetched live from https://attio.com/changelog/2025/ecosystem-updates
+// on 2026-11-16 (HTTP 200). Data lives in src/data/changelog-entries.json.
+const entry = (data as any).entries.find((entry: any) => entry.href === "/changelog/2025/ecosystem-updates");
+if (!entry) throw new Error("Missing changelog data for /changelog/2025/ecosystem-updates");
+---
+
+<ChangelogEntry entry={entry} />

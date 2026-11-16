@@ -1,0 +1,11 @@
+---
+import ChangelogYear from "../../components/ChangelogYear.astro";
+import data from "../../data/changelog-entries.json";
+
+// Changelog 2023, copy fetched live from https://attio.com/changelog/2023
+// on 2026-11-16 (HTTP 200). Data lives in src/data/changelog-entries.json.
+const yearData = (data as any).years.find((year: any) => year.year === 2023);
+if (!yearData) throw new Error("Missing changelog data for 2023");
+---
+
+<ChangelogYear yearData={yearData} />

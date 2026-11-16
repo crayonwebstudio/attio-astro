@@ -1,0 +1,11 @@
+---
+import ChangelogEntry from "../../../components/ChangelogEntry.astro";
+import data from "../../../data/changelog-entries.json";
+
+// Subject line variables in emails, copy fetched live from https://attio.com/changelog/2023/subject-line-variables-in-email
+// on 2026-11-16 (HTTP 200). Data lives in src/data/changelog-entries.json.
+const entry = (data as any).entries.find((entry: any) => entry.href === "/changelog/2023/subject-line-variables-in-email");
+if (!entry) throw new Error("Missing changelog data for /changelog/2023/subject-line-variables-in-email");
+---
+
+<ChangelogEntry entry={entry} />

@@ -1,0 +1,11 @@
+---
+import ChangelogEntry from "../../../components/ChangelogEntry.astro";
+import data from "../../../data/changelog-entries.json";
+
+// New browser extension integrations, copy fetched live from https://attio.com/changelog/2024/new-browser-extension-integrations
+// on 2026-11-16 (HTTP 200). Data lives in src/data/changelog-entries.json.
+const entry = (data as any).entries.find((entry: any) => entry.href === "/changelog/2024/new-browser-extension-integrations");
+if (!entry) throw new Error("Missing changelog data for /changelog/2024/new-browser-extension-integrations");
+---
+
+<ChangelogEntry entry={entry} />

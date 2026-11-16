@@ -1,0 +1,11 @@
+---
+import ChangelogEntry from "../../../components/ChangelogEntry.astro";
+import data from "../../../data/changelog-entries.json";
+
+// Refreshed in-app help drawer, copy fetched live from https://attio.com/changelog/2025/refreshed-in-app-help-drawer
+// on 2026-11-16 (HTTP 200). Data lives in src/data/changelog-entries.json.
+const entry = (data as any).entries.find((entry: any) => entry.href === "/changelog/2025/refreshed-in-app-help-drawer");
+if (!entry) throw new Error("Missing changelog data for /changelog/2025/refreshed-in-app-help-drawer");
+---
+
+<ChangelogEntry entry={entry} />

@@ -1,0 +1,45 @@
+---
+// Renders inline segments (text, bold, italic, underline, code, links,
+// line breaks) for changelog entries.
+// Segment model shared with src/data/help.json, plus u and br.
+interface Segment {
+  t: string;
+  b?: boolean;
+  i?: boolean;
+  u?: boolean;
+  code?: boolean;
+  br?: boolean;
+  href?: string;
+}
+
+interface Props {
+  segments: Segment[];
+}
+
+const { segments } = Astro.props;
+---
+
+{
+  segments.map((part) =>
+    part.br ? (
+      <br />
+    ) : part.href ? (
+      <a
+        href={part.href}
+        class="text-blue-500 underline underline-offset-2 hover:text-blue-600"
+      >
+        {part.t}
+      </a>
+    ) : part.code ? (
+      <code class="rounded bg-paper-200 px-1 py-0.5 font-mono text-[0.9em]">{part.t}</code>
+    ) : part.b ? (
+      <strong class="font-semibold">{part.t}</strong>
+    ) : part.i ? (
+      <em>{part.t}</em>
+    ) : part.u ? (
+      <u>{part.t}</u>
+    ) : (
+      part.t
+    )
+  )
+}
