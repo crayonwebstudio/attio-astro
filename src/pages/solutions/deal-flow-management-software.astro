@@ -1,0 +1,351 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/solutions/deal-flow-management-software
+// on 2026-11-16 (HTTP 200, 379KB). Live H1 is "Deal flow CRM" (eyebrow) with the page
+// headline as H2; here the headline "The CRM for custom deal flow." is the single H1,
+// per the platform page pattern. Tabs (Pipelines, Relationships, Recruiting) switch
+// product mocks on live; their inner panel copy is not in the live text extract, so
+// panels are illustrative HTML/CSS mocks. The quote's live em dash is rendered as a
+// comma, per the no em dash rule. Product visuals are rebuilt as HTML/CSS mocks,
+// no Attio images are hotlinked or copied.
+const tabs = ["Pipelines", "Relationships", "Recruiting"];
+
+const heroStages = [
+  {
+    stage: "Sourcing",
+    deals: [
+      { name: "Northwind Capital", value: "$4.2M" },
+      { name: "Helix Ventures", value: "$2.8M" },
+    ],
+  },
+  {
+    stage: "Diligence",
+    deals: [
+      { name: "Lumio AI", value: "$6.5M" },
+      { name: "Verda Labs", value: "$3.1M" },
+    ],
+  },
+  {
+    stage: "Term sheet",
+    deals: [{ name: "Cortexa", value: "$8.0M" }],
+  },
+  {
+    stage: "Closed",
+    deals: [{ name: "Northpeak", value: "$12.0M" }],
+  },
+];
+
+const relationships = [
+  { name: "June Angelides", role: "Investor", company: "Seedcamp", signal: "3 signals this week" },
+  { name: "Sarah Johnson", role: "Founder and CEO", company: "GreenLeaf Inc", signal: "Demo booked, Aug 29" },
+  { name: "George Wilkes", role: "Partner", company: "Northwind Capital", signal: "Replied to intro email" },
+  { name: "Amelia Carter", role: "Chief of Staff", company: "Lumio AI", signal: "Engagement high" },
+];
+
+const candidates = [
+  { name: "Isla Harrington", role: "Investment Associate", stage: "Final round" },
+  { name: "Theo Marshall", role: "Platform Lead", stage: "Interview" },
+  { name: "Nathan Cole", role: "Analyst", stage: "Screening" },
+  { name: "Maxwell Turner", role: "Operations Manager", stage: "Offer" },
+];
+
+const features = [
+  {
+    title: "Real-time data for real-time relationships.",
+    copy: "Attio\u2019s real-time data sync means you\u2019ll always have the info you need, whenever you need it.",
+  },
+  {
+    title: "Custom data tracking.",
+    copy: "Tweak to your heart's content.",
+  },
+];
+
+const moreCards = [
+  {
+    title: "Advanced permission control",
+    copy: "Be as specific as you need with your contact permissions.",
+    mock: ["Owner: Full access", "Team: Edit records", "Guest: View only"],
+  },
+  {
+    title: "True multiplayer collaboration",
+    copy: "Keep your entire team on the same page with real-time collaboration.",
+    mock: ["Isla is viewing Deal", "George left a comment", "Theo updated Stage"],
+  },
+  {
+    title: "Fully secure, fully compliant",
+    copy: "Attio uses world-class security and is fully GDPR & ISO 27001 compliant.",
+    mock: ["GDPR compliant", "ISO 27001 certified", "SOC 2 Type II"],
+  },
+];
+---
+
+<BaseLayout
+  title="Attio: The CRM for agentic revenue"
+  description="The system for revenue teams to build pipeline, accelerate deals, and grow accounts around the clock."
+  finalCtaDemo
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">Deal flow CRM</p>
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      The CRM for custom deal flow.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Fast, flexible and enriched with hundreds of data sources, Attio puts you in control of your
+      pipeline.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Try for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </div>
+
+    <!-- Hero product mock: deal pipeline board in a browser frame -->
+    <div class="mx-auto mt-14 max-w-5xl overflow-hidden rounded-2xl border border-paper-500 bg-white text-left shadow-lg">
+      <div class="flex items-center gap-2 border-b border-paper-400 bg-paper-200 px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-400"></span>
+        <span class="h-3 w-3 rounded-full bg-yellow-400"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500"></span>
+        <span class="ml-3 text-xs font-medium text-ink-700">Attio, Deals</span>
+      </div>
+      <div class="overflow-x-auto p-5 sm:p-6">
+        <div class="grid min-w-[720px] gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {heroStages.map((col) => (
+            <div class="rounded-xl bg-paper-200 p-4">
+              <div class="flex items-center justify-between">
+                <p class="text-sm font-semibold">{col.stage}</p>
+                <span class="text-xs font-medium text-ink-700">{col.deals.length}</span>
+              </div>
+              <ul class="mt-3 space-y-3">
+                {col.deals.map((deal) => (
+                  <li class="rounded-lg border border-paper-400 bg-white p-3">
+                    <p class="text-sm font-semibold">{deal.name}</p>
+                    <p class="mt-1 text-sm text-ink-600">{deal.value}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Organize: World-class deal tracking -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="World-class deal tracking">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">Organize</p>
+    <h2 class="mt-3 max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      World-class deal tracking.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      With relationship intelligence, enriched pipelines and infinite customization, Attio allows
+      you to get ahead of the competition.
+    </p>
+    <div class="mt-6 flex flex-wrap items-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+    </div>
+
+    <div class="mt-10 flex flex-wrap gap-3" role="tablist" aria-label="Deal tracking views">
+      {tabs.map((tab, i) => (
+        <button
+          type="button"
+          role="tab"
+          aria-selected={i === 0 ? "true" : "false"}
+          data-deal-tab={tab}
+          class:list={[
+            "rounded-full px-5 py-2.5 text-sm font-semibold",
+            i === 0 ? "bg-ink-100 text-white" : "border border-paper-500 bg-white text-ink-100",
+          ]}
+        >
+          {tab}
+        </button>
+      ))}
+    </div>
+
+    <!-- Pipelines panel -->
+    <div data-deal-panel="Pipelines" class="mt-8 overflow-hidden rounded-2xl border border-paper-500 bg-paper-200 p-5 sm:p-6">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {heroStages.map((col) => (
+          <div class="rounded-xl bg-white p-4">
+            <div class="flex items-center justify-between">
+              <p class="text-sm font-semibold">{col.stage}</p>
+              <span class="text-xs font-medium text-ink-700">{col.deals.length}</span>
+            </div>
+            <ul class="mt-3 space-y-3">
+              {col.deals.map((deal) => (
+                <li class="rounded-lg border border-paper-400 p-3">
+                  <p class="text-sm font-semibold">{deal.name}</p>
+                  <p class="mt-1 text-sm text-ink-600">{deal.value}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Relationships panel -->
+    <div data-deal-panel="Relationships" class="mt-8 hidden overflow-hidden rounded-2xl border border-paper-500 bg-white p-6 sm:p-8">
+      <p class="text-sm font-semibold">Relationships, enriched</p>
+      <ul class="mt-5 space-y-4">
+        {relationships.map((person) => (
+          <li class="flex flex-wrap items-center justify-between gap-3 border-b border-paper-400 pb-4 last:border-0 last:pb-0">
+            <div>
+              <p class="text-sm font-semibold">{person.name}</p>
+              <p class="mt-0.5 text-sm text-ink-600">
+                {person.role}, {person.company}
+              </p>
+            </div>
+            <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-600">
+              {person.signal}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Recruiting panel -->
+    <div data-deal-panel="Recruiting" class="mt-8 hidden overflow-hidden rounded-2xl border border-paper-500 bg-white p-6 sm:p-8">
+      <p class="text-sm font-semibold">Recruiting pipeline</p>
+      <ul class="mt-5 space-y-4">
+        {candidates.map((candidate) => (
+          <li class="flex flex-wrap items-center justify-between gap-3 border-b border-paper-400 pb-4 last:border-0 last:pb-0">
+            <div>
+              <p class="text-sm font-semibold">{candidate.name}</p>
+              <p class="mt-0.5 text-sm text-ink-600">{candidate.role}</p>
+            </div>
+            <span class="rounded-full bg-paper-300 px-3 py-1 text-xs font-semibold text-ink-600">
+              {candidate.stage}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Pipeline management: Easily build the perfect pipeline -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Easily build the perfect pipeline">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">Pipeline management</p>
+    <h2 class="mt-3 max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      Easily build the perfect pipeline.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Craft custom workflows that keep your team agile enough to strike while the iron is hot,
+      every time.
+    </p>
+    <div class="mt-10 grid gap-8 lg:grid-cols-2">
+      <div>
+        {features.map((feature) => (
+          <div class="border-b border-paper-400 py-6 first:pt-0">
+            <h3 class="font-display text-xl font-semibold">{feature.title}</h3>
+            <p class="mt-2 pr-8 text-sm leading-relaxed text-ink-600">{feature.copy}</p>
+          </div>
+        ))}
+      </div>
+      <div class="overflow-hidden rounded-2xl border border-paper-500 bg-white p-6 sm:p-8">
+        <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">
+          Deal record, custom attributes
+        </p>
+        <ul class="mt-5 space-y-3">
+          {[
+            { label: "Deal size", value: "$8.0M" },
+            { label: "Stage", value: "Term sheet" },
+            { label: "Lead partner", value: "June Angelides" },
+            { label: "Next step", value: "Partner meeting, Thursday" },
+            { label: "Last synced", value: "Just now" },
+          ].map((row) => (
+            <li class="flex items-center justify-between gap-4 rounded-lg bg-paper-200 px-4 py-3 text-sm">
+              <span class="font-medium">{row.label}</span>
+              <span class="font-semibold">{row.value}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- And that's not all -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="And that's not all">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      And that&rsquo;s not all...
+    </h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {moreCards.map((card) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <ul class="space-y-2">
+              {card.mock.map((line) => (
+                <li class="rounded-lg bg-white px-3 py-2 text-xs leading-relaxed text-ink-600 shadow-sm">
+                  {line}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 text-center sm:px-6">
+    <blockquote class="mx-auto max-w-3xl font-serif text-2xl leading-snug text-ink-100 sm:text-3xl">
+      Attio acts as a single source of truth and action for all of our investments. We use it for
+      everything, from pipeline and deal flow management to recruiting, reporting and closing
+      deals. It really does it all.
+    </blockquote>
+    <p class="mt-6 text-sm font-semibold">June Angelides MBE</p>
+    <p class="mt-1 text-sm text-ink-600">Investor</p>
+  </section>
+</BaseLayout>
+
+<script>
+  // Deal tracking tabs
+  const dealTabs = document.querySelectorAll("[data-deal-tab]");
+  const dealPanels = document.querySelectorAll("[data-deal-panel]");
+  dealTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const name = tab.getAttribute("data-deal-tab") || "";
+      dealTabs.forEach((t) => {
+        const active = t === tab;
+        t.setAttribute("aria-selected", active ? "true" : "false");
+        t.classList.toggle("bg-ink-100", active);
+        t.classList.toggle("text-white", active);
+        t.classList.toggle("border", !active);
+        t.classList.toggle("border-paper-500", !active);
+        t.classList.toggle("bg-white", !active);
+        t.classList.toggle("text-ink-100", !active);
+      });
+      dealPanels.forEach((p) => {
+        p.classList.toggle("hidden", p.getAttribute("data-deal-panel") !== name);
+      });
+    });
+  });
+</script>
