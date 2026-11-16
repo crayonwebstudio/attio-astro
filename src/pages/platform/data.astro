@@ -1,0 +1,470 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/platform/data on 2026-11-16 (HTTP 200, 626KB).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live H1 is "Data model" (duplicated desktop/mobile); the page headline is the H2
+// "One context. Every team.", used here as the single H1, per the workflows page pattern.
+const rowOne = [
+  {
+    name: "Partnership",
+    kind: "Custom",
+    attrs: ["Partnership name", "Partnership type", "Location"],
+    more: "12 More Attributes",
+  },
+  {
+    name: "Invoices",
+    kind: "Custom",
+    attrs: ["Billing address", "Phone number", "Point of contact"],
+    more: "12 More Attributes",
+  },
+  {
+    name: "Company",
+    kind: "Standard",
+    attrs: ["Company name", "Industry"],
+    more: "10 More Attributes",
+  },
+  {
+    name: "Deal",
+    kind: "Standard",
+    attrs: ["Deal ID", "Deal type"],
+    more: "8 More Attributes",
+  },
+  {
+    name: "Person",
+    kind: "Standard",
+    attrs: ["Person name", "Email address"],
+    more: "12 More Attributes",
+  },
+  { name: "Marketplaces", kind: "Template", attrs: [], more: null },
+  { name: "Product-led growth", kind: "Template", attrs: [], more: null },
+  { name: "Product-led sales", kind: "Template", attrs: [], more: null },
+  { name: "Sales", kind: "Template", attrs: [], more: null },
+];
+
+const rowTwo = [
+  {
+    name: "Buyer",
+    kind: "Custom",
+    attrs: ["Buyer ID", "Buyer type", "Last transaction date"],
+    more: "10 More Attributes",
+  },
+  {
+    name: "Seller",
+    kind: "Custom",
+    attrs: ["Seller ID", "Stage", "Estimated ARR"],
+    more: "11 More Attributes",
+  },
+  {
+    name: "Transaction",
+    kind: "Custom",
+    attrs: ["Transaction ID", "Transaction date", "Purchased plan"],
+    more: "5 More Attributes",
+  },
+  {
+    name: "Workspace",
+    kind: "Standard",
+    attrs: ["Billing email address", "Subscription state", "Seat count"],
+    more: "11 More Attributes",
+  },
+  {
+    name: "User",
+    kind: "Custom",
+    attrs: ["User ID", "Workspace", "Renewal date"],
+    more: "15 More Attributes",
+  },
+  {
+    name: "Company",
+    kind: "Custom",
+    attrs: ["Company name", "Industry", "Domain"],
+    more: "12 More Attributes",
+  },
+  {
+    name: "Deal",
+    kind: "Custom",
+    attrs: ["Deal ID", "Deal stage", "Deal value"],
+    more: "8 More Attributes",
+  },
+  {
+    name: "Person",
+    kind: "Standard",
+    attrs: ["Record name", "Email address", "Location"],
+    more: "12 More Attributes",
+  },
+];
+
+const modelCards = [
+  {
+    n: "01",
+    title: "Build for any business model.",
+    copy: "Track investors, partners, products, or anything else unique to how you operate.",
+    mock: ["Partnership object", "Investor object", "Product object"],
+  },
+  {
+    n: "02",
+    title: "Iterate faster than ever.",
+    copy: "Sort, filter, and utilize millions of records in milliseconds.",
+    mock: ["Sort: 2.4M records", "Filter: Industry = SaaS", "Result in 12ms"],
+  },
+  {
+    n: "03",
+    title: "Fine-tune to your data structure.",
+    copy: "Customize fields to capture exactly what you need to track.",
+    mock: ["Field: Renewal date", "Type: Date", "Required: Yes"],
+  },
+  {
+    n: "04",
+    title: "Create associations.",
+    copy: "Link objects to make your data actionable and insightful with our powerful graph model.",
+    mock: ["Company -> Deal", "Deal -> Person", "Person -> Workspace"],
+  },
+];
+
+const currentCards = [
+  {
+    title: "Custom attributes",
+    copy: "Track, enrich, and update any data your business needs.",
+  },
+  {
+    title: "Activity timelines",
+    copy: "Get instant visibility into the full history of every interaction.",
+  },
+  {
+    title: "Detailed views",
+    copy: "From kanbans to tables, visualize your data the way that works for you.",
+  },
+];
+
+const enrichmentCards = [
+  {
+    title: "Every record, enriched.",
+    copy: "Revenue to location, employee count, company size, and more.",
+  },
+  {
+    title: "Customer conversations in context.",
+    copy: "Your team gets live customer context from every email, meeting, record, and more.",
+  },
+  {
+    title: "Data-powered workflows.",
+    copy: "Automate your go-to-market decisions based on the most reliable dataset in the industry.",
+  },
+];
+
+const sourceCards = [
+  {
+    title: "Data warehouses.",
+    copy: "No silos. Collate your product, user & billing data in real-time via reverse ETL and CDPs.",
+  },
+  { title: "Email and calendar sync.", copy: null },
+  { title: "Sales engagement tools.", copy: null },
+];
+
+const decisionTabs = ["Sales pipeline", "Revenue metrics", "Product growth"];
+
+const plugs = [
+  "Ask Attio",
+  "AI",
+  "Data model",
+  "Apps & integrations",
+  "Call Intelligence",
+  "Workflows",
+  "Sequences",
+  "Reporting",
+];
+---
+
+<BaseLayout
+  title="Data structure & syncing | Attio"
+  description="The right call is always in front of you. Reps, agents, and reports run on one picture."
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">Data model</p>
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      One context. Every team.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      The right call is always in front of you. Reps, agents, and reports run on one picture.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </div>
+  </section>
+
+  <!-- Object card marquee -->
+  <section class="overflow-hidden pb-20 pt-4" aria-label="Data model objects">
+    <div class="marquee space-y-4">
+      <div class="overflow-hidden">
+        <div class="marquee-track flex w-max gap-4 pr-4">
+          {[...rowOne, ...rowOne].map((obj) => (
+            <article class="w-[280px] shrink-0 rounded-2xl border border-paper-500 bg-white p-5">
+              <div class="flex items-center justify-between gap-2">
+                <p class="font-display text-lg font-semibold">{obj.name}</p>
+                <span
+                  class:list={[
+                    "rounded-full px-2 py-0.5 text-xs font-semibold",
+                    obj.kind === "Standard" ? "bg-blue-100 text-blue-600" : "bg-paper-300 text-ink-600",
+                  ]}
+                >
+                  {obj.kind}
+                </span>
+              </div>
+              {obj.attrs.length > 0 && (
+                <ul class="mt-3 space-y-1.5 text-sm text-ink-600">
+                  {obj.attrs.map((attr) => (
+                    <li class="flex items-center justify-between gap-2">
+                      <span>{attr}</span>
+                      <span class="text-ink-800">Aa</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {obj.more && (
+                <p class="mt-3 border-t border-paper-400 pt-3 text-xs font-semibold text-ink-700">{obj.more}</p>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+      <div class="overflow-hidden">
+        <div class="marquee-track flex w-max gap-4 pr-4" style="animation-direction: reverse;">
+          {[...rowTwo, ...rowTwo].map((obj) => (
+            <article class="w-[280px] shrink-0 rounded-2xl border border-paper-500 bg-white p-5">
+              <div class="flex items-center justify-between gap-2">
+                <p class="font-display text-lg font-semibold">{obj.name}</p>
+                <span
+                  class:list={[
+                    "rounded-full px-2 py-0.5 text-xs font-semibold",
+                    obj.kind === "Standard" ? "bg-blue-100 text-blue-600" : "bg-paper-300 text-ink-600",
+                  ]}
+                >
+                  {obj.kind}
+                </span>
+              </div>
+              <ul class="mt-3 space-y-1.5 text-sm text-ink-600">
+                {obj.attrs.map((attr) => (
+                  <li class="flex items-center justify-between gap-2">
+                    <span>{attr}</span>
+                    <span class="text-ink-800">Aa</span>
+                  </li>
+                ))}
+              </ul>
+              {obj.more && (
+                <p class="mt-3 border-t border-paper-400 pt-3 text-xs font-semibold text-ink-700">{obj.more}</p>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blazingly fast, amazingly flexible -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Blazingly fast, amazingly flexible">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      Blazingly fast, amazingly flexible.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Create the exact data model your business needs with custom objects.
+    </p>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {modelCards.map((card) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <ul class="space-y-2">
+              {card.mock.map((line) => (
+                <li class="rounded-lg bg-white px-3 py-2 font-mono text-xs leading-relaxed text-ink-600 shadow-sm">
+                  {line}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-6">
+            <p class="font-display text-sm font-semibold text-blue-500">{card.n}</p>
+            <h3 class="mt-2 font-display text-xl font-semibold">{card.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 text-center sm:px-6">
+    <blockquote class="mx-auto max-w-3xl font-serif text-2xl leading-snug text-ink-100 sm:text-3xl">
+      It finally felt like I could configure our CRM to fit our business needs, rather than the other
+      way around.
+    </blockquote>
+    <p class="mt-6 text-sm font-semibold">Margaret Shen</p>
+    <p class="mt-1 text-sm text-ink-600">Head of Business Operations, Modal</p>
+  </section>
+
+  <!-- Context that stays current -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Context that stays current">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      Context that stays current.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Your team always has the latest customer intelligence, automatically.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {currentCards.map((card) => (
+        <article class="rounded-2xl border border-paper-500 bg-white p-6">
+          <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Automatic enrichment -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Automatic enrichment, automatic advantage">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      Automatic enrichment, automatic advantage.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Get the context you need for every prospect, automatically drawn from 100s of sources and
+      pre-analyzed by AI.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {enrichmentCards.map((card) => (
+        <article class="rounded-2xl border border-paper-500 bg-white p-6">
+          <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Unify your data sources -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Unify your data sources">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      Unify your data sources.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Draw on all your business, customer and product data to supercharge your GTM team&rsquo;s efforts.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {sourceCards.map((card) => (
+        <article class="rounded-2xl border border-paper-500 bg-white p-6">
+          <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+          {card.copy && <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- From data to decisions, instantly -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="From data to decisions, instantly">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      From data to decisions, instantly.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Surface insights fast with reports built for how your business works.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-3" role="tablist" aria-label="Decision reports">
+      {decisionTabs.map((tab, i) => (
+        <button
+          type="button"
+          role="tab"
+          aria-selected={i === 0 ? "true" : "false"}
+          data-decision-tab={tab}
+          data-decision-copy={tab === "Sales pipeline" ? "Stages, forecasts, win rates, and time to close, all tracked." : ""}
+          class:list={[
+            "rounded-full px-5 py-2.5 text-sm font-semibold",
+            i === 0 ? "bg-ink-100 text-white" : "border border-paper-500 bg-white text-ink-100",
+          ]}
+        >
+          {tab}
+        </button>
+      ))}
+    </div>
+    <div class="mt-8 grid gap-6 lg:grid-cols-2" id="decision-panel">
+      <div class="rounded-2xl border border-paper-500 bg-white p-6 sm:p-8">
+        <h3 class="font-display text-xl font-semibold" id="decision-panel-title">Sales pipeline</h3>
+        <p class="mt-2 text-sm leading-relaxed text-ink-600" id="decision-panel-copy">
+          Stages, forecasts, win rates, and time to close, all tracked.
+        </p>
+        <a href="/platform/reporting" class="mt-4 inline-block text-sm font-semibold text-blue-500">
+          Learn more
+        </a>
+      </div>
+      <div class="rounded-2xl border border-paper-500 bg-paper-200 p-6 sm:p-8" aria-hidden="true">
+        <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Pipeline by stage</p>
+        <ul class="mt-5 space-y-4">
+          {[
+            { label: "Discovery", width: "82%", value: "$1.2M" },
+            { label: "Negotiation", width: "64%", value: "$940K" },
+            { label: "Proposal", width: "48%", value: "$710K" },
+            { label: "Closed won", width: "30%", value: "$430K" },
+          ].map((row) => (
+            <li>
+              <div class="flex items-center justify-between text-sm">
+                <span class="font-medium">{row.label}</span>
+                <span class="font-semibold">{row.value}</span>
+              </div>
+              <div class="mt-1.5 h-2 rounded-full bg-paper-400">
+                <div class="h-2 rounded-full bg-blue-500" style={`width: ${row.width}`}></div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attio plugs in -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Attio plugs in">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Attio plugs in. You take off.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Work your way, from outreach to outcomes.
+    </p>
+    <ul class="mt-10 flex flex-wrap gap-3">
+      {plugs.map((plug, i) => (
+        <li class="flex items-center gap-2 rounded-full border border-paper-500 bg-white px-4 py-2 text-sm font-medium">
+          <span class="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-xs font-semibold text-blue-600">
+            {i + 1}
+          </span>
+          {plug}
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
+
+<script>
+  const tabs = document.querySelectorAll("[data-decision-tab]");
+  const titleEl = document.getElementById("decision-panel-title");
+  const copyEl = document.getElementById("decision-panel-copy");
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => {
+        t.setAttribute("aria-selected", t === tab ? "true" : "false");
+        t.classList.toggle("bg-ink-100", t === tab);
+        t.classList.toggle("text-white", t === tab);
+        t.classList.toggle("border", t !== tab);
+        t.classList.toggle("border-paper-500", t !== tab);
+        t.classList.toggle("bg-white", t !== tab);
+        t.classList.toggle("text-ink-100", t !== tab);
+      });
+      const name = tab.getAttribute("data-decision-tab") || "";
+      const copy = tab.getAttribute("data-decision-copy") || "";
+      if (titleEl) titleEl.textContent = name;
+      if (copyEl) copyEl.textContent = copy;
+    });
+  });
+</script>
