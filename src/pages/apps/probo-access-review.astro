@@ -1,0 +1,11 @@
+---
+import AppDetail from "../../components/AppDetail.astro";
+import details from "../../data/app-details.json";
+
+// Detail page for Probo Access Review, copy fetched live from https://attio.com/apps/probo-access-review
+// on 2026-11-16 (HTTP 200). See src/components/AppDetail.astro.
+const app = details.find((d) => d.slug === "probo-access-review");
+if (!app) throw new Error("Missing app detail: probo-access-review");
+---
+
+<AppDetail app={app} />

@@ -1,0 +1,354 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Shared layout for the 299 app detail pages under /apps/*.
+// Copy fetched live from https://attio.com/apps/{slug} on 2026-11-16
+// (HTTP 200 each), stored in src/data/app-details.json. All titles,
+// taglines, versions, built-by, categories, resources, section copy,
+// and related apps are live Attio copy. Live em dashes are rendered as
+// commas, per the no em dash rule. Product visuals are rebuilt as
+// HTML/CSS mocks, no Attio images, logos, or fonts are hotlinked or
+// copied. Live detail pages have no standard FinalCta ("Agentic revenue
+// runs on Attio." appears 0 times in the live HTML), so this layout hides
+// the shared FinalCta. The live hero gallery (marketplace screenshots)
+// is rendered as a dark pinstripe panel with the app wordmark; 11 apps
+// have no gallery image on live and render without one. The hero button
+// is "Install app" on 296 apps and "Install extension" on 3 (google-meet,
+// groovin, lookupist), each linking to its live destination. Nested h2/h3
+// headings inside a section body are live subheads, rendered as such;
+// bold-only paragraphs are live subsection labels, rendered semibold.
+
+interface Segment {
+  t: string;
+  b?: boolean;
+  i?: boolean;
+  code?: boolean;
+  href?: string;
+}
+
+interface ListItem {
+  segments: Segment[];
+}
+
+interface Block {
+  kind: "p" | "subhead" | "h2" | "h3" | "ul" | "ol" | "img";
+  segments?: Segment[];
+  text?: string;
+  items?: ListItem[];
+  alt?: string;
+  file?: string;
+}
+
+interface Section {
+  heading: string;
+  blocks: Block[];
+}
+
+interface Resource {
+  label: string;
+  href: string;
+}
+
+interface RelatedApp {
+  slug: string;
+  name: string;
+  vendor: string;
+  description: string;
+}
+
+interface AppDetail {
+  slug: string;
+  title: string;
+  description: string;
+  version: string | null;
+  h1: string;
+  tagline: string;
+  installHref: string | null;
+  installLabel: string | null;
+  official: boolean;
+  builtBy: string | null;
+  category: { name: string; anchor: string } | null;
+  resources: Resource[];
+  sections: Section[];
+  otherHeading: string | null;
+  otherApps: RelatedApp[];
+  heroImage: { alt: string; file: string } | null;
+}
+
+interface Props {
+  app: AppDetail;
+}
+
+const { app } = Astro.props;
+
+function initials(name: string): string {
+  const words = name.replace(/[^A-Za-z0-9 ]/g, "").split(" ").filter(Boolean);
+  if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
+  return name.replace(/[^A-Za-z0-9]/g, "").slice(0, 2).toUpperCase();
+}
+
+function tileHue(name: string): number {
+  let h = 0;
+  for (const ch of name) h = (h * 31 + ch.charCodeAt(0)) % 360;
+  return h;
+}
+---
+
+<BaseLayout title={app.title} description={app.description} hideFinalCta>
+  <!-- Breadcrumb + version -->
+  <section class="mx-auto max-w-[1200px] px-4 pt-12 sm:px-6" aria-label="Breadcrumb">
+    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-dashed border-paper-600 pb-5">
+      <p class="text-sm font-semibold tracking-wide text-ink-600">
+        <a href="/apps" class="hover:text-blue-500">Apps</a>
+        <span aria-hidden="true"> / </span>
+        <span class="text-ink-800">{app.h1}</span>
+      </p>
+      {app.version && (
+        <p class="whitespace-nowrap text-sm font-medium text-ink-600">[V {app.version}]</p>
+      )}
+    </div>
+  </section>
+
+  <!-- Header -->
+  <header class="mx-auto max-w-[1200px] px-4 py-12 sm:px-6" aria-label="App header">
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-10">
+      <div class="flex items-center gap-5">
+        <span
+          class="flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-[30%] font-display text-xl font-semibold text-white lg:size-21"
+          style={`background-color: hsl(${tileHue(app.h1)} 65% 45%)`}
+          aria-hidden="true"
+        >
+          {initials(app.h1)}
+        </span>
+        <h1 class="font-display text-[40px] font-semibold leading-[1.05] tracking-tight sm:text-[56px]">
+          {app.h1}
+        </h1>
+      </div>
+      <div class="lg:pt-2">
+        <p class="max-w-[28em] text-balance text-xl leading-relaxed text-ink-100">{app.tagline}</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          {app.installHref && (
+            <a
+              href={app.installHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center rounded-[10px] bg-ink-100 px-4 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+            >
+              {app.installLabel ?? "Install app"}
+            </a>
+          )}
+          {app.official && (
+            <span class="inline-flex items-center gap-2 rounded-[10px] border border-paper-500 px-2.5 py-2 text-sm font-medium text-ink-600">
+              <span class="flex h-4 w-4 items-center justify-center rounded-full bg-green-600 text-[10px] font-bold text-white" aria-hidden="true">
+                &#10003;
+              </span>
+              Official app
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero gallery mock, only where live has a gallery image -->
+    {app.heroImage && (
+      <figure class="mt-12">
+        <div class="pinstripe-bg flex items-center justify-center overflow-hidden rounded-2xl bg-ink-50 px-6 py-16">
+          <p class="min-w-0 break-words text-center font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+            {app.h1}
+          </p>
+        </div>
+      </figure>
+    )}
+  </header>
+
+  <!-- Sidebar + sections -->
+  <div class="mx-auto grid max-w-[1200px] gap-12 px-4 pb-24 sm:px-6 lg:grid-cols-[280px_1fr]">
+    <aside aria-label="App details">
+      <div class="grid gap-8 sm:grid-cols-2 lg:sticky lg:top-32 lg:grid-cols-1">
+        {app.builtBy && (
+          <div>
+            <h3 class="text-sm font-semibold uppercase tracking-[0.15em] text-ink-700">Built by</h3>
+            <p class="mt-2 text-sm font-medium">{app.builtBy}</p>
+          </div>
+        )}
+        {app.category && (
+          <div>
+            <h3 class="text-sm font-semibold uppercase tracking-[0.15em] text-ink-700">Category</h3>
+            <p class="mt-2 text-sm font-medium">
+              <a href={`/apps#${app.category.anchor}`} class="text-blue-500 underline underline-offset-2 hover:text-blue-600">
+                {app.category.name}
+              </a>
+            </p>
+          </div>
+        )}
+        {app.resources.length > 0 && (
+          <div>
+            <h3 class="text-sm font-semibold uppercase tracking-[0.15em] text-ink-700">Resources</h3>
+            <ul class="mt-2 space-y-1.5">
+              {app.resources.map((res) => (
+                <li>
+                  <a
+                    href={res.href}
+                    target={res.href.startsWith("http") ? "_blank" : undefined}
+                    rel={res.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    class="text-sm font-medium text-blue-500 underline underline-offset-2 hover:text-blue-600"
+                  >
+                    {res.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </aside>
+
+    <div class="min-w-0">
+      {app.sections.map((section) => (
+        <section aria-label={section.heading}>
+          <h2 class="mt-16 scroll-mt-32 font-display text-[28px] font-semibold leading-tight tracking-tight first:mt-0 sm:text-[32px]">
+            {section.heading}
+          </h2>
+          <div class="max-w-prose">
+            {section.blocks.map((block) => {
+              if (block.kind === "h2") {
+                return (
+                  <h2 class="mt-12 scroll-mt-32 font-display text-[28px] font-semibold leading-tight tracking-tight sm:text-[32px]">
+                    {block.text}
+                  </h2>
+                );
+              }
+              if (block.kind === "h3") {
+                return (
+                  <h3 class="mt-10 scroll-mt-32 font-display text-xl font-semibold">{block.text}</h3>
+                );
+              }
+              if (block.kind === "subhead") {
+                return <p class="mt-8 font-semibold leading-relaxed text-ink-100">{block.text}</p>;
+              }
+              if (block.kind === "ul") {
+                return (
+                  <ul class="mt-5 space-y-2">
+                    {block.items?.map((item) => (
+                      <li class="flex items-baseline gap-x-3 leading-relaxed text-ink-100">
+                        <span class="h-2 w-2 shrink-0 translate-y-[-1px] rounded-[2px] bg-ink-300" aria-hidden="true" />
+                        <span>
+                          {item.segments.map((part) =>
+                            part.href ? (
+                              <a href={part.href} class="text-blue-500 underline underline-offset-2 hover:text-blue-600">
+                                {part.t}
+                              </a>
+                            ) : part.code ? (
+                              <code class="rounded bg-paper-200 px-1 py-0.5 font-mono text-[0.9em]">{part.t}</code>
+                            ) : part.b ? (
+                              <strong class="font-semibold">{part.t}</strong>
+                            ) : part.i ? (
+                              <em>{part.t}</em>
+                            ) : (
+                              part.t
+                            )
+                          )}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                );
+              }
+              if (block.kind === "ol") {
+                return (
+                  <ol class="mt-5 list-decimal space-y-2 pl-6">
+                    {block.items?.map((item) => (
+                      <li class="leading-relaxed text-ink-100 marker:font-semibold">
+                        {item.segments.map((part) =>
+                          part.href ? (
+                            <a href={part.href} class="text-blue-500 underline underline-offset-2 hover:text-blue-600">
+                              {part.t}
+                            </a>
+                          ) : part.code ? (
+                            <code class="rounded bg-paper-200 px-1 py-0.5 font-mono text-[0.9em]">{part.t}</code>
+                          ) : part.b ? (
+                            <strong class="font-semibold">{part.t}</strong>
+                          ) : part.i ? (
+                            <em>{part.t}</em>
+                          ) : (
+                            part.t
+                          )
+                        )}
+                      </li>
+                    ))}
+                  </ol>
+                );
+              }
+              if (block.kind === "img") {
+                return (
+                  <figure class="mt-8">
+                    <div class="pinstripe-bg flex items-center justify-center overflow-hidden rounded-2xl bg-ink-50 px-6 py-10">
+                      <p class="min-w-0 break-words text-center font-display text-lg font-semibold tracking-tight text-white">
+                        {block.alt || app.h1}
+                      </p>
+                    </div>
+                  </figure>
+                );
+              }
+              return (
+                <p class="mt-5 leading-relaxed text-ink-100">
+                  {block.segments?.map((part) =>
+                    part.href ? (
+                      <a href={part.href} class="text-blue-500 underline underline-offset-2 hover:text-blue-600">
+                        {part.t}
+                      </a>
+                    ) : part.code ? (
+                      <code class="rounded bg-paper-200 px-1 py-0.5 font-mono text-[0.9em]">{part.t}</code>
+                    ) : part.b ? (
+                      <strong class="font-semibold">{part.t}</strong>
+                    ) : part.i ? (
+                      <em>{part.t}</em>
+                    ) : (
+                      part.t
+                    )
+                  )}
+                </p>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+
+      <!-- Back to the apps index -->
+      <p class="mt-16 border-t border-dashed border-paper-600 pt-8">
+        <a href="/apps" class="text-sm font-semibold text-ink-100 underline underline-offset-4 hover:text-blue-500">
+          Back to all apps
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Other apps in the same category -->
+  {app.otherApps.length > 0 && (
+    <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label={app.otherHeading ?? "Other apps"}>
+      <h3 class="font-display text-2xl font-semibold tracking-tight">{app.otherHeading ?? "Other apps"}</h3>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {app.otherApps.map((other) => (
+          <a
+            href={`/apps/${other.slug}`}
+            class="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-paper-500 bg-white p-5 transition-colors hover:border-ink-300"
+          >
+            <div class="flex items-center gap-2.5">
+              <span
+                class="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-[30%] text-sm font-semibold text-white"
+                style={`background-color: hsl(${tileHue(other.name)} 65% 45%)`}
+                aria-hidden="true"
+              >
+                {initials(other.name)}
+              </span>
+              <span class="font-display text-lg font-semibold tracking-tight">{other.name}</span>
+              <span class="ml-auto text-ink-700 opacity-0 transition-opacity group-hover:opacity-100" aria-hidden="true">&rarr;</span>
+            </div>
+            <p class="text-sm text-ink-600">By {other.vendor}</p>
+            <p class="text-sm leading-relaxed text-ink-600">{other.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+</BaseLayout>

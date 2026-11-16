@@ -1,0 +1,11 @@
+---
+import AppDetail from "../../components/AppDetail.astro";
+import details from "../../data/app-details.json";
+
+// Detail page for Allo, copy fetched live from https://attio.com/apps/mobile-first-integrations-allo
+// on 2026-11-16 (HTTP 200). See src/components/AppDetail.astro.
+const app = details.find((d) => d.slug === "mobile-first-integrations-allo");
+if (!app) throw new Error("Missing app detail: mobile-first-integrations-allo");
+---
+
+<AppDetail app={app} />

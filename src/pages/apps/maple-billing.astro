@@ -1,0 +1,11 @@
+---
+import AppDetail from "../../components/AppDetail.astro";
+import details from "../../data/app-details.json";
+
+// Detail page for Measure, copy fetched live from https://attio.com/apps/maple-billing
+// on 2026-11-16 (HTTP 200). See src/components/AppDetail.astro.
+const app = details.find((d) => d.slug === "maple-billing");
+if (!app) throw new Error("Missing app detail: maple-billing");
+---
+
+<AppDetail app={app} />

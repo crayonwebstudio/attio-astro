@@ -1,0 +1,11 @@
+---
+import AppDetail from "../../components/AppDetail.astro";
+import details from "../../data/app-details.json";
+
+// Detail page for Lookupist, copy fetched live from https://attio.com/apps/lookupist
+// on 2026-11-16 (HTTP 200). See src/components/AppDetail.astro.
+const app = details.find((d) => d.slug === "lookupist");
+if (!app) throw new Error("Missing app detail: lookupist");
+---
+
+<AppDetail app={app} />

@@ -1,0 +1,11 @@
+---
+import AppDetail from "../../components/AppDetail.astro";
+import details from "../../data/app-details.json";
+
+// Detail page for Gojiberry, copy fetched live from https://attio.com/apps/gojiberry
+// on 2026-11-16 (HTTP 200). See src/components/AppDetail.astro.
+const app = details.find((d) => d.slug === "gojiberry");
+if (!app) throw new Error("Missing app detail: gojiberry");
+---
+
+<AppDetail app={app} />

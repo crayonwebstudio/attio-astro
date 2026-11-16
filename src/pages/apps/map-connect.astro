@@ -1,0 +1,11 @@
+---
+import AppDetail from "../../components/AppDetail.astro";
+import details from "../../data/app-details.json";
+
+// Detail page for Map Connect, copy fetched live from https://attio.com/apps/map-connect
+// on 2026-11-16 (HTTP 200). See src/components/AppDetail.astro.
+const app = details.find((d) => d.slug === "map-connect");
+if (!app) throw new Error("Missing app detail: map-connect");
+---
+
+<AppDetail app={app} />

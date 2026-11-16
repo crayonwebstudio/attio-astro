@@ -1,0 +1,11 @@
+---
+import AppDetail from "../../components/AppDetail.astro";
+import details from "../../data/app-details.json";
+
+// Detail page for PublicViews, copy fetched live from https://attio.com/apps/public-views
+// on 2026-11-16 (HTTP 200). See src/components/AppDetail.astro.
+const app = details.find((d) => d.slug === "public-views");
+if (!app) throw new Error("Missing app detail: public-views");
+---
+
+<AppDetail app={app} />
