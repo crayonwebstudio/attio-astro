@@ -1,0 +1,293 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/customers on 2026-11-16 (HTTP 200, 413KB).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live H1 is "Customer stories" inside a pill badge; the headline
+// "The fastest-growing companies run on Attio." is the H2, as on live.
+// The 7 featured cards are large horizontal cards (lg 420px, xl 460px on live), each
+// linking to its story page. Only Granola, Passionfroot and Taskrabbit have a photo
+// on the live cards (shre-long.png, customers-passionfroot-v2.png, taskrabbit-cover.png);
+// the other 4 cards show only the logo, so their right-hand panels here are CSS mocks.
+// The live page has no standard FinalCta ("Agentic revenue runs on Attio." appears 0 times);
+// it ends with its own light closing CTA, "The CRM behind thousands of companies.",
+// so this page hides the shared FinalCta and renders that CTA itself.
+// Granola funding conflict, flagged in the spec: the card says $125M Series C, the Granola
+// story says $192M raised. The card is rendered as live shows it, not reconciled.
+// The Taskrabbit summary ends "Attio.." with a double period on live, kept verbatim.
+// The closing CTA on live is: desktop Start for free + Talk to sales; mobile an email form
+// (placeholder "Your email address") whose submit button reads "Send me a demo", plus a
+// Talk to sales link. The form has no backend here, submit only flips to Subscribed.
+const logos = [
+  "Granola",
+  "Wispr Flow",
+  "Listen Labs",
+  "Obvious",
+  "Modal",
+  "USV",
+  "Replicate",
+  "Railway",
+  "Taskrabbit",
+  "Public",
+  "Wordsmith",
+  "Passionfroot",
+];
+
+const stories = [
+  {
+    slug: "granola",
+    name: "Granola",
+    industry: "SaaS",
+    funding: "$125M",
+    round: "Series C",
+    metric: "83% faster lead triage.",
+    summary: "How Granola turns product signals into revenue at scale.",
+    mockTitle: "Product signals",
+    mock: [
+      { label: "Usage spike", value: "Score 98" },
+      { label: "New workspace", value: "Triaged" },
+      { label: "Buying signal", value: "Routed to sales" },
+    ],
+  },
+  {
+    slug: "modal",
+    name: "Modal",
+    industry: "Artificial Intelligence",
+    funding: "$750M",
+    round: "Series D",
+    metric: "Workflow automation at scale.",
+    summary: "How Modal uses Attio to accelerate product-led growth.",
+    mockTitle: "Workflow run",
+    mock: [
+      { label: "Trigger", value: "New signup" },
+      { label: "Enrich", value: "Account enriched" },
+      { label: "Route", value: "Owner assigned" },
+    ],
+  },
+  {
+    slug: "railway",
+    name: "Railway",
+    industry: "SaaS",
+    funding: "$100M",
+    round: "Series B",
+    metric: "Cloud infrastructure magic.",
+    summary: "How Railway turned usage data into revenue with Attio.",
+    mockTitle: "Usage to revenue",
+    mock: [
+      { label: "Active workspaces", value: "Up 42%" },
+      { label: "Expansion revenue", value: "$620K" },
+      { label: "Churn risk", value: "3 accounts" },
+    ],
+  },
+  {
+    slug: "passionfroot",
+    name: "Passionfroot",
+    industry: "Creator Economy",
+    funding: "$15M",
+    round: "Series A",
+    metric: "25% revenue boost.",
+    summary: "How Passionfroot built a creator-first CRM which scales.",
+    mockTitle: "Creator pipeline",
+    mock: [
+      { label: "New creator", value: "Onboarded" },
+      { label: "Brand deal", value: "Negotiation" },
+      { label: "Payout", value: "Scheduled" },
+    ],
+  },
+  {
+    slug: "union-square-ventures",
+    name: "Union Square Ventures",
+    industry: "Venture Capital",
+    funding: null,
+    round: null,
+    metric: "From fragmented to unified.",
+    summary: "How USV turned siloed data into a source of truth with Attio.",
+    mockTitle: "Unified records",
+    mock: [
+      { label: "Portfolio company", value: "One record" },
+      { label: "Siloed data", value: "Merged" },
+      { label: "Source of truth", value: "Live" },
+    ],
+  },
+  {
+    slug: "snackpass",
+    name: "Snackpass",
+    industry: "SaaS",
+    funding: "$70M",
+    round: "Series B",
+    metric: "Complete GTM visibility.",
+    summary: "Why Snackpass switched from Salesforce to Attio.",
+    mockTitle: "GTM overview",
+    mock: [
+      { label: "Open pipeline", value: "$4.28M" },
+      { label: "Deals at risk", value: "2 flagged" },
+      { label: "Forecast", value: "On track" },
+    ],
+  },
+  {
+    slug: "taskrabbit",
+    name: "Taskrabbit",
+    industry: "SaaS",
+    funding: null,
+    round: null,
+    metric: "4X faster deals.",
+    summary: "How Taskrabbit is scaling partnerships with Attio..",
+    mockTitle: "Partnerships",
+    mock: [
+      { label: "New partner", value: "Qualified" },
+      { label: "Deal update", value: "4x faster" },
+      { label: "Adoption", value: "90% overnight" },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Customers | Attio"
+  description="Discover how thousands of companies use Attio to scale their business."
+  hideFinalCta
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <h1 class="inline-block rounded-[13px] border border-paper-500 bg-white px-3 py-1.5 text-[13px] font-medium text-ink-600">
+      Customer stories
+    </h1>
+    <h2 class="mx-auto mt-6 max-w-4xl font-display text-[44px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      The fastest-growing companies run on Attio.
+    </h2>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Discover how thousands of companies use Attio to scale.
+    </p>
+
+    <!-- Logo strip, live order -->
+    <ul class="mt-14 flex flex-wrap items-center justify-center gap-x-10 gap-y-4" aria-label="Customer logos">
+      {logos.map((logo) => (
+        <li class="font-display text-lg font-semibold tracking-tight text-ink-800">{logo}</li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Featured customer stories -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Customer stories">
+    <div class="space-y-6">
+      {stories.map((story) => (
+        <a
+          href={`/customers/${story.slug}`}
+          class="group grid overflow-hidden rounded-2xl border border-paper-500 bg-white transition-shadow hover:shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)] lg:grid-cols-2 lg:items-stretch"
+        >
+          <div class="flex flex-col justify-center p-6 sm:p-10">
+            <p class="font-display text-2xl font-semibold tracking-tight">{story.name}</p>
+            <p class="mt-4 text-sm font-medium text-ink-600">
+              {story.industry}
+              {story.funding && (
+                <>
+                  {" / "}
+                  {story.funding}
+                  {story.round && (
+                    <span class="ml-2 rounded-md border border-paper-500 px-2 py-0.5 text-xs font-semibold text-ink-600">
+                      {story.round}
+                    </span>
+                  )}
+                </>
+              )}
+            </p>
+            <h3 class="mt-6 font-display text-heading-sm font-semibold tracking-tight">
+              <span class="font-semibold">{story.metric}</span>{" "}
+              <span class="font-normal text-ink-600">{story.summary}</span>
+            </h3>
+            <p class="mt-6 flex items-center gap-1.5 text-sm font-semibold text-ink-100">
+              Read case study
+              <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">-&gt;</span>
+            </p>
+          </div>
+          <div class="border-t border-paper-400 bg-paper-200 p-6 sm:p-8 lg:border-l lg:border-t-0">
+            <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">{story.mockTitle}</p>
+            <ul class="mt-4 space-y-3">
+              {story.mock.map((row) => (
+                <li class="flex items-center justify-between gap-4 rounded-lg bg-white px-4 py-3 text-sm shadow-sm">
+                  <span class="font-medium">{row.label}</span>
+                  <span class="font-semibold text-ink-600">{row.value}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Customer quote">
+    <div class="grid items-center gap-10 lg:grid-cols-2">
+      <div class="flex items-center justify-center rounded-2xl border border-paper-500 bg-paper-200 py-16">
+        <span class="flex h-32 w-32 items-center justify-center rounded-full bg-ink-100 font-display text-4xl font-semibold text-white">
+          JM
+        </span>
+      </div>
+      <div>
+        <blockquote class="font-serif text-2xl leading-snug text-ink-100 sm:text-3xl">
+          &ldquo;Attio is the best CRM you will ever use, and likely the last CRM you will ever
+          need.&rdquo;
+        </blockquote>
+        <p class="mt-6 text-sm font-semibold">Jamie Marshall</p>
+        <p class="mt-1 text-sm text-ink-600">Co-founder and COO at Snackpass</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA, as on live: light section, not the black FinalCta -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 text-center sm:px-6" aria-label="Get started">
+    <h2 class="font-display text-heading-md font-semibold tracking-tight sm:text-heading-lg">
+      The CRM behind
+      <span class="block font-serif font-normal">thousands of companies.</span>
+    </h2>
+    <div class="mt-8 hidden flex-wrap items-center justify-center gap-3 md:flex">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </div>
+    <form id="customers-demo-form" class="mx-auto mt-8 flex w-full max-w-xs flex-col gap-2 md:hidden">
+      <input
+        type="email"
+        name="email"
+        placeholder="Your email address"
+        aria-label="Your email address"
+        class="block w-full rounded-[10px] border border-paper-500 bg-white p-[10px_13px] text-base text-ink-100 outline-none placeholder:text-ink-700 focus:border-blue-500 focus:ring-[3px] focus:ring-blue-300"
+      />
+      <button
+        type="submit"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Send me a demo
+      </button>
+    </form>
+    <p class="mt-4 md:hidden">
+      <a href="/contact/sales" class="text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </p>
+  </section>
+</BaseLayout>
+
+<script>
+  // Mobile closing-CTA form: no backend, submit only flips to a subscribed state.
+  const form = document.getElementById("customers-demo-form");
+  if (form) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const input = form.querySelector('input[type="email"]');
+      const button = form.querySelector('button[type="submit"]');
+      const value = input ? input.value.trim() : "";
+      if (button && value.includes("@")) {
+        button.textContent = "Subscribed";
+        button.disabled = true;
+      }
+    });
+  }
+</script>
