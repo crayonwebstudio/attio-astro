@@ -8,11 +8,13 @@ import FinalCta from "../components/FinalCta.astro";
 interface Props {
   title?: string;
   description?: string;
+  finalCta?: string;
 }
 
 const {
   title = "Attio: The CRM for agentic revenue",
   description = "The system for revenue teams to build pipeline, accelerate deals, and grow accounts around the clock.",
+  finalCta,
 } = Astro.props;
 ---
 
@@ -43,7 +45,7 @@ const {
     <main>
       <slot />
     </main>
-    <FinalCta />
+    <FinalCta heading={finalCta} />
     <SiteFooter />
   </body>
 </html>

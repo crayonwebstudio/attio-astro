@@ -1,11 +1,16 @@
 ---
 /* Final CTA, black pinstripe section. Inverted pills versus the hero. */
+interface Props {
+  heading?: string;
+}
+
+const { heading = "Agentic revenue runs on Attio." } = Astro.props;
 ---
 
 <section class="pinstripe-bg bg-ink-50 text-white">
   <div class="mx-auto max-w-[1200px] px-4 py-24 text-center sm:px-6">
     <h2 class="font-display text-heading-md sm:text-heading-lg font-semibold tracking-tight">
-      Agentic revenue runs on Attio.
+      {heading}
     </h2>
     <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
       <a

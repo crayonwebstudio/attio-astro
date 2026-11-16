@@ -1,0 +1,316 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/platform/workflows on 2026-11-16 (HTTP 200).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live H1 is "Workflows" (duplicated desktop/mobile); the page headline is the H2
+// "Revenue agents at your team's command.", used here as the single H1, per spec.
+const agents = [
+  { name: "Web Agent", copy: "Researches accounts for the latest on the web." },
+  { name: "Scoring Agent", copy: "Assigns fit to leads based on your ICP criteria." },
+  { name: "Routing Agent", copy: "Routes every lead to the right rep or channel." },
+  { name: "Win/Loss Agent", copy: "Pulls the patterns from every win and every loss." },
+  { name: "Onboarding Agent", copy: "Walks every customer to first value, milestone by milestone." },
+  { name: "Coaching Agent", copy: "Reviews every call from your reps and flags the coaching moments." },
+  { name: "Prospecting Agent", copy: "Finds your next best customers before you have to ask." },
+  { name: "Enrichment Agent", copy: "Adds signals and preps them for the team to act on." },
+  { name: "Briefing Agent", copy: "Hands reps a full brief of what to know before their call." },
+  { name: "Follow-Up Agent", copy: "Recaps every call, updates the deal, drafts the next move." },
+  { name: "Churn Risk Agent", copy: "Spots accounts cooling off and drafts the save play." },
+  { name: "Expansion Agent", copy: "Spots upsell signals and queues the play for the team to run." },
+  { name: "Pipeline Review Agent", copy: "Creates a view of pipeline to report for sales leadership." },
+  { name: "Onboarding prep", copy: "Create a concise brief to prep for a customer onboarding call." },
+  { name: "Outbound Agent", copy: "Drafts and sends personalized sequences to target accounts." },
+];
+
+const rowOne = agents.slice(0, 8);
+const rowTwo = agents.slice(8);
+
+const heroSteps = [
+  { title: "When a new deal is created", copy: "Trigger when a new deal record is created.", status: "Completed" },
+  { title: "Web Agent", copy: "Enrich the record with web research.", status: "Completed" },
+  { title: "Custom Agent", copy: "Score the lead and route to the right AE.", status: "Completed" },
+  { title: "Add to Enterprise target list", copy: "Route lead to Enterprise and draft outreach.", status: "Completed" },
+  { title: "Add to SMB target list", copy: "Route lead to SMB and draft outreach.", status: "Running" },
+];
+
+const hireAgents = [
+  { name: "Enrichment Agent", copy: "Waterfall enrichment. Every source." },
+  { name: "Web Agent", copy: "Account research, decision makers, recent signals." },
+  { name: "Scoring Agent", copy: "Scores every lead for fit and priority." },
+  { name: "Routing Agent", copy: "Right lead, right rep, draft email attached." },
+  { name: "Briefing Agent", copy: "Full brief in hand before every call." },
+];
+
+const ideaSteps = [
+  { n: "01", title: "Say it in a sentence.", copy: "Describe the goal. Attio assembles the workflow for you to approve." },
+  { n: "02", title: "Test it block by block.", copy: null },
+  { n: "03", title: "Run once or a million times.", copy: null },
+];
+
+const contextItems = [
+  { title: "Always online.", copy: "Your agents act right now, not next week." },
+  { title: "Made for agents.", copy: "Engineered so they find, reason, and act." },
+  { title: "Patterns, not flares.", copy: "Agents read the trend, not the noise." },
+  { title: "Wired into your stack.", copy: "Agents reach Notion, Linear, Fin and more." },
+];
+
+const longRunCards = [
+  {
+    title: "Trigger from any signal.",
+    copy: "Record changes, schedules, webhooks, manual runs.",
+    mock: ["Record created: new deal", "Webhook received", "Schedule: every Monday 9:00 AM"],
+    mockLabel: "Workflow webhook",
+  },
+  {
+    title: "Loops, branches, fallbacks.",
+    copy: "Model the messy logic your business needs, even with code.",
+    mock: ["If deal value over $50,000", "Branch: Enterprise route", "Fallback: SMB route"],
+    mockLabel: "Workflow builder",
+  },
+  {
+    title: "Build your own blocks.",
+    copy: "Drop in custom JS, ship with the App SDK, or connect MCP.",
+    mock: ["const score = await enrich(deal);", "if (score > 80) route('enterprise');", "return { owner, nextStep };"],
+    mockLabel: "Workflow run code",
+  },
+];
+
+const trustCards = [
+  {
+    title: "Assigned user permissions.",
+    copy: "Workflows inherit the permissions of whoever you assign.",
+  },
+  {
+    title: "Every run, on the record.",
+    copy: "Open any run. See what each agent read, decided, and did.",
+  },
+  {
+    title: "Pause anything. Rerun anything.",
+    copy: "Pause anytime. Rerun any single run without redoing the rest.",
+  },
+];
+---
+
+<BaseLayout
+  title="Agents and automations | Attio"
+  description="Orchestrate your best plays, on every account, over the deepest context layer in agentic CRM."
+  finalCta="Ask more from CRM. Ask Attio."
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">Workflows</p>
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Revenue agents at your team's command.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Orchestrate your best plays, on every account, over the deepest context layer in agentic CRM.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </div>
+
+    <!-- Hero product mock: workflow run -->
+    <div class="mx-auto mt-14 max-w-3xl overflow-hidden rounded-2xl border border-paper-500 bg-white text-left shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]">
+      <div class="flex items-center gap-2 border-b border-paper-400 bg-paper-200 px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-500"></span>
+        <span class="h-3 w-3 rounded-full bg-[#f5bf42]"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500"></span>
+        <span class="ml-3 text-xs font-medium text-ink-600">Workflows, Run #7</span>
+        <span class="ml-auto rounded-full bg-green-500/10 px-2 py-0.5 text-xs font-semibold text-green-600">Running</span>
+      </div>
+      <ol class="relative space-y-0 p-6 sm:p-8">
+        {heroSteps.map((step, i) => (
+          <li class="relative flex gap-4 pb-6 last:pb-0">
+            {i < heroSteps.length - 1 && (
+              <span class="absolute left-[15px] top-9 h-[calc(100%-24px)] w-px bg-paper-500" aria-hidden="true"></span>
+            )}
+            <span
+              class:list={[
+                "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold",
+                step.status === "Completed" ? "bg-green-500 text-white" : "bg-blue-500 text-white",
+              ]}
+            >
+              {step.status === "Completed" ? "✓" : i + 1}
+            </span>
+            <div class="min-w-0 flex-1 rounded-xl border border-paper-500 p-4">
+              <div class="flex flex-wrap items-center gap-2">
+                <p class="text-sm font-semibold">{step.title}</p>
+                <span
+                  class:list={[
+                    "rounded-full px-2 py-0.5 text-xs font-semibold",
+                    step.status === "Completed"
+                      ? "bg-green-500/10 text-green-600"
+                      : "bg-blue-100 text-blue-600",
+                  ]}
+                >
+                  {step.status}
+                </span>
+              </div>
+              <p class="mt-1 text-sm text-ink-600">{step.copy}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Cue the agents -->
+  <section class="overflow-hidden pb-20 pt-4" aria-label="Cue the agents">
+    <div class="mx-auto max-w-[1200px] px-4 sm:px-6">
+      <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Cue the agents.</h2>
+      <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+        Agents for every job in revenue. Run by Attio, moving deals forward with your team.
+      </p>
+    </div>
+    <div class="marquee mt-10 space-y-4" aria-label="Agent cards">
+      <div class="overflow-hidden">
+        <div class="marquee-track flex w-max gap-4 pr-4">
+          {[...rowOne, ...rowOne].map((agent) => (
+            <article class="w-[300px] shrink-0 rounded-2xl border border-paper-500 bg-white p-5">
+              <h3 class="font-display text-lg font-semibold">{agent.name}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-600">{agent.copy}</p>
+              <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-ink-700">Attio</p>
+            </article>
+          ))}
+        </div>
+      </div>
+      <div class="overflow-hidden">
+        <div class="marquee-track flex w-max gap-4 pr-4" style="animation-direction: reverse;">
+          {[...rowTwo, ...rowTwo].map((agent) => (
+            <article class="w-[300px] shrink-0 rounded-2xl border border-paper-500 bg-white p-5">
+              <h3 class="font-display text-lg font-semibold">{agent.name}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-600">{agent.copy}</p>
+              <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-ink-700">Attio</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hire the best rep -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Hire the best rep">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      Hire the best rep. Again. Again. And again.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Agents in concert on every deal, beside your team.
+    </p>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+      {hireAgents.map((agent) => (
+        <article class="rounded-2xl border border-paper-500 bg-white p-6">
+          <h3 class="font-display text-lg font-semibold">{agent.name}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{agent.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 text-center sm:px-6">
+    <blockquote class="mx-auto max-w-3xl font-serif text-2xl leading-snug text-ink-100 sm:text-3xl">
+      Before every meeting, Attio centralizes, summarizes, and surfaces everything I need to know
+      to give a great first impression or close the deal.
+    </blockquote>
+    <p class="mt-6 text-sm font-semibold">Ian Ahuja</p>
+    <p class="mt-1 text-sm text-ink-600">Head of Sales &amp; Partnerships, Lightdash</p>
+  </section>
+
+  <!-- From idea to live agent -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="From idea to live agent">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      From idea to live agent, before your next meeting.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Describe it. Test it. Ship it. Run it back.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {ideaSteps.map((step) => (
+        <article class="rounded-2xl border border-paper-500 bg-white p-6">
+          <p class="font-display text-sm font-semibold text-blue-500">{step.n}</p>
+          <h3 class="mt-2 font-display text-xl font-semibold">{step.title}</h3>
+          {step.copy && <p class="mt-2 text-sm leading-relaxed text-ink-600">{step.copy}</p>}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Powered by Universal Context -->
+  <section class="pinstripe-bg bg-ink-50 pb-20 pt-20 text-white" aria-label="Powered by Universal Context">
+    <div class="mx-auto max-w-[1200px] px-4 sm:px-6">
+      <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">
+        Powered by Universal Context
+      </h2>
+      <p class="mt-3 max-w-2xl text-lg leading-relaxed text-white/70">
+        The deepest context in agentic CRM. So your agents make better calls.
+      </p>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {contextItems.map((item) => (
+          <article class="rounded-2xl border border-white/15 bg-white/5 p-6">
+            <h3 class="font-display text-lg font-semibold">{item.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-white/70">{item.copy}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Built for the long run -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 pt-20 sm:px-6" aria-label="Built for the long run">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Built for the long run.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Fire from any signal. Model any logic. Replay any run.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {longRunCards.map((card) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">{card.mockLabel}</p>
+            <ul class="mt-4 space-y-2">
+              {card.mock.map((line) => (
+                <li class="rounded-lg bg-white px-3 py-2 font-mono text-xs leading-relaxed text-ink-600 shadow-sm">
+                  {line}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Trust by default -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Trust by default">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Trust by default.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Assigned permissions. Traceable steps. Pause anytime.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {trustCards.map((card) => (
+        <article class="rounded-2xl border border-paper-500 bg-white p-6">
+          <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
