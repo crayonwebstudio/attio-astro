@@ -1,0 +1,202 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/brand on 2026-11-16 (HTTP 200, 390KB).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live has no standard FinalCta ("Agentic revenue runs on Attio." appears 0 times
+// in the live HTML), so hideFinalCta is used.
+// Live section headings are h3 in source; rendered as h2 here, consistent with the
+// rest of this build. The founders photo (attio-founders.jpg, 7046x4699) is rendered
+// as a CSS mock panel, not copied. Download links are the live URLs: wordmark and
+// logomark SVGs live at /brand/v1/, the logo pack and press photos are Storyblok
+// ZIP links, as on live.
+---
+
+<BaseLayout
+  title="Brand guidelines and press kit | Attio"
+  description="Guidelines and assets for referencing Attio in press coverage and third-party materials."
+  hideFinalCta
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-16 pt-16 sm:px-6 sm:pt-24">
+    <h1 class="max-w-[15em] font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Brand guidelines and press kit.
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Guidelines and assets for referencing Attio in press coverage and third-party materials.
+    </p>
+  </section>
+
+  <!-- About Attio -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="About Attio">
+    <h2 class="font-display text-heading-md font-semibold tracking-tight">About Attio</h2>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">
+      Attio is the agentic CRM that meets you where you work, compounds every customer signal into context, then
+      acts on it across your pipeline to let you move at unmatched speed and scale. Teams use Attio to get ahead,
+      always know their next move, and raise the ceiling on what&rsquo;s possible.
+    </p>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">
+      Founded in London by <a href="https://www.linkedin.com/in/nicolas-sharp-a92726b1/" class="font-medium text-ink-100 underline underline-offset-4">Nicolas Sharp</a> and <a href="https://www.linkedin.com/in/alexander-christie-a42112a7/" class="font-medium text-ink-100 underline underline-offset-4">Alexander Christie</a> in 2019.
+    </p>
+    <!-- Founders photo: CSS mock panel, live photo not copied -->
+    <div class="mt-10 overflow-hidden rounded-2xl border border-paper-500 bg-ink-100">
+      <div class="flex min-h-[280px] flex-col items-center justify-center gap-4 bg-[repeating-linear-gradient(-45deg,#101010_0px,#101010_12px,#161616_12px,#161616_24px)] px-6 py-16 text-center sm:min-h-[360px]">
+        <p class="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">attio</p>
+        <p class="max-w-md text-sm leading-relaxed text-white/70">
+          Nicolas Sharp and Alexander Christie, founders of Attio, London 2019.
+        </p>
+      </div>
+      <p class="border-t border-white/10 px-6 py-3 text-xs text-white/60">
+        Founders photo, shown as a placeholder panel. The live photo is attio-founders.jpg.
+      </p>
+    </div>
+  </section>
+
+  <!-- Naming -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Naming">
+    <h2 class="font-display text-heading-md font-semibold tracking-tight">Naming</h2>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">
+      Attio is spelled as one word with an uppercase A. It names both our company and product. Attio is pronounced
+      &ldquo;AT-ee-oh&rdquo; with the emphasis on the first syllable and a strong &ldquo;t&rdquo; sound. Softer
+      &ldquo;t&rdquo; sounds and broader vowels from regional accents are acceptable. Capitalize the names of Attio
+      products, such as Call Intelligence, Workflows, and Ask Attio. Keep features within a product lowercase, such
+      as custom objects, people object, and permissions.
+    </p>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">
+      Read the story of <a href="/blog/how-we-chose-the-name-attio" class="font-medium text-ink-100 underline underline-offset-4">how we chose the name Attio</a> on our blog.
+    </p>
+  </section>
+
+  <!-- Wordmark -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Wordmark">
+    <h2 class="font-display text-heading-md font-semibold tracking-tight">Wordmark</h2>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">
+      The wordmark is the most recognizable form of Attio&rsquo;s brand. Use it by default wherever the layout allows.
+    </p>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">
+      Do not use the Attio wordmark without the logo, and do not typeset the name in place of the wordmark.
+    </p>
+    <div class="mt-10 overflow-hidden rounded-2xl border border-paper-500 bg-white">
+      <div class="flex min-h-[180px] items-center justify-center bg-paper-200 px-6 py-12">
+        <p class="font-display text-5xl font-semibold lowercase tracking-tight text-ink-100 sm:text-6xl">attio</p>
+      </div>
+      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-paper-400 px-6 py-4">
+        <p class="text-sm font-medium">Wordmark [SVG]</p>
+        <a
+          href="/brand/v1/attio-lockup.svg"
+          class="rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+        >
+          Download
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logo -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Logo">
+    <h2 class="font-display text-heading-md font-semibold tracking-tight">Logo</h2>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">
+      The Attio logomark is the visual shorthand for our brand. Use it where space is limited and the wordmark
+      cannot breathe, such as avatars, app icons, favicons, or logo grids.
+    </p>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">
+      Keep clear space around it, and do not warp, stretch, recolor, or redraw.
+    </p>
+    <div class="mt-10 overflow-hidden rounded-2xl border border-paper-500 bg-white">
+      <div class="flex min-h-[180px] items-center justify-center bg-paper-200 px-6 py-12">
+        <span
+          class="flex h-20 w-20 items-center justify-center rounded-2xl bg-ink-100 font-display text-4xl font-semibold lowercase text-white"
+        >
+          a
+        </span>
+      </div>
+      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-paper-400 px-6 py-4">
+        <p class="text-sm font-medium">Logo [SVG]</p>
+        <a
+          href="/brand/v1/attio-logomark.svg"
+          class="rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+        >
+          Download
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logo pack -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Logo pack">
+    <h2 class="font-display text-heading-md font-semibold tracking-tight">Logo pack</h2>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">
+      The logo pack contains brand assets as SVG and PNG files in both light and dark variants.
+    </p>
+    <div class="mt-10 overflow-hidden rounded-2xl border border-paper-500 bg-white">
+      <div class="grid gap-px bg-paper-400 sm:grid-cols-2">
+        <div class="flex min-h-[140px] flex-col items-center justify-center gap-2 bg-white px-6 py-10">
+          <p class="font-display text-3xl font-semibold lowercase tracking-tight text-ink-100">attio</p>
+          <p class="text-xs font-medium text-ink-700">Wordmark, light</p>
+        </div>
+        <div class="flex min-h-[140px] flex-col items-center justify-center gap-2 bg-ink-100 px-6 py-10">
+          <p class="font-display text-3xl font-semibold lowercase tracking-tight text-white">attio</p>
+          <p class="text-xs font-medium text-white/70">Wordmark, dark</p>
+        </div>
+        <div class="flex min-h-[140px] flex-col items-center justify-center gap-2 bg-white px-6 py-10">
+          <span
+            class="flex h-12 w-12 items-center justify-center rounded-xl bg-ink-100 font-display text-2xl font-semibold lowercase text-white"
+          >
+            a
+          </span>
+          <p class="text-xs font-medium text-ink-700">Logomark, light</p>
+        </div>
+        <div class="flex min-h-[140px] flex-col items-center justify-center gap-2 bg-ink-100 px-6 py-10">
+          <span
+            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white font-display text-2xl font-semibold lowercase text-ink-100"
+          >
+            a
+          </span>
+          <p class="text-xs font-medium text-white/70">Logomark, dark</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-paper-400 px-6 py-4">
+        <p class="text-sm font-medium">Logo pack [SVG + PNG]</p>
+        <a
+          href="https://a.storyblok.com/f/234930/8a6f825750/attio-logo-pack.zip"
+          class="rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+        >
+          Download
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photos -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Photos">
+    <h2 class="font-display text-heading-md font-semibold tracking-tight">Photos</h2>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">
+      Images of our team and out-of-home campaigns, ready for editorial use.
+    </p>
+    <div class="mt-10 overflow-hidden rounded-2xl border border-paper-500 bg-white">
+      <div class="flex min-h-[180px] flex-col items-center justify-center gap-3 bg-paper-200 px-6 py-12 text-center">
+        <p class="font-display text-2xl font-semibold tracking-tight text-ink-100">Team and campaign photos</p>
+        <p class="max-w-md text-sm leading-relaxed text-ink-600">
+          Press photos of the Attio team and out-of-home campaigns, packaged for editorial use.
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-paper-400 px-6 py-4">
+        <p class="text-sm font-medium">Press photos [ZIP]</p>
+        <a
+          href="https://a.storyblok.com/f/234930/f502925ba2/attio-press-photos.zip"
+          class="rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+        >
+          Download
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Press contact -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Press contact">
+    <h2 class="font-display text-heading-md font-semibold tracking-tight">Press contact</h2>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">
+      For press inquiries, contact <a href="mailto:press@attio.com" class="font-medium text-ink-100 underline underline-offset-4">press@attio.com</a>.
+    </p>
+  </section>
+</BaseLayout>
