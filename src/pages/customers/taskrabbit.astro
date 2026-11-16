@@ -1,0 +1,11 @@
+---
+import CustomerStory from "../../components/CustomerStory.astro";
+import stories from "../../data/customers.json";
+
+// Taskrabbit's story, copy fetched live from https://attio.com/customers/taskrabbit
+// on 2026-11-16 (HTTP 200). Data lives in src/data/customers.json.
+const story = stories.find((entry) => entry.slug === "taskrabbit");
+if (!story) throw new Error("Missing story data for taskrabbit");
+---
+
+<CustomerStory story={story} />

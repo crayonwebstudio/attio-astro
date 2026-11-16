@@ -1,0 +1,334 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Shared layout for the 12 customer story pages under /customers/*.
+// Copy fetched live from https://attio.com/customers/{slug} on 2026-11-16
+// (HTTP 200 each), stored in src/data/customers.json. All headings, subcopy,
+// quotes, stats, and article text are live Attio copy. Live em dashes are
+// rendered as commas, per the no em dash rule. Product visuals are rebuilt
+// as HTML/CSS mocks, no Attio images, logos, or fonts are hotlinked or copied.
+// The hero cover image and interviewee portraits on live are replaced by a
+// wordmark panel and initials circles. Granola is the only story with a video
+// on live; the play button here is a static mock, there is no video file.
+// Key feature links use live destinations, except Workflows, which live links
+// to /platform/automations and here links to /platform/workflows, the built
+// equivalent. The closing CTA mirrors /customers: light section, desktop
+// Start for free / Talk to sales, mobile email form with no backend.
+// Granola funding is rendered as live shows it: About says $125M (Series C)
+// while the article body says $192 million raised. Modal About says $750M
+// (Series D) while its article says a 355$m Series C in 2026. Conduit About
+// says $37M (Series A) while its article says $44 million raised. Snackpass
+// About says $70M (Series B) while its article says $95.6 million raised.
+// None of these were reconciled.
+
+interface Person {
+  name: string;
+  role: string;
+}
+
+interface Fact {
+  label: string;
+  value: string;
+}
+
+interface Feature {
+  name: string;
+  href: string;
+}
+
+interface ArticleBlock {
+  kind: "h2" | "h3" | "p" | "li";
+  text: string;
+  links?: { href: string; text: string }[];
+}
+
+interface Story {
+  slug: string;
+  name: string;
+  cs: string;
+  video: boolean;
+  title: string;
+  description: string;
+  h1: string;
+  people: Person[];
+  about: string;
+  facts: Fact[];
+  features: Feature[];
+  challenge: string;
+  solution: string;
+  results: string[];
+  article: ArticleBlock[];
+}
+
+interface Props {
+  story: Story;
+}
+
+const { story } = Astro.props;
+
+function initials(name: string): string {
+  const parts = name.split(" ").filter(Boolean);
+  return parts
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+}
+
+// Split a paragraph into text and link segments on its live link text.
+function segments(text: string, links: { href: string; text: string }[] | undefined) {
+  if (!links || links.length === 0) return [{ text, href: null as string | null }];
+  const out: { text: string; href: string | null }[] = [];
+  let rest = text;
+  for (const link of links) {
+    const idx = rest.indexOf(link.text);
+    if (idx === -1) continue;
+    if (idx > 0) out.push({ text: rest.slice(0, idx), href: null });
+    out.push({ text: link.text, href: link.href });
+    rest = rest.slice(idx + link.text.length);
+  }
+  if (rest) out.push({ text: rest, href: null });
+  return out;
+}
+
+// Group consecutive list items in the article into one list.
+type RenderBlock =
+  | { kind: "h2" | "h3" | "p"; text: string; links?: { href: string; text: string }[] }
+  | { kind: "ul"; items: string[] };
+
+const blocks: RenderBlock[] = [];
+for (const block of story.article) {
+  if (block.kind === "li") {
+    const last = blocks[blocks.length - 1];
+    if (last && last.kind === "ul") {
+      last.items.push(block.text);
+    } else {
+      blocks.push({ kind: "ul", items: [block.text] });
+    }
+  } else {
+    blocks.push(block);
+  }
+}
+---
+
+<BaseLayout title={story.title} description={story.description} hideFinalCta>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pt-16 sm:px-6 sm:pt-24" aria-label="Customer story">
+    <p class="text-sm font-semibold tracking-wide text-ink-600">
+      <a href="/customers" class="hover:text-blue-500">Customers</a>
+      <span aria-hidden="true"> / </span>
+      {story.name}
+    </p>
+    <p class="mt-6 inline-block rounded-[13px] border border-paper-500 bg-white px-3 py-1.5 text-[13px] font-medium text-ink-600">
+      [CS {story.cs}]
+    </p>
+
+    <!-- Hero media mock: cover image on live, video thumbnail on Granola -->
+    <div class="pinstripe-bg relative mt-8 flex aspect-[16/9] flex-col items-center justify-center gap-6 overflow-hidden rounded-2xl bg-ink-50 px-6">
+      <p class="text-center font-display text-4xl font-semibold tracking-tight text-white sm:text-6xl">
+        {story.name}
+      </p>
+      {story.video && (
+        <span class="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path
+              d="M4.16 2.98C3.86 2.81 3.5 3.03 3.5 3.36V8.64C3.5 8.97 3.86 9.19 4.16 9.02L8.81 6.38C9.11 6.21 9.11 5.79 8.81 5.62L4.16 2.98Z"
+              fill="currentColor"
+            />
+          </svg>
+          Play video
+        </span>
+      )}
+    </div>
+
+    <h1 class="mt-10 max-w-4xl font-display text-[40px] font-semibold leading-[1.05] tracking-tight sm:text-[56px]">
+      {story.h1}
+    </h1>
+
+    <!-- A conversation with -->
+    <div class="mt-12">
+      <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">A conversation with</p>
+      <div class="mt-4 flex flex-wrap items-center gap-x-8 gap-y-4">
+        {story.people.map((person) => (
+          <div class="flex items-center gap-4">
+            <span class="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-ink-100 font-display text-2xl font-semibold text-white">
+              {initials(person.name)}
+            </span>
+            <div>
+              <p class="font-semibold">{person.name}</p>
+              <p class="mt-0.5 text-sm text-ink-600">{person.role}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- About, Challenge, Solution, Results -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 pt-16 sm:px-6" aria-label="About this customer">
+    <div class="grid gap-12 lg:grid-cols-12">
+      <!-- About aside -->
+      <aside class="lg:col-span-4">
+        <div class="grid grid-cols-2 gap-x-6 gap-y-6 lg:grid-cols-1">
+          <div class="col-span-full">
+            <h2 class="font-semibold">About</h2>
+            <p class="mt-1 text-sm leading-relaxed text-ink-600">{story.about}</p>
+          </div>
+          {story.facts.map((fact) => (
+            <div>
+              <h2 class="font-semibold">{fact.label}</h2>
+              <p class="mt-1 text-sm text-ink-600">{fact.value}</p>
+            </div>
+          ))}
+          {story.features.length > 0 && (
+            <div class="col-span-full">
+              <h2 class="font-semibold">Key features</h2>
+              <ul class="mt-2 flex flex-col gap-2">
+                {story.features.map((feature) => (
+                  <li>
+                    <a
+                      href={feature.href}
+                      class="group flex items-center gap-2 text-sm text-ink-600 hover:text-blue-500"
+                    >
+                      <span class="flex h-3.5 w-3.5 items-center justify-center rounded-sm bg-blue-100 text-[9px] font-bold text-blue-600">
+                        &#10003;
+                      </span>
+                      {feature.name}
+                      <span aria-hidden="true" class="opacity-0 transition-opacity group-hover:opacity-100">
+                        -&gt;
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </aside>
+
+      <!-- Challenge, Solution, Results -->
+      <div class="lg:col-span-8">
+        <div class="grid gap-8 md:grid-cols-2">
+          <div>
+            <h2 class="text-lg font-semibold">Challenge</h2>
+            <p class="mt-4 leading-relaxed text-ink-600">{story.challenge}</p>
+          </div>
+          <div>
+            <h2 class="text-lg font-semibold">Solution</h2>
+            <p class="mt-4 leading-relaxed text-ink-600">{story.solution}</p>
+          </div>
+        </div>
+        <div class="mt-10 border-t border-dashed border-paper-600 pt-8">
+          <h2 class="text-lg font-semibold">Results</h2>
+          <ul class="mt-4 space-y-3">
+            {story.results.map((result) => (
+              <li class="flex items-baseline gap-x-3 leading-relaxed text-ink-600">
+                <span class="h-2 w-2 shrink-0 translate-y-[-1px] rounded-[2px] bg-ink-300" aria-hidden="true" />
+                {result}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article -->
+  <article class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Story">
+    <div class="mx-auto max-w-prose">
+      {blocks.map((block) => {
+        if (block.kind === "h2") {
+          return (
+            <h2 class="mt-16 font-display text-[28px] font-semibold leading-tight tracking-tight first:mt-0 sm:text-[32px]">
+              {block.text}
+            </h2>
+          );
+        }
+        if (block.kind === "h3") {
+          return <h3 class="mt-12 font-display text-lg font-semibold text-ink-600 first:mt-0">{block.text}</h3>;
+        }
+        if (block.kind === "ul") {
+          return (
+            <ul class="mt-5 space-y-2">
+              {block.items.map((item) => (
+                <li class="flex items-baseline gap-x-3 leading-relaxed text-ink-100">
+                  <span class="h-2 w-2 shrink-0 translate-y-[-1px] rounded-[2px] bg-ink-300" aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          );
+        }
+        return (
+          <p class="mt-5 leading-relaxed text-ink-100">
+            {segments(block.text, block.links).map((part) =>
+              part.href ? (
+                <a href={part.href} class="text-blue-500 underline underline-offset-2 hover:text-blue-600">
+                  {part.text}
+                </a>
+              ) : (
+                part.text
+              )
+            )}
+          </p>
+        );
+      })}
+    </div>
+  </article>
+
+  <!-- Closing CTA, as on live and on /customers: light section, not the black FinalCta -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 text-center sm:px-6" aria-label="Get started">
+    <h2 class="font-display text-heading-md font-semibold tracking-tight sm:text-heading-lg">
+      The CRM behind
+      <span class="block font-serif font-normal">thousands of companies.</span>
+    </h2>
+    <div class="mt-8 hidden flex-wrap items-center justify-center gap-3 md:flex">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </div>
+    <form id="story-demo-form" class="mx-auto mt-8 flex w-full max-w-xs flex-col gap-2 md:hidden">
+      <input
+        type="email"
+        name="email"
+        placeholder="Your email address"
+        aria-label="Your email address"
+        class="block w-full rounded-[10px] border border-paper-500 bg-white p-[10px_13px] text-base text-ink-100 outline-none placeholder:text-ink-700 focus:border-blue-500 focus:ring-[3px] focus:ring-blue-300"
+      />
+      <button
+        type="submit"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Send me a demo
+      </button>
+    </form>
+    <p class="mt-4 md:hidden">
+      <a href="/contact/sales" class="text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </p>
+  </section>
+
+  <script>
+    // Mobile closing-CTA form: no backend, submit only flips to a subscribed state.
+    const form = document.getElementById("story-demo-form");
+    if (form) {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const input = form.querySelector('input[type="email"]');
+        const button = form.querySelector('button[type="submit"]');
+        const value = input ? input.value.trim() : "";
+        if (button && value.includes("@")) {
+          button.textContent = "Subscribed";
+          button.disabled = true;
+        }
+      });
+    }
+  </script>
+</BaseLayout>

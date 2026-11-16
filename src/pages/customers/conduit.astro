@@ -1,0 +1,11 @@
+---
+import CustomerStory from "../../components/CustomerStory.astro";
+import stories from "../../data/customers.json";
+
+// Conduit's story, copy fetched live from https://attio.com/customers/conduit
+// on 2026-11-16 (HTTP 200). Data lives in src/data/customers.json.
+const story = stories.find((entry) => entry.slug === "conduit");
+if (!story) throw new Error("Missing story data for conduit");
+---
+
+<CustomerStory story={story} />

@@ -1,0 +1,11 @@
+---
+import CustomerStory from "../../components/CustomerStory.astro";
+import stories from "../../data/customers.json";
+
+// Union Square Ventures's story, copy fetched live from https://attio.com/customers/union-square-ventures
+// on 2026-11-16 (HTTP 200). Data lives in src/data/customers.json.
+const story = stories.find((entry) => entry.slug === "union-square-ventures");
+if (!story) throw new Error("Missing story data for union-square-ventures");
+---
+
+<CustomerStory story={story} />

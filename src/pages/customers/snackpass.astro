@@ -1,0 +1,11 @@
+---
+import CustomerStory from "../../components/CustomerStory.astro";
+import stories from "../../data/customers.json";
+
+// Snackpass's story, copy fetched live from https://attio.com/customers/snackpass
+// on 2026-11-16 (HTTP 200). Data lives in src/data/customers.json.
+const story = stories.find((entry) => entry.slug === "snackpass");
+if (!story) throw new Error("Missing story data for snackpass");
+---
+
+<CustomerStory story={story} />

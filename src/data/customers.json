@@ -1,0 +1,2983 @@
+[
+  {
+    "slug": "snackpass",
+    "name": "Snackpass",
+    "cs": "01",
+    "video": false,
+    "title": "Snackpass' Story | Attio",
+    "description": "Why Snackpass switched from Salesforce to Attio.",
+    "h1": "Why Snackpass switched from Salesforce to Attio",
+    "people": [
+      {
+        "name": "Jamie Marshall",
+        "role": "Co-founder and COO"
+      }
+    ],
+    "about": "Snackpass provides restaurants with world-class technology to build a unified operational ecosystem for their customers.",
+    "facts": [
+      {
+        "label": "Industry",
+        "value": "SaaS"
+      },
+      {
+        "label": "Company size",
+        "value": "51-100"
+      },
+      {
+        "label": "Headquarters",
+        "value": "San Francisco, California"
+      },
+      {
+        "label": "Founded",
+        "value": "2017"
+      },
+      {
+        "label": "Funding raised",
+        "value": "$70M (Series B)"
+      }
+    ],
+    "features": [
+      {
+        "name": "Custom objects",
+        "href": "/platform/data"
+      },
+      {
+        "name": "Reports",
+        "href": "/platform/reporting"
+      },
+      {
+        "name": "Workflows",
+        "href": "/platform/workflows"
+      }
+    ],
+    "challenge": "As Snackpass grew rapidly, Salesforce's high costs and complex administration held them back. They needed a CRM that could keep up with their rapid expansion while providing the flexibility and power to support their hyper-growth.",
+    "solution": "Use Attio to rapidly build a flexible CRM that gives complete visibility across sales, success, and finance with powerful automations.",
+    "results": [
+      "Built complete channel attribution tracking without engineering support",
+      "Total automation of sales and customer success motions",
+      "Reduced overhead by freeing up a full-time position previously dedicated to maintaining their CRM"
+    ],
+    "article": [
+      {
+        "kind": "h2",
+        "text": "Snackpass’ story"
+      },
+      {
+        "kind": "p",
+        "text": "In the fall of 2017, two Yale students set out to build an app that would make ordering at local restaurants easier and more enjoyable for their friends. The business took off immediately. \"We knew very quickly that we were on to something,\" says Jamie Marshall, co-founder and COO of Snackpass. \"In the space of a semester, over 80% of the student population was already using Snackpass.\"",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Since then, Snackpass has grown dramatically. What started as a social ordering app for college campuses has evolved into a full-scale operating system that helps restaurants boost profitability and streamline operations. Their vision has clearly resonated with some of today’s leading investors, including YCombinator and Andreessen Horowitz, and they’ve raised $95.6 million to date.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Quick service restaurants are often forced to rely on outdated, expensive tech that doesn’t support their unique identity or complex needs. We saw an opportunity to change that. Snackpass gives these businesses powerful, affordable technology that can really help them grow and provide amazing experiences for customers.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "Growth hindered by Salesforce"
+      },
+      {
+        "kind": "p",
+        "text": "Like many in the restaurant operations industry, Snackpass used Salesforce as their CRM. Unfortunately, as the company scaled rapidly, their implementation became a major bottleneck for growth.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "\"For our lean team, Salesforce was difficult to use. To achieve the detailed and automated set up we were looking for, we consistently had to involve engineering or third-party Salesforce consultants, which was expensive and inefficient.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Even after consultants got involved, they still couldn’t get their CRM to truly reflect their business model. Building was slow in Salesforce, and Jamie found its UI and infrastructure outdated too.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "With a heavily outbound sales motion focused on hard-to-reach restaurant owners, flexibility was crucial. \"Our business has evolved a lot as a startup, so the structure of our data model needed to change along with it,\" Jamie explains. \"I needed the flexibility to set this up myself and have complete visibility.\"",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The team tried exploring alternatives like HubSpot and Pipedrive, in the hope they would be simpler. But Jamie found they couldn’t support Snackpass’ needs either.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Snackpass needed a powerful, flexible CRM that could scale with their growth, without relying on costly consultants or pulling resources away from engineering. For Jamie and her team, this felt impossible.",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "The Attio moment"
+      },
+      {
+        "kind": "p",
+        "text": "Lacking a solution, Snackpass had resigned themselves to using Salesforce.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "That’s when they discovered Attio.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“I was instantly obsessed,” Jamie recalls. “Attio was powerful, beautiful, and had incredible data automation capabilities. We saw the value straight away. In fact, we switched our entire operations within a few weeks.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“What really struck me was how Attio takes really complex business processes and makes them incredibly intuitive,” added Jamie. “Attio's automatic email sync and record creation ensures our customer data is always up-to-date, and saves our team so much time.\"",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "With full control over their data model and powerful automations across sales, success, and revenue tracking, the team no longer needs to rely on consultants and can focus on growing their business.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“The fact that I could find this level of power and simplicity in a CRM blew me away.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "How Snackpass uses Attio"
+      },
+      {
+        "kind": "p",
+        "text": "Attio has transformed Snackpass’ entire GTM operations. Using custom objects and automated workflows, they've built a system that captures, organizes and acts on all their customer data. The platform has broken down silos between teams and maximized their GTM engine efficiency.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Attio is by far the most powerful CRM I’ve ever used,” says Jamie. “It’s a central source of truth for our whole team. We all love it.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Building a sales engine with complete visibility"
+      },
+      {
+        "kind": "p",
+        "text": "Using Attio, Snackpass has built a powerful system to manage their sales team and understand their unique customers. They use custom objects to track company metrics, and sync all of their revenue and volume data into Attio.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We make our prospect lists in Attio, we tag who's managing which territory, we know every deal that's in the pipeline, we know how long it's taking, and if it’s closed. And then we handle all of our customer success in Attio as well.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Attio’s lists feature, which Snackpass uses to organize inbound leads, the sales pipeline, and customer success, has been especially valuable. “We pull all of our marketing data, Facebook, Google, SEO, directly into our lists,” Jamie explains.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Snackpass finally has total visibility across their GTM, which seemed impossible in Salesforce. “For the first time, we can see exactly where our customers come from and how they move through our pipeline. The whole team has ten times the visibility into our data, our customers, our pipeline, even our marketing efforts, because we have everything synced in.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Powering customer success with automations"
+      },
+      {
+        "kind": "p",
+        "text": "Snackpass has built their whole customer success operation in their Attio workspace. “After a restaurant signs on, everything happens automatically,” says Jamie.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We built all of our workflows without any engineering on our part, making our whole team so much more productive.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "For example, when a contract is signed, Attio automatically updates the deal stage and notifies the right regional team member through Slack. Every new customer gets immediate attention from the right person.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“What used to take hours of work now happens instantly,” adds Jamie.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "For Snackpass, Attio has become more than just a CRM, it’s the central nervous system of their business. “Every team has complete visibility into what matters to them,” says Jamie. “And my favorite part is that it’s all automated, without our sales team even needing to update a thing.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Upgrading revenue tracking with reports"
+      },
+      {
+        "kind": "p",
+        "text": "With Attio’s robust reporting capabilities, Snackpass have built a powerful engine for refining their GTM efforts.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Beyond customer data, Snackpass imports all their transaction data, revenue metrics, and live dates into Attio using custom objects. “We can see how we're doing month over month, year over year.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "They use Attio’s powerful reporting tools to track every metric that matters. “We can see how many accounts we have closed this month, where everything is in the pipeline, and if we are hitting our goals,” says Jamie.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Best of all, anyone on our team can go in and make any report they can think of within minutes.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "Scaling up with Attio"
+      },
+      {
+        "kind": "p",
+        "text": "Attio has had a dramatic impact on Snackpass’ operations. Now, their sales team can focus on closing more deals, their success team can onboard more restaurants, and they’ve eliminated the need for costly consultants.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Looking ahead, Snackpass sees even more potential. They plan to continue using Attio long-term as they scale further, and they’re excited. “I’d love to use Attio for everything, and consolidate our whole stack within the platform.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Snackpass are already getting more creative with recently launched features like Sequences. Jamie says they can’t wait for more.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“It’s powerful but flexible, and it scales with us. Even if our business changes or evolves in the future, we can shift and adjust as needed.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Attio is the best CRM you will ever use,” Jamie concludes, “and most likely the last CRM you will ever need.”",
+        "links": []
+      }
+    ]
+  },
+  {
+    "slug": "conduit",
+    "name": "Conduit",
+    "cs": "02",
+    "video": false,
+    "title": "Conduit's Story | Attio",
+    "description": "How Conduit powers its hybrid GTM motion with Attio",
+    "h1": "How Conduit powers its GTM motions using Attio",
+    "people": [
+      {
+        "name": "Tyler Bubin",
+        "role": "Director of Revenue"
+      }
+    ],
+    "about": "Web3 infrastructure provider Conduit is a complete rollup platform where the best teams in crypto can scale their apps with speed and security.",
+    "facts": [
+      {
+        "label": "Industry",
+        "value": "Web3 infrastructure"
+      },
+      {
+        "label": "Company size",
+        "value": "11-50"
+      },
+      {
+        "label": "Headquarters",
+        "value": "San Francisco, California"
+      },
+      {
+        "label": "Founded",
+        "value": "2022"
+      },
+      {
+        "label": "Funding raised",
+        "value": "$37M (Series A)"
+      }
+    ],
+    "features": [
+      {
+        "name": "Custom objects",
+        "href": "/platform/data"
+      },
+      {
+        "name": "Workflows",
+        "href": "/platform/workflows"
+      },
+      {
+        "name": "Integrations",
+        "href": "/apps"
+      }
+    ],
+    "challenge": "Conduit's explosive growth as a Web3 infrastructure provider was outpacing their makeshift setup’s ability to track new opportunities, analyze customer relationships, and manage complex deployments effectively.",
+    "solution": "Use Attio to build their own flexible engine for GTM and post-sales operations, dramatically boosting team-wide productivity and automating deployment updates across their business.",
+    "results": [
+      "A CRM that perfectly mirrors their unique, hybrid business model.",
+      "Dozens of hours saved across the team weekly to focus on more high-value work.",
+      "100% adoption across GTM and total visibility into all stages of account management.",
+      "Automatic funnel insights into all customers and unique deployment activities."
+    ],
+    "article": [
+      {
+        "kind": "h2",
+        "text": "Breaking barriers to Web3 building"
+      },
+      {
+        "kind": "p",
+        "text": "Over the past decade, crypto apps have surged, driven by the rise of Web3 platforms like Ethereum which have allowed anyone to build scalable, decentralized blockchain apps. But with this success came Ethereum's biggest challenge: network congestion that made transactions too clunky and expensive for users.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Rollups were the critical breakthrough: bundling transactions to reduce fees and congestion while maintaining Ethereum's core security. But implementing a rollup was still a huge undertaking, needing deep expertise, expensive tools, and weeks of testing just to get started.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Conduit removes that barrier. Founded in 2022 by Andrew Huang, Conduit is one of the first self-serve Rollups‑as‑a‑Service platforms where crypto teams can spin up scalable, production-ready rollups in minutes.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "\"Our mission is to make rollups as easy as spinning up virtual machines on AWS,\" explains Tyler Bubin, Director of Revenue. \"We want to make rollups just as accessible to every builder in the Web3 space.\"",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "In just over a year since their founding, Conduit has already raised $44 million, and they’re still scaling. “We already power rollups for leading web companies like Blackbird, Ethena, Polygon, Mode and Zora, this infrastructure will power the next wave of crypto innovation in the Web3 space,” says Tyler.",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "Bottlenecked by manual CRM"
+      },
+      {
+        "kind": "p",
+        "text": "When Tyler joined Conduit in early 2024, the company was scaling rapidly, but operations were stretched thin. “At the time, we were managing everything manually in Notion: prospects, networks, deployments, even post‑sales activity,” he explains.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We were juggling hundreds of rollups for an exponentially growing customer base, and we knew it wasn’t sustainable. All of our critical data was fragmented across our stack, making it very difficult to even gather basic customer information, let alone act on it.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "This makeshift setup deprived engineering, finance, and support of the context they needed. “There was no single view of a customer or their live rollups,” Tyler recalls. “We were on version 0.01 of account management and trying to reach version 1. It just wasn’t scalable.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Conduit needed a CRM that could actually keep up with their rapidly growing number of customers and deployments. “I wanted something flexible, with all the core features but none of the rigidity of legacy CRMs,” says Tyler. “A great user experience, minimal admin overhead, and a tool our whole team could actually use.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "“An incredible quality of life improvement.”"
+      },
+      {
+        "kind": "p",
+        "text": "As Conduit’s growth accelerated, it became clear their makeshift solution couldn't last much longer. Tyler began searching for a platform that could handle the scale and complexity of their go‑to‑market motion.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The team needed a CRM powerful enough to reflect their technical data model, but flexible enough for a fast-moving startup.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“I kept hearing about this new tool called Attio, people were calling it the “Notion of CRMs,” saying that the power, stunning UI, and ease of integration was unmatched,” Tyler recalls. “That got my attention.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Immediately, seeing that Attio could track the entire customer lifecycle convinced Conduit to try the platform. “Most CRMs are built for either pre-sales or post-sales,” explains Tyler. “Attio gave us the perfect data model to manage both seamlessly, without adding overhead.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "It didn’t take long for the team to make the switch. “Right away, it was an incredible quality of life improvement,” he adds. “Attio completely exceeded my expectations.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "After a quick setup, Conduit was on track to remove the friction in their daily business processes. “All our data, accounts, histories, deployment details, suddenly became accessible to the whole team. Processes that used to take days, suddenly took minutes.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "How Conduit uses Attio"
+      },
+      {
+        "kind": "p",
+        "text": "With Attio, Conduit has built a CRM that matches their exact data model and supports their hybrid sales and product-led GTM motion. “We get people in the funnel through freemium, and we have a long tail to activate,” explains Tyler. “But the vast majority of our business is sales-led, rollups are a very technical sell.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Now, every opportunity and relationship is tracked in detail using lists, powerful workflows, and custom objects, all tailored to Conduit’s unique business model.",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Custom deployment tracking"
+      },
+      {
+        "kind": "p",
+        "text": "Conduit’s operations revolve around deployments, blockchain networks spun up and managed for individual customers. To track this complex process, Tyler created a custom Deployment object in Attio.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“If you think about any type of infrastructure business, you have one customer for any number of deployments,” explains Tyler. “In post-sales, it’s crucial we can connect every customer to that activity.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Our Deployments object pulls in live metadata from our Postgres database via the Attio API, giving every department, from sales to support, real-time visibility into what’s happening on‑chain.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "As a result, all usage data about any deployment is available to everyone in the team. “This object allows anyone to instantly see, report on, and analyze that activity,” says Tyler. “Having all that information at our fingertips is incredible because it saves us so much time.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Automating the funnel"
+      },
+      {
+        "kind": "p",
+        "text": "Beyond the bidirectional data feed populating their Deployments object, Conduit leverages Attio workflows to automate their entire customer lifecycle.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We use workflows in Attio to pump PQLs into our pipeline,” says Tyler. “That way, we can pick up active deals and surface them inside our demo request funnel, automatically creating and assigning new opportunities to the right people. It makes the whole process much easier for our Sales team.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Conduit also uses the Typeform workflow block trigger, so that when prospect information is submitted, it automatically adds new opportunities or accounts right inside their pipeline for the team to evaluate.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“I love how modular the workflows in Attio are,” says Tyler. “Even the less technical folks like me can build really powerful automations, that’s been a huge unlock for us as a team.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Attio is at the core of Conduit's automation engine, and Tyler and the team have set up more integrations to extend its capabilities even further, including Pylon for support ticketing.",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "A single source of truth"
+      },
+      {
+        "kind": "p",
+        "text": "Attio now acts as the central source of truth across Conduit’s sales, partnerships, and customer success teams.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Whether it's sales tracking, customer success work, or ecosystem relationships, we can see what’s happening, who’s involved, and how much capacity we have at a glance, all within Attio. It's more than we could have ever asked for,” says Tyler. “Web3 is a very ecosystem-heavy space, so tracking the status of those external relationships is critical.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The adoption rate of Attio in Conduit’s GTM and operations teams has reached 100%. “Everybody on our team uses Attio daily,“ Tyler adds. “The low admin burden makes it perfect for an early-stage startup like ours.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Attio is not only Conduit’s pre or post-sales GTM system of record, but the core platform where the whole team operates. “With Attio, we have made our data totally accessible to anyone who needs it, across finance, engineering, field engineering, or professional services.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "Building the future of Web3"
+      },
+      {
+        "kind": "p",
+        "text": "With Attio powering its GTM engine, Conduit can stay laser-focused on its mission: helping Web3 builders spin up secure, scalable rollups in minutes.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Next, the team is looking to expand their operations in Attio, including building out workflows to add more PQLs into their pipeline. “I don’t want to rely on Notion or anything else,” says Tyler. “I want everything to live in Attio.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We chose Attio because we wanted a tool that could scale at the same pace we are. It’s already way ahead of other tools with its UX and collaboration capaibilities, not just for sales, but for every phase of account management beyond that.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "For Conduit, Attio is more than just a CRM, it’s the foundation for their growth. “We’re going from zero to one,” says Tyler, “and Attio is the right tool to scale alongside us. It has everything we need, and more.”",
+        "links": []
+      }
+    ]
+  },
+  {
+    "slug": "railway",
+    "name": "Railway",
+    "cs": "03",
+    "video": false,
+    "title": "Railway's Story | Attio",
+    "description": "How Railway turned usage data into revenue with Attio\n",
+    "h1": "How Railway turned usage data into revenue with Attio",
+    "people": [
+      {
+        "name": "David Banys",
+        "role": "Head of Product Marketing"
+      }
+    ],
+    "about": "Railway is a cloud platform for developers to build, deploy, and scale full-stack web applications.",
+    "facts": [
+      {
+        "label": "Industry",
+        "value": "SaaS"
+      },
+      {
+        "label": "Company size",
+        "value": "11-50"
+      },
+      {
+        "label": "Headquarters",
+        "value": "San Francisco, California"
+      },
+      {
+        "label": "Founded",
+        "value": "2020"
+      },
+      {
+        "label": "Funding raised",
+        "value": "$100M (Series B)"
+      }
+    ],
+    "features": [
+      {
+        "name": "Custom objects",
+        "href": "/platform/data"
+      },
+      {
+        "name": "Workflows",
+        "href": "/platform/workflows"
+      },
+      {
+        "name": "Integrations",
+        "href": "/apps"
+      }
+    ],
+    "challenge": "Railway was struggling to build a CRM that could adapt to their unique business model. They needed a powerful, flexible CRM to unify their product-led growth data and metered billing in one place.",
+    "solution": "Attio gave Railway a customizable CRM that mapped perfectly to their metered billing structure and PLG engine, complete with real-time adoption scores and automated intelligent workflows.",
+    "results": [
+      "100% GTM team adoption with zero admin overhead",
+      "Custom data model showing revenue, usage, and adoption at a glance",
+      "Automated workflows that convert product signals into pipeline"
+    ],
+    "article": [
+      {
+        "kind": "h2",
+        "text": "Making web infrastructure magic"
+      },
+      {
+        "kind": "p",
+        "text": "In 2019, Jake Cooper was scaling infrastructure at Uber when he hit a wall: shipping even simple apps meant wrangling outdated tools and required a full DevOps team. It was slow, fragmented, and built for a different era.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "He started questioning why. What if infrastructure wasn’t a bottleneck? What if deployment could be instant? Convinced there had to be a better way, Jake left Uber to build the platform he always wanted, where developers could focus purely on shipping code.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Two years later, he launched Railway: the all-in-one developer platform that makes full-stack software development instantly accessible for anyone, anywhere. Railway provides engineers with a single platform where they can build, deploy and monitor apps, from the biggest idea down to the smallest line of code.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We bring intuitive design and user experience to the world of infrastructure engineering,” says David Banys, Head of Product Marketing. “You input your code and Railway builds, runs, scales and monitors it, so you can focus on building your product.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Having raised a $20 million Series A led by Redpoint Ventures and angel investors from Github, Linear and Datadog, today the team ships new features to over 500,000 users every week, taking on AWS, Google Cloud, and DigitalOcean.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Railway is on a mission to make it intuitive for everyone to deploy code, by making web infrastructure feel like magic.",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "Friction, friction, friction"
+      },
+      {
+        "kind": "p",
+        "text": "Railway is rapidly building a product for developers, by developers. As their customer base and live deployments started to scale exponentially, the time came for them to centralize their data in a CRM.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The team needed a tool that could give them the visibility they wanted. “We began feeding our data into every CRM we could find,” recalls David, “but it just wouldn't work.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "From Salesforce to HubSpot, traditional CRMs fell short. “Legacy CRMs weren’t built for teams like ours,” says David. “We sell software based on metered billing, which requires complex revenue accounting. These tools didn’t grasp our model, they simply pushed their traditional sales approach.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The team simply couldn’t represent their data, implement their business model, or access the features they needed. “The data structures in traditional CRMs are outdated, the interfaces are cumbersome, and managing them demands a full-time administrator,” says David. “It was just friction, friction, friction, all the time.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We're a strong technical team,” says David, “so we generated an algorithmic adoption score, tracked revenue, and forecast run-rates in code, but there was no single place to pull it all together.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "With no workable solution, Railway was forced to improvise. “We ended up streaming adoption alerts into our chat,” he recalls. “It reached a point where I didn’t think any CRM would ever come close to what we needed.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "“The ultimate system of record”"
+      },
+      {
+        "kind": "p",
+        "text": "After months of trudging through legacy CRMs, Railway hit a breaking point. “We realized they were products built for another era, and that's not the company we are, or the product we're trying to build,” says David. “How could we, as a PLG company, use a tool that was against our own values?”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Then they found Attio.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“A friend of the company referred us to Attio, and as soon as we saw the product, we knew this was a completely new kind of software,” says David.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "While other CRMs forced the team to jump through hoop after hoop to even just shoehorn their business model, Attio allowed Railway to configure their dream CRM rapidly. “Immediately, it was fast, powerful, and had a beautiful user interface to work with,” says David. “It was noticeable right from the moment we synced.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“The self onboarding was incredible. Instantly, we could sync our data and get going all on our own terms. Attio really resonated with us as a company. It gave us the exact experience we want to give to our users.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The team got up and running fast. “Even in the very beginning, we’d ship something every day that was an instant value-add. It was so satisfying,” adds David. “With every record, attribute, filter and dashboard we built, Attio was building our ultimate system of record.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "How Railway uses Attio"
+      },
+      {
+        "kind": "p",
+        "text": "With Attio, Railway has built a product-led-growth machine. Using custom objects, intelligent automation and powerful integrations, the team has built their workspace around a metered-billing, subscription-based business model, something that just was not possible with any other CRM.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Attio lets us mirror the way we actually work,” says David. “From a single place we can see every customer, how they’re trending, what’s up and what’s down. It’s a central space to understand it all.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "A living system of record"
+      },
+      {
+        "kind": "p",
+        "text": "Railway’s business model is centered around the teams building their products on the platform. Using Attio’s powerful data model, David has represented this unique customer and relationship data inside Attio.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“As a PLG company, we love the Workspaces object,\" shares David. “Right out of the box, we had this data model that maps perfectly onto our concept of teams, and the individual users related to each team.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "With Workspaces, Railway can track the progress of their customers on an individual and company level, in the precise ways they engage with the product. “It allows us to say ‘here are all our teams, by revenue, usage, adoption, activity', anything that we want to feed into it,” says David.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The team’s favorite feature is the ability to create filters for their object data. “I have a few different filters that I check on a daily or weekly basis,” he shares. “I can check what our customer spend level is for the month, whether it is growing or not and more.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Attio gives us access to a birds-eye view of our top 100 to 1000 customers, with total ease.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Real-time automated data sync"
+      },
+      {
+        "kind": "p",
+        "text": "As a developer company, Railway wanted a CRM that could handle their specific data needs. With clear documentation, an open API, and the freedom to integrate with any data source, Attio was the perfect fit.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We built our own enrichment bot to signal when a team signs onto the product and is in our ICP,” explains David. “When a new workspace appears on the platform, our custom script checks the domain against our ICP database and enriches the record with industry tags, seat counts, ARR, and lifetime usage.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The team have also created an adoption score that feeds directly into Attio, so they can instantly analyze changes to adoption level over time. “Our adoption score is a home-grown algorithm that blends product signals from Segment, BigQuery, and manual inputs, into a single metric, which is then plugged into Attio for real-time updates and live tracking,” says David.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“As a devtools company, we’re very technical, this is our world, right? So a CRM like Attio, with all that documentation and code up front, is more than we could have wished for.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Workflows that turn product signals into pipeline"
+      },
+      {
+        "kind": "p",
+        "text": "David and team have used Attio’s workflows to translate live product usage into instant GTM insights. “I use workflows in Attio to send live alerts to our GTM chat,” says David. “So, if a customer reaches a certain monthly spend threshold, I've set up an automatic update that will stream into our chat.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The team also uses the Deals object and workflows to amp up their sales-assisted growth, a crucial element in their enterprise component on top of their PLG motion.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“When a customer indicates through their actions in the product, or by clicking a form asking to talk to sales, we’ve set up an automation to create a deal record,” explains David. “We can then pick up these deals in triage during our GTM meetings, so we can provide those teams with tailored sales-assisted guidance.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“It’s been a huge uplift for our GTM team,” he adds. “We're in Attio daily and our adoption has reached 100%. Other teams like engineering love to check it out too. It’s definitely become the central source of truth for our entire operation.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "Scaling up on an extensible canvas"
+      },
+      {
+        "kind": "p",
+        "text": "Attio has enabled Railway to build their PLG machine, so they can continue supporting the next generation of web developers.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "David is looking forward to experimenting with the platform even further, in particular through more custom objects and email Sequencing. “The extensibility is the most exciting thing,” he says. “It’s a software blank slate that we can keep building on top of and growing with.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Attio is a dev company’s dream CRM. Everyone in our team is very technical, so it's the perfect platform for us to build on to understand our customers, gather crucial account information and produce critical new insights into our pipeline.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“I’d definitely recommend it to any startup, especially those using subscription software or metered billing, or teams combining product-led and sales-assisted growth. The data model is just so flexible, and it's extremely easy to set up.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Ultimately, Railway found a tool in Attio that they no longer thought existed in the world of CRM. “Attio feels like the exact kind of software we’d build ourselves,” says David. “We feel at home in it.”",
+        "links": []
+      }
+    ]
+  },
+  {
+    "slug": "taskrabbit",
+    "name": "Taskrabbit",
+    "cs": "04",
+    "video": false,
+    "title": "Taskrabbit's Story | Attio",
+    "description": "How Taskrabbit scales partnerships with Attio.",
+    "h1": "How Taskrabbit is scaling partnerships with Attio.",
+    "people": [
+      {
+        "name": "Konnor Vaughn",
+        "role": "Head of Partner Development"
+      }
+    ],
+    "about": "Taskrabbit is a managed marketplace that connects people with trusted workers for everyday services.",
+    "facts": [
+      {
+        "label": "Industry",
+        "value": "SaaS"
+      },
+      {
+        "label": "Company size",
+        "value": "201-500"
+      },
+      {
+        "label": "Headquarters",
+        "value": "San Francisco, California"
+      },
+      {
+        "label": "Founded",
+        "value": "2008"
+      }
+    ],
+    "features": [
+      {
+        "name": "Custom objects",
+        "href": "/platform/data"
+      },
+      {
+        "name": "Workflows",
+        "href": "/platform/workflows"
+      },
+      {
+        "name": "Reports",
+        "href": "/platform/reporting"
+      }
+    ],
+    "challenge": "Only 50% of the Taskrabbit partnerships team used their previous CRM. Critical emails went unlogged, contacts disappeared when team members left, and they needed an administrator just to keep it running. As they prepared for market expansion, they needed a CRM that could keep up with their growth.",
+    "solution": "Use Attio to build a flexible CRM that the team could configure themselves, with powerful email sync reclaiming dozens of leads, intuitive deal structures for every kind of business, and custom objects to map multi-region partnerships, with zero admin overhead.",
+    "results": [
+      "90% team adoption overnight, up from sub 50%",
+      "Strategic deals reclaimed from lost email data",
+      "4x faster deal updates across sales team"
+    ],
+    "article": [
+      {
+        "kind": "p",
+        "text": "Taskrabbit connects users with trusted local Taskers for everyday services. As the partnerships team prepared to scale across the US, Europe, and beyond, they needed a CRM that could keep pace with rapid growth. With Attio, they've built an engine to capture every deal, contact, and conversation in one place, achieving 90% adoption overnight and cutting deal update time in half.",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Global partnership growth needs a system teams actually use"
+      },
+      {
+        "kind": "p",
+        "text": "Founded in 2008, Taskrabbit has become a category-defining company in the future of work. With over 50,000 Taskers, the platform is evolving into a fully managed marketplace, extending the customer experience through strategic retail partnerships. But when you’re expanding a team internationally, you can't afford to lose months ramping up new members or rebuilding relationships from scratch.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "So when Konnor Vaughn stepped in to lead and scale partnerships, CRM was a major pain point. They’d moved from Google Sheets to Salesforce, but adoption never took hold. Critical emails went unlogged, contacts disappeared, and when team members left, deal context vanished with them.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "\"I was trying to pick up the pieces of all these deals, but there were no contacts, records, or emails. It felt like starting from scratch every time.\"",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The need became clear: find a CRM that gives time back, keeps everything centralized, and never requires an admin again.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Attio gave them the perfect platform. Overnight, Taskrabbit went from 20% to 90% adoption.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "\"You look at Attio, watch the demos, hear how people talk about it, and you think, yeah, this is what a CRM should look like in 2025.\"",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Mapping complex partnerships with custom objects"
+      },
+      {
+        "kind": "p",
+        "text": "Taskrabbit's partnerships are layered. A single partner might have many services, spanning multiple regions at once. With Attio, the team uses the Companies object to anchor each relationship, and a custom Deals object to model every motion by market, product, or division.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Attio keeps everything organized at the company level while capturing deal details, contacts, and conversations in one place. That visibility is what drove 90% adoption, pretty much overnight.\"",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The impact:",
+        "links": []
+      },
+      {
+        "kind": "li",
+        "text": "90% team adoption overnight, up from sub 50%"
+      },
+      {
+        "kind": "li",
+        "text": "Strategic deals reclaimed from lost email data"
+      },
+      {
+        "kind": "li",
+        "text": "4x faster deal updates across sales team"
+      },
+      {
+        "kind": "p",
+        "text": "\"In Attio, we can see the company, each regional or product deal, and every conversation. It's finally all in one system the team actually uses.\"",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Turning signals into strategy with integrations"
+      },
+      {
+        "kind": "p",
+        "text": "With all key partnerships visible in Attio, the next unlock came from pulling in partner signals automatically and reporting on that data.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The team integrated Fillout on day one to pipe lead forms and customer requests directly into Attio, complete with attributes and tags. From there, Attio's reporting capabilities unlocked new visibility into what's actually working.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The result? The team can analyze deals by product, market, division, and lead source, turning once unquantifiable signals into measurable insights that inform resource allocation and strategy.",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Expanding into new markets with total GTM efficiency"
+      },
+      {
+        "kind": "p",
+        "text": "With 90% team adoption, automated workflows, and every deal and conversation centralized, Taskrabbit is ready to double their partnerships team and expand into Europe while maintaining complete visibility into their scaling partnerships.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Now, they're bringing financial data from Sigma and Snowflake into Attio for richer reporting, and integrating tools like Granola to centralize meeting insights. As the team expands, Attio has become more than a CRM, it's the operating system for how they grow.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "\"Attio gives us the structure and visibility to scale partnerships without slowing down. It's slick, smooth, buttery, and it's only going to get better as we build.\"",
+        "links": []
+      }
+    ]
+  },
+  {
+    "slug": "granola",
+    "name": "Granola",
+    "cs": "05",
+    "video": true,
+    "title": "Granola's Story | Attio",
+    "description": "How Granola turns product signals into revenue at scale",
+    "h1": "How Granola turns product signals into revenue at scale",
+    "people": [
+      {
+        "name": "Shreman Shrestha",
+        "role": "Head of Business"
+      }
+    ],
+    "about": "Granola is the AI notepad for people in back-to-back meetings.",
+    "facts": [
+      {
+        "label": "Industry",
+        "value": "SaaS"
+      },
+      {
+        "label": "Company size",
+        "value": "100-200"
+      },
+      {
+        "label": "Headquarters",
+        "value": "London, UK"
+      },
+      {
+        "label": "Founded",
+        "value": "2023"
+      },
+      {
+        "label": "Funding raised",
+        "value": "$125M (Series C)"
+      }
+    ],
+    "features": [
+      {
+        "name": "Workflows",
+        "href": "/platform/workflows"
+      },
+      {
+        "name": "Integrations",
+        "href": "/apps"
+      },
+      {
+        "name": "Custom objects",
+        "href": "/platform/data"
+      }
+    ],
+    "challenge": "Granola's inbox is inundated with inbound leads weekly but there's no systematic way to prioritize them. High-potential prospects sat in the inbox, product usage data lived in BI tools, and manual triage consumed hours with no path to scale.",
+    "solution": "Use Attio to build an intelligent platform to capture every lead, tier them automatically, connect product signals to customer records, and power workflows that keep AEs focused on the highest-value opportunities.",
+    "results": [
+      "Lead triage 83% faster.",
+      "10X faster access to customer context.",
+      "5 hours per week saved with automated deal updates."
+    ],
+    "article": [
+      {
+        "kind": "p",
+        "text": "Granola is the AI notepad for people in back-to-back meetings. Following rapid growth, $192 million raised and a team scaled to over 40 people in under a year, they needed infrastructure to match their velocity. With Attio, they built a platform to connect inbound sales leads, product usage, enrichment, and conversations in one place, transforming their team into a scalable revenue engine.",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Product-led growth needs a modern tech stack"
+      },
+      {
+        "kind": "p",
+        "text": "Fast-growing, inbound-driven startups face a recurring challenge: how do you turn usage signals into revenue without slowing down?",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Granola was drowning in inbound lead but the sales team had no way to prioritize them. High-potential prospects sat in the inbox, product usage data lived in separate tools, and manual triage consumed hours with no clear path to scale.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "They needed a system that could capture every lead automatically, connect product usage to customer records, and surface the highest-value opportunities without manual work. Attio gave them that system.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“The moment we started setting Attio up, everything became clear. For the first time, we could actually see all of our deals in one place.\"",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "With Attio, Granola has built the complete GTM platform: inbound leads flowing in automatically, product signals synced to every customer record, and workflows routing prospects straight to AEs.",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Triaging inbound at scale with automated workflows"
+      },
+      {
+        "kind": "p",
+        "text": "At Granola, every prospect comes through a Tally form on their website. The team uses a custom ‘Inbound Leads’ object to capture every response automatically in separate records. A Zapier integration then pipes that data straight into Attio, where each lead lands in a structured view.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Now, we have this one place where we can see existing deals and new companies that are interested in chatting to us. It felt like when you can see for the first time.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The GTM team reviews new entries daily, tiering them 1, 3 by potential, and uses workflows to promote high-value leads directly into the Deals object pipeline.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“The Deals object is especially top of mind for our account executives, and having the workflow automatically qualifying and surfacing leads is a huge unlock for our sales team. It saves so much time.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The impact on Granola is tangible:",
+        "links": []
+      },
+      {
+        "kind": "li",
+        "text": "Zero missed leads and 10X faster access to customer context"
+      },
+      {
+        "kind": "li",
+        "text": "Lead review down from 2 hours to 20 minutes daily with tiered workflows"
+      },
+      {
+        "kind": "li",
+        "text": "100% GTM team adoption with daily usage"
+      },
+      {
+        "kind": "h3",
+        "text": "Connecting product signals to sales conversations"
+      },
+      {
+        "kind": "p",
+        "text": "For Granola, understanding how customers use the product is critical. With Attio, they use the Polytomic app to tap directly into their product usage data. Combined with Clay for enrichment, this setup transformed how their team operates.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Connecting our whole stack was a real lightbulb moment. Suddenly, we could see the right people, the right context, at the right time. That’s when Attio felt magical.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Now, when anyone on the team views a company in Attio, they instantly see:",
+        "links": []
+      },
+      {
+        "kind": "li",
+        "text": "Active users"
+      },
+      {
+        "kind": "li",
+        "text": "Engagement levels"
+      },
+      {
+        "kind": "li",
+        "text": "Usage patterns"
+      },
+      {
+        "kind": "p",
+        "text": "\"The first time I saw usage data sync in Attio, I was like, damn. I felt like I had everything I needed to be able to understand what users I should be reaching out to.\"",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Consolidating customer intelligence in one platform"
+      },
+      {
+        "kind": "p",
+        "text": "With total team adoption, automated lead workflows, and product usage data connected to every deal, Granola is ready to triple their GTM team while maintaining visibility across the entire pipeline.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“When I think of revenue, I think of Attio. It's become an indispensable platform for understanding our users as we scale.\"",
+        "links": []
+      }
+    ]
+  },
+  {
+    "slug": "modal",
+    "name": "Modal",
+    "cs": "06",
+    "video": false,
+    "title": "Modal's Story | Attio",
+    "description": "How Modal uses Attio to accelerate product-led growth.",
+    "h1": "How Modal uses Attio to accelerate product-led growth",
+    "people": [
+      {
+        "name": "Margaret Shen",
+        "role": "Head of Business Operations"
+      }
+    ],
+    "about": "Modal is a serverless platform which makes it easy for developers to run generative AI models, large scale batch jobs, job queues, and more.",
+    "facts": [
+      {
+        "label": "Industry",
+        "value": "Artificial Intelligence"
+      },
+      {
+        "label": "Company size",
+        "value": "100-200"
+      },
+      {
+        "label": "Headquarters",
+        "value": "New York City, New York"
+      },
+      {
+        "label": "Founded",
+        "value": "2021"
+      },
+      {
+        "label": "Funding raised",
+        "value": "$750M (Series D)"
+      }
+    ],
+    "features": [
+      {
+        "name": "Workspaces object",
+        "href": "/help/reference/managing-your-data/objects"
+      },
+      {
+        "name": "Integrations",
+        "href": "/apps"
+      },
+      {
+        "name": "Workflows",
+        "href": "/platform/workflows"
+      }
+    ],
+    "challenge": "Modal was struggling to align their product-led growth (PLG) motion with HubSpot’s inflexible data model, leading to inefficiencies and a lack of visibility into key customer data.",
+    "solution": "Use Attio as the central foundation for their product and customer data, on top of which they build high-impact workflows to drive PLG.",
+    "results": [
+      "An automations engine which accelerates their PLG motion",
+      "A CRM which reflects their data structures and deeply integrates with their stack",
+      "An efficient and collaborative tool which scales with their business"
+    ],
+    "article": [
+      {
+        "kind": "h2",
+        "text": "Modal's story"
+      },
+      {
+        "kind": "p",
+        "text": "In 2021, Erik Bernhardsson started a project to build a simple way to deploy arbitrary workloads to the cloud, without the hassle of managing infrastructure.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "His goal was to create a tool that would allow him to iterate on ideas faster, without getting bogged down in the complexities of Kubernetes clusters, containers and hardware requirements.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "What began as a convenient solution for himself quickly turned into Modal, a serverless computer platform that makes it easy for developers to launch and manage compute-intensive tasks, particularly those related to AI and ML. In 2026 they raised a 355$m Series C, with an impressive roster of customers including Ramp, Substack, Lovable, and Meta.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Modal is an infrastructure product which aims to make it really easy for developers to launch arbitrary cloud workloads, particularly those that are very compute intensive,” says Margaret Shen, Head of Business Operations at Modal. “We work especially closely with teams building AI products or features, and help them to fine-tune and deploy their machine learning models.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "PLG hindered by HubSpot"
+      },
+      {
+        "kind": "p",
+        "text": "The dream of every PLG startup is to have a centralized place that tracks both product and customer data, so that GTM teams can get detailed insight into every user, identify PQLs, build personal customer relationships, and reduce churn.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Like many startups, Modal tried using HubSpot to unify their data, but they struggled to build a CRM which actually represented their business.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“It was really difficult to set up HubSpot to reflect our data structure,” says Margaret. “The way it represents different objects and relationships felt really clunky, and we quickly ended up with a CRM cluttered with all sorts of floating records, duplicate companies, and mismatches between records.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "HubSpot’s lack of flexibility also created issues for Modal. “As a PLG business, the notion of workspaces is really key for us to track product data. HubSpot does not have native support for that type of data. Trying to create a workaround was so confusing that we could never quite figure out how to set it up in an optimal way,” says Margaret.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Given the huge expense of HubSpot and the hassle of trying to force PLG motion to fit its data structures, Modal knew they needed to find a CRM that could truly represent their business.",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "The Attio moment"
+      },
+      {
+        "kind": "p",
+        "text": "When Modal heard about Attio, they were immediately excited by the prospect of a modern CRM.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“When I first opened Attio, I instantly got the feeling that this was the start of the next generation of CRM,” says Margaret.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Margaret was thoroughly impressed by Attio’s powerful data model. “For there to be such a powerful and flexible object relational system was incredible. It finally felt like I could configure our CRM to fit our business needs, rather than the other way around,” says Margaret.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Modal also loved the product design. “Attio is so sleek and modern that it’s ultimately just a delight to work in. I genuinely feel happy when I’m in the product, which is almost unheard of in the CRM space.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "How Modal uses Attio"
+      },
+      {
+        "kind": "p",
+        "text": "Modal uses Attio as the central engine for their PLG motion. “Attio gives us confidence that we have a strong foundation of customer data that we can trust, which enables us to build very high leverage, high impact workflows and automations to drive our GTM motion.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "A single source of truth for customer and product data"
+      },
+      {
+        "kind": "p",
+        "text": "The native Workspaces object has enabled Margaret to rapidly tailor Attio to fit Modal’s data model.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Our whole product revolves around the notion of workspaces, so for there to be native support for this was game-changing,” says Margaret. “Being able to intuitively establish one-to-many and many-to-many relationships is crucial to making our data clean and understandable.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Modal uses Attio’s native Segment integration to ensure their CRM is constantly up-to-date with the latest product data.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We use Segment to pull in all of our workspace information, and then associate this with the correct companies and people. We’ve also been importing various product intent signals, such as usage data, to help us identify and preemptively reach out to churn risk accounts. Being able to map and transform this data so easily has drastically improved our retention rates,” says Margaret.",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Automate, iterate, and accelerate"
+      },
+      {
+        "kind": "p",
+        "text": "Using Automations, Modal has built a number of workflows on top of Attio to power their lead generation.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We’re constantly using Attio to identify users who may be willing to upgrade their account, or customers from key companies that we’d like to offer more direct support,” says Margaret. “Using workflows, we’ve been able to turn this process into an engine for growth.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "As a result, Modal has now built a range of automated workflows around Attio, which are deeply integrated with their stack. By drawing on Attio as their single source of truth, they can proactively engage with warm leads in a far more efficient way.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Attio’s data enrichment capabilities make it really easy to identify potential leads. We have a number of workflows to filter leads by enriched attributes, such as Funding raised and Estimated ARR, and product usage data, which enables us to conduct highly targeted and customized outreach,” says Margaret.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "By automating these processes in Attio, Modal can prioritize more strategic initiatives to accelerate their growth.",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "The center of their GTM stack"
+      },
+      {
+        "kind": "p",
+        "text": "In addition to the native Segment integration, Modal has also worked with the Attio API to build some of their own integrations.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Attio’s API documentation is incredibly thorough and intuitive, which made it easy to write integrations to other tools in our stack,” says Margaret. “For example, I’ve set up an integration with our email campaign platform, Loops, which enables us to trigger marketing campaigns based off of people I’ve identified in Attio.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Modal has also linked Tally, a form builder, to their Attio workspace. “Using the webhook of Tally I can instantly send events over to Attio, which ingests the people who have completed the form into a list. This makes it really easy for me to process and act on this data,” says Margaret.",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "Scaling up alongside Attio"
+      },
+      {
+        "kind": "p",
+        "text": "Modal sees Attio playing a key role in driving their future growth. “The product is continually evolving, you can see distinct improvements on a month by month basis, which you just don’t get with the incumbents,” says Margaret.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "For Modal, Attio has been incredibly influential at getting the team on the same page and accelerating their PLG motion.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“To see the whole team, including the co-founders, be excited about Attio is incredible,” says Margaret. “Everyone is noticeably bought into the product, and actually happy to look at data in Attio, add notes, create lists, and interact with the platform as a whole. I’ve never seen people so engaged in a CRM.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We’re looking forward to building more workflows on top of Attio, and integrating it even more deeply with the rest of our stack. I’m excited to see the product evolve in the years to come, and have faith in Attio’s ability to scale with Modal as we grow.”",
+        "links": []
+      }
+    ]
+  },
+  {
+    "slug": "marker-io",
+    "name": "Marker.io",
+    "cs": "07",
+    "video": false,
+    "title": "Marker.io's Story | Attio",
+    "description": "How Marker.io uses Attio to surface high quality leads at scale.",
+    "h1": "How Marker.io uses Attio to surface high-quality leads at scale",
+    "people": [
+      {
+        "name": "Gary Gaspar",
+        "role": "CEO & Co-founder"
+      }
+    ],
+    "about": "Marker.io is a visual feedback and bug reporting tool, primarily for web development and design teams.",
+    "facts": [
+      {
+        "label": "Industry",
+        "value": "SaaS"
+      },
+      {
+        "label": "Company size",
+        "value": "11-50"
+      },
+      {
+        "label": "Headquarters",
+        "value": "Brussels, Belgium"
+      },
+      {
+        "label": "Founded",
+        "value": "2015"
+      }
+    ],
+    "features": [],
+    "challenge": "Marker.io was struggling to identify PQLs and proactively manage deals through Intercom and spreadsheets. They needed a flexible and powerful CRM which natively supported their product-led growth (PLG) motion.",
+    "solution": "Use Attio to build a CRM which integrates their product and customer data, helping them surface opportunities by providing visibility over their entire customer base.",
+    "results": [
+      "A single source of truth for all deals, product data, and customer data",
+      "A highly tailored CRM which precisely reflects and scales with their PLG motion",
+      "Vastly improved efficiency and accuracy of the lead triage process"
+    ],
+    "article": [
+      {
+        "kind": "h2",
+        "text": "Marker.io’s story"
+      },
+      {
+        "kind": "p",
+        "text": "In 2015, co-founders Gary Gaspar, Olivier Kaisin, and Emile-Victor Portenart were running a web design agency, when they realized just how laborious and inefficient quality assurance (QA) testing was.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“I was doing QA testing on a complex web application for one of our clients, and having to manually create individual Trello cards for every bug,” explained Gary Gaspar, CEO and co-founder of Marker.io. “There were hundreds of errors to flag, and I just reached the point where I was completely sick of this process. I knew there had to be a better way of annotating feedback for developers.”",
+        "links": [
+          {
+            "href": "https://marker.io",
+            "text": "Marker.io"
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "text": "Enter Marker.io, an intuitive, visual tool for reporting bugs and providing feedback on websites and web applications.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Marker.io is like Intercom, but for web developers,” says Gary. “Our website widget is a visual tool which makes it really easy to annotate and communicate your feedback in real time on your website. We then plug directly into your Trello, Linear, Github, etc, in two-way synchronization to enhance your existing workflow.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Since launching their tool in 2020, Marker.io has grown rapidly. “We've got 5,000 customers who have reported more than 3 million issues using our tool.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "Searching for a CRM which supports PLG"
+      },
+      {
+        "kind": "p",
+        "text": "Like many early-stage PLG startups, Marker.io was eager to avoid the cost and complexity of adopting a CRM for as long as possible.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“With most CRMs, you open them and instantly feel completely lost in the platform,\" says Gary. “Making them accurately reflect product-led growth is a huge undertaking and often impossible, so we were holding off on making that commitment for as long as we could.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Marker.io were instead using Intercom as a makeshift CRM of sorts, tracking all customer support and success issues, as well as inbound sales, which were growing at a rapid rate. But as they continued to scale, it became evident they needed a CRM to accelerate their growth.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Intercom was fantastic for handling our customer support and success issues, but it’s just not designed for managing deals or identifying PQLs,” says Gary. “We eventually reached a breaking point of sorts, where we realized we were getting hundreds of leads a week, and not being at all proactive in contacting the best opportunities. We also started receiving increasingly complex inbound interest, and had no way of getting a history or overview of all our deals,” says Gary.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The team tried a huge number of CRMs, but none of them fit their needs.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We stuck with Close for a while, but we just didn’t like how it forced us into one way of working,” says Gary. “It never really felt like it truly represented Marker.io, and we eventually just gave up.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "The Attio moment"
+      },
+      {
+        "kind": "p",
+        "text": "When Gary finally stumbled across Attio, he was thrilled to find a powerful and intuitive CRM which he could tailor precisely to Marker.io’s needs.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“There was an instant wow effect the first time I opened Attio. The UX is phenomenal, it's like Notion and Linear had a baby, and it just works,” says Gary.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Gary was blown away by Attio’s out-of-the-box integrations, and native support for Workspaces and Users, two pivotal types of data for PLG motions. “To just click on a company and instantly see if it has an active paying workspace was incredible, especially coming from PLG. Beforehand, there were so many customers that we hardly knew who we were really speaking to. Now in just a glance we can see what plan they’re on, how many issues they’ve logged with our tool, and so on.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "He was also impressed by the automatic enrichment in Attio. “It’s amazing to just type in a domain and instantly see the location, estimated ARR, employee count, and more pop up,” says Gary. “It’s a huge time-saver.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "How Marker.io uses Attio"
+      },
+      {
+        "kind": "p",
+        "text": "Today, Attio is at the heart of Marker.io’s product-led growth.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Our team spends hours a day in Attio, triaging leads and surfacing new opportunities. It’s our single source of truth for all product and customer data, and key to driving our growth.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "A powerful engine for product-led growth"
+      },
+      {
+        "kind": "p",
+        "text": "Attio’s data model natively supports PLG, meaning Marker.io was able to configure Attio precisely for their business model. Alongside the People and Companies standard objects, they’ve enabled the Workspaces and Users objects to track their product data, as well as the Deals object to work their pipeline.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Having Workspaces and Users objects, and then being able to link them to our Deals, People and Companies objects has accelerated our growth to a whole new level,” says Gary. “To be able to activate these pre-built objects at the click of a button is incredible, there’s no other CRM like this for PLG.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“I particularly love the way you can link different tables together and lookup data from other objects. Having our product and customer data all in one place gives us so much context when we’re speaking to people.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Marker.io has directly integrated with Segment, meaning that their Workspaces and Users objects are Attio constantly updated with real-time product data.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“There was such a strong IKEA effect when we set up Attio and connected our workspace to Segment. The whole onboarding process was incredibly intuitive, and within minutes we were able to build our CRM precisely for our needs. It worked exactly how I wanted it to from the get-go,” says Gary.",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Surfacing high-quality leads"
+      },
+      {
+        "kind": "p",
+        "text": "Integrating product and customer data inside their CRM has been a major unlock for Marker.io’s growth.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We have hundreds of new companies signing up every week, which made it really hard to find the gems,” says Gary. “Integrating our product data into Attio has been crucial to give us visibility over our entire customer base.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Having our product and customer data in one place really helps us surface new opportunities, including high-potential accounts, accounts who are a churn risk, and accounts we can target for upselling. Thanks to Attio, we’ve massively boosted our efficiency and increased our revenue.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Scaling up alongside Attio"
+      },
+      {
+        "kind": "p",
+        "text": "For Marker.io, Attio has quickly become a key tool in their GTM stack as they scale. “We’re continually adding new people into our Attio workspace as we expand the team,” says Gary.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“The response from the team has been overwhelmingly positive. We finally feel like we have a CRM that’s doing the work for us to accurately represent our business, rather than the other way around.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Gary feels confident in Attio’s ability to scale with Marker.io as they grow. “I feel like you have built such a strong architecture and infrastructure at Attio, and I’m really excited to build on top of it. The speed at which the team ships new updates is incredible, we’re really looking forward to seeing what’s next on the roadmap.”",
+        "links": []
+      }
+    ]
+  },
+  {
+    "slug": "union-square-ventures",
+    "name": "Union Square Ventures",
+    "cs": "08",
+    "video": false,
+    "title": "Union Square Ventures' Story | Attio",
+    "description": "How USV turned siloed data into a source of truth with Attio.",
+    "h1": "How USV turned siloed data into a source of truth with Attio",
+    "people": [
+      {
+        "name": "Lauren Young",
+        "role": "Head of Network Operations"
+      },
+      {
+        "name": "Matt Cynamon",
+        "role": "Head of Library Sciences"
+      }
+    ],
+    "about": "Union Square Ventures is a venture capital firm that invests at the edge of large markets being transformed by technological and societal pressures.",
+    "facts": [
+      {
+        "label": "Industry",
+        "value": "Venture Capital"
+      },
+      {
+        "label": "Company size",
+        "value": "11-50"
+      },
+      {
+        "label": "Headquarters",
+        "value": "New York City, New York"
+      },
+      {
+        "label": "Founded",
+        "value": "2003"
+      }
+    ],
+    "features": [
+      {
+        "name": "Custom objects",
+        "href": "/platform/data"
+      },
+      {
+        "name": "Workflows",
+        "href": "/platform/workflows"
+      },
+      {
+        "name": "Integrations",
+        "href": "/apps"
+      }
+    ],
+    "challenge": "Union Square Ventures (USV) was struggling with a legacy CRM that kept their team siloed and relationship data scattered. They needed a platform to consolidate their business operations and ensure team-wide visibility.",
+    "solution": "Use Attio to build a flexible CRM that perfectly matches their business model, organizes all their unique data, and automates updates for the whole team.",
+    "results": [
+      "90% company adoption in under three months, up from two users on legacy CRM.",
+      "A unified view of thousands of founder and investor relationships.",
+      "Managing 100+ annual events and all deal flow seamlessly in one place.",
+      "Fully automated onboarding workflows that save hours of valuable time each day."
+    ],
+    "article": [
+      {
+        "kind": "h2",
+        "text": "Investing at the edge"
+      },
+      {
+        "kind": "p",
+        "text": "In April 2000, the dot-com bubble burst, turning the venture capital industry upside down. But where others saw chaos in the market, two investors saw an unprecedented opportunity to build something new.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Fred Wilson and Brad Burnham founded Union Square Ventures in 2003 with a clear mission: invest in and foster early-stage, category-transforming companies.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“USV invests at the edge of large markets that are being transformed by technological and societal pressures,” shares Matt Cynamon, Head of Library Sciences. “We source founders that are determined to transform the world’s largest industries.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "As USV matured, they supported founders across emerging technologies, including social media, fintech, energy, climate, and more. To date, they’ve backed the rise of industry titans, from Twitter, Duolingo, and Etsy, to Twilio, Stripe, Coinbase, and more.",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "Limited by legacy CRMs"
+      },
+      {
+        "kind": "p",
+        "text": "For the USV team, defining success includes cultivating and strengthening relationships, connecting talented candidates to their portfolio, and maintaining a diverse network of stakeholders. As they scaled their operations, the team struggled with rigid legacy CRMs that couldn’t represent this data how they needed, creating serious adoption challenges.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We spent a long time trying to make our CRM work for us, but it was a total nightmare,” says Lauren Young, Head of Network Operations. “It required so much onboarding to add any value that in the end, only two of us actually used it, meaning a lot of important data wasn’t being captured.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "As their portfolio diversified, the team found it difficult to track their expanding universe of contacts in sufficient detail. USV tried switching to a CRM custom-built for venture capital firms, but found it still lacked key features.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“A lot of really obvious functionality was missing,” says Matt. “Very few CRMs even allow you to search your database, and we wanted to start customizing it right out of the box.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "For USV, working with a CRM was a huge burden: critical data was being lost across different teams and projects, and no one wanted to use it.",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "“This feels like magic.”"
+      },
+      {
+        "kind": "p",
+        "text": "Word of Attio first reached USV in 2023 when one of their portfolio companies, Forerunner, began using the platform.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Our partner, Nick, was so eager to learn more that he spoke to some Attio customers,” recalls Matt. “He came back to us and said, 'Attio feels like magic. This is what software should look and feel like. Let’s give it a try.'”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "USV made the leap immediately, and were blown away from the moment the team synced their inboxes into Attio.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We’ve struggled with fragmented software usage for over 20 years,” says Lauren. “But with Attio, all of the deal and relationship data that was once scattered across our stack has been pulled into one place. Having instant access to all our data is incredible. It definitely does feel like magic.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Even though I’m not a CRM expert, migrating to Attio was seamless,” adds Matt. “The Attio team is also always responsive, thoughtful, and eager to help when we have any questions.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "How Union Square Ventures uses Attio"
+      },
+      {
+        "kind": "p",
+        "text": "USV uses Attio as the core platform for enriching, organizing, and understanding all their relationship data. “We're a venture capital firm, so we find entrepreneurs, we invest in them and we manage our deals in Attio,” says Lauren.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We have a pretty unique data structure, which is split between two distinct but interconnected datasets: new deals, and our current network, which includes employees, partners, searches, and all our events. We spent years struggling to represent this in legacy CRMs, but Attio made it easy to set it up our way, in no time at all.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Building custom objects to mirror business operations"
+      },
+      {
+        "kind": "p",
+        "text": "USV uses Attio’s powerful data model to perfectly match their unique business and data structures.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "In addition to the standard Companies and People objects, the team built two custom objects to capture their data, their way: Events and Searches.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Outside of writing checks, events are probably the biggest thing that we do,” says Lauren. “We host over a hundred every year, all the way from intimate breakfasts to large parties with over 300 attendees. The Events object makes it easy to see when they’re happening, who’s attending, what they’re about, and more.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The team also uses the Searches object to organize talent searching for their portfolio companies. By leveraging workflows and relationship attributes, USV now has total visibility over their executive searches.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Our Talent Partner can see which firm is related to which talent search, so that she can meet with the relevant portfolio company and review their searches with them, making the whole prospecting process much more efficient.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Building out these unique objects and attributes has allowed USV to truly represent their data model, massively improving their data cleanliness and business operations.",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Automating their entire stack"
+      },
+      {
+        "kind": "p",
+        "text": "Attio is central to USV’s stack. The team uses Polytomic, a bidirectional ETL tool, to enrich records in Attio with data from Harmonic, a startup database that tracks over 20 million companies.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We’ve set up an automation where we make a query about a range of companies inside Harmonic and automatically pull those results into a list in Attio,” says Lauren. “I can then easily share that data directly with partners, right inside Attio.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Automated updates about events and prospects are crucial to enable USV’s senior leadership to focus on more strategic tasks.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“If a deal stage changes from In talks to Closed, the status of that company’s CEO is immediately converted into an ‘Active’ portfolio within our network, so we can outreach to them as needed.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Matt and Lauren also use Zapier to optimize the onboarding process inside Attio. “All we need to do is press a button and the selected record is published in a public-facing directory, added to a Google Group, and sent an automatic onboarding email. It works just like magic.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Attio workflows have also transformed the efficiency of USV operations. “A single run saves me up to 10 minutes per task,” says Lauren. “So, when you repeat that across numerous items, it quickly adds up to hours saved each day. And that’s just me, the cumulative effect across the team is immense.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "A single source of truth for the whole team"
+      },
+      {
+        "kind": "p",
+        "text": "USV needed to break down the silos that prevented team-wide visibility into the prospecting process and deal pipeline. Now, Attio acts as a single source of truth that over 90% of the team don’t just tolerate working in, but actively enjoy using.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Attio is the furthest we've ever gotten with any kind of firm-wide software, it’s a huge improvement,” says Matt.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“With software as essential as CRM, it’s crucial that you not only pick a tool that improves your workflow quality but also one your team actually wants to use. With Attio, we’ve found a solution that does it all.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "USV partners especially love the browser extension. “Partners can meet prospects right in their inbox, and, at the click of a button, get all of the context they need from Attio notes and enriched data. It's such a small thing, but it adds immense value for our team every day,” says Lauren.",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "Building the future with Attio"
+      },
+      {
+        "kind": "p",
+        "text": "“Anytime you make the switch to a new product, especially with something as important as CRM, it can make you nervous,” says Matt. “There’s always a risk in migrating from the known to the unknown, but with Attio it’s completely paid off, we haven’t looked back since.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "USV are adding additional custom objects to make their data even more nuanced, alongside building out how they import event attendee data into Attio. “We're probably 40% of the way into using Attio to its full capabilities, and we have so much more that we can do,” says Lauren.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Our setup, like our business, is always evolving, but we’re confident that there’s a path to building whatever we need with Attio,” adds Matt. “It truly feels like a prime example of best-in-class software that absolutely anyone can use.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Attio has revolutionized how USV views CRM. Now, the team are eager to see how the platform continues to add value into their next decade of ventures and beyond.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Attio is the tool at the center of all our relationships: past, present and future. We've been around for 20 years, we're going to be around for many more. We’re really excited to continue building out our vision with Attio.”",
+        "links": []
+      }
+    ]
+  },
+  {
+    "slug": "seedcamp",
+    "name": "Seedcamp",
+    "cs": "09",
+    "video": false,
+    "title": "Seedcamp's Story | Attio",
+    "description": "How Seedcamp used Attio to build the perfect deal engine.",
+    "h1": "How Seedcamp built the perfect deal engine using Attio",
+    "people": [
+      {
+        "name": "Miguel Pinho",
+        "role": "Head of Technology"
+      }
+    ],
+    "about": "Seedcamp is a venture capital firm partnering with Europe’s most exceptional tech founders from day one.",
+    "facts": [
+      {
+        "label": "Industry",
+        "value": "Venture Capital"
+      },
+      {
+        "label": "Company size",
+        "value": "11-50"
+      },
+      {
+        "label": "Headquarters",
+        "value": "London, UK"
+      },
+      {
+        "label": "Founded",
+        "value": "2007"
+      }
+    ],
+    "features": [
+      {
+        "name": "Custom objects",
+        "href": "/platform/data"
+      },
+      {
+        "name": "Workflows",
+        "href": "/platform/workflows"
+      },
+      {
+        "name": "API",
+        "href": "https://developers.attio.com/docs/getting-started"
+      },
+      {
+        "name": "Lists",
+        "href": "/help/reference/managing-your-data/lists"
+      },
+      {
+        "name": "Reports",
+        "href": "/platform/reporting"
+      }
+    ],
+    "challenge": "Seedcamp needed a powerful, flexible CRM that could transform the efficiency of its deal flow and extensive network.",
+    "solution": "Use Attio to build a tailor-made CRM to match their exact business model, combining powerful API integrations and custom tools to optimize their workflow.",
+    "results": [
+      "Increased visibility into every stage of their deal pipeline.",
+      "Dramatically accelerated lead management across the entire investment team.",
+      "Hundreds of hours saved per month through an automation-supported deal lifecycle."
+    ],
+    "article": [
+      {
+        "kind": "h2",
+        "text": "Building the ‘Silicon Valley’ of Europe"
+      },
+      {
+        "kind": "p",
+        "text": "For years, the road to startup success was thought to begin and end in Silicon Valley. But in the early 2000s, well ahead of their time, a small team of entrepreneurs set out to prove otherwise.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "With the right mix of talent, capital, and community, why shouldn’t Europe rival the US?",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The team saw this untapped potential as an opportunity to reshape the future of global technology. In 2007, they launched Seedcamp, a powerful network that nurtures European founders as they fundraise, collaborate, and scale.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We back exceptional founders and help them build something meaningful,” shares Miguel Pinho, Head of Technology. “First, we provide funding, and then we connect them with the right experts, partners, and investors from our network to enable them to achieve their ambitions.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "As Seedcamp gained recognition, the team scaled to support over 500 global powerhouses, with a portfolio including publicly listed companies like UiPath and Wise, and unicorns like Revolut and Synthesia.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Over the years, we’ve scaled with incredible founders, backed now well-known companies, and seen some wild journeys,” says Miguel. “Having a front-row seat to all of this has been incredible.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "A journey through suboptimal CRMs"
+      },
+      {
+        "kind": "p",
+        "text": "In 2015, Miguel joined the team to build the processes and tech stack critical to enabling Seedcamp’s growth.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Our previous stack was a nightmare: there were very few tools designed specifically for VCs at the time. With such a small team, it’s vital that we run our operations as efficiently as possible,” says Miguel.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“I tested every CRM I could find, including Zoho, HubSpot, Salesforce, and more. None provided the balance of flexibility and power we needed, and most were designed for larger teams with more resources.\"",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Eventually, Seedcamp settled for a makeshift setup. “We started using Airtable as a temporary solution,” recalls Miguel. “It allowed us to build databases, but we knew the lack of deep integrations with some of our key tools like Google Workspace, meant it wouldn’t be enough in the long term.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "In 2023, Seedcamp realized it was time for something custom-built. “We spent months evaluating modern solutions like Affinity and Zoho, but in the end, Attio stuck out. Now, we’ve been customers for over a year.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "The Attio moment"
+      },
+      {
+        "kind": "p",
+        "text": "Miguel first met Attio’s co-founder, Nicolas Sharp, in 2017. “We talked a lot about building the perfect VC tool stack, so I’ve been following Attio’s journey since the beginning.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "When the time came to choose a CRM, Attio’s powerful API-first structure and intuitive flexibility made it the clear winner.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We saw the value immediately. Before Attio, we'd have to ask each other so many time-consuming questions. Now, with such a powerful data model and sleek UI, we can find what we need without disrupting our workflows.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The Seedcamp team were also impressed by Attio’s unmatched customer support.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "\"Right from the outset we've felt so supported by the team, all the way through discovery, onboarding, and then ongoing customer support. Whenever I have a question, there's always a human I can reach out to,” says Miguel.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“But most of all, the Attio team treats customers as people. That’s extremely rare in the world of CRM.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "How Seedcamp uses Attio"
+      },
+      {
+        "kind": "p",
+        "text": "Attio is the core platform upon which Seedcamp manages its deal flow. Using lists, custom objects, workflows, and the Attio API, Miguel has built a powerful CRM tailored to their unique business model.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“At Seedcamp, we're very careful with the founder's journey, so it’s crucial that our CRM helps us to drive that personalized experience. Attio enables us to do exactly that.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Leveraging custom objects to build a bespoke data model"
+      },
+      {
+        "kind": "p",
+        "text": "For Seedcamp, data visibility is extremely important. “We visualize our deal flow in separate phases. Very few CRMs allow us to represent our unique approach without compromising visibility or efficiency, but with Attio it was easy.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Using Attio’s powerful data model, Seedcamp has built multiple custom objects that mirror precisely how the team operates.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Building this way in Attio has dramatically improved our investment processes and given us much better visibility over what’s in the pipeline, allowing the team to focus on important tasks, instead of manual, repetitive processes.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Miguel is excited that, with Attio, Seedcamp can continue to adapt these approaches if necessary in future.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Attio’s data model is incredibly flexible and easy to experiment with to extend its functionality. We’re even trialing a custom object for Investors to track Companies, People records, or both, all in one place.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Optimizing the deal flow engine"
+      },
+      {
+        "kind": "p",
+        "text": "With such a unique data model, Seedcamp needed to automate the repetitive tasks of their pipeline management to ensure the right records were moved between stages at the right time.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Miguel uses Attio’s powerful Automations feature to achieve this. “We built workflows to migrate our records between our custom objects so that whenever a specific criteria is met, it automatically creates or updates another record.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "These automations have had an immense impact on the team’s productivity. That way, Seedcamp can prioritize higher-value tasks.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Although on the surface each workflow saves only a few seconds, the compounding effect of running them repeatedly is vast, we’re saving hours, even days, every month.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Miguel also uses the Zapier integration to build additional automations between Attio and the rest of Seedcamp’s stack.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We’ve configured a number of automations which create tasks for the team to update data in Attio, or sync data between other platforms into an Attio list. It’s made our processes so much more efficient.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Creating a source of truth using the Attio API"
+      },
+      {
+        "kind": "p",
+        "text": "Recognizing the challenges the team faced in finding the data needed to work efficiently, Seedcamp has leveraged the Attio API to create tools that optimize these processes.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We built a custom browser extension to pull data from Typeform, Airtable and Attio into one place, so the team can access all the context they need without manually switching between different tools.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“The flexibility of the API and intuitive documentation made it easy to build and customize a tool which acts as a natural extension of our existing workflows. The whole team loves it because they have easy access to the critical information they need, it works like magic.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "Building further with Attio"
+      },
+      {
+        "kind": "p",
+        "text": "“It’s amazing to see how much progress we’ve made in just a year of using Attio. Even the team members that don’t use the interface as much still contribute to the shared knowledge base, it truly is a source of truth for the whole team.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Seedcamp is empowered to build anything they need on top of the platform, and are looking forward to adding more automations and integrations to further optimize their processes, enabling their team to focus on more impactful tasks.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“I’ve spent years working with CRMs, and tested more tools than I can count. Although I believe everyone should go through their own journey to choose a CRM, I’ve still recommended Attio to friends, colleagues, and even at VC conferences,” says Miguel.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We’ve had such a positive experience that I would tell everyone to explore Attio, regardless of your business model, it’s an incredible product.”",
+        "links": []
+      }
+    ]
+  },
+  {
+    "slug": "passionfroot",
+    "name": "Passionfroot",
+    "cs": "10",
+    "video": false,
+    "title": "Passionfroot's Story | Attio",
+    "description": "How Passionfroot built a creator-first CRM which scales.",
+    "h1": "How Passionfroot built a creator-first CRM which scales",
+    "people": [
+      {
+        "name": "Filip Mark",
+        "role": "Chief of Staff"
+      }
+    ],
+    "about": "Passionfroot is a software tool that helps creators manage all their sponsorships, collaboration requests, bookings, payments in one place.",
+    "facts": [
+      {
+        "label": "Industry",
+        "value": "Creator Economy"
+      },
+      {
+        "label": "Company size",
+        "value": "1-10"
+      },
+      {
+        "label": "Headquarters",
+        "value": "Berlin, Germany"
+      },
+      {
+        "label": "Founded",
+        "value": "2022"
+      },
+      {
+        "label": "Funding raised",
+        "value": "$15M (Series A)"
+      }
+    ],
+    "features": [
+      {
+        "name": "Lists",
+        "href": "/help/reference/managing-your-data/lists"
+      },
+      {
+        "name": "Integrations",
+        "href": "/apps"
+      },
+      {
+        "name": "Custom objects",
+        "href": "/platform/data"
+      }
+    ],
+    "challenge": "Passionfroot’s creator economy business did not fit the traditional sales CRM data model. Working at the intersection of creators and advertisers, they needed a live source of truth that let them kick-start product & business growth on both the creator and advertiser front.",
+    "solution": "Use Attio custom objects to build a CRM that matches their relational data model, business processes, and product-led growth strategy.",
+    "results": [
+      "25%+ increase in monthly revenue",
+      "Improved user engagement and retention",
+      "90% reduction in manual efforts"
+    ],
+    "article": [
+      {
+        "kind": "h2",
+        "text": "Passionfroot’s story"
+      },
+      {
+        "kind": "p",
+        "text": "Today’s creators don’t just create content: they’re also running businesses. Being successful as a creator requires growing an audience, creating original content, and running a full-scale ads business at the same time.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Despite being a $104 billion industry, creators didn’t have any enterprise software specifically built to help their business. Instead, they’ve been running their businesses on a hodge-podge of tools that take them away from what they truly love: creating.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Enter Passionfroot, a unified no-code platform for creators that helps them manage sponsorships, collaboration requests, bookings, payments and more, all in one place.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“What we're doing for creators is a lot like what Shopify does for merchants,” says Filip Mark, Chief of Staff at Passionfroot. “Sponsors can visit a creator’s Passionfroot page and buy ads intelligently in a seamless process. It’s AdSense, but bespoke and personal.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Backed by some of the world’s biggest creators like Ali Abdaal, the company has already become the go-to solution for some of the biggest creators worldwide. “We’ve got a strong user base of creators with millions of followers. The product is early, but the pull from our creators (both big and small) is there, and we’re building together with them.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "Product-led growth hampered by administrative overload"
+      },
+      {
+        "kind": "p",
+        "text": "Despite being less than two years old, Passionfroot has already seen an incredible surge in product-led growth.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“When creators use our product, they first fall in love with the design from our talented product team. After a few weeks, Passionfroot then becomes a natural extension of their business that they can’t live without,” says Filip Mark, Chief of Staff at Passionfroot. “Creators want to be focused on what they’re really passionate about: delivering value to their audiences. We’re giving them the platform to do that, without drowning in administrative work.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Passionfroot was experiencing their own version of this problem. Using the product, brands are able to make requests to sponsor with creators. As the product took off, tracking these requests manually became impossible.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "In an effort to make sure every request went through, Filip and his team set up a clearing house where they analyzed their database manually for any delayed requests and entered that data into Notion.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Every morning, I’d wake up and have to look at our database manually, feed new entries into Notion, and then update the status of each collaboration. I’d have to check if each sponsor had sent in a creative brief and paid each creator. It was like running the Nasdaq on paper, but with creators,” said Filip. “It worked in the beginning, but as soon as we started to get some traction, it became a full time job and a huge tax on our growth as a product and company.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "Finding a CRM when you have a non-traditional business model"
+      },
+      {
+        "kind": "p",
+        "text": "It was very clear Passionfroot needed to find a CRM. The only problem was that almost all CRMs almost always follow a data model built around accounts, companies, people and deals / opportunities objects (object is the term for data structures in CRM).",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Given Passionfroot’s unique business, the standard CRM model wasn’t going to work for them.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "\"We needed a CRM that could plug directly into our marketplace-esque business model and help us drive efficient business activities to support our product, not just typical sales use cases. Our customers are creators who build storefronts, but in those storefronts they sell sponsorships to sponsors (we call them partners). So we needed a CRM that could track creators, partners and collaborations,” says Filip. “Being able to handle this relational database use-case and integrate directly into our product with tools like Segment was a must.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Passionfroot first looked at Hubspot and Salesforce, but their user experiences, slow deployments, and incompatibility with its stack made it a non-starter.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Hubspot was unable to differentiate between our two different types of customers (creators that use our platform, and partners that book sponsorships from those creators). This rigidity just made them an expensive tool that gets the job half-done,” says Filip.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The company tried Airtable as well (“at least it’s more free form,” says Filip), but it didn’t work either because it was not capable of integrating with Segment directly to their database, and it doesn’t scale well.",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "The Attio moment"
+      },
+      {
+        "kind": "p",
+        "text": "“We were resigned to go with Hubspot, even though it couldn’t really completely fulfill our use case,” says Filip. “But then we discovered Attio. I thought right away: this is exactly what we need.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Filip was impressed with how flexible and powerful the product is, without sacrificing the user experience or having the trade-offs that come with other CRMs.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“The level of power, flexibility and context you get in Attio is amazing,” says Filip. “You can build what you want fast, and it all feels super intuitive. Best of all, even though you can do incredibly complex tasks, you don’t get bogged down in complexity.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Filip also was a big fan of the product design. “Attio is super crisp and clean. It makes a CRM look sexy, even if that’s weird to say. I find myself looking forward to opening Attio every day.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "How Passionfroot uses Attio"
+      },
+      {
+        "kind": "p",
+        "text": "Passionfroot uses Attio as the backbone of their product-led growth strategy. “It gives us a great representation of what’s going on in our product, which was a complete black box before. This lets us fill the gap between where our product is today, and what it needs to be in the future.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "A single source of truth for product-led growth (PLG)"
+      },
+      {
+        "kind": "p",
+        "text": "Using Attio’s custom objects feature, Passionfroot has configured their CRM to be built around the three data types that are core to their business: Creators, Partners and Collaborations.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“As Passionfroot is a destination for creators and brands, the setup is perfect for us, because we have a situation where when a transaction happens, we have a relationship with both the buyer and the seller,” says Filip. “Custom objects have been incredibly useful in that regard.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Passionfroot uses Attio to track how users are using their product and then take actions based on that data. “We can understand when creators are making sales, how many sales they’ve made, the status of their collaborations, and when new sponsors come in.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "They’ve set up a direct integration with Segment, meaning user events are always updated in real-time inside of Attio.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We were really impressed with how easy it was to integrate other tools with Attio. Attio has great documentation, which makes it very easy to get started and understand what’s going on.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Improving user engagement and retention"
+      },
+      {
+        "kind": "p",
+        "text": "Passionfroot uses Attio’s powerful record, filter and view features to monitor the user journey in their own product and take action if needed.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We use kanban views for what we call ‘user sprints,’” says Filip. “Basically, when a new creator signs up and a record is created, we can filter to create monthly sprints and see how far along our users are in key product events. We then use that data to ensure we’re prompting that user to move up the funnel.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "With Attio, Passionfroot is building a more fluid and effective user journey, bolstering both engagement and retention.",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Increasing revenue by 25%"
+      },
+      {
+        "kind": "p",
+        "text": "Before discovering Attio, Passionfroot was spending 12 hours a day making sure opportunities between creators and sponsors were going through to completion.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Using Attio, they’ve streamlined this process to mere minutes.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "However, they’re not just saving time. The team’s been able to use Attio to course-correct any delinquent payments and also drive new business with brands and creators through their Partner Network, generating an extra 25% in GMV per month, thanks to Attio. “It’s allowed us to plug the holes in our business, and now play offense.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "For Passionfroot, logging into Attio isn't just routine, it's essential. It's become a critical gear in their rapid growth machine.",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "The startup journey with Attio"
+      },
+      {
+        "kind": "p",
+        "text": "“Attio is an incredibly flexible product, you can build anything on it. It gives you the tools you need to build a CRM that’s exactly right to your business, your data, and your processes,” says Filip.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Filip estimates that Passionfroot has saved 90% of their time from an operations perspective by using Attio.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We know the results will be even better as we continue to build out Attio’s functionalities,” he adds.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Passionfroot also knows that they’ve picked the right platform to scale with them on their journey.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“As a company, Attio has the hunger to take in your feedback and make your feature requests happen. You just won’t get that level of product velocity from Hubspot or Salesforce.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“They have a bunch on the roadmap that we’re waiting for with anticipation, because they have an incredible foundation and vision that is aligned with the flexibility that modern tech teams like us need.”",
+        "links": []
+      }
+    ]
+  },
+  {
+    "slug": "june",
+    "name": "June",
+    "cs": "11",
+    "video": false,
+    "title": "June's Story | Attio",
+    "description": "How June uses Attio to unify their product and business data.",
+    "h1": "How June uses Attio to unify their product and business data",
+    "people": [
+      {
+        "name": "Alberto Incisa",
+        "role": "Head of Growth"
+      }
+    ],
+    "about": "June is a powerful product analytics tool that allows B2B SaaS companies to instantly understand the most important metrics for their business.",
+    "facts": [
+      {
+        "label": "Industry",
+        "value": "Product Analytics"
+      },
+      {
+        "label": "Company size",
+        "value": "1-10"
+      },
+      {
+        "label": "Headquarters",
+        "value": "San Francisco, California"
+      },
+      {
+        "label": "Founded",
+        "value": "2021"
+      },
+      {
+        "label": "Funding raised",
+        "value": "$2.4m (Seed)"
+      }
+    ],
+    "features": [
+      {
+        "name": "Lists",
+        "href": "/help/reference/managing-your-data/lists"
+      },
+      {
+        "name": "Workspaces object",
+        "href": "/help/reference/managing-your-data/objects"
+      },
+      {
+        "name": "Integrations",
+        "href": "/apps"
+      }
+    ],
+    "challenge": "June's product-led growth (PLG) model faced difficulties aligning with traditional CRMs. They needed a seamless integration of product data and CRM data in order to capture and act on the best PQLs (product-qualified leads).",
+    "solution": "Use Attio to build a CRM that combines their product and customer data to give them real-time insights into customer activities and potential growth areas.",
+    "results": [
+      "A single source of truth for all CRM and product data in one place",
+      "Strong customer retention with automatic churn risk identification",
+      "Automatic identification of PQLs, upsell opportunities, high value accounts"
+    ],
+    "article": [
+      {
+        "kind": "h2",
+        "text": "June's story"
+      },
+      {
+        "kind": "p",
+        "text": "In 2020, June co-founders Enzo Avigo and Ferrucio Balestreri were working at Intercom when they noticed that the product analytics tool the company used was so difficult to use that teammates were openly using other methods to get the job done.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“People were so fed up with the tool that they were using qualitative data much much more,” explained June CTO Ferrucio Balestreri. “Surveys, user interviews and gut feelings were much more preferred to data analytics. We understood that qualitative data had its value, but analytics are so important.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Both Avigo and Balestreri were amazed. The “aha” moment for them arrived, what if there existed an analytics tool that was powerful but also simple and easy to understand?",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "And that’s how June was born. With just a few minutes of setup, product-led growth (PLG) companies can easily understand their most important product metrics to understand their users and grow revenue.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Fast forward 3 years later, they’ve raised $2.4 million from tech’s top funds and incubators (Point Nine, Y Combinator), were named the fastest growing app on customer data platform Segment, and won the Golden Kitty award from Product Hunt as the #1 Data & Analytics app.",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "Searching for the right CRM"
+      },
+      {
+        "kind": "p",
+        "text": "For any PLG startup, product analytics is one of the first tools in any company’s stack.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Every company needs to understand metrics around acquisition (How many signups were this week vs last?), engagement (What is the retention rate?) and monetization (what unique value is causing users to sign up?)",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "This data is powerful because a company can see exactly how users are using the product, what features are sticky and what causes churn.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Because we’re a PLG startup building analytics products for PLG companies, we’ve always had a great understanding of how users are using our product,” said Alberto Incisa, Head of Growth at June. “But the question became: what about the other side of the equation? How do we identify and act on our PQLs (product-qualified leads?)”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The answer became clear: June needed a way to combine their product data with their CRM data. First they tried integrating their product data with Hubspot, but it created a significant amount of data quality and cost issues.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Since we weren’t able to have our own workspace object in Hubspot, we had to combine our data with the Contacts object. That caused a ton of data quality and consistency issues on our end” said Incisa. “In the end, we were going to have to put in too much effort at too much cost just to get something that might work for us. It wasn't worth it.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "June needed to find a CRM that could fit their exact PLG motion and data model.",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "The Attio moment"
+      },
+      {
+        "kind": "p",
+        "text": "“After briefly trying Hubspot, we switched back to our old way -- spreadsheets, looking up PQLs in Gmail, LinkedIn, etc.,” said Incisa. “Everything was manual and took a very long time.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "And then June found Attio. They were thoroughly impressed: with the design, the time-to-value, the power, and most importantly: the flexibility.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Attio’s design is awesome…it’s so nice and so clean,” says Incisa. “But the biggest thing for us was that Attio has custom objects, meaning we could mold it exactly how we wanted based on our PLG motion and data model.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "June was also really impressed by the speed of Attio’s product. “We were blown away by how fast Attio is, even when you have hundreds of thousands of records. You can search through your data crazy fast. It’s a wonderful experience.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "How June uses Attio"
+      },
+      {
+        "kind": "p",
+        "text": "June uses Attio as the engine for their product-led sales efforts. Using the tool, they are able to build new strategic GTM motions on top of their PLG efforts that allow them to increase revenue growth.",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "A single source of truth for customers, users and prospects"
+      },
+      {
+        "kind": "p",
+        "text": "June uses Attio’s custom objects and integration capabilities to configure their CRM to exactly match their data model and PLG motion.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Attio is like the engine of our GTM strategy, because we’re able to see all the analytics, business, and relationship data about our customers all in one place and then act on that data,” says Incisa.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "June has integrated their analytics and product data with two custom objects, Workspaces and Users. They’re linked relationally to Attio’s companies and people standard objects, meaning they get a whole view of the customer without any data quality or consistency issues.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“The ability to have separate objects for Users/People and Workspaces/Objects is a huge differentiator for us,” says Incisa. “It ensures that we can have a continuous relationship with a customer even if they switch companies. Users change roles, relationships stay constant.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Identifying product-qualified leads (PQLs) for revenue growth"
+      },
+      {
+        "kind": "p",
+        "text": "Using Attio’s view and list features, as well as built-in data enrichment, June is able to quickly identify which of their workspaces are product-qualified leads.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We’re able to see in real time which of our free workspaces are using the product a lot and then reach out super quickly,” says Incisa. “It’s amazing because we right away get all the context on not just if anyone on our team has an existing relationship with the company, but also their industry, location, employee range and ARR.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The ARR data actually allows June to automatically see which of their workspaces and users come from companies with high ARR. “We’re able to use that data point to reach out and start building relationships with companies that could present great expansion opportunities.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Product-led growth with a human touch"
+      },
+      {
+        "kind": "p",
+        "text": "Attio’s ability to integrate product data with CRM data has played a key role in June’s growth journey.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Product-led growth doesn’t mean zero human interaction. Building relationships with customers is still incredibly important,” says Incisa.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Integrating our product data in Attio has allowed us to easily identify high-potential accounts, accounts that are a churn risk, and power users on our free plan that could be great upsell opportunities,” says Incisa.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We don’t have a sales team, so everything needs to be super efficient. With Attio, we can be super efficient and ensure we’re not letting customers slip through the cracks. In fact, we’ve gotten so much value out of Attio that we decided to build an integration for it for our customers in our own product.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The new integration between June and Attio is now live. Read about the announcement here.",
+        "links": [
+          {
+            "href": "/blog/attio-june-integration",
+            "text": "here"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "baton",
+    "name": "Baton",
+    "cs": "12",
+    "video": false,
+    "title": "Baton's Story | Attio",
+    "description": "How Baton built the backbone of their business using Attio workflows.",
+    "h1": "How Baton built the backbone of their business using Attio workflows",
+    "people": [
+      {
+        "name": "Chat Joglekar",
+        "role": "Head of Growth"
+      }
+    ],
+    "about": "Baton is a marketplace which offers owners of small businesses free valuations to help them grow and sell to the right buyers at the right time.",
+    "facts": [
+      {
+        "label": "Industry",
+        "value": "Marketplace"
+      },
+      {
+        "label": "Company size",
+        "value": "1-10"
+      },
+      {
+        "label": "Headquarters",
+        "value": "New York City, New York"
+      },
+      {
+        "label": "Founded",
+        "value": "2021"
+      },
+      {
+        "label": "Funding raised",
+        "value": "$2.8m (Seed)"
+      }
+    ],
+    "features": [
+      {
+        "name": "Workflows",
+        "href": "/platform/workflows"
+      },
+      {
+        "name": "Custom objects",
+        "href": "/platform/data"
+      },
+      {
+        "name": "Integrations",
+        "href": "/apps"
+      }
+    ],
+    "challenge": "Baton’s early-stage CRM of Airtable, Retool and Notion hindered their ability to grow and scale, causing numerous bottlenecks and data visibility issues.",
+    "solution": "Use Attio to centralize their sales-led GTM efforts, automating updates throughout the sales process to drive and support their growth.",
+    "results": [
+      "25%+ savings on time spent manually updating records",
+      "A unified source of updates on every aspect of the GTM motion for the whole team",
+      "A constantly evolving CRM that grows alongside their business & integrates and syncs with their internal databases"
+    ],
+    "article": [
+      {
+        "kind": "h2",
+        "text": "Baton’s story"
+      },
+      {
+        "kind": "p",
+        "text": "Small businesses play a vital role in both our economy and our communities. Yet if owners want to understand their company’s valuation or find the right buyer, they face many difficulties. The lack of transparent marketplaces means that owners risk undervaluing or overvaluing their business, often leading to financial losses or missed opportunities. As a result many small businesses simply shut down rather than transferring ownership, entailing vast losses for owners and preventing many promising entrepreneurs from ever running a small business.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Enter Baton, a marketplace for small businesses that offers free valuations to support owners in planning their next move, be it growing or selling their business.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“You can think of Baton as the Zillow for small businesses, a trusted and transparent marketplace where the business, the financials and everything else that’s required is verified,” says Chat Joglekar, co-founder and CEO of Baton. “That’s really what we’re aiming to build.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "Struggling with a DIY CRM"
+      },
+      {
+        "kind": "p",
+        "text": "Like many early-stage startups, Baton held off on adopting a CRM as long as they could because of the complexity and slow time-to-value typically associated with traditional CRMs.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Finding and then setting up a CRM is usually a huge ordeal. It’s a really big buying decision and you get locked in,” says Chat. “Making them work for your business in a way that drives growth is very difficult. We knew we had to get a CRM at some point, but we wanted to push that out for as long as possible.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Baton instead integrated a variety of tools together, including Airtable, Retool and Notion, to track their customer relationships. This worked initially, but like all DIY, stitched together systems it was cumbersome, manual, and incredibly hard to scale. Ensuring that the data stored in each of these different tools was correct and consistent was an increasingly large burden for the team.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Our biggest challenge by far was making sure that data was up-to-date and consistent across all of our tools,” says Chat. “What stage were people at? Had they given us their data via our onboarding flow? We would actually go to Retool, which we use as our admin dashboard, and manually copy and paste each of those things into Airtable. That took hours of our customer success and sales reps’ time.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The surging volume of administrative tasks was soon taking up multiple hours a day. This threatened the team’s productivity and scaling potential, leading Baton to urgently search for a CRM solution.",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "The Attio moment"
+      },
+      {
+        "kind": "p",
+        "text": "Although the need for a CRM was evident, Chat was eager to avoid the rigid structure of traditional CRMs, especially Salesforce.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“It was important to us to find something that wasn’t Salesforce. That’s because once you’re on it, everything takes so long to implement. You have to hire developers just to get things going and you can’t make any quick changes. You just get locked in. So I was trying to find a solution that fit everything we wanted with nothing we didn’t.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Baton also quickly ruled out Hubspot, because it wasn’t possible to easily implement custom objects (object is the term for the data structures in a CRM). As a marketplace business, the traditional CRM structure of Companies / Contacts / Deals just wasn’t enough.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Hubspot offered a lot of features, but its structure was still too rigid for our longer-term goals. We really want to reach a point where we have every small business in America stored in our CRM, and Hubspot just lacks the power and flexibility we need to achieve this.” Due to the sensitive nature of small business data, it was important to find a solution that met Baton’s security standards.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "So when Chat finally found Attio, he was delighted to see a lightweight and secure CRM that he could build out precisely the way he wanted.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Chat was instantly impressed by the power and flexibility of Attio, and particularly the power of its automation engine. “The fact that you’re not locked into a structure feels good. With Attio you get the flexibility of spreadsheets and Airtable but with the power of a very advanced CRM. You can pretty much automate any business process and mold it to your exact data structure.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "He was also impressed with how easy it was to use Attio to bring Baton’s DIY setup right into Attio.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“It was fortuitous timing because we were in the zone of outgrowing our Airtable instance, and I think Attio has all the things we liked about Airtable, but with much more power since it’s got the true features of an advanced CRM. There were just the right amount of built-in assumptions that we didn’t need to build everything from scratch, whilst still having enough flexibility that we could structure our CRM precisely how we wanted.”",
+        "links": []
+      },
+      {
+        "kind": "h2",
+        "text": "How Baton uses Attio"
+      },
+      {
+        "kind": "p",
+        "text": "Today, Attio is integral to Baton’s entire GTM strategy. Using custom objects, Baton has configured Attio around its three key data types: Buyers, Sellers, and Leads. Paired with the newly released Automations feature, these constitute the primary driving forces for Baton’s ever-evolving sales pipeline.",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Automating sales processes"
+      },
+      {
+        "kind": "p",
+        "text": "Before finding Attio, Baton was spending multiple hours a day manually updating every small piece of data whenever they changed the stage of a business in their three-part sales process. Thanks to the newly released Automations feature, Baton now automates all of these processes. This reassures the team that nothing falls through the cracks between their different pipelines by sending them automatic reminders when particular accounts need following up, or instantly updating the stage of a business when an attribute is changed.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Baton has also been particularly innovative in automating their weighted pipeline forecast, building a workflow specifically to update the probability of closing a deal based on the stage of the business in a pipeline.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "The impact of automating these tasks on Baton’s productivity has been vast. “We’ve saved 25 to 30% of the sales team time using Attio Automations,” said Chat. “It’s helped us scale tremendously and clear a huge chunk of time off the sales team.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "With plans to start mobilizing the Outreach integration within Automations in the coming weeks, Baton anticipates saving an additional 25 to 30% of the sales team’s time by automating Outreach sequences.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Since moving to Attio, Baton has also lessened the burden on the engineering team to support admin functionality needed by the sales team, a big problem Chat has faced when using Salesforce in the past. While the engineering team uses Attio’s developer-friendly tools to keep user data in sync with Baton’s database, Attio empowers the sales team to create their own views and workflows in a quick and intuitive way without having to wait for engineering.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Attio’s list and view features are incredibly powerful. We can slice and dice the data in so many ways,” says Chat.",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Custom data structures for their marketplace business model"
+      },
+      {
+        "kind": "p",
+        "text": "Baton’s marketplace business model meant that the traditional CRM data structure of Contacts / Companies / Deals wasn’t going to be enough for them. Small business owners and buyers must fill out surveys to verify all their data. Baton needed to be able to incorporate that data inside their CRM.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "With Attio, they’ve been able to build objects for Buyers, Sellers and Leads, the three key data structures their business relies upon. Using Attio’s API, they’re able to automatically sync that data in Attio and then link it to their Company object.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Attio’s custom objects and API have made it so much easier for us to understand what’s going on with our customers and prospects,” says Chat. “It’s pretty amazing we can have a completely custom CRM that supports our business and data model with very little setup.”",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Automated, real-time updates to keep the team on the same page"
+      },
+      {
+        "kind": "p",
+        "text": "Baton also integrates Automations with Slack to ensure that the entire Baton team is on the same page, sending real-time notifications for a vast range of use cases.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“Slack is such an important tool for us day-to-day, so being able to sync our CRM and Slack together has made a big impact. We’re all kept in the loop in real time as things happen. For example, we’ve built a workflow specifically for valuation reports which sends a Slack notification whenever we deliver a valuation. These valuations are really important for our team, so it’s great to keep the engineers and designers informed in real-time of what’s going on on the GTM side of things.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Baton has also automated Slack notifications for when deals are closed, financial details need updating and more. These frequent updates ensure that everyone in Baton understands the current GTM strategy, maximizing the efficiency of collaboration between different teams.",
+        "links": []
+      },
+      {
+        "kind": "h3",
+        "text": "Scaling up alongside Attio"
+      },
+      {
+        "kind": "p",
+        "text": "Chat believes that “a tool like Attio is so important for an early-stage startup because it allows you to build and iterate your sales motion from the ground up really quickly.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "For Baton, Attio has quickly become an integral tool in their stack to drive and support their goals to scale. In a short time, Baton has already gone from relying on a DIY Airtable to running a powerful, complex CRM that serves as the backbone for all their GTM efforts.",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "“We know that Attio is going to grow with us. It’s such a key strategic platform for us, our growth and our ability to scale, sitting on top of our data. Also, the customer support is top-notch. We get replies incredibly fast, which you just wouldn’t see at Salesforce or Hubspot.”",
+        "links": []
+      },
+      {
+        "kind": "p",
+        "text": "Attio has also received overwhelmingly positive feedback from the team. “Everyone on the GTM side has seen such a big boost, and so too have the engineers, since they can focus on building our product. We’re excited to see how Baton and Attio grow together in the years to come.\"",
+        "links": []
+      }
+    ]
+  }
+]

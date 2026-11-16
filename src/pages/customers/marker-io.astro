@@ -1,0 +1,11 @@
+---
+import CustomerStory from "../../components/CustomerStory.astro";
+import stories from "../../data/customers.json";
+
+// Marker.io's story, copy fetched live from https://attio.com/customers/marker-io
+// on 2026-11-16 (HTTP 200). Data lives in src/data/customers.json.
+const story = stories.find((entry) => entry.slug === "marker-io");
+if (!story) throw new Error("Missing story data for marker-io");
+---
+
+<CustomerStory story={story} />
