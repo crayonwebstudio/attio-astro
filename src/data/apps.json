@@ -1,0 +1,2163 @@
+{
+ "categories": [
+  {
+   "id": "analytics",
+   "name": "Analytics",
+   "apps": [
+    {
+     "slug": "chatgpt",
+     "name": "ChatGPT",
+     "vendor": "Attio",
+     "description": "Bring your Attio CRM into ChatGPT",
+     "official": true
+    },
+    {
+     "slug": "claude",
+     "name": "Claude",
+     "vendor": "Attio",
+     "description": "Search, manage, and update Attio from Claude",
+     "official": true
+    },
+    {
+     "slug": "mcp",
+     "name": "MCP",
+     "vendor": "Attio",
+     "description": "Use your own LLM to read and write data in Attio",
+     "official": true
+    },
+    {
+     "slug": "segment",
+     "name": "Segment",
+     "vendor": "Attio",
+     "description": "Create and update records in Attio using Segment event data",
+     "official": true
+    },
+    {
+     "slug": "fibbler",
+     "name": "Fibbler",
+     "vendor": "Fibbler",
+     "description": "Match LinkedIn Ads data to CRM accounts and prove ROI",
+     "official": true
+    },
+    {
+     "slug": "leadjourney",
+     "name": "Leadjourney",
+     "vendor": "Leadjourney",
+     "description": "Ad attribution for your Attio CRM",
+     "official": true
+    },
+    {
+     "slug": "cometly",
+     "name": "Cometly",
+     "vendor": "Cometly",
+     "description": "AI Marketing Attribution & Analytics Software",
+     "official": true
+    },
+    {
+     "slug": "outdoo",
+     "name": "Outdoo AI",
+     "vendor": "Outdoo AI",
+     "description": "Bring coaching and AI roleplay insights into Attio",
+     "official": true
+    },
+    {
+     "slug": "etropo",
+     "name": "Etropo",
+     "vendor": "Etropo",
+     "description": "Modern and efficient way to manage your marketing budget.",
+     "official": true
+    },
+    {
+     "slug": "segmetrics",
+     "name": "Segmetrics",
+     "vendor": "SegMetrics",
+     "description": "Uncover the hidden profit in every part of your funnel",
+     "official": true
+    },
+    {
+     "slug": "geomaps",
+     "name": "GeoMaps",
+     "vendor": "GeoMaps",
+     "description": "Turn your Attio CRM into an interactive map",
+     "official": false
+    },
+    {
+     "slug": "audit",
+     "name": "Audit",
+     "vendor": "dialed technologies",
+     "description": "Stop guessing how messy your Attio is",
+     "official": false
+    },
+    {
+     "slug": "schema-map",
+     "name": "Schema Map",
+     "vendor": "Wintactix",
+     "description": "See your whole Attio schema as one clear, live diagram",
+     "official": false
+    },
+    {
+     "slug": "demand-sense",
+     "name": "DemandSense",
+     "vendor": "demand-sense-dev",
+     "description": "Trace how your Linkedin Ads grow revenue impact in Attio",
+     "official": false
+    },
+    {
+     "slug": "comp-code",
+     "name": "CompCode",
+     "vendor": "CompCode",
+     "description": "Commission tracking for every deal",
+     "official": false
+    },
+    {
+     "slug": "arka-analytics",
+     "name": "Arka Analytics",
+     "vendor": "Arka Analytics",
+     "description": "Copilot & Analytics for Attio",
+     "official": false
+    },
+    {
+     "slug": "prompt-ql",
+     "name": "PromptQL",
+     "vendor": "PromptQL",
+     "description": "Multiplayer AI with wiki",
+     "official": false
+    },
+    {
+     "slug": "first-distro",
+     "name": "First Distro",
+     "vendor": "FirstDistro",
+     "description": "Prevent churn. Increase retention.",
+     "official": false
+    },
+    {
+     "slug": "digitalpilot",
+     "name": "DigitalPilot",
+     "vendor": "DigitalPilot",
+     "description": "The attribution platform for B2B SMBs",
+     "official": false
+    },
+    {
+     "slug": "permute",
+     "name": "Permute",
+     "vendor": "Permute",
+     "description": "AI-native executive intelligence and automations platform",
+     "official": false
+    },
+    {
+     "slug": "falora",
+     "name": "Falora",
+     "vendor": "Falora",
+     "description": "Control Your Growth",
+     "official": false
+    },
+    {
+     "slug": "hey-sid",
+     "name": "Hey Sid",
+     "vendor": "Hey Sid",
+     "description": "See the pipeline your campaigns influenced",
+     "official": false
+    },
+    {
+     "slug": "improvado",
+     "name": "Improvado",
+     "vendor": "Improvado",
+     "description": "Ask your AI Agent questions across Attio + ad data",
+     "official": false
+    },
+    {
+     "slug": "productbet",
+     "name": "Productbet",
+     "vendor": "Productbet",
+     "description": "ProductBet connects your existing tools and uses AI to find",
+     "official": false
+    },
+    {
+     "slug": "supercurve",
+     "name": "Supercurve",
+     "vendor": "Supercurve",
+     "description": "Your AI marketing teammate for your Attio pipeline",
+     "official": false
+    },
+    {
+     "slug": "funnelstory",
+     "name": "FunnelStory",
+     "vendor": "FunnelStory",
+     "description": "FunnelStory is an AI Customer SuperIntelligence platform",
+     "official": false
+    }
+   ]
+  },
+  {
+   "id": "automations",
+   "name": "Automations",
+   "apps": [
+    {
+     "slug": "google-chrome",
+     "name": "Google Chrome",
+     "vendor": "Attio",
+     "description": "Manage Attio from Gmail and the web with a Chrome extension",
+     "official": true
+    },
+    {
+     "slug": "zapier",
+     "name": "Zapier",
+     "vendor": "Attio",
+     "description": "Connect Attio to thousands of services and build powerful automations",
+     "official": true
+    },
+    {
+     "slug": "slack",
+     "name": "Slack",
+     "vendor": "Attio",
+     "description": "Ask anything and trigger workflows from Slack",
+     "official": true
+    },
+    {
+     "slug": "pipedream",
+     "name": "Pipedream",
+     "vendor": "Pipedream",
+     "description": "Build and deploy AI agents for Attio with Pipedream",
+     "official": true
+    },
+    {
+     "slug": "spiich",
+     "name": "Spiich",
+     "vendor": "Spiich Labs",
+     "description": "AI sales assistant",
+     "official": true
+    },
+    {
+     "slug": "whalesync",
+     "name": "Whalesync",
+     "vendor": "Whalesync",
+     "description": "Two-way sync with Airtable, Notion, Sheets, and more",
+     "official": true
+    },
+    {
+     "slug": "asana",
+     "name": "Asana",
+     "vendor": "Attio",
+     "description": "Create Asana tasks and projects from Attio workflows",
+     "official": true
+    },
+    {
+     "slug": "click-up",
+     "name": "ClickUp",
+     "vendor": "Attio",
+     "description": "Create ClickUp lists and tasks straight from Attio",
+     "official": true
+    },
+    {
+     "slug": "klavis-ai",
+     "name": "Klavis AI",
+     "vendor": "Klavis AI",
+     "description": "Open Source MCP Integrations for AI Applications",
+     "official": true
+    },
+    {
+     "slug": "den",
+     "name": "Den",
+     "vendor": "Den",
+     "description": "AI Connected Workspace",
+     "official": true
+    },
+    {
+     "slug": "super",
+     "name": "Slite",
+     "vendor": "Slite",
+     "description": "AI Search on your Attio data + all your company tools",
+     "official": true
+    },
+    {
+     "slug": "okta",
+     "name": "Okta",
+     "vendor": "Attio",
+     "description": "Provides Oauth2 configuration for SCIM in Okta",
+     "official": true
+    },
+    {
+     "slug": "jet-admin-apps",
+     "name": "Jet Admin",
+     "vendor": "Jet Admin",
+     "description": "No-Code Web App Builder",
+     "official": true
+    },
+    {
+     "slug": "scoutos",
+     "name": "Scoutos",
+     "vendor": "Scoutos",
+     "description": "Build AI agents that automate workflows, connect tools",
+     "official": true
+    },
+    {
+     "slug": "default",
+     "name": "Default",
+     "vendor": "Default",
+     "description": "Automate inbound scheduling, routing & enrichment workflows",
+     "official": true
+    },
+    {
+     "slug": "zams",
+     "name": "Zams",
+     "vendor": "Zams",
+     "description": "Run your sales stack from Attio in plain English.",
+     "official": true
+    },
+    {
+     "slug": "arcade-dev",
+     "name": "Arcade.dev",
+     "vendor": "Arcade.dev",
+     "description": "Securely connect AI agents to Attio",
+     "official": true
+    },
+    {
+     "slug": "journeybee",
+     "name": "Journeybee",
+     "vendor": "Journeybee",
+     "description": "PRM - Partner Relationship Management",
+     "official": true
+    },
+    {
+     "slug": "launchyfi",
+     "name": "Launchyfi",
+     "vendor": "Launchyfi",
+     "description": "Seamlessly sync Attio with Launchyfi to power AI GTM",
+     "official": true
+    },
+    {
+     "slug": "magpai",
+     "name": "Magpai",
+     "vendor": "Magpai",
+     "description": "Workflows that don't feel like work.",
+     "official": true
+    },
+    {
+     "slug": "synter",
+     "name": "Synter",
+     "vendor": "Synter",
+     "description": "Synter Media AI, sync your CRM data to build targeted ads",
+     "official": true
+    },
+    {
+     "slug": "civic-iq",
+     "name": "Civic IQ",
+     "vendor": "Civic IQ",
+     "description": "Intent Signals for Gov Sellers",
+     "official": true
+    },
+    {
+     "slug": "semblyai",
+     "name": "Sembly AI",
+     "vendor": "SemblyAI",
+     "description": "Turn meetings into CRM notes, tasks & contacts",
+     "official": true
+    },
+    {
+     "slug": "venta-ai",
+     "name": "Venta AI",
+     "vendor": "Venta AI",
+     "description": "The compliant AI colleague for sales teams in Europe",
+     "official": true
+    },
+    {
+     "slug": "onecli",
+     "name": "OneCLI",
+     "vendor": "OneCLI",
+     "description": "AI agent gateway for secure, scoped API access to Attio",
+     "official": true
+    },
+    {
+     "slug": "luo",
+     "name": "Luo",
+     "vendor": "Luo Technologies",
+     "description": "Your work runs on Luo",
+     "official": true
+    },
+    {
+     "slug": "teammates",
+     "name": "Teammates",
+     "vendor": "Teammates",
+     "description": "Empower your virtual workforce to manage your sales process",
+     "official": true
+    },
+    {
+     "slug": "howdy-go",
+     "name": "HowdyGo",
+     "vendor": "HowdyGo",
+     "description": "Interactive product demo software for go-to-market teams",
+     "official": true
+    },
+    {
+     "slug": "obvious",
+     "name": "Obvious",
+     "vendor": "Obvious AI",
+     "description": "The gap between your potential and your tools just closed",
+     "official": true
+    },
+    {
+     "slug": "import2-import-2",
+     "name": "Import2",
+     "vendor": "Import2",
+     "description": "1-click data migration for Attio",
+     "official": false
+    },
+    {
+     "slug": "composio",
+     "name": "Composio",
+     "vendor": "Composio Development",
+     "description": "Skip the specs , seamlessly integrate any tool you need",
+     "official": false
+    },
+    {
+     "slug": "cal-sync",
+     "name": "Cal.com Sync",
+     "vendor": "Kolaai",
+     "description": "Sync events from Cal.com into Attio",
+     "official": false
+    },
+    {
+     "slug": "integration-app-inc-integration-app",
+     "name": "Membrane",
+     "vendor": "Integration.app",
+     "description": "Easily integrate Attio with various SaaS platforms",
+     "official": false
+    },
+    {
+     "slug": "swan",
+     "name": "Swan",
+     "vendor": "Swan",
+     "description": "AI agent that syncs Attio records and automates GTM workflow",
+     "official": false
+    },
+    {
+     "slug": "deeplineapi",
+     "name": "Deepline",
+     "vendor": "DeeplineApi",
+     "description": "Research and enrich Attio records with AI agents",
+     "official": false
+    },
+    {
+     "slug": "oneleet",
+     "name": "Oneleet",
+     "vendor": "Oneleet",
+     "description": "Review who has access to your Attio workspace",
+     "official": false
+    },
+    {
+     "slug": "base-44",
+     "name": "Base44",
+     "vendor": "Connectors-base44",
+     "description": "Bring your Attio CRM data into custom Base44 apps",
+     "official": false
+    },
+    {
+     "slug": "workflow-utilities",
+     "name": "Advanced Workflow Automations",
+     "vendor": "Neon Deer Data Labs",
+     "description": "Build smarter workflows from your Attio activity",
+     "official": false
+    },
+    {
+     "slug": "flowla",
+     "name": "Flowla",
+     "vendor": "Flowla",
+     "description": "Deal rooms for Attio, with auto sync and engagement tracking",
+     "official": false
+    },
+    {
+     "slug": "via-socket",
+     "name": "viaSocket",
+     "vendor": "walkover",
+     "description": "Connect Attio with 2,200+ apps and automate your workflows",
+     "official": false
+    },
+    {
+     "slug": "quotient",
+     "name": "Quotient",
+     "vendor": "Quotient",
+     "description": "Automate your marketing using Attio People and Company data",
+     "official": false
+    },
+    {
+     "slug": "foyai",
+     "name": "Foyai",
+     "vendor": "Foyai",
+     "description": "Turn Attio deals into powerful sales rooms",
+     "official": false
+    },
+    {
+     "slug": "revenuehero",
+     "name": "RevenueHero",
+     "vendor": "RevenueHero",
+     "description": "Inbound lead conversion & scheduling",
+     "official": false
+    },
+    {
+     "slug": "sim",
+     "name": "Sim",
+     "vendor": "Sim",
+     "description": "Build, deploy, and manage AI Agents",
+     "official": false
+    },
+    {
+     "slug": "partnero",
+     "name": "Partnero",
+     "vendor": "Partnero",
+     "description": "Keep affiliates, deals, and commissions in sync",
+     "official": false
+    },
+    {
+     "slug": "workflow-chain",
+     "name": "Workflow Chain",
+     "vendor": "Buildrhaus",
+     "description": "Trigger Attio workflows from other workflows",
+     "official": false
+    },
+    {
+     "slug": "konnectify",
+     "name": "Konnectify",
+     "vendor": "Konnectify",
+     "description": "Connect Attio to your other apps and automate workflows",
+     "official": false
+    },
+    {
+     "slug": "probo-access-review",
+     "name": "Probo Access Review",
+     "vendor": "Probo",
+     "description": "Bring Attio workspace members into your access reviews",
+     "official": false
+    },
+    {
+     "slug": "cotera",
+     "name": "Cotera Pre Meeting Research",
+     "vendor": "Cotera",
+     "description": "Get a dossier on the person you're meeting with.",
+     "official": false
+    },
+    {
+     "slug": "round-robin-pro",
+     "name": "Round Robin Pro",
+     "vendor": "Kolaai",
+     "description": "Automatically assign users to records and list items",
+     "official": false
+    },
+    {
+     "slug": "autoscaled",
+     "name": "AutoScaled",
+     "vendor": "AutoScaled",
+     "description": "Generate personalized sales presentations from Attio data",
+     "official": false
+    },
+    {
+     "slug": "fastnai",
+     "name": "fastn.ai",
+     "vendor": "fastnai",
+     "description": "Unified API to embed and manage SaaS integrations.",
+     "official": false
+    },
+    {
+     "slug": "ventos",
+     "name": "Ventos",
+     "vendor": "Ventos",
+     "description": "AI operating layer for VC and investment firms",
+     "official": false
+    },
+    {
+     "slug": "google-sheets-connector",
+     "name": "Superjoin Connector",
+     "vendor": "Superjoin",
+     "description": "AI-Powered data sync between Attio and Google Sheets",
+     "official": false
+    },
+    {
+     "slug": "docusign-iam-workflows",
+     "name": "Docusign Workflows by Fluidlabs",
+     "vendor": "Fluidlabs",
+     "description": "Pre-fill Docusign agreements and file them back in Attio",
+     "official": false
+    },
+    {
+     "slug": "airstride",
+     "name": "Airstride",
+     "vendor": "Airstride",
+     "description": "Partner revenue growth platform for channel teams",
+     "official": false
+    },
+    {
+     "slug": "chirp",
+     "name": "Chirp",
+     "vendor": "Birdie By Chirp",
+     "description": "Update Attio by voice after every sales call",
+     "official": false
+    },
+    {
+     "slug": "firestarter",
+     "name": "Firestarter",
+     "vendor": "Firestarter",
+     "description": "An AI commercial team that does the work, not the talk",
+     "official": false
+    },
+    {
+     "slug": "integrately",
+     "name": "Integrately",
+     "vendor": "Integrately",
+     "description": "Integrately - No code automation platform",
+     "official": false
+    },
+    {
+     "slug": "targenix",
+     "name": "Targenix",
+     "vendor": "Targenix",
+     "description": "Send Facebook and Instagram lead ads to Attio instantly",
+     "official": false
+    },
+    {
+     "slug": "wring-funding",
+     "name": "Wring",
+     "vendor": "WRING",
+     "description": "Claim AWS new client credits when you win a deal",
+     "official": false
+    },
+    {
+     "slug": "dimedove",
+     "name": "Dimedove",
+     "vendor": "Dimedove",
+     "description": "Qualify leads at scale.",
+     "official": false
+    },
+    {
+     "slug": "qobra",
+     "name": "Qobra",
+     "vendor": "Qobra",
+     "description": "#1 AI sales compensation and commission management platform",
+     "official": false
+    },
+    {
+     "slug": "regional-task-queue",
+     "name": "Regional Task Queue",
+     "vendor": "Buildrhaus",
+     "description": "Process your task queue by region and type",
+     "official": false
+    },
+    {
+     "slug": "veck",
+     "name": "Veck",
+     "vendor": "Veck",
+     "description": "Send Veck projects to Attio as deals",
+     "official": false
+    },
+    {
+     "slug": "agentteams",
+     "name": "AgentTeams",
+     "vendor": "AgentTeams",
+     "description": "AI employees that keep your CRM up to date",
+     "official": false
+    },
+    {
+     "slug": "bound",
+     "name": "Bound",
+     "vendor": "bound",
+     "description": "Bound is your FX copilot",
+     "official": false
+    },
+    {
+     "slug": "helios",
+     "name": "Helios",
+     "vendor": "WarpBuild",
+     "description": "The AI-native workflow automation platform",
+     "official": false
+    },
+    {
+     "slug": "tinct",
+     "name": "Tinct",
+     "vendor": "Tinct",
+     "description": "Personalize your landing pages for every company you target",
+     "official": false
+    },
+    {
+     "slug": "caddie-ai",
+     "name": "Caddie AI",
+     "vendor": "Caddie AI",
+     "description": "Your personal AI agent that learns and works like you.",
+     "official": false
+    },
+    {
+     "slug": "core-speed-connector",
+     "name": "CoreSpeed",
+     "vendor": "CoreSpeed",
+     "description": "Connect Attio to secure AI agents and workflows",
+     "official": false
+    },
+    {
+     "slug": "hyper-ai",
+     "name": "Hyper AI",
+     "vendor": "Hyper AI",
+     "description": "Turn every AI product demo into a person record with notes",
+     "official": false
+    },
+    {
+     "slug": "stimulir",
+     "name": "Stimulir",
+     "vendor": "Stimulir",
+     "description": "Agent Business OS",
+     "official": false
+    },
+    {
+     "slug": "pollen",
+     "name": "Pollen",
+     "vendor": "Pollen",
+     "description": "AI agents for customer success",
+     "official": false
+    },
+    {
+     "slug": "stilla",
+     "name": "Stilla",
+     "vendor": "Stilla",
+     "description": "Let AI closes the loop: customer request \u2192 ship \u2192 close deal",
+     "official": false
+    }
+   ]
+  },
+  {
+   "id": "billing",
+   "name": "Billing",
+   "apps": [
+    {
+     "slug": "pandadoc",
+     "name": "PandaDoc",
+     "vendor": "Attio",
+     "description": "Streamline documents end-to-end, without ever leaving Attio",
+     "official": true
+    },
+    {
+     "slug": "stripe",
+     "name": "Stripe",
+     "vendor": "Attio",
+     "description": "Integrate your Stripe account with Attio workflows",
+     "official": true
+    },
+    {
+     "slug": "sequence",
+     "name": "Sequence",
+     "vendor": "Sequence",
+     "description": "Modern quotes, contracts and billing for AI and SaaS",
+     "official": true
+    },
+    {
+     "slug": "maple-billing",
+     "name": "Measure",
+     "vendor": "Measure (formerly Maple)",
+     "description": "Spin up contracts and automate billing for your contacts",
+     "official": true
+    },
+    {
+     "slug": "hyperline",
+     "name": "Hyperline",
+     "vendor": "Hyperline",
+     "description": "The new standard for revenue management",
+     "official": true
+    },
+    {
+     "slug": "docupotion",
+     "name": "DocuPotion",
+     "vendor": "DocuPotion",
+     "description": "Documents & e-signatures: quotes, invoices, NDAs, contracts",
+     "official": true
+    },
+    {
+     "slug": "monetize-now",
+     "name": "MonetizeNow",
+     "vendor": "MonetizeNow",
+     "description": "AI-powered CPQ, Billing, Metering for omni-channel B2B SaaS",
+     "official": true
+    },
+    {
+     "slug": "turnstile",
+     "name": "Turnstile",
+     "vendor": "Turnstile",
+     "description": "Complete quote-to-cash for sales led startups in minutes",
+     "official": true
+    },
+    {
+     "slug": "stripe-invoicing",
+     "name": "Stripe Invoicing",
+     "vendor": "dialed technologies",
+     "description": "Automate billing with Stripe invoicing directly in Attio",
+     "official": false
+    },
+    {
+     "slug": "stripe-subscriptions",
+     "name": "Stripe Subscriptions",
+     "vendor": "dialed technologies",
+     "description": "Sync Stripe subscriptions into Attio",
+     "official": false
+    },
+    {
+     "slug": "attibooks",
+     "name": "Attibooks",
+     "vendor": "Craftt",
+     "description": "Create and sync QuickBooks invoices from any Attio record",
+     "official": false
+    },
+    {
+     "slug": "solvimon",
+     "name": "Solvimon",
+     "vendor": "Solvimon",
+     "description": "Integration for Solvimon quote to cash solution",
+     "official": false
+    }
+   ]
+  },
+  {
+   "id": "calling",
+   "name": "Calling",
+   "apps": [
+    {
+     "slug": "google-meet",
+     "name": "Google Meet",
+     "vendor": "Attio",
+     "description": "Record your Meet calls and update Attio while you talk",
+     "official": true
+    },
+    {
+     "slug": "microsoft-teams",
+     "name": "Microsoft Teams",
+     "vendor": "Attio",
+     "description": "Record, transcribe and analyze your Teams meetings in Attio",
+     "official": true
+    },
+    {
+     "slug": "zoom",
+     "name": "Zoom",
+     "vendor": "Attio",
+     "description": "Record, transcribe and analyze your Zoom calls in Attio",
+     "official": true
+    },
+    {
+     "slug": "granola",
+     "name": "Granola",
+     "vendor": "Granola",
+     "description": "Your AI-powered meeting notes, added to Attio",
+     "official": true
+    },
+    {
+     "slug": "fireflies",
+     "name": "Fireflies.ai",
+     "vendor": "Fireflies",
+     "description": "Automatically send meeting notes, tasks, and more to Attio",
+     "official": true
+    },
+    {
+     "slug": "aircall",
+     "name": "Aircall",
+     "vendor": "Attio",
+     "description": "Make phone calls and keep your CRM in sync",
+     "official": true
+    },
+    {
+     "slug": "quo",
+     "name": "Quo",
+     "vendor": "Quo",
+     "description": "The best phone system for growth",
+     "official": true
+    },
+    {
+     "slug": "circleback",
+     "name": "Circleback",
+     "vendor": "Circleback",
+     "description": "AI-powered meeting notes and automations.",
+     "official": true
+    },
+    {
+     "slug": "mobile-first-integrations-allo",
+     "name": "Allo",
+     "vendor": "The Mobile-First Company",
+     "description": "Get phone numbers with unlimited calls, synced to Attio",
+     "official": true
+    },
+    {
+     "slug": "just-call",
+     "name": "JustCall",
+     "vendor": "SaaS Labs",
+     "description": "The smarter way to connect, with AI insights built in.",
+     "official": true
+    },
+    {
+     "slug": "ringcentral",
+     "name": "RingCentral",
+     "vendor": "Attio",
+     "description": "Make phone calls",
+     "official": true
+    },
+    {
+     "slug": "claap",
+     "name": "Claap",
+     "vendor": "Claap",
+     "description": "Automate call transcription and data population with Claap.",
+     "official": true
+    },
+    {
+     "slug": "spinach-ai",
+     "name": "Spinach AI",
+     "vendor": "Spinach AI",
+     "description": "Supercharge your meetings with the power of AI.",
+     "official": true
+    },
+    {
+     "slug": "meetgeekai",
+     "name": "MeetGeek",
+     "vendor": "MeetGeek",
+     "description": "Automatically send meeting notes and tasks to Attio",
+     "official": true
+    },
+    {
+     "slug": "amie",
+     "name": "Amie",
+     "vendor": "Amie",
+     "description": "Record meetings and sync AI summaries",
+     "official": true
+    },
+    {
+     "slug": "nomi",
+     "name": "Nomi",
+     "vendor": "Nomi",
+     "description": "AI Sales Copilot: Real-time call guidance.",
+     "official": true
+    },
+    {
+     "slug": "dial-next",
+     "name": "DialNext",
+     "vendor": "DialNext",
+     "description": "Log calls and SMS activity to Attio records",
+     "official": true
+    },
+    {
+     "slug": "speck",
+     "name": "Speck",
+     "vendor": "Speck",
+     "description": "The Ambient Agent for Your Computer",
+     "official": true
+    },
+    {
+     "slug": "dialfyne",
+     "name": "Dialfyne",
+     "vendor": "Dialfyne",
+     "description": "Bring Attio context into Dialfyne calls",
+     "official": true
+    },
+    {
+     "slug": "ringover-integration",
+     "name": "Ringover",
+     "vendor": "Ringover",
+     "description": "Turn every call & exchange into AI-powered Attio insights",
+     "official": true
+    },
+    {
+     "slug": "cloudtalk",
+     "name": "Cloudtalk",
+     "vendor": "cloudtalk",
+     "description": "Auto-log calls, SMS & AI insights into Attio records",
+     "official": false
+    },
+    {
+     "slug": "krisp-call",
+     "name": "KrispCall",
+     "vendor": "KrispCall",
+     "description": "KrispCall is a cloud telephony system for modern businesses.",
+     "official": false
+    },
+    {
+     "slug": "ringee-io",
+     "name": "Ringee.io",
+     "vendor": "Ringee",
+     "description": "Make calls from Attio with Ringee and sync call activity",
+     "official": false
+    },
+    {
+     "slug": "caretta",
+     "name": "Caretta",
+     "vendor": "Caretta",
+     "description": "Sales Call Assistant for Top Reps",
+     "official": false
+    },
+    {
+     "slug": "callpal",
+     "name": "CallPal",
+     "vendor": "CallPal",
+     "description": "Power dialing and click-to-call on your own SIP trunk",
+     "official": false
+    },
+    {
+     "slug": "aside",
+     "name": "Caret",
+     "vendor": "at",
+     "description": "Live answer copilot for enterprise tech sales",
+     "official": false
+    },
+    {
+     "slug": "reached",
+     "name": "Reached",
+     "vendor": "Reached",
+     "description": "3x more conversations, twice as fast.",
+     "official": false
+    },
+    {
+     "slug": "convo",
+     "name": "Convo",
+     "vendor": "Convo",
+     "description": "Meeting intelligence that automates your follow-up work",
+     "official": false
+    },
+    {
+     "slug": "kallio",
+     "name": "Kallio",
+     "vendor": "Kallio",
+     "description": "Connect Aircall, Dialpad, or 3CX: Calls, SMS, People",
+     "official": false
+    },
+    {
+     "slug": "knowzilla",
+     "name": "Knowzilla",
+     "vendor": "Knowzilla",
+     "description": "Navigation for sales. Real-time AI that guides every deal",
+     "official": false
+    },
+    {
+     "slug": "call-forges",
+     "name": "CallForges",
+     "vendor": "CallForges",
+     "description": "Log every CallForges call in Attio automatically",
+     "official": false
+    },
+    {
+     "slug": "miniti",
+     "name": "miniti",
+     "vendor": "miniti",
+     "description": "AI live meeting assistant and speech coach",
+     "official": false
+    },
+    {
+     "slug": "easy-ringer",
+     "name": "EasyRinger",
+     "vendor": "EasyRinger",
+     "description": "Place calls from Attio using your EasyRinger phone numbers",
+     "official": false
+    },
+    {
+     "slug": "heystream",
+     "name": "HeyStream",
+     "vendor": "HeyStream",
+     "description": "The live streaming platform built for B2B growth",
+     "official": false
+    },
+    {
+     "slug": "solardialer",
+     "name": "SolarDialer",
+     "vendor": "SolarDialer",
+     "description": "AI calls your Attio leads and logs every call",
+     "official": false
+    },
+    {
+     "slug": "backdrop",
+     "name": "Backdrop",
+     "vendor": "Backdrop",
+     "description": "Live in-call sales copilot",
+     "official": false
+    }
+   ]
+  },
+  {
+   "id": "communication",
+   "name": "Communication",
+   "apps": [
+    {
+     "slug": "gmail",
+     "name": "Gmail",
+     "vendor": "Attio",
+     "description": "Sync your workspace to your Gmail and Google Calendar",
+     "official": true
+    },
+    {
+     "slug": "outlook",
+     "name": "Outlook",
+     "vendor": "Attio",
+     "description": "Sync your workspace to Outlook to keep your team aligned",
+     "official": true
+    },
+    {
+     "slug": "groovin",
+     "name": "Groovin",
+     "vendor": "Groovin",
+     "description": "Sync your outreach channels to Attio",
+     "official": true
+    },
+    {
+     "slug": "resend",
+     "name": "Resend",
+     "vendor": "Attio",
+     "description": "Send emails and add contacts to segments from Attio",
+     "official": true
+    },
+    {
+     "slug": "slashy",
+     "name": "Slashy",
+     "vendor": "Slashy",
+     "description": "AI-native email client with first-party Attio integration",
+     "official": true
+    },
+    {
+     "slug": "kondo",
+     "name": "Kondo",
+     "vendor": "Kondo",
+     "description": "Superhuman for LinkedIn DMs",
+     "official": true
+    },
+    {
+     "slug": "telegram",
+     "name": "Telegram",
+     "vendor": "Attio",
+     "description": "Send Telegram messages and start workflows from bot commands",
+     "official": true
+    },
+    {
+     "slug": "scribeless",
+     "name": "Scribeless",
+     "vendor": "Scribeless",
+     "description": "Send direct mail from Attio",
+     "official": true
+    },
+    {
+     "slug": "housecat",
+     "name": "Housecat",
+     "vendor": "Housecat",
+     "description": "Never update your CRM again",
+     "official": true
+    },
+    {
+     "slug": "skylar-ai-roleplays",
+     "name": "Skylar",
+     "vendor": "Skylar",
+     "description": "Practice before the call - don\u2019t burn the deal.",
+     "official": true
+    },
+    {
+     "slug": "onbox",
+     "name": "Onbox",
+     "vendor": "Onbox",
+     "description": "Email for people who move hundreds of small cases a day",
+     "official": true
+    },
+    {
+     "slug": "hey-reach",
+     "name": "HeyReach",
+     "vendor": "Neon Deer Data Labs",
+     "description": "Centralize your LinkedIn outreach from HeyReach in Attio",
+     "official": false
+    },
+    {
+     "slug": "timelinesai-whatsapp-integration",
+     "name": "TimelinesAI WhatsApp Integration",
+     "vendor": "TimelinesAI",
+     "description": "Two-way WhatsApp messaging inside your Attio records",
+     "official": false
+    },
+    {
+     "slug": "super-link-in",
+     "name": "SuperLinkIn",
+     "vendor": "appstronauts",
+     "description": "Keep contacts and conversations connected to Attio",
+     "official": false
+    },
+    {
+     "slug": "salesmsg",
+     "name": "Salesmsg",
+     "vendor": "Salesmsg",
+     "description": "Texting, calling, and AI-powered conversations for Attio",
+     "official": false
+    },
+    {
+     "slug": "bird",
+     "name": "Bird",
+     "vendor": "Bird",
+     "description": "Message your customers across channels from Attio",
+     "official": false
+    },
+    {
+     "slug": "email-notifications",
+     "name": "Workspace Email Notifications",
+     "vendor": "Neon Deer Data Labs",
+     "description": "Send email alerts to workspace members via Attio workflows",
+     "official": false
+    },
+    {
+     "slug": "faqir",
+     "name": "Faqir",
+     "vendor": "Parma",
+     "description": "Your FAQs, Automated",
+     "official": false
+    },
+    {
+     "slug": "memoket",
+     "name": "Memoket",
+     "vendor": "Memoket",
+     "description": "Send meeting notes from Memoket to Attio",
+     "official": false
+    },
+    {
+     "slug": "recordkite-app",
+     "name": "Recordkite",
+     "vendor": "Recordkite",
+     "description": "Get your customer Slack conversations in Attio",
+     "official": false
+    },
+    {
+     "slug": "blujay",
+     "name": "Blujay",
+     "vendor": "Blujay",
+     "description": "Text your leads with iMessage directly from Attio",
+     "official": false
+    },
+    {
+     "slug": "salespeak-inbound-ai",
+     "name": "Salespeak Inbound AI",
+     "vendor": "Salespeak",
+     "description": "Website AI conversations and leads, synced into Attio",
+     "official": false
+    },
+    {
+     "slug": "postlude-ai",
+     "name": "Postlude",
+     "vendor": "Postlude",
+     "description": "Send follow-up emails in your own voice after every call",
+     "official": false
+    },
+    {
+     "slug": "hazelchat",
+     "name": "Hazelchat",
+     "vendor": "Hazelchat",
+     "description": "Turn website chat enquiries into people with notes",
+     "official": false
+    },
+    {
+     "slug": "snailreach",
+     "name": "SnailReach",
+     "vendor": "SnailReach",
+     "description": "One personal letter per prospect, logged in Attio",
+     "official": false
+    }
+   ]
+  },
+  {
+   "id": "customer-support",
+   "name": "Customer support",
+   "apps": [
+    {
+     "slug": "pylon",
+     "name": "Pylon",
+     "vendor": "Pylon",
+     "description": "Sync Attio CRM data into Pylon for full customer context",
+     "official": true
+    },
+    {
+     "slug": "intercom",
+     "name": "Fin",
+     "vendor": "Intercom",
+     "description": "Give Fin live access to your Attio CRM data",
+     "official": true
+    },
+    {
+     "slug": "plain",
+     "name": "Plain",
+     "vendor": "Plain",
+     "description": "Sync Attio CRM data into Plain for customer context",
+     "official": true
+    },
+    {
+     "slug": "sparrowdesk",
+     "name": "SparrowDesk",
+     "vendor": "SparrowDesk",
+     "description": "AI-first customer support for modern teams.",
+     "official": false
+    },
+    {
+     "slug": "productlane",
+     "name": "Productlane",
+     "vendor": "Productlane",
+     "description": "Push support conversations and contacts to Attio",
+     "official": false
+    },
+    {
+     "slug": "cevanos",
+     "name": "Cevanos",
+     "vendor": "Cevanos by Cogninest AI",
+     "description": "AI customer service that knows your Attio customers",
+     "official": false
+    },
+    {
+     "slug": "bubbla-v",
+     "name": "BubblaV",
+     "vendor": "BubblaV",
+     "description": "AI support assistant",
+     "official": false
+    },
+    {
+     "slug": "asyntai-ai-chatbot",
+     "name": "Asyntai AI Chatbot",
+     "vendor": "Asyntai",
+     "description": "AI chat that answers your website visitors",
+     "official": false
+    },
+    {
+     "slug": "screen-reply",
+     "name": "ScreenReply",
+     "vendor": "OneButton Software LLC",
+     "description": "Request or capture instant screen recordings in one click",
+     "official": false
+    },
+    {
+     "slug": "unthread",
+     "name": "Unthread",
+     "vendor": "Unthread",
+     "description": "AI support in Slack",
+     "official": false
+    }
+   ]
+  },
+  {
+   "id": "data-and-enrichment",
+   "name": "Data and enrichment",
+   "apps": [
+    {
+     "slug": "hightouch",
+     "name": "Hightouch",
+     "vendor": "Attio",
+     "description": "Sync your data warehouse to Attio in minutes",
+     "official": true
+    },
+    {
+     "slug": "notion",
+     "name": "Notion",
+     "vendor": "Attio",
+     "description": "Create and update Notion pages from Attio workflows",
+     "official": true
+    },
+    {
+     "slug": "clay",
+     "name": "Clay",
+     "vendor": "Clay",
+     "description": "Go to market with unique data , and the ability to act on it",
+     "official": true
+    },
+    {
+     "slug": "apollo",
+     "name": "Apollo",
+     "vendor": "Attio",
+     "description": "Bring Apollo data into your agent blocks",
+     "official": true
+    },
+    {
+     "slug": "lemlist",
+     "name": "lemlist",
+     "vendor": "Attio",
+     "description": "Turn outreach into pipeline with lemlist + Attio",
+     "official": true
+    },
+    {
+     "slug": "customer-io",
+     "name": "Customer.io",
+     "vendor": "Customer.io",
+     "description": "Automatically sync your marketing activity into Attio",
+     "official": true
+    },
+    {
+     "slug": "google-sheets",
+     "name": "Google Sheets",
+     "vendor": "Attio",
+     "description": "Create, find, and update Google Sheets rows",
+     "official": true
+    },
+    {
+     "slug": "snitcher",
+     "name": "Snitcher",
+     "vendor": "Snitcher",
+     "description": "Identify website visitors & sync them to Attio automatically",
+     "official": true
+    },
+    {
+     "slug": "evertrace",
+     "name": "Evertrace",
+     "vendor": "Evertrace",
+     "description": "The founder detection engine for data-driven VCs",
+     "official": true
+    },
+    {
+     "slug": "hunter",
+     "name": "Hunter",
+     "vendor": "Attio",
+     "description": "Find and verify email addresses without leaving Attio",
+     "official": true
+    },
+    {
+     "slug": "polytomic",
+     "name": "Polytomic",
+     "vendor": "Polytomic",
+     "description": "One platform to sync to and from Attio",
+     "official": true
+    },
+    {
+     "slug": "aanrich-app",
+     "name": "Aanrich",
+     "vendor": "Aanrich",
+     "description": "Enrich a Person with phones & emails in one click",
+     "official": true
+    },
+    {
+     "slug": "airtable",
+     "name": "Airtable",
+     "vendor": "Attio",
+     "description": "Integrate your Airtable data with Attio workflows",
+     "official": true
+    },
+    {
+     "slug": "sync-penguin",
+     "name": "SyncPenguin",
+     "vendor": "SyncPenguin",
+     "description": "A universal two-way syncing platform",
+     "official": true
+    },
+    {
+     "slug": "matagi",
+     "name": "MATAGI",
+     "vendor": "Matagi",
+     "description": "Auto-enrich your Attio with Matagi research agents",
+     "official": true
+    },
+    {
+     "slug": "harmonic-sync",
+     "name": "Harmonic Sync",
+     "vendor": "Harmonic",
+     "description": "Sync and enrich your Attio data with Harmonic",
+     "official": true
+    },
+    {
+     "slug": "lead-mapper",
+     "name": "Lead Mapper",
+     "vendor": "Lead Mapper",
+     "description": "Drive Less, Sell More",
+     "official": true
+    },
+    {
+     "slug": "my-crm-backup",
+     "name": "MyCRMBackup",
+     "vendor": "MyCRMBackup",
+     "description": "One-click CRM Backup",
+     "official": true
+    },
+    {
+     "slug": "octolens",
+     "name": "Octolens",
+     "vendor": "Octolens",
+     "description": "Social listening signals, right inside Attio workflows",
+     "official": true
+    },
+    {
+     "slug": "reodotdev",
+     "name": "reodotdev",
+     "vendor": "reodotdev",
+     "description": "Two-way sync to keep Reo and Attio data always up to date",
+     "official": true
+    },
+    {
+     "slug": "outboundsync",
+     "name": "OutboundSync",
+     "vendor": "OutboundSync",
+     "description": "Outbound data in Attio for replies, attribution, and more",
+     "official": true
+    },
+    {
+     "slug": "databar",
+     "name": "Databar",
+     "vendor": "Databar",
+     "description": "Enrich Attio companies & people with 100+ data providers",
+     "official": true
+    },
+    {
+     "slug": "surface-labs",
+     "name": "Surface Labs",
+     "vendor": "Surface",
+     "description": "Turn 30% more  website traffic into leads",
+     "official": true
+    },
+    {
+     "slug": "octave",
+     "name": "Octave",
+     "vendor": "Octave",
+     "description": "Octave is the context engine for go-to-market teams",
+     "official": true
+    },
+    {
+     "slug": "specter",
+     "name": "Specter",
+     "vendor": "Specter",
+     "description": "Specter + Attio: Outsmart markets, win the deal",
+     "official": true
+    },
+    {
+     "slug": "albacross",
+     "name": "Albacross",
+     "vendor": "Albacross",
+     "description": "Identify website visitors and push enriched leads to Attio",
+     "official": true
+    },
+    {
+     "slug": "parsley",
+     "name": "Parsley",
+     "vendor": "Parsley",
+     "description": "Actionable intent signals for sales",
+     "official": true
+    },
+    {
+     "slug": "apollo-enrichment",
+     "name": "Apollo Enrichment",
+     "vendor": "Neon Deer Data Labs",
+     "description": "Auto-enrich companies and people with Apollo data",
+     "official": false
+    },
+    {
+     "slug": "check-for-duplicates",
+     "name": "Duplicate Detection & Merging",
+     "vendor": "Neon Deer Data Labs",
+     "description": "Monitoring, scheduled scans & merging for duplicate records",
+     "official": false
+    },
+    {
+     "slug": "instantly",
+     "name": "Instantly.ai",
+     "vendor": "Instantly.ai",
+     "description": "Instantly connects you to leads and automates outreach",
+     "official": false
+    },
+    {
+     "slug": "addtocrm",
+     "name": "Add to CRM",
+     "vendor": "Add to CRM",
+     "description": "The Chrome Extension that adds leads to Attio in one click",
+     "official": false
+    },
+    {
+     "slug": "origami",
+     "name": "Origami",
+     "vendor": "Origami",
+     "description": "AI prospecting that dedupes against your Attio CRM",
+     "official": false
+    },
+    {
+     "slug": "google-sheets-integration",
+     "name": "Google Sheets Integration",
+     "vendor": "appstronauts",
+     "description": "Keep your Attio CRM and Google Sheets in sync",
+     "official": false
+    },
+    {
+     "slug": "lumaevents",
+     "name": "Luma Events",
+     "vendor": "dialed technologies",
+     "description": "Delightful events start here",
+     "official": false
+    },
+    {
+     "slug": "the-swarm-v-1",
+     "name": "The Swarm",
+     "vendor": "dialed technologies",
+     "description": "Find warm connections right in Attio using The Swarm",
+     "official": false
+    },
+    {
+     "slug": "map-connect",
+     "name": "Map Connect",
+     "vendor": "dialed technologies",
+     "description": "Visualize Attio records on interactive maps with clustering",
+     "official": false
+    },
+    {
+     "slug": "wiza",
+     "name": "Wiza",
+     "vendor": "Wiza",
+     "description": "Find, enrich, and sync verified contacts to Attio",
+     "official": false
+    },
+    {
+     "slug": "location-edit",
+     "name": "Better Location Attribute",
+     "vendor": "Love & Kindness GmbH",
+     "description": "Autocomplete and Address entry for Location attributes",
+     "official": false
+    },
+    {
+     "slug": "dedupe",
+     "name": "Dedupe",
+     "vendor": "dialed technologies",
+     "description": "Duplicate management for Attio",
+     "official": false
+    },
+    {
+     "slug": "deduptio",
+     "name": "Deduptio",
+     "vendor": "Craftt",
+     "description": "Find, review, and merge duplicate records in Attio",
+     "official": false
+    },
+    {
+     "slug": "fuse-ai",
+     "name": "FuseAI",
+     "vendor": "FuseAI",
+     "description": "Sync enriched prospects and outreach activity",
+     "official": false
+    },
+    {
+     "slug": "netrows",
+     "name": "Netrows",
+     "vendor": "NETROWS",
+     "description": "Enrich in real-time any person or company with B2B data.",
+     "official": false
+    },
+    {
+     "slug": "tapni",
+     "name": "Tapni",
+     "vendor": "Tapni",
+     "description": "Business card platform with lead capture and AI scanner",
+     "official": false
+    },
+    {
+     "slug": "getsignals-in",
+     "name": "getsignals.in",
+     "vendor": "getsignals",
+     "description": "Sync Social Signals and Engagement to Attio",
+     "official": false
+    },
+    {
+     "slug": "bitscale-app",
+     "name": "Bitscale",
+     "vendor": "Bitscale",
+     "description": "Scale creative GTM ideas",
+     "official": false
+    },
+    {
+     "slug": "via-csv",
+     "name": "ViaCSV",
+     "vendor": "ViaCSV",
+     "description": "The smarter way to import data into Attio",
+     "official": false
+    },
+    {
+     "slug": "subdomain-merge",
+     "name": "Subdomain Merge",
+     "vendor": "Buildrhaus",
+     "description": "Review and merge companies with related domains",
+     "official": false
+    },
+    {
+     "slug": "knock-2",
+     "name": "Knock2",
+     "vendor": "Knock2",
+     "description": "Turn anonymous website traffic into sales-ready leads",
+     "official": false
+    },
+    {
+     "slug": "shuttio",
+     "name": "Shuttio",
+     "vendor": "Craftt",
+     "description": "Move HubSpot, Pipedrive, Salesforce, Affinity, CSV to Attio",
+     "official": false
+    },
+    {
+     "slug": "paradigm",
+     "name": "Paradigm",
+     "vendor": "Paradigm",
+     "description": "AI agents to scale your research",
+     "official": false
+    },
+    {
+     "slug": "speak-soon",
+     "name": "SpeakSoon",
+     "vendor": "SpeakSoon",
+     "description": "Turn events into an effective sales channel",
+     "official": false
+    },
+    {
+     "slug": "twain",
+     "name": "Twain",
+     "vendor": "Twain Technology GmbH",
+     "description": "Turn Attio lists into researched, personalized outreach",
+     "official": false
+    },
+    {
+     "slug": "oppy",
+     "name": "Oppy",
+     "vendor": "Oppy",
+     "description": "Sync strategy cards and contacts with Attio CRM",
+     "official": false
+    },
+    {
+     "slug": "swoogo",
+     "name": "Swoogo Events",
+     "vendor": "dialed technologies",
+     "description": "The event platform that gets you so you can wow them",
+     "official": false
+    },
+    {
+     "slug": "clean",
+     "name": "Clean",
+     "vendor": "Clean",
+     "description": "Prospects backed by real-world data",
+     "official": false
+    },
+    {
+     "slug": "e-core-enrichment",
+     "name": "eCore Enrichment",
+     "vendor": "eCore Service",
+     "description": "Verified emails and phone numbers, one click away",
+     "official": false
+    },
+    {
+     "slug": "sendable",
+     "name": "Sendable",
+     "vendor": "Sendable",
+     "description": "Sync your Sendable leads and outreach activity to Attio",
+     "official": false
+    },
+    {
+     "slug": "tables",
+     "name": "Tables",
+     "vendor": "Tables",
+     "description": "Fill and enrich your Attio CRM with B2B data",
+     "official": false
+    },
+    {
+     "slug": "checkredirects",
+     "name": "CheckRedirects",
+     "vendor": "checkredirects.io",
+     "description": "Resolve URLs before they create duplicate records",
+     "official": false
+    },
+    {
+     "slug": "contacts-by-digitalpilot",
+     "name": "Contacts by DigitalPilot",
+     "vendor": "DigitalPilot",
+     "description": "Find company contacts, and verify emails in Attio",
+     "official": false
+    },
+    {
+     "slug": "foil",
+     "name": "Foil",
+     "vendor": "Foil",
+     "description": "Competitive battlecards from your own calls, inside Attio",
+     "official": false
+    },
+    {
+     "slug": "folioready",
+     "name": "FolioReady",
+     "vendor": "FolioReady",
+     "description": "AI reads client documents and fills your Attio records",
+     "official": false
+    },
+    {
+     "slug": "signal-raven-ai",
+     "name": "SignalRaven",
+     "vendor": "SignalRaven-ai",
+     "description": "Buyer signals from LinkedIn as people, notes and tasks",
+     "official": false
+    },
+    {
+     "slug": "breakout",
+     "name": "Breakout",
+     "vendor": "Breakout",
+     "description": "Identify website visitors and act on them in Attio",
+     "official": false
+    },
+    {
+     "slug": "dotless",
+     "name": "Dotless",
+     "vendor": "Dotless",
+     "description": "Find local businesses without a website",
+     "official": false
+    },
+    {
+     "slug": "echo",
+     "name": "Echo",
+     "vendor": "Echo",
+     "description": "Send Echo leads and replies to Attio, get deals back",
+     "official": false
+    },
+    {
+     "slug": "getrosters-agent-check",
+     "name": "GetRosters Agent Check",
+     "vendor": "GetRosters",
+     "description": "Mark which people are working real estate agents",
+     "official": false
+    },
+    {
+     "slug": "insourcia",
+     "name": "Insourcia",
+     "vendor": "Insourcia",
+     "description": "Enrich and monitor your French companies with registry data",
+     "official": false
+    },
+    {
+     "slug": "storeinspect",
+     "name": "StoreInspect",
+     "vendor": "StoreInspect",
+     "description": "Shopify store intelligence and verified contacts",
+     "official": false
+    },
+    {
+     "slug": "cvr-pilot",
+     "name": "CVR Pilot",
+     "vendor": "CVR Pilot",
+     "description": "Qualified Danish B2B leads from the CVR register",
+     "official": false
+    },
+    {
+     "slug": "gojiberry",
+     "name": "Gojiberry",
+     "vendor": "Gojiberry",
+     "description": "Your Attio CRM, fed with warm leads and synced automatically",
+     "official": false
+    },
+    {
+     "slug": "lookupist",
+     "name": "Lookupist",
+     "vendor": "Wintactix",
+     "description": "Find and create Attio records from any webpage",
+     "official": false
+    },
+    {
+     "slug": "phano",
+     "name": "Phano",
+     "vendor": "Phano",
+     "description": "Composite AI for  customer success and account management",
+     "official": false
+    },
+    {
+     "slug": "specstream",
+     "name": "SpecStream",
+     "vendor": "SpecStream",
+     "description": "The live web data engine",
+     "official": false
+    },
+    {
+     "slug": "tapify",
+     "name": "Tapify",
+     "vendor": "Tapify",
+     "description": "Turn real-world introductions into Attio contacts",
+     "official": false
+    }
+   ]
+  },
+  {
+   "id": "email-sequencing",
+   "name": "E-mail sequencing",
+   "apps": [
+    {
+     "slug": "mailchimp",
+     "name": "Mailchimp",
+     "vendor": "Attio",
+     "description": "Automate Mailchimp with Attio automations",
+     "official": true
+    },
+    {
+     "slug": "mixmax",
+     "name": "Mixmax",
+     "vendor": "Attio",
+     "description": "Automate Mixmax with Attio automations",
+     "official": true
+    },
+    {
+     "slug": "outreach",
+     "name": "Outreach",
+     "vendor": "Attio",
+     "description": "Automate email sequences from Attio",
+     "official": true
+    },
+    {
+     "slug": "salesforge",
+     "name": "Salesforge",
+     "vendor": "Salesforge",
+     "description": "Less manual work. More pipeline progress.",
+     "official": true
+    },
+    {
+     "slug": "ada-ai-email-marketing-employee",
+     "name": "Affluent",
+     "vendor": "Affluent",
+     "description": "Writes New Email Campaigns Every Day, Hands-Free",
+     "official": true
+    },
+    {
+     "slug": "loops-so",
+     "name": "Loops",
+     "vendor": "Loops",
+     "description": "Sync contacts between Loops and Attio, and trigger workflows",
+     "official": true
+    },
+    {
+     "slug": "autotouch-ai",
+     "name": "Autotouch AI",
+     "vendor": "autotouch ai",
+     "description": "Turn Attio accounts into rep-ready prospecting",
+     "official": false
+    },
+    {
+     "slug": "reply-flux",
+     "name": "ReplyFlux",
+     "vendor": "TKH digital",
+     "description": "Draft smarter emails with context from your CRM",
+     "official": false
+    },
+    {
+     "slug": "freelvy",
+     "name": "Freelvy",
+     "vendor": "Freelvy",
+     "description": "Skip existing customers and log outreach in Attio",
+     "official": false
+    }
+   ]
+  },
+  {
+   "id": "forms-and-surveys",
+   "name": "Forms and surveys",
+   "apps": [
+    {
+     "slug": "typeform",
+     "name": "Typeform",
+     "vendor": "Attio",
+     "description": "Respond to Typeform form submissions inside Attio",
+     "official": true
+    },
+    {
+     "slug": "fillout",
+     "name": "Fillout",
+     "vendor": "Fillout",
+     "description": "Modern forms that integrate directly with Attio",
+     "official": true
+    },
+    {
+     "slug": "tallyforms",
+     "name": "Tally Forms",
+     "vendor": "Tally",
+     "description": "The simplest way to send form submissions to Attio",
+     "official": true
+    },
+    {
+     "slug": "fyrebox-quiz-maker",
+     "name": "Fyrebox Quiz Maker",
+     "vendor": "Fyrebox Quiz Maker",
+     "description": "Turn quiz participants into Attio CRM contacts instantly",
+     "official": true
+    },
+    {
+     "slug": "involve-me",
+     "name": "involve.me",
+     "vendor": "involve.me",
+     "description": "The AI quiz funnel builder with built-in email automation",
+     "official": true
+    },
+    {
+     "slug": "calendly-events",
+     "name": "Calendly",
+     "vendor": "Neon Deer Data Labs",
+     "description": "Automatically sync Calendly bookings to Attio",
+     "official": false
+    },
+    {
+     "slug": "forms-app",
+     "name": "Forms",
+     "vendor": "dialed technologies",
+     "description": "Forms that know your CRM",
+     "official": false
+    },
+    {
+     "slug": "orbit-ai",
+     "name": "Orbit AI",
+     "vendor": "Orbit AI",
+     "description": "Forms and AI automation workflows",
+     "official": false
+    },
+    {
+     "slug": "ikiform",
+     "name": "Ikiform",
+     "vendor": "Ikiform",
+     "description": "Send website form submissions to Attio as people",
+     "official": false
+    },
+    {
+     "slug": "pagekiss",
+     "name": "PageKiss",
+     "vendor": "PageKiss",
+     "description": "Turn landing page leads into Attio people records",
+     "official": false
+    },
+    {
+     "slug": "site-seam",
+     "name": "SiteSeam",
+     "vendor": "SiteStack LLC",
+     "description": "Build faster. Get leads. Close more jobs.",
+     "official": false
+    }
+   ]
+  },
+  {
+   "id": "product-management",
+   "name": "Product management",
+   "apps": [
+    {
+     "slug": "linear",
+     "name": "Linear",
+     "vendor": "Attio",
+     "description": "Create customer requests",
+     "official": true
+    },
+    {
+     "slug": "miro-insights",
+     "name": "Miro Insights",
+     "vendor": "Miro",
+     "description": "Prioritize what matters.  Build with confidence.",
+     "official": true
+    },
+    {
+     "slug": "productboard",
+     "name": "Productboard",
+     "vendor": "Attio",
+     "description": "Send customer insights from Attio to Productboard",
+     "official": true
+    },
+    {
+     "slug": "nalvin",
+     "name": "Nalvin",
+     "vendor": "Nalvin",
+     "description": "AI Agent for Product Teams",
+     "official": true
+    },
+    {
+     "slug": "jira",
+     "name": "Jira Sync",
+     "vendor": "Kolaai",
+     "description": "Automatically sync data between Jira and Attio",
+     "official": false
+    },
+    {
+     "slug": "routine",
+     "name": "Routine",
+     "vendor": "Routine",
+     "description": "Bring Attio tasks into Routine and keep CRM work updated",
+     "official": false
+    },
+    {
+     "slug": "2048",
+     "name": "2048 Game Arcade",
+     "vendor": "Neon Deer Data Labs",
+     "description": "Classic games, built inside Attio",
+     "official": false
+    },
+    {
+     "slug": "revo",
+     "name": "Revo",
+     "vendor": "Revo",
+     "description": "AI that knows your product, your team, and everything about",
+     "official": false
+    },
+    {
+     "slug": "windmill",
+     "name": "Windmill",
+     "vendor": "Windmill",
+     "description": "AI Performance Reviews",
+     "official": false
+    },
+    {
+     "slug": "brusnika-lms",
+     "name": "Brusnika LMS",
+     "vendor": "Brusnika LMS",
+     "description": "Train your team directly from your Attio workspace",
+     "official": false
+    },
+    {
+     "slug": "sawstream",
+     "name": "SawStream",
+     "vendor": "Aranzolm",
+     "description": "Website integration for Attio. Show records + JSON & CSV",
+     "official": false
+    },
+    {
+     "slug": "itr",
+     "name": "Iteright",
+     "vendor": "Iteright",
+     "description": "Turn every digital dollar into measurable business impacts",
+     "official": false
+    },
+    {
+     "slug": "central-ai",
+     "name": "Central AI",
+     "vendor": "Central AI",
+     "description": "Sync your Central contacts and conversations with Attio",
+     "official": false
+    },
+    {
+     "slug": "closedloopai",
+     "name": "ClosedLoop AI",
+     "vendor": "ClosedLoop AI",
+     "description": "Turn Attio calls and deals into product insights",
+     "official": false
+    },
+    {
+     "slug": "use-reviews",
+     "name": "UseReviews",
+     "vendor": "UseReviews",
+     "description": "Turn customer feedback into insights tied to every person",
+     "official": false
+    }
+   ]
+  },
+  {
+   "id": "storage",
+   "name": "Storage",
+   "apps": [
+    {
+     "slug": "box",
+     "name": "Box",
+     "vendor": "Attio",
+     "description": "Securely store, share, and collaborate on files with Box",
+     "official": true
+    },
+    {
+     "slug": "google-drive",
+     "name": "Google Drive",
+     "vendor": "Attio",
+     "description": "Keep your files safe, synced, and shareable with Google Drive",
+     "official": true
+    },
+    {
+     "slug": "microsoft-onedrive",
+     "name": "Microsoft OneDrive",
+     "vendor": "Attio",
+     "description": "Store and share your files with Microsoft OneDrive",
+     "official": true
+    },
+    {
+     "slug": "pro-backup",
+     "name": "ProBackup",
+     "vendor": "ProBackup",
+     "description": "Automated daily backups & one-click restore for Attio",
+     "official": true
+    },
+    {
+     "slug": "public-views",
+     "name": "PublicViews",
+     "vendor": "dialed technologies",
+     "description": "Share the view - Keep the workspace",
+     "official": false
+    }
+   ]
+  }
+ ]
+}
