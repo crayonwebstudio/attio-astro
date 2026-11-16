@@ -1,0 +1,366 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/platform/call-intelligence on 2026-11-16 (HTTP 200, 488KB).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live H1 is "Never take notes again."; the eyebrow is "Call Intelligence".
+// Live final CTA heading is "Agentic revenue runs on Attio." (the default) with Send me a demo.
+
+const plugs = [
+  "Ask Attio",
+  "AI",
+  "Data model",
+  "Apps & integrations",
+  "Call Intelligence",
+  "Workflows",
+  "Sequences",
+  "Reporting",
+];
+
+const followUps = [
+  {
+    n: "01",
+    title: "Customer signals spotted for you.",
+    copy: "AI picks up buying signals, blockers, or requests during the call, not days later.",
+  },
+  {
+    n: "02",
+    title: "Objections handling",
+    copy: "",
+    clip: "10:00",
+  },
+  {
+    n: "03",
+    title: "Coach with context.",
+    copy: "Revisit missed moments for your team or act on customer feedback.",
+  },
+  {
+    n: "04",
+    title: "Handoffs, handled.",
+    copy: "Share clips, summaries, and key takeaways.",
+  },
+  {
+    n: "05",
+    title: "Trigger key actions.",
+    copy: "Link actions to the right deals, move fast with AI.",
+  },
+];
+
+const insightItems = [
+  {
+    title: "Every decision on record.",
+    copy: "",
+  },
+  {
+    title: "Fast forward to the buyer.",
+    copy: "With Focus Mode, zoom in on key decision makers and skip through the noise.",
+  },
+  {
+    title: "Leave every call with a plan.",
+    copy: "",
+  },
+  {
+    title: "Transcripts in 100+ languages.",
+    copy: "",
+  },
+];
+---
+
+<BaseLayout
+  title="Call Intelligence | Attio"
+  description="Every conversation captured, summarized, and synced to your CRM, instantly."
+  finalCtaDemo
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">Call Intelligence</p>
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Never take notes again.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Every call captured, every insight summarized, every conversation turned into context your team can act on, immediately.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </div>
+  </section>
+
+  <!-- Hero mock: call detail -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Call Intelligence preview">
+    <div class="overflow-hidden rounded-2xl border border-paper-500 bg-paper-200 shadow-sm">
+      <div class="flex items-center gap-2 border-b border-paper-400 bg-white px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-500/70"></span>
+        <span class="h-3 w-3 rounded-full bg-[#f5bf42]"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500/70"></span>
+        <span class="ml-3 text-sm font-medium text-ink-600">Product Demo w/ GreenLeaf</span>
+        <span class="ml-auto rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-600">10:00</span>
+        <span class="rounded-full bg-paper-300 px-2.5 py-1 text-xs font-semibold text-ink-600">28:14</span>
+      </div>
+      <div class="grid min-w-0 gap-4 p-4 sm:p-6 lg:grid-cols-5">
+        <div class="min-w-0 rounded-xl border border-paper-400 bg-white p-5 lg:col-span-3">
+          <div class="flex flex-wrap gap-2">
+            <span class="rounded-full bg-ink-100 px-3 py-1 text-xs font-semibold text-white">Insights</span>
+            <span class="rounded-full bg-paper-200 px-3 py-1 text-xs font-semibold text-ink-600 ring-1 ring-paper-400">Transcript</span>
+            <span class="rounded-full bg-paper-200 px-3 py-1 text-xs font-semibold text-ink-600 ring-1 ring-paper-400">Summary</span>
+          </div>
+          <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-ink-700">Discovery Call</p>
+          <p class="mt-2 leading-relaxed text-ink-100">
+            <strong>Ashley</strong> is the decision maker at <strong>GreenLeaf</strong>, looking to migrate from
+            spreadsheets to Basepoint by <strong>Monday</strong>, with plans to purchase <strong>6 seats</strong> on
+            the <strong>Pro plan</strong>.
+          </p>
+          <div class="mt-4 space-y-2 text-sm">
+            <div class="flex min-w-0 items-center justify-between gap-2 border-b border-paper-400 pb-2">
+              <span class="min-w-0 truncate text-ink-600">Decision maker identified</span>
+              <span class="shrink-0 font-semibold">Ashley</span>
+            </div>
+            <div class="flex min-w-0 items-center justify-between gap-2 border-b border-paper-400 pb-2">
+              <span class="min-w-0 truncate text-ink-600">Migration target</span>
+              <span class="shrink-0 font-semibold">Basepoint</span>
+            </div>
+            <div class="flex min-w-0 items-center justify-between gap-2">
+              <span class="min-w-0 truncate text-ink-600">Planned seats</span>
+              <span class="shrink-0 font-semibold">6 seats, Pro plan</span>
+            </div>
+          </div>
+        </div>
+        <div class="min-w-0 rounded-xl border border-paper-400 bg-white p-5 lg:col-span-2">
+          <p class="text-xs font-semibold uppercase tracking-wide text-ink-700">Open Attio</p>
+          <div class="mt-3 overflow-x-auto">
+            <table class="w-full min-w-[320px] text-left text-sm">
+              <thead>
+                <tr class="text-xs text-ink-700">
+                  <th class="pb-2 pr-3 font-semibold">Company</th>
+                  <th class="pb-2 pr-3 font-semibold">Associated People</th>
+                  <th class="pb-2 pr-3 font-semibold">Deal Stage</th>
+                  <th class="pb-2 font-semibold">Est. Close Date</th>
+                </tr>
+              </thead>
+              <tbody class="text-ink-100">
+                <tr class="border-t border-paper-400">
+                  <td class="py-2 pr-3 font-semibold">Vercel</td>
+                  <td class="py-2 pr-3 text-ink-700">-</td>
+                  <td class="py-2 pr-3 text-ink-700">-</td>
+                  <td class="py-2 text-ink-700">-</td>
+                </tr>
+                <tr class="border-t border-paper-400">
+                  <td class="py-2 pr-3 font-semibold">DigitalOcean</td>
+                  <td class="py-2 pr-3 text-ink-700">-</td>
+                  <td class="py-2 pr-3 text-ink-700">-</td>
+                  <td class="py-2 text-ink-700">-</td>
+                </tr>
+                <tr class="border-t border-paper-400">
+                  <td class="py-2 pr-3 font-semibold">Github</td>
+                  <td class="py-2 pr-3 text-ink-700">-</td>
+                  <td class="py-2 pr-3 text-ink-700">-</td>
+                  <td class="py-2 text-ink-700">-</td>
+                </tr>
+                <tr class="border-t border-paper-400">
+                  <td class="py-2 pr-3 font-semibold">GreenLeaf</td>
+                  <td class="py-2 pr-3">Ashley Lawson</td>
+                  <td class="py-2 pr-3">
+                    <span class="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-semibold text-blue-600">Lead</span>
+                  </td>
+                  <td class="py-2">in 7 days</td>
+                </tr>
+                <tr class="border-t border-paper-400">
+                  <td class="py-2 pr-3 font-semibold">Stripe</td>
+                  <td class="py-2 pr-3 text-ink-700">-</td>
+                  <td class="py-2 pr-3 text-ink-700">-</td>
+                  <td class="py-2 text-ink-700">-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="mt-3 text-xs text-ink-700">Associated Deals: GreenLeaf, Product Demo</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Insights -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">Insights</p>
+    <h2 class="mt-4 max-w-3xl font-display text-heading-md font-semibold tracking-tight sm:text-heading-lg">
+      From hello to handoff, every word lives in Attio.
+    </h2>
+    <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Search, replay, or uncover insights from any conversation.
+    </p>
+    <div class="mt-10 grid gap-4 sm:grid-cols-2">
+      <div class="min-w-0 rounded-2xl border border-paper-500 bg-paper-200 p-6">
+        <h3 class="font-display text-xl font-semibold">Every call, every detail.</h3>
+        <p class="mt-3 leading-relaxed text-ink-600">
+          Our native AI records, transcribes, and logs every call as you talk.
+        </p>
+        <p class="mt-3 leading-relaxed text-ink-600">
+          <strong class="text-ink-100">No more lost call notes.</strong> Call recordings and meeting details are
+          automatically linked to relevant records.
+        </p>
+      </div>
+      <div class="min-w-0 rounded-2xl border border-paper-500 bg-paper-200 p-6">
+        <h3 class="font-display text-xl font-semibold">Context, not just content.</h3>
+        <p class="mt-3 leading-relaxed text-ink-600">
+          Every conversation is instantly structured and searchable.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote 1 -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <figure class="mx-auto max-w-3xl text-center">
+      <blockquote class="font-serif text-2xl leading-snug text-ink-100 sm:text-3xl">
+        "Call Intelligence has been a game changer, both for our leads and customers, it just works."
+      </blockquote>
+      <figcaption class="mt-6 text-sm font-semibold">Youmna Sirgi</figcaption>
+      <p class="mt-1 text-sm text-ink-700">Head of Operations, Plain</p>
+    </figure>
+  </section>
+
+  <!-- One conversation. Limitless insights. -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight sm:text-heading-lg">
+      One conversation. Limitless insights.
+    </h2>
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {insightItems.map((c) => (
+        <div class="min-w-0 rounded-2xl border border-paper-500 bg-paper-200 p-6">
+          <h3 class="font-display text-xl font-semibold">{c.title}</h3>
+          {c.copy && <p class="mt-3 leading-relaxed text-ink-600">{c.copy}</p>}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Instant sync -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight sm:text-heading-lg">
+      Instant sync. Zero setup friction.
+    </h2>
+    <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Attio connects with Zoom, Google Meet, and Microsoft Teams.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      {["Zoom", "Google Meet", "Microsoft Teams"].map((app) => (
+        <span class="rounded-full border border-paper-500 bg-paper-200 px-5 py-3 text-sm font-semibold">{app}</span>
+      ))}
+    </div>
+  </section>
+
+  <!-- Templates -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight sm:text-heading-lg">
+      Take a look at templates.
+    </h2>
+    <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-600">Start with ours or make it yours.</p>
+    <div class="mt-10 overflow-hidden rounded-2xl border border-paper-500 bg-paper-200 shadow-sm">
+      <div class="flex items-center gap-2 border-b border-paper-400 bg-white px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-500/70"></span>
+        <span class="h-3 w-3 rounded-full bg-[#f5bf42]"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500/70"></span>
+        <span class="ml-3 text-sm font-medium text-ink-600">SPICED</span>
+        <span class="ml-auto rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-600">Template</span>
+      </div>
+      <div class="grid min-w-0 gap-4 p-4 sm:grid-cols-2 sm:p-6">
+        <div class="min-w-0 rounded-xl border border-paper-400 bg-white p-5">
+          <p class="text-xs font-semibold uppercase tracking-wide text-ink-700">Templates</p>
+          <ul class="mt-3 space-y-2 text-sm font-semibold">
+            <li class="flex items-center justify-between gap-2 border-b border-paper-400 pb-2">
+              <span>Product demo</span>
+              <span class="rounded-full bg-paper-200 px-2 py-0.5 text-xs text-ink-600 ring-1 ring-paper-400">SPICED</span>
+            </li>
+            <li class="flex items-center justify-between gap-2 border-b border-paper-400 pb-2">
+              <span>Customer onboarding</span>
+              <span class="rounded-full bg-paper-200 px-2 py-0.5 text-xs text-ink-600 ring-1 ring-paper-400">SPICED</span>
+            </li>
+            <li class="flex items-center justify-between gap-2">
+              <span>More</span>
+              <span class="text-ink-700">→</span>
+            </li>
+          </ul>
+        </div>
+        <div class="min-w-0 rounded-xl border border-paper-400 bg-white p-5">
+          <p class="text-xs font-semibold uppercase tracking-wide text-ink-700">Sections</p>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            {["Situation", "Pain", "Impact", "Critical Event", "Decision"].map((s) => (
+              <span class="rounded-full bg-paper-200 px-3 py-1 text-xs font-semibold text-ink-600 ring-1 ring-paper-400">
+                {s}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Follow-up without friction -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight sm:text-heading-lg">
+      Follow-up without friction.
+    </h2>
+    <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Conversations don't end when recording stops.
+    </p>
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {followUps.map((f) => (
+        <div class="min-w-0 rounded-2xl border border-paper-500 bg-paper-200 p-6">
+          <p class="text-sm font-semibold text-blue-600">[{f.n}]</p>
+          <h3 class="mt-3 font-display text-xl font-semibold">{f.title}</h3>
+          {f.copy && <p class="mt-3 leading-relaxed text-ink-600">{f.copy}</p>}
+          {f.clip && (
+            <p class="mt-4">
+              <span class="rounded-full bg-ink-100 px-3 py-1 text-xs font-semibold text-white">Clip, {f.clip}</span>
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Quote 2 -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <figure class="mx-auto max-w-3xl text-center">
+      <blockquote class="font-serif text-2xl leading-snug text-ink-100 sm:text-3xl">
+        "Having our call recordings automatically connected to the rest of our CRM data is incredible."
+      </blockquote>
+      <figcaption class="mt-6 text-sm font-semibold">Sam Tierney</figcaption>
+      <p class="mt-1 text-sm text-ink-700">Founding GTM, Plain</p>
+    </figure>
+  </section>
+
+  <!-- Attio plugs in -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight sm:text-heading-lg">
+      Attio plugs in. You take off.
+    </h2>
+    <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Work your way, from outreach to outcomes.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-3">
+      {plugs.map((p, i) => (
+        <a
+          href="/apps"
+          class="flex items-center gap-2 rounded-full border border-paper-500 bg-paper-200 px-5 py-3 text-sm font-semibold hover:bg-paper-300"
+        >
+          <span class="text-xs font-semibold text-blue-600">[{String(i + 1).padStart(2, "0")}]</span>
+          {p}
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
