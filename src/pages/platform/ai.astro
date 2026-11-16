@@ -1,0 +1,312 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/platform/ai on 2026-11-16 (HTTP 200).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+const askCards = [
+  {
+    n: "01",
+    title: "Start every day ready.",
+    copy: "Walk into every meeting prepared, know which deals need attention, and make every minute of your day count.",
+    prompt: "Prepare me for the day",
+    mock: [
+      { label: "10:00 AM", text: "Demo call with GreenLeaf" },
+      { label: "Needs attention", text: "GreenLeaf deal, $54,000, no reply in 6 days" },
+      { label: "Due today", text: "3 follow-ups across your open deals" },
+    ],
+  },
+  {
+    n: "02",
+    title: "End calls with action.",
+    copy: "Draft follow-ups, update records, schedule next steps, create account briefs. Instantly, not eventually.",
+    prompt: "Write a follow-up email",
+    mock: [
+      { label: "Draft ready", text: "Follow-up to Ashley at GreenLeaf, after the demo call" },
+      { label: "Next step", text: "Book a technical review for Thursday, 2:00 PM" },
+      { label: "Record updated", text: "GreenLeaf deal stage moved to Negotiation" },
+    ],
+  },
+  {
+    n: "03",
+    title: "Context on demand.",
+    copy: "Company structure, tech stack, product details, past conversations. One question replaces endless searching.",
+    prompt: "What do you know about the founders of GreenLeaf?",
+    mock: [
+      { label: "Founders", text: "Ashley Chen and Sam Ortiz, founded 2021" },
+      { label: "Tech stack", text: "Built on modern web tooling, hiring engineers" },
+      { label: "Last touch", text: "Demo call, Aug 29, 10:40 AM, 48 minutes" },
+    ],
+  },
+  {
+    n: "04",
+    title: "Customer insights, collected.",
+    copy: "Surface pain points, requested features, emerging patterns. From thousands of interactions, in seconds.",
+    prompt: "What was their product feedback?",
+    mock: [
+      { label: "Pain point", text: "Reporting is hard to share with the wider team" },
+      { label: "Requested", text: "Slack alerts when a deal goes quiet" },
+      { label: "Pattern", text: "12 accounts asked for deeper integrations this quarter" },
+    ],
+  },
+];
+
+const autonomousCards = [
+  {
+    title: "Create any workflow with AI.",
+    copy: "Ask Attio to build workflows for you just by describing the goal.",
+    mock: ["New deal created", "Web Agent enriches the record", "Custom Agent scores and routes"],
+  },
+  {
+    title: "Research, enrich, route.",
+    copy: null,
+    mock: ["Research the account", "Enrich every record", "Route to the right owner"],
+  },
+  {
+    title: "Custom Agents for custom jobs.",
+    copy: null,
+    mock: ["Describe the job once", "The agent runs it daily", "Results land in your workspace"],
+  },
+];
+
+const callCards = [
+  {
+    title: "Every conversation, noted and filed.",
+    copy: "AI records, transcribes, and logs every call as you speak.",
+    mock: "Ashley, 0:02 Everything is in spreadsheets right now and it is getting unmanageable.",
+  },
+  {
+    title: "Customer signals spotted for you.",
+    copy: "AI picks up buying signals, blockers, or requests during the call, not days later.",
+    mock: "Signal spotted: buying intent, GreenLeaf asked about annual pricing.",
+  },
+  {
+    title: "Leave every call with a plan.",
+    copy: "Track action items and draft next steps before you leave the call.",
+    mock: "Action: send the security review by Friday, book the technical review.",
+  },
+];
+
+const mcpCards = [
+  {
+    title: "Customer context.",
+    copy: "Bring insights from your live CRM data into chats with Claude or ChatGPT.",
+  },
+  {
+    title: "Tools for agents.",
+    copy: "Enable agent-driven workflows with full read and write access.",
+  },
+  {
+    title: "Secure by design.",
+    copy: "Authenticate via OAuth with user-scoped permissions.",
+  },
+];
+
+const plugs = [
+  "Ask Attio",
+  "AI",
+  "Data model",
+  "Apps & integrations",
+  "Call Intelligence",
+  "Workflows",
+  "Sequences",
+  "Reporting",
+];
+---
+
+<BaseLayout
+  title="Embedded intelligence | Attio"
+  description="A team of agents on every deal. Qualifying, enriching, researching, and moving to close."
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">Embedded intelligence</p>
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Every rep, infinitely multiplied.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      A team of agents on every deal. Qualifying, enriching, researching, and moving to close.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </div>
+
+    <!-- Hero product mock: Ask Attio day briefing -->
+    <div class="mx-auto mt-14 max-w-4xl overflow-hidden rounded-2xl border border-paper-500 bg-white text-left shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]">
+      <div class="flex items-center gap-2 border-b border-paper-400 bg-paper-200 px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-500"></span>
+        <span class="h-3 w-3 rounded-full bg-[#f5bf42]"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500"></span>
+        <span class="ml-3 text-xs font-medium text-ink-600">Ask Attio</span>
+      </div>
+      <div class="grid gap-6 p-6 sm:grid-cols-2 sm:p-8">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Good morning, Alex</p>
+          <p class="mt-4 rounded-xl border border-paper-500 bg-paper-200 px-4 py-3 text-sm font-medium">
+            Prepare me for the day
+          </p>
+          <p class="mt-4 text-sm leading-relaxed text-ink-600">
+            Your day, briefed in seconds. Meetings, deals that need attention, and follow-ups due today.
+          </p>
+        </div>
+        <ul class="space-y-3">
+          <li class="rounded-xl border border-paper-500 p-4">
+            <p class="text-xs font-semibold text-ink-700">10:00 AM, DEMO CALL</p>
+            <p class="mt-1 text-sm font-medium">Product demo with GreenLeaf</p>
+          </li>
+          <li class="rounded-xl border border-paper-500 p-4">
+            <p class="text-xs font-semibold text-ink-700">NEEDS ATTENTION</p>
+            <p class="mt-1 text-sm font-medium">GreenLeaf deal, $54,000, no reply in 6 days</p>
+          </li>
+          <li class="rounded-xl border border-paper-500 p-4">
+            <p class="text-xs font-semibold text-ink-700">DUE TODAY</p>
+            <p class="mt-1 text-sm font-medium">3 follow-ups across your open deals</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ask Attio -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Ask Attio">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">AI</p>
+    <h2 class="mt-4 max-w-2xl font-display text-heading-md font-semibold tracking-tight">Ask Attio.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Search, update, and create with AI.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {askCards.map((card) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <p class="rounded-lg bg-white px-3 py-2 text-sm font-medium shadow-sm">{card.prompt}</p>
+            <ul class="mt-4 space-y-2">
+              {card.mock.map((row) => (
+                <li class="flex items-baseline gap-2 text-sm">
+                  <span class="shrink-0 text-xs font-semibold uppercase tracking-wide text-ink-700">{row.label}</span>
+                  <span class="text-ink-600">{row.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-6">
+            <p class="font-display text-sm font-semibold text-blue-500">{card.n}</p>
+            <h3 class="mt-2 font-display text-xl font-semibold">{card.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 text-center sm:px-6">
+    <blockquote class="mx-auto max-w-3xl font-serif text-2xl leading-snug text-ink-100 sm:text-3xl">
+      Ask Attio enables us to answer important questions, fast, about key areas like our win rates,
+      pipeline health, and state of play.
+    </blockquote>
+    <p class="mt-6 text-sm font-semibold">Eric Weiss</p>
+    <p class="mt-1 text-sm text-ink-600">GTM, Plain</p>
+  </section>
+
+  <!-- Autonomous work in action -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Autonomous work in action">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Autonomous work in action.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Orchestrate your revenue motion with agents.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {autonomousCards.map((card) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <ol class="space-y-2">
+              {card.mock.map((step, i) => (
+                <li class="flex items-center gap-3 rounded-lg bg-white px-3 py-2 text-sm shadow-sm">
+                  <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-semibold text-blue-600">
+                    {i + 1}
+                  </span>
+                  <span class="font-medium">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+            {card.copy && <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Smarter calls -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Smarter calls">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">
+      Smarter calls, from kickoff to close.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Every conversation captured, summarized, and synced to your CRM, instantly.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {callCards.map((card) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <p class="rounded-lg bg-white px-4 py-3 text-sm leading-relaxed text-ink-600 shadow-sm">
+              {card.mock}
+            </p>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- CRM, meet MCP -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="CRM, meet MCP">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">CRM, meet MCP.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Connect to Attio in AI tools and get work done anywhere, anytime.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {mcpCards.map((card) => (
+        <article class="rounded-2xl border border-paper-500 bg-white p-6">
+          <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Attio plugs in -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Attio plugs in">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Attio plugs in. You take off.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Work your way, from outreach to outcomes.
+    </p>
+    <ul class="mt-10 flex flex-wrap gap-3">
+      {plugs.map((plug, i) => (
+        <li class="flex items-center gap-2 rounded-full border border-paper-500 bg-white px-4 py-2 text-sm font-medium">
+          <span class="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-xs font-semibold text-blue-600">
+            {i + 1}
+          </span>
+          {plug}
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
