@@ -1,0 +1,411 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/platform/ask on 2026-11-16 (HTTP 200, 640KB).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// The live "individualize email" wording in Shipped feature outreach is kept verbatim.
+
+const roles = [
+  {
+    id: "marketing",
+    label: "Marketing",
+    title: "Turn every customer touchpoint into competitive advantage.",
+    copy: "Analyze conversion, validate messaging, and gather content for campaigns.",
+    prompt: "Analyze conversion and validate our messaging",
+    mock: [
+      { label: "Conversion", text: "Demo requests up 18% after the new landing page" },
+      { label: "Messaging", text: "GreenLeaf buyers mention speed and setup most" },
+      { label: "Campaign", text: "3 customer quotes ready for the launch post" },
+    ],
+  },
+  {
+    id: "success",
+    label: "Success",
+    title: "Retain and expand more accounts when review is effortless.",
+    copy: "Hand off accounts, check customer health, and run business reviews.",
+    prompt: "Check customer health and run a business review",
+    mock: [
+      { label: "Health", text: "Brightloop usage is up 24% this month" },
+      { label: "Handoff", text: "Vela account brief ready for the new CSM" },
+      { label: "Review", text: "QBR deck drafted from the last 90 days" },
+    ],
+  },
+  {
+    id: "sales",
+    label: "Sales",
+    title: "Win faster when every call is perfectly prepped.",
+    copy: "Prepare for meetings, update deals, and review pipeline.",
+    prompt: "update this deal pls",
+    mock: [
+      { label: "Basepoint // GreenLeaf", text: "Update Deal Stage, Accept, Negotiation" },
+      { label: "Next step", text: "Joshua to send documentation on the proposal" },
+      { label: "Drew Houston", text: "Updated Role, Accept, Head of IT" },
+      { label: "GreenLeaf", text: "Funding Raised, Accept, $100M - $250M" },
+    ],
+  },
+  {
+    id: "founders",
+    label: "Founders",
+    title: "Build product and revenue wins with real customer insights.",
+    copy: "Run customer discovery, track deals, and gather product feedback.",
+    prompt: "Run customer discovery on GreenLeaf",
+    mock: [
+      { label: "Discovery", text: "5 interviews booked with GreenLeaf champions" },
+      { label: "Deals", text: "GreenLeaf, $54,000, in Negotiation" },
+      { label: "Feedback", text: "Reporting is hard to share with the wider team" },
+    ],
+  },
+  {
+    id: "vc",
+    label: "Venture capital",
+    title: "Turn portfolio intelligence into perfectly timed investment edge.",
+    copy: "Research founders, leverage networks, and manage deal flow.",
+    prompt: "Research founders in our portfolio",
+    mock: [
+      { label: "Founders", text: "Ashley Chen and Sam Ortiz, founded 2021" },
+      { label: "Network", text: "2 warm intros through existing portfolio" },
+      { label: "Deal flow", text: "GreenLeaf, $100M - $250M raised, tracking" },
+    ],
+  },
+];
+
+const contextItems = [
+  {
+    lead: "Semantic search",
+    rest: "delivers instant retrieval even as your data scales.",
+    glyph: "⌕",
+  },
+  {
+    lead: "Grounded in your context",
+    rest: "like emails, calls, and product usage.",
+    glyph: "◈",
+  },
+  {
+    lead: "Understand patterns",
+    rest: "across customer signals, not just individual flares.",
+    glyph: "∿",
+  },
+  {
+    lead: "Granola notes. Slack threads.",
+    rest: "Your favorite tools, connected and searchable.",
+    glyph: "✦",
+  },
+  {
+    lead: "Say hello.",
+    rest: "Hola. Olá. Bonjour. Hallo. Buongiorno. Ask Attio in any language.",
+    glyph: "◐",
+  },
+];
+
+const trustFeatures = [
+  {
+    title: "Real information, not AI invention.",
+    copy: "Every answer is sourced from your actual CRM records and customer knowledge.",
+    mock: [
+      { label: "Cursor", text: "Waiting for feedback on proposal" },
+      { label: "Mailchimp", text: "Awaiting reply on pricing offer" },
+      { label: "Pablo Hernandez", text: "No response for 2 weeks" },
+      { label: "Dropbox", text: "Monthly report not submitted" },
+    ],
+  },
+  {
+    title: "Your permissions, enforced.",
+    copy: "Ask Attio follows your existing permissions, so everyone sees only what they're supposed to.",
+    mock: null,
+  },
+  {
+    title: "Intelligent suggestions. Human decisions.",
+    copy: "You're always in command and empowered to approve, modify, or reject any suggestion.",
+    mock: [
+      { label: "Drew Houston", text: "Update Role, Accept, Head of IT" },
+      { label: "GreenLeaf", text: "Funding raised, Accept, $100M - $250M" },
+      { label: "Next step", text: "Update Next step, Accept" },
+    ],
+  },
+];
+
+const prompts = [
+  { title: "Daily brief", copy: "Prepare for your day with a daily briefing of your meetings." },
+  { title: "Product feedback", copy: "Extract product feedback from a call recording." },
+  { title: "Objection handling", copy: "Prepare targeted responses to anticipated objections in your next call." },
+  { title: "Run account research", copy: "Run deep web research on a company to capture key information." },
+  { title: "Follow-up email", copy: "Draft a follow-up email to keep the conversation rolling after a meeting." },
+  { title: "Deal brief", copy: "Create a comprehensive deal briefing." },
+  { title: "Meeting prep", copy: "Get the full context on your next meeting so you can show up prepared." },
+  { title: "Shipped feature outreach", copy: "Find customers who requested a specific feature and draft individualize email to them." },
+  { title: "QBR Prep", copy: "Create an account brief for your next quarterly business review call." },
+  { title: "Recap call", copy: "Get a structured recap of a recorded meeting." },
+  { title: "Sales coach", copy: "Get coaching on your sales skills." },
+  { title: "Update deal", copy: "Automatically update a deal record based on a recorded call." },
+  { title: "Suggest next steps", copy: "Create actionable follow-up tasks from a meeting." },
+  { title: "Onboarding prep", copy: "Create a concise brief to prep for a customer onboarding call." },
+  { title: "Product engagement", copy: "Summarize product engagement and usage trends for a workspace." },
+];
+---
+
+<BaseLayout
+  title="Ask Attio | Attio"
+  description="Ask more from CRM."
+  finalCta="Ask more from CRM. Ask Attio."
+  finalCtaDemo
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Ask Attio.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Every question, answered. Every follow-up, sent. Every task, done.
+    </p>
+
+    <!-- Hero Ask mock -->
+    <div class="mx-auto mt-10 max-w-2xl overflow-hidden rounded-2xl border border-paper-500 bg-white text-left shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]">
+      <div class="flex items-center gap-3 border-b border-paper-400 bg-paper-200 px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-500"></span>
+        <span class="h-3 w-3 rounded-full bg-[#f5bf42]"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500"></span>
+        <span class="ml-3 text-xs font-medium text-ink-600">Ask Attio</span>
+      </div>
+      <div class="p-5 sm:p-6">
+        <p class="flex items-center justify-between rounded-xl border border-paper-500 px-4 py-3 text-sm text-ink-600">
+          <span>Ask anything<span class="ml-1 inline-block h-4 w-[2px] animate-pulse bg-blue-500 align-middle"></span></span>
+          <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ink-100 text-xs text-white">↑</span>
+        </p>
+        <div class="mt-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <p class="text-sm leading-relaxed text-ink-600">
+            Engineered for performance. Unified by design. Powered by Universal Context.
+          </p>
+          <a
+            href="/contact/sales"
+            class="shrink-0 rounded-full border border-ink-100 px-5 py-2.5 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+          >
+            Talk to sales
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+    </div>
+  </section>
+
+  <!-- Simply powerful customer intelligence: role tabs -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Customer intelligence by role">
+    <h2 class="mx-auto max-w-2xl text-center font-display text-heading-md font-semibold tracking-tight">
+      Simply powerful customer intelligence.
+    </h2>
+    <div class="mt-10 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Roles">
+      {roles.map((role) => (
+        <button
+          type="button"
+          role="tab"
+          data-role-tab={role.id}
+          aria-selected={role.id === "sales" ? "true" : "false"}
+          class:list={[
+            "rounded-full px-5 py-2.5 text-sm font-semibold transition-colors",
+            role.id === "sales" ? "bg-ink-100 text-white" : "border border-paper-500 bg-white text-ink-600 hover:border-ink-600",
+          ]}
+        >
+          {role.label}
+        </button>
+      ))}
+    </div>
+    {roles.map((role) => (
+      <div
+        data-role-panel={role.id}
+        role="tabpanel"
+        class:list={["mx-auto mt-8 max-w-4xl", role.id === "sales" ? "" : "hidden"]}
+      >
+        <div class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5 sm:p-6">
+            <p class="rounded-lg bg-white px-3 py-2 text-sm font-medium shadow-sm">{role.prompt}</p>
+            <ul class="mt-4 space-y-2">
+              {role.mock.map((row) => (
+                <li class="flex items-baseline gap-2 text-sm">
+                  <span class="shrink-0 text-xs font-semibold uppercase tracking-wide text-ink-700">{row.label}</span>
+                  <span class="text-ink-600">{row.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-6 sm:p-8">
+            <h3 class="font-display text-xl font-semibold sm:text-2xl">{role.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600 sm:text-base">{role.copy}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <!-- Universal Context -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Universal Context">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">
+      Universal Context<sup class="text-base align-super">TM</sup>
+    </h2>
+    <ul class="mt-10 divide-y divide-paper-400 border-y border-paper-400">
+      {contextItems.map((item) => (
+        <li class="flex items-start gap-4 py-6 sm:items-center sm:gap-6">
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-paper-500 bg-paper-200 text-xl text-blue-500">
+            {item.glyph}
+          </span>
+          <p class="text-base leading-relaxed text-ink-100 sm:text-lg">
+            <span class="font-semibold">{item.lead}</span>{" "}
+            <span class="text-ink-600">{item.rest}</span>
+          </p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Intelligence built for how you work -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Intelligence built for how you work">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">
+      Intelligence built for how you work and what you do.
+    </h2>
+
+    <!-- Meetings mock -->
+    <div class="mx-auto mt-10 max-w-4xl overflow-hidden rounded-2xl border border-paper-500 bg-white shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]">
+      <div class="flex items-center gap-2 border-b border-paper-400 bg-paper-200 px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-500"></span>
+        <span class="h-3 w-3 rounded-full bg-[#f5bf42]"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500"></span>
+        <span class="ml-3 text-xs font-medium text-ink-600">Ask Attio</span>
+      </div>
+      <div class="grid gap-6 p-6 sm:grid-cols-2 sm:p-8">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Good morning, Alex</p>
+          <p class="mt-4 rounded-xl border border-paper-500 bg-paper-200 px-4 py-3 text-sm font-medium">
+            Ask anything...
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="rounded-full bg-blue-100 px-3 py-1.5 text-xs font-semibold text-blue-600">Auto</span>
+            <span class="rounded-full border border-paper-500 px-3 py-1.5 text-xs font-medium">Prep for next meeting</span>
+            <span class="rounded-full border border-paper-500 px-3 py-1.5 text-xs font-medium">Recap last call</span>
+          </div>
+          <p class="mt-6 text-sm font-semibold">Meetings</p>
+          <p class="mt-1 text-sm text-ink-600">Today, Oct 14</p>
+          <ul class="mt-3 space-y-2 text-sm">
+            <li class="rounded-lg border border-paper-500 px-3 py-2">
+              <span class="font-medium">Basepoint x Stripe</span>
+              <span class="block text-xs text-ink-600">10:00 - 11:00 AM</span>
+            </li>
+            <li class="rounded-lg border border-paper-500 px-3 py-2">
+              <span class="font-medium">Ashley and Martin</span>
+              <span class="block text-xs text-ink-600">10:20 - 10:40 AM</span>
+            </li>
+            <li class="rounded-lg border border-paper-500 px-3 py-2">
+              <span class="font-medium">GreenLeaf // Basepoint</span>
+              <span class="block text-xs text-ink-600">2:30 - 3:00 PM</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Details</p>
+          <p class="mt-3 text-sm leading-relaxed text-ink-600">
+            Demo call with GreenLeaf team to help them get the most out of their PRO trial.
+          </p>
+          <p class="mt-3 text-xs text-blue-500">https://meet.google.com/psn-zfzb-yaw</p>
+          <p class="mt-6 text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Participants, 8</p>
+          <ul class="mt-3 space-y-2 text-sm">
+            <li class="flex items-baseline gap-2">
+              <span class="font-medium">Dylan Parker</span>
+              <span class="text-ink-600">CEO of Basepoint</span>
+            </li>
+            <li class="flex items-baseline gap-2">
+              <span class="font-medium">Annie Zhang</span>
+              <span class="text-ink-600">Product Manager at GreenLeaf</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust features -->
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {trustFeatures.map((feature) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          {feature.mock && (
+            <div class="border-b border-paper-400 bg-paper-200 p-5">
+              <ul class="space-y-2">
+                {feature.mock.map((row) => (
+                  <li class="flex items-baseline gap-2 rounded-lg bg-white px-3 py-2 text-sm shadow-sm">
+                    <span class="shrink-0 text-xs font-semibold text-ink-700">{row.label}</span>
+                    <span class="text-ink-600">{row.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <div class="p-6">
+            <h3 class="font-display text-xl font-semibold">{feature.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{feature.copy}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Prompt library -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Prompt library">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">
+      From one expert to everyone.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Best practice becomes standard practice with the prompt library.
+    </p>
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {prompts.map((prompt) => (
+        <article class="rounded-2xl border border-paper-500 bg-white p-6">
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Attio</p>
+          <h3 class="mt-3 font-display text-lg font-semibold">{prompt.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{prompt.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 text-center sm:px-6">
+    <blockquote class="mx-auto max-w-3xl font-serif text-2xl leading-snug text-ink-100 sm:text-3xl">
+      Ask Attio is a core part of how we run marketing and sales at Listen Labs. It saves our team
+      hours and keeps product, sales, and marketing aligned around what is actually landing.
+    </blockquote>
+    <p class="mt-6 text-sm font-semibold">Diana Lim</p>
+    <p class="mt-1 text-sm text-ink-600">Growth Engineer, Listen Labs</p>
+  </section>
+
+  <script>
+    const tabs = document.querySelectorAll("[data-role-tab]");
+    const panels = document.querySelectorAll("[data-role-panel]");
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const id = tab.getAttribute("data-role-tab");
+        tabs.forEach((t) => {
+          const active = t === tab;
+          t.setAttribute("aria-selected", active ? "true" : "false");
+          t.classList.toggle("bg-ink-100", active);
+          t.classList.toggle("text-white", active);
+          t.classList.toggle("border", !active);
+          t.classList.toggle("border-paper-500", !active);
+          t.classList.toggle("bg-white", !active);
+          t.classList.toggle("text-ink-600", !active);
+        });
+        panels.forEach((panel) => {
+          panel.classList.toggle("hidden", panel.getAttribute("data-role-panel") !== id);
+        });
+      });
+    });
+  </script>
+</BaseLayout>
