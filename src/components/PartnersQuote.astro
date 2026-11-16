@@ -1,0 +1,51 @@
+---
+// Partners quote block, used on /partners, /partners/app-partners and
+// /partners/creator-partners. Copy fetched live from attio.com on 2026-11-16.
+// Avatars are initials tiles, not the live Storyblok photos.
+interface Props {
+  overline: string;
+  quote: string;
+  name: string;
+  role: string;
+  features: string[];
+}
+
+const { overline, quote, name, role, features } = Astro.props;
+const initials = name
+  .split(" ")
+  .map((w) => w[0])
+  .slice(0, 2)
+  .join("");
+---
+
+<div class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+  <div class="grid gap-0 md:grid-cols-12">
+    <div class="pinstripe-bg flex min-h-[260px] flex-col items-center justify-center gap-3 bg-ink-100 px-6 py-12 text-center md:col-span-5">
+      <span class="flex h-20 w-20 items-center justify-center rounded-full bg-white font-display text-2xl font-semibold text-ink-100">
+        {initials}
+      </span>
+      <p class="font-display text-lg font-semibold text-white">{name}</p>
+      <p class="text-sm text-white/70">{role}</p>
+    </div>
+    <div class="flex flex-col justify-center px-6 py-10 sm:px-10 md:col-span-7">
+      <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">{overline}</p>
+      <blockquote class="mt-4 font-display text-2xl font-medium leading-snug tracking-tight text-ink-100 sm:text-[28px]">
+        &ldquo;{quote}&rdquo;
+      </blockquote>
+      <p class="mt-6 font-semibold text-ink-100">{name}</p>
+      <p class="text-sm text-ink-600">{role}</p>
+      <p class="mt-6 text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">
+        {name.split(" ")[0]}&rsquo;s favorite features
+      </p>
+      <ul class="mt-3 flex flex-wrap gap-2">
+        {
+          features.map((f) => (
+            <li class="rounded-full border border-paper-500 bg-paper-200 px-3 py-1.5 text-sm font-medium text-ink-100">
+              {f}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</div>

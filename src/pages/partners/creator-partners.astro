@@ -1,0 +1,225 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PartnersQuote from "../../components/PartnersQuote.astro";
+import PartnersFaq from "../../components/PartnersFaq.astro";
+import PartnersPathways from "../../components/PartnersPathways.astro";
+
+// Copy fetched live from https://attio.com/partners/creator-partners on 2026-11-16
+// (HTTP 200, 517KB), with section copy from the live i18n dictionary
+// (creatorPartners, creatorPartnersHeader, creatorPartnersPerksBenefits,
+// creatorPartnersPersona).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live has no standard FinalCta ("Agentic revenue runs on Attio." appears 0 times
+// in the live HTML), so hideFinalCta is used.
+// Live H1 is the small pill ("Creator partners"); the large hero headline is an H2,
+// as on live. The "Become a Creator Partner" buttons scroll to
+// #creator-partners-form, as on live; that section states applications are
+// currently closed. Creator videos are CSS mock panels, not the live video files.
+
+const creators = [
+  "Daniel Hull",
+  "Kayla Campos",
+  "Jan Meinecke",
+  "Philip Wallage",
+  "Joe Rhew",
+  "Tem Nugmanov",
+  "Alexandre Kantjas",
+];
+
+const personas = [
+  {
+    label: "Who you are",
+    title: "GTM Leader",
+    body: "Someone who helps businesses scale, transform, and achieve the impossible.",
+  },
+  {
+    label: "What you do",
+    title: "Shape modern teams",
+    body: "You share how Attio is the foundation for the next generation of businesses.",
+  },
+  {
+    label: "What you create",
+    title: "Content that inspires",
+    body: "You create high-quality content that helps businesses turn their visions into reality.",
+  },
+];
+
+const perks = [
+  { n: "01", title: "Free creator workspace", body: "Scale your business and content creation with a dedicated Attio Pro workspace." },
+  { n: "02", title: "Early access to features", body: "Stay ahead of the game and experiment with new Attio features before anyone else." },
+  { n: "03", title: "Creator network", body: "Connect with a community of top voices who represent the future of GTM." },
+  { n: "04", title: "Content promotion", body: "Boost your social influence with ad spend and engagement from the Attio team." },
+  { n: "05", title: "Marketing resources", body: "Get one-on-one marketing support and exclusive assets, tailored to you." },
+  { n: "06", title: "Direct access to the team", body: "Collaborate with Attio's partnership and product teams to shape the future of GTM." },
+];
+
+const faq = [
+  {
+    q: "What makes someone an ideal Attio Creator Partner?",
+    a: "You're an Attio power user who is passionate about creating content, particularly on LinkedIn. You have an engaged audience of founders, operators, and people in the GTM space.",
+  },
+  {
+    q: "I don't have a big audience, can I still apply?",
+    a: "We welcome creators at all stages. What matters most to us is the quality of your content, not the size of your audience. If you're passionate about what you're sharing and have a unique perspective, we'd love to hear from you.",
+  },
+  {
+    q: "What kind of content are you looking for?",
+    a: "We encourage you to share any Attio-related content that is tailored to your unique audience. We're particularly looking for high-quality, innovative content that highlights how you and your team use Attio.",
+  },
+  {
+    q: "Will I get revenue share from this?",
+    a: "We don't currently offer revenue share, but may consider this in future as the program evolves.",
+  },
+];
+
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join("");
+---
+
+<BaseLayout
+  title="Creator Program | Attio"
+  description="Our Creator Program empowers leading GTM voices like yours. Get exclusive resources, from a free workspace to boosted content."
+  hideFinalCta
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-16 pt-16 text-center sm:px-6 sm:pt-24">
+    <div class="mx-auto w-fit rounded-[13px] border border-paper-500 bg-white px-3 py-1.5 text-[13px] font-medium leading-[1.4em] text-ink-600">
+      <h1 class="font-medium">Creator partners</h1>
+    </div>
+    <h2 class="mx-auto mt-6 max-w-[15em] text-balance font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Build your brand. Grow your audience.
+    </h2>
+    <p class="mx-auto mt-6 max-w-xl text-balance text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Help define the next generation of GTM as we transform one of the world&rsquo;s largest software categories.
+    </p>
+    <div class="mt-8">
+      <a
+        href="#creator-partners-form"
+        class="inline-flex items-center gap-1.5 rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Become a Creator Partner
+      </a>
+    </div>
+  </section>
+
+  <!-- Creator videos -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Creator videos">
+    <div class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2">
+      {
+        creators.map((name) => (
+          <figure class="w-[280px] shrink-0 snap-start overflow-hidden rounded-2xl border border-paper-500 bg-white sm:w-[320px]">
+            <div class="pinstripe-bg relative flex min-h-[200px] flex-col items-center justify-center gap-3 bg-ink-100 px-6 py-10 text-center">
+              <span
+                class="flex h-14 w-14 items-center justify-center rounded-full bg-white font-display text-lg font-semibold text-ink-100"
+                aria-label={`Creator partners video ${name}`}
+              >
+                {initials(name)}
+              </span>
+              <span class="flex h-10 w-10 items-center justify-center rounded-full border border-white/40 text-white" aria-hidden="true">
+                &#9654;
+              </span>
+            </div>
+            <figcaption class="px-5 py-4">
+              <p class="font-display text-base font-semibold text-ink-100">{name}</p>
+              <p class="text-sm text-ink-600">Creator partner</p>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Personas -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Creators shape the future of GTM">
+    <div class="text-center">
+      <h2 class="font-display text-heading-md font-semibold tracking-tight">Creators shape the future of GTM.</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+        Showcase your builds and inspire others.
+      </p>
+    </div>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        personas.map((p) => (
+          <div class="rounded-2xl border border-paper-500 bg-white p-8">
+            <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">{p.label}</p>
+            <h3 class="mt-4 font-display text-heading-xs font-semibold tracking-tight text-ink-100">{p.title}</h3>
+            <p class="mt-3 text-base leading-relaxed text-ink-600">{p.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Perks and benefits -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Perks and benefits">
+    <div class="text-center">
+      <h2 class="font-display text-heading-md font-semibold tracking-tight">Perks &amp; benefits.</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+        From early feature access to content promotion, our program is designed to set you up for success.
+      </p>
+      <a
+        href="#creator-partners-form"
+        class="mt-6 inline-flex items-center gap-1.5 rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Become a Creator Partner
+      </a>
+    </div>
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        perks.map((perk) => (
+          <div class="rounded-2xl border border-paper-500 bg-white p-8">
+            <p class="font-display text-sm font-semibold text-ink-700">{perk.n} /</p>
+            <h3 class="mt-3 font-display text-heading-xs font-semibold tracking-tight text-ink-100">{perk.title}</h3>
+            <p class="mt-3 text-base leading-relaxed text-ink-600">{perk.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Applications closed -->
+  <section id="creator-partners-form" class="bg-paper-200" aria-label="Creator Partner applications">
+    <div class="mx-auto max-w-[1200px] px-4 py-20 text-center sm:px-6">
+      <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Attio Creator Partners</p>
+      <h2 class="mx-auto mt-4 max-w-2xl font-display text-heading-md font-semibold tracking-tight">
+        Creator Partner applications are currently closed.
+      </h2>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 pt-20 sm:px-6" aria-label="Creator partner quote">
+    <PartnersQuote
+      overline="Attio Creator Partners"
+      quote="The Attio creator program is a wellspring of new connections, genuine inspiration, and next-gen GTM insight I haven't found elsewhere."
+      name="Daniel Hull"
+      role="Founder, 80x"
+      features={["Workflows", "Integrations", "Communication intelligence"]}
+    />
+  </section>
+
+  <PartnersFaq items={faq} />
+
+  <PartnersPathways
+    cards={[
+      {
+        href: "/partners/app-partners",
+        label: "App partners",
+        title: "App partners.",
+        subtitle: "Build apps that power the next era of CRM.",
+        link: "Become an App Partner",
+      },
+      {
+        href: "/partners/expert-partners",
+        label: "Expert partners",
+        title: "Expert partners.",
+        subtitle: "Help GTM teams build, scale and grow.",
+        link: "Become an Expert Partner",
+      },
+    ]}
+  />
+</BaseLayout>

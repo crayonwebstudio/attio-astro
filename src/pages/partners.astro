@@ -1,0 +1,250 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/partners on 2026-11-16 (HTTP 200, 428KB).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live has no standard FinalCta ("Agentic revenue runs on Attio." appears 0 times
+// in the live HTML), so hideFinalCta is used.
+// Live H1 is the small pill ("Partner programs"); the large hero headline is an H2,
+// as on live. Quote carousel data (all 3 quotes, roles, favorite features) comes
+// from the live Storyblok blok in the page payload; the static HTML renders
+// Giacomo's slide, so he is the default active slide here.
+const quotes = [
+  {
+    name: "Riya Grover",
+    role: "Co-founder & CEO, Sequence",
+    program: "App Partners",
+    quote:
+      "Attio's developer experience is a breath of fresh air. The team is outstanding to work with, we're thrilled for Sequence to be part of the Attio App Store.",
+    features: ["Deals", "Workflows", "Notes"],
+  },
+  {
+    name: "Daniel Hull",
+    role: "Founder, 80x",
+    program: "Creator Partners",
+    quote:
+      "The Attio creator program is a wellspring of new connections, genuine inspiration, and next-gen GTM insight I haven't found elsewhere.",
+    features: ["Workflows", "Integrations", "Communication intelligence"],
+  },
+  {
+    name: "Giacomo Caranese",
+    role: "Co-founder, novlini",
+    program: "Expert Partners",
+    quote:
+      "Attio connects me with teams that value speed, structure, and scale. Building flexible, high-impact systems on such a powerful product is a pleasure.",
+    features: ["Email & calendar sync", "API", "Mobile app"],
+  },
+];
+
+const programs = [
+  {
+    n: "01",
+    label: "App partners",
+    title: "App partners.",
+    subtitle: "Build apps that power the next era of CRM.",
+    href: "/partners/app-partners",
+    motif: "apps",
+  },
+  {
+    n: "02",
+    label: "Creator partners",
+    title: "Creator partners.",
+    subtitle: "Build your brand, grow your audience.",
+    href: "/partners/creator-partners",
+    motif: "creators",
+  },
+  {
+    n: "03",
+    label: "Expert partners",
+    title: "Expert partners.",
+    subtitle: "Help GTM teams build, scale and grow.",
+    href: "/partners/expert-partners",
+    motif: "experts",
+  },
+];
+
+const updates = [
+  { title: "LinkedIn", copy: "Keep up to date with what the team is building.", href: "https://linkedin.com/company/attio" },
+  { title: "X", copy: "Stay in the loop with what we're working on.", href: "https://x.com/attio" },
+  { title: "Blog", copy: "Be the first to get new Attio updates.", href: "/blog" },
+  { title: "Changelog", copy: "Stay on top of all releases and new features.", href: "/changelog" },
+];
+
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join("");
+---
+
+<BaseLayout
+  title="Partner Programs | Attio"
+  description="From building technology around our platform to creating content about Attio, we have a program for every need."
+  hideFinalCta
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-16 pt-16 text-center sm:px-6 sm:pt-24">
+    <div class="mx-auto w-fit rounded-[13px] border border-paper-500 bg-white px-3 py-1.5 text-[13px] font-medium leading-[1.4em] text-ink-600">
+      <h1 class="font-medium">Partner programs</h1>
+    </div>
+    <h2 class="mx-auto mt-6 max-w-[15em] text-balance font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Partner with us to build the next generation of CRM.
+    </h2>
+    <p class="mx-auto mt-6 max-w-xl text-balance text-lg leading-relaxed text-ink-600 sm:text-xl">
+      We work with the best developers, creators, and consultants to power the next era of companies.
+    </p>
+  </section>
+
+  <!-- Program cards -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Partner programs">
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        programs.map((p) => (
+          <a
+            href={p.href}
+            class="group overflow-hidden rounded-2xl border border-paper-500 bg-white transition-colors hover:bg-paper-200"
+          >
+            <div class="pinstripe-bg flex min-h-[220px] flex-col items-center justify-center gap-3 bg-ink-100 px-6 py-12 text-center">
+              <p class="font-display text-3xl font-semibold lowercase tracking-tight text-white">attio</p>
+              <p class="text-sm font-medium text-white/70">{p.label}</p>
+            </div>
+            <div class="p-6">
+              <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">{p.n} / {p.label}</p>
+              <h3 class="mt-3 font-display text-heading-xs font-semibold tracking-tight text-ink-100">
+                {p.title} <span class="font-medium text-ink-600">{p.subtitle}</span>
+              </h3>
+              <p class="mt-5 flex items-center gap-1.5 text-sm font-semibold text-ink-100">
+                Learn more
+                <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
+                  &rarr;
+                </span>
+              </p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Partner quotes carousel -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Partner stories">
+    <div class="grid gap-4 sm:grid-cols-3" role="tablist" aria-label="Partner quotes">
+      {
+        quotes.map((q, i) => (
+          <button
+            type="button"
+            role="tab"
+            data-quote-tab={i}
+            aria-selected={i === 2 ? "true" : "false"}
+            class="overflow-hidden rounded-2xl border border-paper-500 text-left transition-colors"
+          >
+            <span class="pinstripe-bg flex min-h-[220px] flex-col items-center justify-center gap-2 bg-ink-100 px-4 py-10 text-center">
+              <span class="flex h-16 w-16 items-center justify-center rounded-full bg-white font-display text-xl font-semibold text-ink-100">
+                {initials(q.name)}
+              </span>
+              <span class="font-display text-base font-semibold text-white">{q.name}</span>
+              <span class="text-xs text-white/70">{q.role}</span>
+            </span>
+            <span class="block bg-white px-5 py-4">
+              <span class="block truncate text-sm">
+                <span class="font-bold">{q.name}</span>, {q.role}
+              </span>
+              <span class="mt-1 block text-sm text-ink-600">{q.program}</span>
+            </span>
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="mt-6 overflow-hidden rounded-2xl border border-paper-500 bg-white">
+      <div class="px-6 py-10 sm:px-10">
+        <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700" data-quote-overline>
+          Expert Partners
+        </p>
+        <blockquote
+          class="mt-4 max-w-3xl font-display text-2xl font-medium leading-snug tracking-tight text-ink-100 sm:text-[28px]"
+          data-quote-text
+        >
+          &ldquo;Attio connects me with teams that value speed, structure, and scale. Building flexible,
+          high-impact systems on such a powerful product is a pleasure.&rdquo;
+        </blockquote>
+        <p class="mt-6 font-semibold text-ink-100" data-quote-name>Giacomo Caranese</p>
+        <p class="text-sm text-ink-600" data-quote-role>Co-founder, novlini</p>
+        <p class="mt-6 text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">
+          <span data-quote-first>Giacomo</span>&rsquo;s favorite features
+        </p>
+        <ul class="mt-3 flex flex-wrap gap-2" data-quote-features>
+          <li class="rounded-full border border-paper-500 bg-paper-200 px-3 py-1.5 text-sm font-medium text-ink-100">
+            Email &amp; calendar sync
+          </li>
+          <li class="rounded-full border border-paper-500 bg-paper-200 px-3 py-1.5 text-sm font-medium text-ink-100">
+            API
+          </li>
+          <li class="rounded-full border border-paper-500 bg-paper-200 px-3 py-1.5 text-sm font-medium text-ink-100">
+            Mobile app
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Keep up to date -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Keep up to date">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Keep up to date.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Get the latest updates on what we&rsquo;re building.
+    </p>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        updates.map((item) => (
+          <a
+            href={item.href}
+            class="group rounded-2xl border border-paper-500 bg-white p-6 transition-colors hover:bg-paper-200"
+          >
+            <h3 class="font-display text-xl font-semibold group-hover:underline">{item.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{item.copy}</p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <script define:vars={{ quotes }}>
+    const tabs = Array.from(document.querySelectorAll("[data-quote-tab]"));
+    const overline = document.querySelector("[data-quote-overline]");
+    const text = document.querySelector("[data-quote-text]");
+    const name = document.querySelector("[data-quote-name]");
+    const role = document.querySelector("[data-quote-role]");
+    const first = document.querySelector("[data-quote-first]");
+    const features = document.querySelector("[data-quote-features]");
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const q = quotes[Number(tab.getAttribute("data-quote-tab"))];
+        if (!q) return;
+        tabs.forEach((t) => {
+          t.setAttribute("aria-selected", t === tab ? "true" : "false");
+          t.classList.toggle("border-blue-500", t === tab);
+          t.classList.toggle("border-paper-500", t !== tab);
+        });
+        if (overline) overline.textContent = q.program;
+        if (text) text.textContent = "\u201C" + q.quote + "\u201D";
+        if (name) name.textContent = q.name;
+        if (role) role.textContent = q.role;
+        if (first) first.textContent = q.name.split(" ")[0];
+        if (features) {
+          features.innerHTML = q.features
+            .map(
+              (f) =>
+                '<li class="rounded-full border border-paper-500 bg-paper-200 px-3 py-1.5 text-sm font-medium text-ink-100">' +
+                f +
+                "</li>"
+            )
+            .join("");
+        }
+      });
+    });
+    const active = tabs[2];
+    if (active) active.classList.add("border-blue-500");
+  </script>
+</BaseLayout>

@@ -1,0 +1,321 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PartnersQuote from "../../components/PartnersQuote.astro";
+import PartnersFaq from "../../components/PartnersFaq.astro";
+import PartnersPathways from "../../components/PartnersPathways.astro";
+
+// Copy fetched live from https://attio.com/partners/app-partners on 2026-11-16
+// (HTTP 200, 652KB), with section copy from the live i18n dictionary
+// (appPartners, appPartnersHeader, appPartnersBento, appPartnersDiagram,
+// appPartnersDocsLinks, appPartnersStartBuilding).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live has no standard FinalCta ("Agentic revenue runs on Attio." appears 0 times
+// in the live HTML), so hideFinalCta is used.
+// Live H1 is the small pill ("App partners"); the large hero headline is an H2, as on live.
+// The "Start building." steps switch between the SDK flow (5 steps) and the REST API
+// flow (3 steps) as on live; SDK is the default, as in the live static HTML.
+
+const logos = ["Aircall", "Census", "Claap", "Dropbox", "Linear", "Relay", "Symbol", "SyncPenguin"];
+
+const sdkSteps = [
+  {
+    title: "Create your app",
+    body: 'Head over to our <a href="https://build.attio.com/">developer console</a> and sign in with your Attio account. Create your app and give it a unique name.',
+  },
+  {
+    title: "Develop",
+    body: 'Use React, TypeScript, and our <a href="https://docs.attio.com/sdk/">App SDK</a> to build your app that runs natively inside of Attio.',
+  },
+  {
+    title: "Manage authentication",
+    body: "Connect to your service by configuring OAuth or access tokens.",
+  },
+  {
+    title: "Configure your listing",
+    body: "Give your app a logo, a description, and screenshots, to show users what it does.",
+  },
+  {
+    title: "Publish",
+    body: 'Submit your app for review via the <a href="https://build.attio.com/">developer console</a>, and share it with your users.',
+  },
+];
+
+const apiSteps = [
+  {
+    title: "Create your app",
+    body: 'Head over to our <a href="https://build.attio.com/">developer console</a> and sign in with your Attio account. Create your app and give it a unique name.',
+  },
+  {
+    title: "Configure OAuth",
+    body: '<a href="https://docs.attio.com/rest-api/">Configure OAuth for your app</a> and make authenticated requests to the Attio API.',
+  },
+  {
+    title: "Develop",
+    body: 'Use the <a href="https://docs.attio.com/rest-api/">REST API</a> to read and write data in Attio.',
+  },
+];
+
+const diagramNodes = [
+  { label: "Sales engagement", records: null },
+  { label: "Email & calendar", records: null },
+  { label: "Data warehouses", records: null },
+  { label: "Customer support", records: null },
+  { label: "Billing & invoicing", records: null },
+  { label: "Product data", records: null },
+];
+
+const faq = [
+  {
+    q: "How do I get started?",
+    a: 'To get started, we recommend creating a <a href="https://build.attio.com/">developer account</a> and familiarizing yourself with our <a href="https://docs.attio.com/">API documentation</a>.',
+  },
+  {
+    q: "What makes someone an ideal Attio App Partner?",
+    a: "The app partner program is open to all developers, although we're especially interested in working with teams who have mutual customers with Attio and are looking to build an integration between our products.",
+  },
+  {
+    q: "Can I monetize my app?",
+    a: "We don't offer native monetization as part of the App Store, but you are free to charge users of your app how you see fit.",
+  },
+];
+---
+
+<BaseLayout
+  title="App Partner Program | Attio"
+  description="Develop custom integrations to expand the Attio ecosystem."
+  hideFinalCta
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-16 pt-16 text-center sm:px-6 sm:pt-24">
+    <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3" aria-label="App partners">
+      {
+        logos.map((logo) => (
+          <span class="font-display text-lg font-semibold lowercase tracking-tight text-ink-700">{logo}</span>
+        ))
+      }
+    </div>
+    <div class="mx-auto mt-10 w-fit rounded-[13px] border border-paper-500 bg-white px-3 py-1.5 text-[13px] font-medium leading-[1.4em] text-ink-600">
+      <h1 class="font-medium">App partners</h1>
+    </div>
+    <h2 class="mx-auto mt-6 max-w-[15em] text-balance font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Build apps that transform GTM.
+    </h2>
+    <p class="mx-auto mt-6 max-w-xl text-balance text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Power the next generation of CRM and build the future of business software.
+    </p>
+
+    <!-- Docs links -->
+    <div class="mx-auto mt-14 grid max-w-3xl gap-6 text-left sm:grid-cols-2">
+      <div class="rounded-2xl border border-paper-500 bg-white p-8">
+        <h3 class="font-display text-heading-xs font-semibold tracking-tight text-ink-100">App SDK</h3>
+        <p class="mt-3 text-base leading-relaxed text-ink-600">
+          Develop Typescript React applications that run natively on Attio&rsquo;s platform.
+        </p>
+        <a
+          href="https://docs.attio.com/sdk/"
+          class="mt-6 inline-flex items-center gap-1.5 rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+        >
+          Build with SDK
+        </a>
+      </div>
+      <div class="rounded-2xl border border-paper-500 bg-white p-8">
+        <h3 class="font-display text-heading-xs font-semibold tracking-tight text-ink-100">REST API</h3>
+        <p class="mt-3 text-base leading-relaxed text-ink-600">
+          Develop apps that read and write information to and from workspaces.
+        </p>
+        <a
+          href="https://docs.attio.com/rest-api/"
+          class="mt-6 inline-flex items-center gap-1.5 rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+        >
+          Build with REST API
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Start building -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Start building">
+    <div class="text-center">
+      <h2 class="font-display text-heading-md font-semibold tracking-tight">Start building.</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+        Create custom apps, automations, and integrations on top of Attio.
+      </p>
+      <div class="mt-8 inline-flex rounded-full border border-paper-500 bg-white p-1" role="tablist" aria-label="Build flow">
+        <button
+          type="button"
+          role="tab"
+          data-flow-tab="sdk"
+          aria-selected="true"
+          class="rounded-full px-5 py-2 text-sm font-semibold transition-colors"
+        >
+          SDK
+        </button>
+        <button
+          type="button"
+          role="tab"
+          data-flow-tab="api"
+          aria-selected="false"
+          class="rounded-full px-5 py-2 text-sm font-semibold transition-colors"
+        >
+          REST API
+        </button>
+      </div>
+    </div>
+
+    <ol class="mx-auto mt-12 max-w-3xl" data-flow-steps="sdk">
+      {
+        sdkSteps.map((step, i) => (
+          <li class="flex gap-6 border-b border-paper-500 py-7 first:pt-0">
+            <span class="font-display text-sm font-semibold text-ink-700">0{i + 1} /</span>
+            <div>
+              <h3 class="font-display text-heading-xs font-semibold tracking-tight text-ink-100">{step.title}</h3>
+              <p class="step-body mt-2 max-w-2xl text-base leading-relaxed text-ink-600" set:html={step.body} />
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+    <ol class="mx-auto mt-12 hidden max-w-3xl" data-flow-steps="api">
+      {
+        apiSteps.map((step, i) => (
+          <li class="flex gap-6 border-b border-paper-500 py-7 first:pt-0">
+            <span class="font-display text-sm font-semibold text-ink-700">0{i + 1} /</span>
+            <div>
+              <h3 class="font-display text-heading-xs font-semibold tracking-tight text-ink-100">{step.title}</h3>
+              <p class="step-body mt-2 max-w-2xl text-base leading-relaxed text-ink-600" set:html={step.body} />
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="mt-8 text-center text-sm text-ink-600">
+      <a href="https://docs.attio.com/sdk/" class="font-semibold text-ink-100 underline underline-offset-4 hover:text-blue-500" data-docs-link>
+        Learn more on docs.attio.com
+      </a>
+    </p>
+  </section>
+
+  <!-- Explore existing apps -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Explore existing apps">
+    <div class="text-center">
+      <h2 class="font-display text-heading-md font-semibold tracking-tight">Explore existing apps.</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+        See what other developers have built in Attio.
+      </p>
+      <p class="mx-auto mt-2 max-w-2xl text-base leading-relaxed text-ink-600">
+        Visit the App Store to explore the apps and integrations that extend Attio&rsquo;s functionality.
+      </p>
+      <a
+        href="/apps"
+        class="mt-6 inline-flex items-center gap-1.5 rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Discover apps
+      </a>
+    </div>
+
+    <!-- Diagram mock: category nodes plus the record counts from live -->
+    <div class="mx-auto mt-12 grid max-w-4xl gap-6 lg:grid-cols-2">
+      <div class="rounded-2xl border border-paper-500 bg-white p-6">
+        <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Categories</p>
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {
+            diagramNodes.map((n) => (
+              <li class="rounded-full border border-paper-500 bg-paper-200 px-3 py-1.5 text-sm font-medium text-ink-100">
+                {n.label}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+        <div class="border-b border-paper-500 px-6 py-4">
+          <p class="font-display text-lg font-semibold text-ink-100">Workspace</p>
+          <p class="text-sm text-ink-600">2,857 Records</p>
+        </div>
+        <div class="grid grid-cols-2 divide-x divide-paper-500">
+          <div class="px-6 py-4">
+            <p class="font-display text-lg font-semibold text-ink-100">Company</p>
+            <p class="text-sm text-ink-600">3,096 Records</p>
+          </div>
+          <div class="px-6 py-4">
+            <p class="font-display text-lg font-semibold text-ink-100">Deal</p>
+            <p class="text-sm text-ink-600">5,490 Records</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="App partner quote">
+    <PartnersQuote
+      overline="Attio App Partners"
+      quote="Attio's developer experience is a breath of fresh air. The team is outstanding to work with, we're thrilled for Sequence to be part of the Attio App Store."
+      name="Riya Grover"
+      role="Co-founder & CEO, Sequence"
+      features={["Deals", "Workflows", "Notes"]}
+    />
+  </section>
+
+  <PartnersFaq items={faq} />
+
+  <PartnersPathways
+    cards={[
+      {
+        href: "/partners/creator-partners",
+        label: "Creator partners",
+        title: "Creator partners.",
+        subtitle: "Build your brand and grow your audience.",
+        link: "Become a Creator Partner",
+      },
+      {
+        href: "/partners/expert-partners",
+        label: "Expert partners",
+        title: "Expert partners.",
+        subtitle: "Help GTM teams build, scale and grow.",
+        link: "Become an Expert Partner",
+      },
+    ]}
+  />
+
+  <script>
+    // Start building: SDK / REST API flow switch, as on live.
+    const tabs = Array.from(document.querySelectorAll("[data-flow-tab]"));
+    const docsLink = document.querySelector("[data-docs-link]");
+    const docsHrefs: Record<string, string> = {
+      sdk: "https://docs.attio.com/sdk/",
+      api: "https://docs.attio.com/rest-api/",
+    };
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const flow = tab.getAttribute("data-flow-tab") ?? "sdk";
+        tabs.forEach((t) => {
+          const active = t === tab;
+          t.setAttribute("aria-selected", active ? "true" : "false");
+          t.classList.toggle("bg-ink-100", active);
+          t.classList.toggle("text-white", active);
+          t.classList.toggle("text-ink-100", !active);
+        });
+        document.querySelectorAll("[data-flow-steps]").forEach((list) => {
+          list.classList.toggle("hidden", list.getAttribute("data-flow-steps") !== flow);
+        });
+        if (docsLink) docsLink.setAttribute("href", docsHrefs[flow]);
+      });
+    });
+    const defaultTab = tabs[0];
+    if (defaultTab) {
+      defaultTab.classList.add("bg-ink-100", "text-white");
+    }
+  </script>
+
+  <style>
+    .step-body a {
+      color: var(--color-blue-500);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .step-body a:hover {
+      color: var(--color-blue-600);
+    }
+  </style>
+</BaseLayout>
