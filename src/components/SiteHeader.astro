@@ -1,0 +1,234 @@
+---
+/* Sticky header. Black with white text while the announcement bar is present,
+   white with black text and a bottom border after the bar is dismissed.
+   Mega menus open on hover (CSS group-hover) and close on Escape (script).
+   Mobile drawer below 1024px. Logo is a CSS mark, two overlapping rounded
+   shapes, plus lowercase bold "attio" text. No copied logo file. */
+const platformMenu = [
+  {
+    group: "Context",
+    items: [
+      { label: "Universal Context", desc: "The AI context layer", href: "/platform/universal-context" },
+      { label: "Data Model", desc: "Sync and structure your data", href: "/platform/data" },
+      { label: "Enrichment", desc: "Auto-enrich every record", href: "/platform/enrichment" },
+      { label: "Call Intelligence", desc: "Record and analyze meetings", href: "/platform/call-intelligence" },
+      { label: "Reporting & Forecasts", desc: "Insights in real time", href: "/platform/reporting" },
+    ],
+  },
+  {
+    group: "Orchestration",
+    items: [
+      { label: "Ask Attio", desc: "Analyze and create with AI", href: "/platform/ask" },
+      { label: "Workflows", desc: "Orchestrate any revenue motion", href: "/platform/workflows" },
+      { label: "Custom Agents", desc: "Agents ready for any task", href: "/platform/custom-agents" },
+      { label: "Web Agent", desc: "Research the web on autopilot", href: "/platform/web-agent" },
+      { label: "Sequences", desc: "Personalized outreach at scale", href: "/platform/sequences" },
+    ],
+  },
+  {
+    group: "Ecosystem",
+    items: [
+      { label: "Apps", desc: "Discover the tools you need", href: "/apps" },
+      { label: "MCP", desc: "Connect everywhere you work", href: "/platform/mcp" },
+      { label: "Developer Platform", desc: "Extend and integrate with Attio", href: "/platform/developers" },
+    ],
+  },
+];
+const attioFor = [
+  { label: "Slack", href: "/apps/slack" },
+  { label: "ChatGPT", href: "/apps/chatgpt" },
+  { label: "Claude", href: "/apps/claude" },
+];
+const getStarted = [
+  { label: "Attio 101", href: "/help/reference/attio-101" },
+  { label: "Startup program", href: "/startups" },
+  { label: "Talk to sales", href: "/contact/sales" },
+];
+const resourcesMenu = [
+  {
+    group: "Support",
+    items: [
+      { label: "Help Center", desc: "Learn about Attio's features", href: "/help" },
+      { label: "Academy", desc: "Essential Attio, explained", href: "/help/academy" },
+      { label: "Developer Docs", desc: "Start building on Attio", href: "https://docs.attio.com" },
+      { label: "Attio Community", desc: "Connect with other Attio users", href: "https://www.attio.community/" },
+    ],
+  },
+  {
+    group: "Partners",
+    items: [
+      { label: "Technology partners", desc: "", href: "/partners/app-partners" },
+      { label: "Expert partners", desc: "", href: "/partners/expert-partners" },
+      { label: "Creator partners", desc: "", href: "/partners/creator-partners" },
+    ],
+  },
+  {
+    group: "Company",
+    items: [
+      { label: "Changelog", desc: "", href: "/changelog" },
+      { label: "Announcements", desc: "", href: "/blog" },
+      { label: "Engineering blog", desc: "", href: "/engineering/blog" },
+      { label: "Careers", desc: "", href: "/careers" },
+    ],
+  },
+];
+---
+
+<header id="site-header" class="bg-ink-50 text-white transition-colors">
+  <div class="mx-auto flex h-16 max-w-[1200px] items-center justify-between gap-4 px-4 sm:px-6">
+    <a href="/" class="flex shrink-0 items-center gap-2" aria-label="Attio home">
+      <span class="relative block h-6 w-7" aria-hidden="true">
+        <span class="absolute left-0 top-0 h-5 w-5 rounded-full bg-current opacity-100"></span>
+        <span class="absolute bottom-0 right-0 h-5 w-5 rounded-[50%_50%_50%_4px] bg-blue-500"></span>
+      </span>
+      <span class="font-display text-[22px] font-bold leading-none tracking-tight">attio</span>
+    </a>
+
+    <nav class="hidden min-[1024px]:flex items-center gap-1 text-[15px] font-medium" aria-label="Primary">
+      <div class="group relative">
+        <button type="button" class="flex items-center gap-1 rounded-full px-3 py-2 hover:bg-white/10" aria-haspopup="true">
+          Platform
+          <span class="text-xs transition-transform group-hover:rotate-180" aria-hidden="true">&#8964;</span>
+        </button>
+        <div class="invisible absolute left-1/2 top-full z-50 w-[720px] -translate-x-1/2 pt-2 opacity-0 transition-opacity group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+          <div class="flex overflow-hidden rounded-xl bg-white text-ink-100 shadow-xl ring-1 ring-ink-100/10">
+            <div class="grid flex-1 grid-cols-3 gap-6 p-6">
+              {platformMenu.map((col) => (
+                <div>
+                  <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-ink-700">{col.group}</p>
+                  <ul class="space-y-3">
+                    {col.items.map((item) => (
+                      <li>
+                        <a href={item.href} class="block rounded-md hover:text-blue-500">
+                          <span class="block text-sm font-semibold leading-snug">{item.label}</span>
+                          <span class="block text-[13px] leading-snug text-ink-700">{item.desc}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <div class="w-44 shrink-0 bg-paper-300 p-6">
+              <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-ink-700">Attio for</p>
+              <ul class="mb-6 space-y-2">
+                {attioFor.map((item) => (
+                  <li><a href={item.href} class="text-sm font-medium hover:text-blue-500">{item.label}</a></li>
+                ))}
+              </ul>
+              <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-ink-700">Get started</p>
+              <ul class="space-y-2">
+                {getStarted.map((item) => (
+                  <li><a href={item.href} class="text-sm font-medium hover:text-blue-500">{item.label}</a></li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group relative">
+        <button type="button" class="flex items-center gap-1 rounded-full px-3 py-2 hover:bg-white/10" aria-haspopup="true">
+          Resources
+          <span class="text-xs transition-transform group-hover:rotate-180" aria-hidden="true">&#8964;</span>
+        </button>
+        <div class="invisible absolute left-1/2 top-full z-50 w-[560px] -translate-x-1/2 pt-2 opacity-0 transition-opacity group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+          <div class="grid grid-cols-2 gap-6 rounded-xl bg-white p-6 text-ink-100 shadow-xl ring-1 ring-ink-100/10">
+            {resourcesMenu.map((col) => (
+              <div>
+                <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-ink-700">{col.group}</p>
+                <ul class="space-y-3">
+                  {col.items.map((item) => (
+                    <li>
+                      <a href={item.href} class="block rounded-md hover:text-blue-500">
+                        <span class="block text-sm font-semibold leading-snug">{item.label}</span>
+                        {item.desc && <span class="block text-[13px] leading-snug text-ink-700">{item.desc}</span>}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <a href="/platform/developers" class="rounded-full px-3 py-2 hover:bg-white/10">Developers</a>
+      <a href="/customers" class="rounded-full px-3 py-2 hover:bg-white/10">Customers</a>
+      <a href="/pricing" class="rounded-full px-3 py-2 hover:bg-white/10">Pricing</a>
+    </nav>
+
+    <div class="hidden min-[1024px]:flex items-center gap-2">
+      <a href="/go/welcome/sign-in" class="rounded-full px-4 py-2 text-sm font-medium ring-1 ring-current hover:bg-white/10">Sign in</a>
+      <a href="/go/welcome/sign-in" class="rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink-100 hover:bg-paper-300">Start for free</a>
+    </div>
+
+    <button
+      type="button"
+      id="mobile-menu-button"
+      class="rounded-md p-2 hover:bg-white/10 min-[1024px]:hidden"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="block h-0.5 w-6 bg-current"></span>
+      <span class="mt-1.5 block h-0.5 w-6 bg-current"></span>
+      <span class="mt-1.5 block h-0.5 w-6 bg-current"></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-white/10 bg-ink-50 px-4 py-4 text-white min-[1024px]:hidden" data-menu-state="closed">
+    <nav class="flex flex-col gap-1 text-[15px] font-medium" aria-label="Mobile">
+      <p class="px-2 pt-2 text-xs font-semibold uppercase tracking-wide text-white/60">Platform</p>
+      {platformMenu.flatMap((col) => col.items).map((item) => (
+        <a href={item.href} class="rounded-md px-2 py-2 hover:bg-white/10">{item.label}</a>
+      ))}
+      <p class="px-2 pt-4 text-xs font-semibold uppercase tracking-wide text-white/60">Resources</p>
+      {resourcesMenu.flatMap((col) => col.items).map((item) => (
+        <a href={item.href} class="rounded-md px-2 py-2 hover:bg-white/10">{item.label}</a>
+      ))}
+      <a href="/platform/developers" class="rounded-md px-2 py-2 hover:bg-white/10">Developers</a>
+      <a href="/customers" class="rounded-md px-2 py-2 hover:bg-white/10">Customers</a>
+      <a href="/pricing" class="rounded-md px-2 py-2 hover:bg-white/10">Pricing</a>
+      <div class="mt-4 flex gap-2">
+        <a href="/go/welcome/sign-in" class="flex-1 rounded-full px-4 py-2 text-center text-sm font-medium ring-1 ring-white/60">Sign in</a>
+        <a href="/go/welcome/sign-in" class="flex-1 rounded-full bg-white px-4 py-2 text-center text-sm font-semibold text-ink-100">Start for free</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("site-header");
+  const applyHeaderTheme = () => {
+    const dismissed = document.documentElement.getAttribute("data-banner-dismissed") === "true";
+    if (!header) return;
+    if (dismissed) {
+      header.classList.remove("bg-ink-50", "text-white");
+      header.classList.add("bg-white", "text-ink-100", "border-b", "border-paper-500");
+      const startBtn = header.querySelector('a[href="/go/welcome/sign-in"].bg-white');
+      if (startBtn) {
+        startBtn.classList.remove("bg-white", "text-ink-100");
+        startBtn.classList.add("bg-ink-100", "text-white");
+      }
+    }
+  };
+  document.addEventListener("attio:banner-dismissed", applyHeaderTheme);
+  if (document.documentElement.getAttribute("data-banner-dismissed") === "true") applyHeaderTheme();
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      const active = document.activeElement;
+      if (active instanceof HTMLElement) active.blur();
+    }
+  });
+
+  const menuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  menuButton?.addEventListener("click", () => {
+    const open = mobileMenu?.classList.toggle("hidden") === false;
+    menuButton.setAttribute("aria-expanded", String(open));
+    menuButton.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    mobileMenu?.setAttribute("data-menu-state", open ? "open" : "closed");
+  });
+</script>

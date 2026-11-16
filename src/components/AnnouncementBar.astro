@@ -1,0 +1,31 @@
+---
+/* Black announcement bar, dismissible. Default text per spec Appendix C.1.
+   Banner text varies per load on the live site, so this is the default variant. */
+---
+
+<div id="announcement-bar" class="bg-ink-50 text-white">
+  <div class="mx-auto flex max-w-[1200px] items-center justify-center gap-2 px-4 py-2 text-sm">
+    <a href="/architecture" class="hover:underline">
+      The new architecture for agentic revenue is here
+      <span aria-hidden="true"> &rarr;</span>
+    </a>
+    <button
+      type="button"
+      id="announcement-dismiss"
+      aria-label="Dismiss announcement"
+      class="ml-2 rounded-full px-2 py-0.5 text-white/80 hover:bg-white/10 hover:text-white"
+    >
+      &times;
+    </button>
+  </div>
+</div>
+
+<script>
+  const bar = document.getElementById("announcement-bar");
+  const dismiss = document.getElementById("announcement-dismiss");
+  dismiss?.addEventListener("click", () => {
+    bar?.remove();
+    document.documentElement.setAttribute("data-banner-dismissed", "true");
+    document.dispatchEvent(new CustomEvent("attio:banner-dismissed"));
+  });
+</script>

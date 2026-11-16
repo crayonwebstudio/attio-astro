@@ -1,0 +1,143 @@
+---
+/* Black footer. Four visual columns, each grouping two headings, per Appendix C.3.
+   Socials are text links. "New" is a small blue pill. External links show an arrow. */
+const columns = [
+  {
+    groups: [
+      {
+        heading: "Platform",
+        links: [
+          { label: "Refer a team", href: "/refer", badge: "New" },
+          { label: "Changelog", href: "/changelog" },
+          { label: "Gmail extension", href: "https://chrome.google.com/webstore/detail/attio/legacbojjmajoedfolbjlekjjkepadph/", external: true },
+          { label: "iOS app", href: "https://apps.apple.com/gb/app/attio/id1511545395", external: true },
+          { label: "Android app", href: "https://play.google.com/store/apps/details?id=com.attio&gl=GB", external: true },
+        ],
+      },
+      {
+        heading: "Company",
+        links: [
+          { label: "Customers", href: "/customers" },
+          { label: "Announcements", href: "/blog" },
+          { label: "Engineering blog", href: "/engineering/blog", badge: "New" },
+          { label: "Careers", href: "/careers" },
+          { label: "Manifesto", href: "/redefine" },
+          { label: "Brand", href: "/brand" },
+          { label: "Become a partner", href: "/partners" },
+        ],
+      },
+    ],
+  },
+  {
+    groups: [
+      {
+        heading: "Import from",
+        links: [
+          { label: "Salesforce", href: "/help/reference/imports-exports/migrate-data-from-another-crm" },
+          { label: "Hubspot", href: "/help/reference/imports-exports/migrate-data-from-another-crm" },
+          { label: "Pipedrive", href: "/help/reference/imports-exports/migrate-data-from-another-crm" },
+          { label: "Zoho", href: "/help/reference/imports-exports/migrate-data-from-another-crm" },
+          { label: "Excel", href: "/help/reference/imports-exports/import-data-into-attio-via-csv" },
+          { label: "CSV", href: "/help/reference/imports-exports/import-data-into-attio-via-csv" },
+        ],
+      },
+      {
+        heading: "Attio for",
+        links: [
+          { label: "Startups", href: "/startups" },
+          { label: "Deal flow", href: "/solutions/deal-flow-management-software" },
+        ],
+      },
+    ],
+  },
+  {
+    groups: [
+      {
+        heading: "Apps",
+        links: [
+          { label: "Gmail", href: "/apps/gmail" },
+          { label: "Outlook", href: "/apps/outlook" },
+          { label: "Segment", href: "/apps/segment" },
+          { label: "Mailchimp", href: "/apps/mailchimp" },
+          { label: "Slack", href: "/apps/slack" },
+          { label: "Outreach", href: "/apps/outreach" },
+          { label: "Mixmax", href: "/apps/mixmax" },
+          { label: "Typeform", href: "/apps/typeform" },
+          { label: "Zapier", href: "/apps/zapier" },
+        ],
+      },
+    ],
+  },
+  {
+    groups: [
+      {
+        heading: "Resources",
+        links: [
+          { label: "Startup program", href: "/startups" },
+          { label: "Help center", href: "/help" },
+          { label: "Developers", href: "https://docs.attio.com", external: true },
+          { label: "System status", href: "https://status.attio.com/", external: true },
+          { label: "Hire an expert", href: "/experts" },
+          { label: "Downloads", href: "/download" },
+          { label: "Trust Center", href: "https://trust.attio.com/", external: true },
+        ],
+      },
+    ],
+  },
+];
+---
+
+<footer class="bg-ink-50 text-white">
+  <div class="mx-auto max-w-[1200px] px-4 py-16 sm:px-6">
+    <div class="flex flex-col gap-12 lg:flex-row lg:justify-between">
+      <div class="shrink-0">
+        <a href="/" class="flex items-center gap-2" aria-label="Attio home">
+          <span class="relative block h-6 w-7" aria-hidden="true">
+            <span class="absolute left-0 top-0 h-5 w-5 rounded-full bg-white"></span>
+            <span class="absolute bottom-0 right-0 h-5 w-5 rounded-[50%_50%_50%_4px] bg-blue-500"></span>
+          </span>
+          <span class="font-display text-[22px] font-bold leading-none tracking-tight">attio</span>
+        </a>
+        <div class="mt-8 flex gap-4 text-sm text-white/70">
+          <a href="https://linkedin.com/company/attio" class="hover:text-white">LinkedIn</a>
+          <a href="https://twitter.com/attio" class="hover:text-white">X</a>
+          <a href="https://dribbble.com/attio" class="hover:text-white">Dribbble</a>
+          <a href="https://www.youtube.com/@attioCRM" class="hover:text-white">YouTube</a>
+        </div>
+      </div>
+      <div class="grid flex-1 grid-cols-2 gap-10 md:grid-cols-4">
+        {columns.map((col) => (
+          <div class="space-y-8">
+            {col.groups.map((group) => (
+              <div>
+                <h2 class="mb-3 text-xs font-semibold uppercase tracking-wide text-ink-800">{group.heading}</h2>
+                <ul class="space-y-2.5">
+                  {group.links.map((link) => (
+                    <li>
+                      <a href={link.href} class="text-sm text-white/75 hover:text-white">
+                        {link.label}
+                        {link.external && <span aria-hidden="true"> &#8599;</span>}
+                        {link.badge && (
+                          <span class="ml-2 rounded-full bg-blue-500 px-2 py-0.5 text-[10px] font-semibold text-white">{link.badge}</span>
+                        )}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="mt-16 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between">
+      <p>&copy; 2026 Attio Ltd. All rights reserved.</p>
+      <div class="flex flex-wrap gap-5">
+        <a href="/legal/services-agreement" class="hover:text-white">Services Agreement</a>
+        <a href="/legal/privacy" class="hover:text-white">Privacy Policy</a>
+        <a href="/llms.txt" class="hover:text-white">LLMs</a>
+        <a href="/privacy-preferences" class="hover:text-white">Cookie settings</a>
+      </div>
+    </div>
+  </div>
+</footer>

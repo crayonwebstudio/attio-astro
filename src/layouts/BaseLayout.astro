@@ -1,0 +1,49 @@
+---
+import "../styles/global.css";
+import AnnouncementBar from "../components/AnnouncementBar.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import FinalCta from "../components/FinalCta.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Attio: The CRM for agentic revenue",
+  description = "The system for revenue teams to build pipeline, accelerate deals, and grow accounts around the clock.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Attio" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@attio" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-white text-ink-100 antialiased">
+    <div class="sticky top-0 z-50">
+      <AnnouncementBar />
+      <SiteHeader />
+    </div>
+    <main>
+      <slot />
+    </main>
+    <FinalCta />
+    <SiteFooter />
+  </body>
+</html>
