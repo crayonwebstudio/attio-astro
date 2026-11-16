@@ -1,0 +1,459 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/solutions/startup-crm on 2026-11-16 (HTTP 200, 381KB).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live H1 is "CRM for startups" (eyebrow) with the page headline as H2; here the headline
+// "The real-time CRM for scaling startups." is the single H1, per the platform page pattern.
+// Pipeline management is a Radix accordion on the live page: item 1 has subcopy, items 2 and 3
+// are titles only and switch the image. Tabs switch product mocks, no extra tab copy on live.
+const logos = [
+  "Granola",
+  "Modal",
+  "Taskrabbit",
+  "Replicate",
+  "Railway",
+  "Passionfroot",
+  "Wispr Flow",
+  "Listen Labs",
+  "Public",
+  "Wordsmith",
+  "USV",
+  "Obvious",
+];
+
+const tabs = ["Contacts", "Pipelines", "Activity", "Reporting"];
+
+const companies = [
+  { name: "Granola", stage: "Series C", value: "$125M", owner: "Isla Harrington" },
+  { name: "Modal", stage: "Series B", value: "$86M", owner: "George Wilkes" },
+  { name: "Railway", stage: "Series B", value: "$54M", owner: "Theo Marshall" },
+  { name: "Taskrabbit", stage: "Growth", value: "$42M", owner: "Amelia Carter" },
+  { name: "Replicate", stage: "Series A", value: "$28M", owner: "Nathan Cole" },
+];
+
+const kanban = [
+  {
+    stage: "Discovery",
+    deals: [
+      { name: "Lumio AI", value: "$20,800" },
+      { name: "Verda Labs", value: "$36,400" },
+    ],
+  },
+  {
+    stage: "Negotiation",
+    deals: [
+      { name: "Cortexa", value: "$54,000" },
+      { name: "Driftwave", value: "$31,200" },
+    ],
+  },
+  {
+    stage: "Closed won",
+    deals: [{ name: "Northpeak", value: "$78,000" }],
+  },
+];
+
+const activity = [
+  { time: "10:40 AM", kind: "Demo call", who: "Sarah Johnson, GreenLeaf Inc" },
+  { time: "09:15 AM", kind: "Email opened", who: "Ashley, GreenLeaf Inc" },
+  { time: "Yesterday", kind: "Note added", who: "Sam, GreenLeaf Inc" },
+  { time: "Yesterday", kind: "Deal moved", who: "GreenLeaf Inc to Negotiation" },
+];
+
+const reportRows = [
+  { label: "Weighted pipeline", value: "$4.28M", width: "82%" },
+  { label: "Win rate", value: "34%", width: "34%" },
+  { label: "Sales cycle", value: "41 days", width: "55%" },
+  { label: "New ARR", value: "$348K", width: "48%" },
+];
+
+const accordion = [
+  {
+    title: "Create the perfect sales workflow.",
+    copy: "Use Attio's powerful templates or building blocks to design your perfect workflow.",
+    panel: "workflow",
+  },
+  { title: "Powerful intel on every deal.", copy: null, panel: "intel" },
+  { title: "Collaborative notes for everyone.", copy: null, panel: "notes" },
+];
+
+const moreCards = [
+  {
+    title: "Advanced permission control",
+    copy: "Be as specific as you need with your contact permissions.",
+    mock: ["Owner: Full access", "Team: Edit records", "Guest: View only"],
+  },
+  {
+    title: "True multiplayer collaboration",
+    copy: "Keep your entire team on the same page with real-time collaboration.",
+    mock: ["Isla is viewing Deal", "George left a comment", "Theo updated Stage"],
+  },
+  {
+    title: "Fully secure, fully compliant",
+    copy: "Attio uses world-class security and is fully GDPR & ISO 27001 compliant.",
+    mock: ["GDPR compliant", "ISO 27001 certified", "SOC 2 Type II"],
+  },
+];
+---
+
+<BaseLayout
+  title="Attio: The CRM for agentic revenue"
+  description="The system for revenue teams to build pipeline, accelerate deals, and grow accounts around the clock."
+  finalCtaDemo
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">CRM for startups</p>
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      The real-time CRM for scaling startups.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Infinitely flexible, Attio is built for every stage of the startup journey, from zero to IPO.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Try for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </div>
+
+    <!-- Hero product mock: companies table in a browser frame -->
+    <div class="mx-auto mt-14 max-w-5xl overflow-hidden rounded-2xl border border-paper-500 bg-white text-left shadow-lg">
+      <div class="flex items-center gap-2 border-b border-paper-400 bg-paper-200 px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-400"></span>
+        <span class="h-3 w-3 rounded-full bg-yellow-400"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500"></span>
+        <span class="ml-3 text-xs font-medium text-ink-700">Attio, Companies</span>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[560px] text-left text-sm">
+          <thead>
+            <tr class="border-b border-paper-400 text-xs uppercase tracking-wide text-ink-700">
+              <th class="px-5 py-3 font-semibold">Company</th>
+              <th class="px-5 py-3 font-semibold">Stage</th>
+              <th class="px-5 py-3 font-semibold">Value</th>
+              <th class="px-5 py-3 font-semibold">Owner</th>
+            </tr>
+          </thead>
+          <tbody>
+            {companies.map((c) => (
+              <tr class="border-b border-paper-400 last:border-0">
+                <td class="px-5 py-3 font-semibold">{c.name}</td>
+                <td class="px-5 py-3 text-ink-600">{c.stage}</td>
+                <td class="px-5 py-3 text-ink-600">{c.value}</td>
+                <td class="px-5 py-3 text-ink-600">{c.owner}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logo strip -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Customer logos">
+    <ul class="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+      {logos.map((logo) => (
+        <li class="font-display text-lg font-semibold tracking-tight text-ink-800">{logo}</li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- From zero to one: Build your go-to-market engine -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Build your go-to-market engine">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">From zero to one</p>
+    <h2 class="mt-3 max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      Build your go-to-market engine.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Create, iterate and scale everything from sales pipelines to customer success and more.
+    </p>
+    <div class="mt-6 flex flex-wrap items-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+    </div>
+
+    <div class="mt-10 flex flex-wrap gap-3" role="tablist" aria-label="Go-to-market views">
+      {tabs.map((tab, i) => (
+        <button
+          type="button"
+          role="tab"
+          aria-selected={i === 0 ? "true" : "false"}
+          data-gtm-tab={tab}
+          class:list={[
+            "rounded-full px-5 py-2.5 text-sm font-semibold",
+            i === 0 ? "bg-ink-100 text-white" : "border border-paper-500 bg-white text-ink-100",
+          ]}
+        >
+          {tab}
+        </button>
+      ))}
+    </div>
+
+    <!-- Contacts panel -->
+    <div data-gtm-panel="Contacts" class="mt-8 overflow-hidden rounded-2xl border border-paper-500 bg-white">
+      <div class="flex items-center justify-between border-b border-paper-400 bg-paper-200 px-5 py-3">
+        <p class="text-sm font-semibold">Companies</p>
+        <p class="text-xs font-medium text-ink-700">5 records</p>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[560px] text-left text-sm">
+          <thead>
+            <tr class="border-b border-paper-400 text-xs uppercase tracking-wide text-ink-700">
+              <th class="px-5 py-3 font-semibold">Company</th>
+              <th class="px-5 py-3 font-semibold">Stage</th>
+              <th class="px-5 py-3 font-semibold">Value</th>
+              <th class="px-5 py-3 font-semibold">Owner</th>
+            </tr>
+          </thead>
+          <tbody>
+            {companies.map((c) => (
+              <tr class="border-b border-paper-400 last:border-0">
+                <td class="px-5 py-3 font-semibold">{c.name}</td>
+                <td class="px-5 py-3 text-ink-600">{c.stage}</td>
+                <td class="px-5 py-3 text-ink-600">{c.value}</td>
+                <td class="px-5 py-3 text-ink-600">{c.owner}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Pipelines panel -->
+    <div data-gtm-panel="Pipelines" class="mt-8 hidden overflow-hidden rounded-2xl border border-paper-500 bg-paper-200 p-5 sm:p-6">
+      <div class="grid gap-4 md:grid-cols-3">
+        {kanban.map((col) => (
+          <div class="rounded-xl bg-white p-4">
+            <p class="text-sm font-semibold">{col.stage}</p>
+            <ul class="mt-3 space-y-3">
+              {col.deals.map((deal) => (
+                <li class="rounded-lg border border-paper-400 p-3">
+                  <p class="text-sm font-semibold">{deal.name}</p>
+                  <p class="mt-1 text-sm text-ink-600">{deal.value}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Activity panel -->
+    <div data-gtm-panel="Activity" class="mt-8 hidden overflow-hidden rounded-2xl border border-paper-500 bg-white p-6 sm:p-8">
+      <p class="text-sm font-semibold">GreenLeaf Inc, activity</p>
+      <ul class="mt-5 space-y-4">
+        {activity.map((item) => (
+          <li class="flex items-start gap-4 border-b border-paper-400 pb-4 last:border-0 last:pb-0">
+            <span class="w-20 shrink-0 text-xs font-semibold text-ink-700">{item.time}</span>
+            <div>
+              <p class="text-sm font-semibold">{item.kind}</p>
+              <p class="mt-0.5 text-sm text-ink-600">{item.who}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Reporting panel -->
+    <div data-gtm-panel="Reporting" class="mt-8 hidden overflow-hidden rounded-2xl border border-paper-500 bg-white p-6 sm:p-8">
+      <p class="text-sm font-semibold">Revenue overview</p>
+      <ul class="mt-5 space-y-4">
+        {reportRows.map((row) => (
+          <li>
+            <div class="flex items-center justify-between text-sm">
+              <span class="font-medium">{row.label}</span>
+              <span class="font-semibold">{row.value}</span>
+            </div>
+            <div class="mt-1.5 h-2 rounded-full bg-paper-400">
+              <div class="h-2 rounded-full bg-blue-500" style={`width: ${row.width}`}></div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Pipeline management: Workflows that work for you -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Workflows that work for you">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">Pipeline management</p>
+    <h2 class="mt-3 max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      Workflows that work for you.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Design your sales pipeline from the ground up to convert the most valuable deals for your
+      startup.
+    </p>
+    <div class="mt-10 grid gap-8 lg:grid-cols-2">
+      <div>
+        {accordion.map((item, i) => (
+          <div class="border-b border-paper-400 py-5 first:pt-0">
+            <button
+              type="button"
+              aria-expanded={i === 0 ? "true" : "false"}
+              data-workflow-item={item.panel}
+              class="flex w-full items-center justify-between gap-4 text-left"
+            >
+              <span class="font-display text-xl font-semibold">{item.title}</span>
+              <span class="text-xl font-light text-ink-700" data-workflow-icon={item.panel}>
+                {i === 0 ? "−" : "+"}
+              </span>
+            </button>
+            {item.copy && (
+              <p class="mt-3 pr-8 text-sm leading-relaxed text-ink-600" data-workflow-copy={item.panel}>
+                {item.copy}
+              </p>
+            )}
+          </div>
+        ))}
+      </div>
+      <div class="overflow-hidden rounded-2xl border border-paper-500 bg-white p-6 sm:p-8">
+        <div data-workflow-panel="workflow">
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Sales workflow</p>
+          <ul class="mt-5 space-y-3">
+            {["New lead captured", "Enriched automatically", "Routed to the right rep", "Follow-up scheduled", "Deal moved to Negotiation"].map(
+              (step, i) => (
+                <li class="flex items-center gap-3 rounded-lg bg-paper-200 px-4 py-3 text-sm">
+                  <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-500 text-xs font-semibold text-white">
+                    {i + 1}
+                  </span>
+                  <span class="font-medium">{step}</span>
+                </li>
+              ),
+            )}
+          </ul>
+        </div>
+        <div data-workflow-panel="intel" class="hidden">
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Deal intel</p>
+          <ul class="mt-5 space-y-3">
+            {[
+              { label: "GreenLeaf Inc", value: "Engagement high" },
+              { label: "Decision maker", value: "Sarah Johnson, CTO" },
+              { label: "Last interaction", value: "Demo call, Aug 29" },
+              { label: "Signals", value: "3 buying signals this week" },
+            ].map((row) => (
+              <li class="flex items-center justify-between gap-4 rounded-lg bg-paper-200 px-4 py-3 text-sm">
+                <span class="font-medium">{row.label}</span>
+                <span class="font-semibold">{row.value}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div data-workflow-panel="notes" class="hidden">
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Shared notes</p>
+          <ul class="mt-5 space-y-3">
+            {[
+              "Isla: GreenLeaf wants pricing by Friday.",
+              "George: Sent the security review doc.",
+              "Theo: Intro call booked with their CFO.",
+            ].map((note) => (
+              <li class="rounded-lg bg-paper-200 px-4 py-3 text-sm leading-relaxed">{note}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- And that's not all -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="And that's not all">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      And that&rsquo;s not all...
+    </h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {moreCards.map((card) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <ul class="space-y-2">
+              {card.mock.map((line) => (
+                <li class="rounded-lg bg-white px-3 py-2 text-xs leading-relaxed text-ink-600 shadow-sm">
+                  {line}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 text-center sm:px-6">
+    <blockquote class="mx-auto max-w-3xl font-serif text-2xl leading-snug text-ink-100 sm:text-3xl">
+      Attio is the most flexible CRM we&rsquo;ve ever come across. We&rsquo;ve been able to build a
+      world-class go-to-market engine, from our sales pipelines to customer onboarding processes to
+      customer success. There&rsquo;s nothing like it in the market.
+    </blockquote>
+    <p class="mt-6 text-sm font-semibold">Taimur Abdaal</p>
+    <p class="mt-1 text-sm text-ink-600">Co-Founder &amp; CTO</p>
+  </section>
+</BaseLayout>
+
+<script>
+  // Go-to-market tabs
+  const gtmTabs = document.querySelectorAll("[data-gtm-tab]");
+  const gtmPanels = document.querySelectorAll("[data-gtm-panel]");
+  gtmTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const name = tab.getAttribute("data-gtm-tab") || "";
+      gtmTabs.forEach((t) => {
+        const active = t === tab;
+        t.setAttribute("aria-selected", active ? "true" : "false");
+        t.classList.toggle("bg-ink-100", active);
+        t.classList.toggle("text-white", active);
+        t.classList.toggle("border", !active);
+        t.classList.toggle("border-paper-500", !active);
+        t.classList.toggle("bg-white", !active);
+        t.classList.toggle("text-ink-100", !active);
+      });
+      gtmPanels.forEach((p) => {
+        p.classList.toggle("hidden", p.getAttribute("data-gtm-panel") !== name);
+      });
+    });
+  });
+
+  // Pipeline management accordion
+  const workflowItems = document.querySelectorAll("[data-workflow-item]");
+  const workflowPanels = document.querySelectorAll("[data-workflow-panel]");
+  workflowItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const name = item.getAttribute("data-workflow-item") || "";
+      workflowItems.forEach((i) => {
+        const active = i === item;
+        i.setAttribute("aria-expanded", active ? "true" : "false");
+        const icon = document.querySelector(`[data-workflow-icon="${i.getAttribute("data-workflow-item")}"]`);
+        if (icon) icon.textContent = active ? "−" : "+";
+        const copy = document.querySelector(`[data-workflow-copy="${i.getAttribute("data-workflow-item")}"]`);
+        if (copy) copy.classList.toggle("hidden", !active);
+      });
+      workflowPanels.forEach((p) => {
+        p.classList.toggle("hidden", p.getAttribute("data-workflow-panel") !== name);
+      });
+    });
+  });
+</script>

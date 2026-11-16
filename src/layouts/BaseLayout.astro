@@ -9,12 +9,14 @@ interface Props {
   title?: string;
   description?: string;
   finalCta?: string;
+  finalCtaDemo?: boolean;
 }
 
 const {
   title = "Attio: The CRM for agentic revenue",
   description = "The system for revenue teams to build pipeline, accelerate deals, and grow accounts around the clock.",
   finalCta,
+  finalCtaDemo = false,
 } = Astro.props;
 ---
 
@@ -45,7 +47,7 @@ const {
     <main>
       <slot />
     </main>
-    <FinalCta heading={finalCta} />
+    <FinalCta heading={finalCta} showDemo={finalCtaDemo} />
     <SiteFooter />
   </body>
 </html>

@@ -2,9 +2,10 @@
 /* Final CTA, black pinstripe section. Inverted pills versus the hero. */
 interface Props {
   heading?: string;
+  showDemo?: boolean;
 }
 
-const { heading = "Agentic revenue runs on Attio." } = Astro.props;
+const { heading = "Agentic revenue runs on Attio.", showDemo = false } = Astro.props;
 ---
 
 <section class="pinstripe-bg bg-ink-50 text-white">
@@ -25,6 +26,14 @@ const { heading = "Agentic revenue runs on Attio." } = Astro.props;
       >
         Start for free
       </a>
+      {showDemo && (
+        <a
+          href="/contact/sales"
+          class="rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10"
+        >
+          Send me a demo
+        </a>
+      )}
     </div>
   </div>
 </section>
