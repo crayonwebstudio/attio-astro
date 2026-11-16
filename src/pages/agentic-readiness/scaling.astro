@@ -1,0 +1,35 @@
+---
+import AgenticResult from "../../components/AgenticResult.astro";
+
+// Copy fetched live from https://attio.com/agentic-readiness/scaling on 2026-11-16 (HTTP 200).
+// Title, H1, subcopy, all 3 next steps and their link destinations are live Attio copy.
+// The spec said 4 next steps; live has 3, rendered as live.
+// Meta description em dash rendered as a comma per the no em dash rule.
+---
+
+<AgenticResult
+  title="You're ready to build more robust agentic workflows | Attio"
+  description="You're ready to build more robust agentic workflows, enrich leads, route autonomously, and run processes on a schedule in Attio."
+  stage="Scaling"
+  heading="You're ready to build more robust agentic workflows"
+  subcopy={[
+    "Continue where the stakes are recoverable and run the process like a product release with a named owner and a feedback loop.",
+  ]}
+  steps={[
+    [
+      { text: "Use " },
+      { text: "Attio's web agent", href: "/help/reference/automations/workflows/workflows-block-library#web-agent" },
+      { text: " or a custom agent to enrich inbound leads so account research, decision makers, and recent signals are surfaced for each account." },
+    ],
+    [
+      { text: "Build more advanced workflows that segment and route leads autonomously. For example, route by region using the " },
+      { text: "Execute code block", href: "/help/reference/automations/workflows/workflows-block-library#execute-code" },
+      { text: "'s AI agent to send each lead to the right rep." },
+    ],
+    [
+      { text: "Ask Attio to analyze recent calls and prep upcoming meetings, or set up a " },
+      { text: "workflow", href: "/help/reference/automations/workflows/create-a-workflow#create-a-new-workflow" },
+      { text: " with custom agents to run the process on a schedule." },
+    ],
+  ]}
+/>

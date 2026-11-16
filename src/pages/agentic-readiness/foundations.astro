@@ -1,0 +1,41 @@
+---
+import AgenticResult from "../../components/AgenticResult.astro";
+
+// Copy fetched live from https://attio.com/agentic-readiness/foundations on 2026-11-16 (HTTP 200).
+// Title, H1, subcopy, all 4 next steps and their link destinations are live Attio copy.
+// Meta description em dash rendered as a comma per the no em dash rule.
+---
+
+<AgenticResult
+  title="Start with your data foundation | Attio"
+  description="Start with your data foundation, set up customer data, connect AI tools, and try Ask Attio and workflows in Attio."
+  stage="Foundations"
+  heading="Start with your data foundation"
+  subcopy={[
+    "Setting up your data foundation keeps your data consistent and queryable without you maintaining it by hand.",
+    "Attio's infrastructure is engineered to handle the volume of work your team and agents need, with room to grow as that work multiplies, and extensibility that makes it the foundation for building.",
+  ]}
+  steps={[
+    [
+      { text: "Set up your customer data", href: "/help/academy/introduction/email-sync-people-companies" },
+      { text: " in Attio with objects, records, and attributes that map to your business." },
+    ],
+    [
+      { text: "Connect to AI tools through " },
+      { text: "Attio's MCP", href: "/help/reference/attio-ai/attio-mcp" },
+      { text: ", product data through " },
+      { text: "APIs", href: "/help/reference/apps/generating-an-api-key" },
+      { text: ", BI tools through Attio's data connectors, or whatever fits the stack." },
+    ],
+    [
+      { text: "Try using " },
+      { text: "Ask Attio", href: "/help/academy/introduction/ask-attio" },
+      { text: " to search across data, including calls, notes, emails, and records, or to research information on the web." },
+    ],
+    [
+      { text: "Try building a " },
+      { text: "workflow", href: "/help/reference/automations/workflows/manage-workflows" },
+      { text: " using Ask Attio or the workflow builder." },
+    ],
+  ]}
+/>

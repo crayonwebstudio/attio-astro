@@ -1,0 +1,24 @@
+---
+import AgenticResult from "../../components/AgenticResult.astro";
+
+// Copy fetched live from https://attio.com/agentic-readiness/orchestration on 2026-11-16 (HTTP 200).
+// Title, H1, subcopy, and all 4 next steps are live Attio copy. The live next steps
+// have no inline links on this page, rendered the same.
+// Meta description em dash rendered as a comma per the no em dash rule.
+---
+
+<AgenticResult
+  title="You're past readiness | Attio"
+  description="You're past readiness, orchestrate agentic sales processes as you scale and empower your whole GTM team."
+  stage="Orchestration"
+  heading="You're past readiness"
+  subcopy={[
+    "From here it's orchestration as you scale and empowering the whole sales team to deliver their GTM work exactly as they need it.",
+  ]}
+  steps={[
+    [{ text: "Assign a named owner to each agentic process and create a feedback loop with reviewers." }],
+    [{ text: "Document gaps and bottlenecks as the system evolves." }],
+    [{ text: "Set up a structure for managing agentic sales processes so they scale without losing quality." }],
+    [{ text: "Double down on funnel areas where existing agentic workflows are already showing the highest impact." }],
+  ]}
+/>
