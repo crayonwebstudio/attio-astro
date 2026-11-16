@@ -1,0 +1,321 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/platform/reporting on 2026-11-16 (HTTP 200, 667KB).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Hero dashboard values are live copy; the two metric panels mirror the live page's
+// pipeline-health and revenue views.
+
+const pipelineMetrics = [
+  { label: "Weighted pipeline", value: "$4.28M" },
+  { label: "Pipeline by region", value: "$4.28M" },
+  { label: "Pipeline by segment", value: "$4.28M" },
+  { label: "Stuck deals", value: "12 in Negotiation" },
+  { label: "Slipped deals", value: "$286K moved" },
+  { label: "Missing follow-ups", value: "8 overdue" },
+  { label: "Win rate", value: "34%" },
+  { label: "Sales cycle", value: "41 days" },
+  { label: "Stage conversion", value: "62%" },
+];
+
+const revenueMetrics = [
+  { label: "Renewal risk", value: "7 accounts" },
+  { label: "Churn exposure", value: "$184K" },
+  { label: "Revenue by plan", value: "$1.24M" },
+  { label: "Customer ARR", value: "$1.24M" },
+  { label: "Expansion pipeline", value: "$620K" },
+  { label: "New ARR", value: "$348K" },
+];
+
+const engineCards = [
+  {
+    title: "Your business, from any angle.",
+    copy: "Group by anything you track, in the format of your choice.",
+    mock: "group",
+  },
+  {
+    title: "A report type for every question.",
+    copy: "Where deals stall, how long they sit, and what changed since last quarter.",
+    mock: "funnel",
+  },
+  {
+    title: "Everyone sees the same numbers.",
+    copy: "Share a dashboard with your workspace or another team.",
+    mock: "share",
+  },
+  {
+    title: "Nix the weekly slide deck.",
+    copy: "A live board your whole team can see, arranged by how you actually work.",
+    mock: "board",
+  },
+];
+
+const historyItems = [
+  {
+    n: "01",
+    title: "Rewind to any day.",
+    copy: "Compare periods, measure velocity, see exactly where you stood.",
+  },
+  {
+    n: "02",
+    title: "Know if you're ahead.",
+    copy: "A goal line runs across the chart to track your targets.",
+  },
+  {
+    n: "03",
+    title: "Down to the record.",
+    copy: "Click a number to see the records behind the trend.",
+  },
+];
+
+const mathCards = [
+  {
+    title: "Daily workspace creations.",
+    copy: "New signups as they land, counted day by day.",
+    bars: [34, 52, 44, 66, 58, 78, 92],
+    kind: "bars",
+  },
+  {
+    title: "Average revenue per workspace.",
+    copy: "Where revenue actually comes from, split by plan.",
+    bars: [62, 24, 14],
+    kind: "split",
+  },
+  {
+    title: "Number of users per workspace.",
+    copy: "Active users per workspace, tracked against target.",
+    bars: [40, 55, 62, 70, 84],
+    kind: "bars",
+  },
+  {
+    title: "Monthly recurring revenue.",
+    copy: "One number for where MRR stands right now.",
+    bars: [30, 42, 38, 55, 64, 78, 90],
+    kind: "bars",
+  },
+  {
+    title: "Customer acquisition cost.",
+    copy: "What it costs to win a customer, and which way that's trending.",
+    bars: [88, 80, 74, 66, 58, 52, 46],
+    kind: "bars",
+  },
+  {
+    title: "Lead channel distribution.",
+    copy: "How the mix of paid and organic is shifting.",
+    bars: [55, 30, 15],
+    kind: "split",
+  },
+];
+---
+
+<BaseLayout
+  title="Reporting | Attio"
+  description="Reporting for go-to-market teams. Forecasts you can trust, pipeline health that updates itself, and insights only possible in Attio."
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">Reporting</p>
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      The live story behind every number.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Forecasts you can trust, pipeline health that updates itself, and insights only possible in Attio.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </div>
+  </section>
+
+  <!-- Hero dashboard mock -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Reporting dashboard preview">
+    <div class="overflow-hidden rounded-2xl border border-paper-500 bg-paper-200 shadow-sm">
+      <div class="flex items-center gap-2 border-b border-paper-400 bg-white px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-500/70"></span>
+        <span class="h-3 w-3 rounded-full bg-[#f5bf42]"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500/70"></span>
+        <span class="ml-3 text-sm font-medium text-ink-600">Reporting</span>
+        <span class="ml-auto rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-600">Live</span>
+      </div>
+      <div class="grid min-w-0 gap-4 p-4 sm:grid-cols-2 sm:p-6">
+        <div class="min-w-0 rounded-xl border border-paper-400 bg-white p-5">
+          <p class="text-sm font-semibold text-ink-700">Pipeline health</p>
+          <p class="mt-1 font-display text-3xl font-semibold">$4.28M</p>
+          <p class="text-xs text-ink-700">Weighted pipeline</p>
+          <div class="mt-4 flex items-end gap-1.5" aria-hidden="true">
+            {[38, 52, 44, 66, 58, 78, 92, 84].map((h) => (
+              <div class="w-full rounded-t-sm bg-blue-500/80" style={`height: ${h}px`}></div>
+            ))}
+          </div>
+          <dl class="mt-4 space-y-2 text-sm">
+            {pipelineMetrics.slice(1).map((m) => (
+              <div class="flex min-w-0 items-center justify-between gap-2 border-t border-paper-400 pt-2">
+                <dt class="min-w-0 truncate text-ink-600">{m.label}</dt>
+                <dd class="shrink-0 font-semibold">{m.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div class="min-w-0 rounded-xl border border-paper-400 bg-white p-5">
+          <p class="text-sm font-semibold text-ink-700">Revenue</p>
+          <p class="mt-1 font-display text-3xl font-semibold">$1.24M</p>
+          <p class="text-xs text-ink-700">Customer ARR</p>
+          <div class="mt-4 flex items-end gap-1.5" aria-hidden="true">
+            {[30, 42, 38, 55, 64, 78, 90, 96].map((h) => (
+              <div class="w-full rounded-t-sm bg-green-600/80" style={`height: ${h}px`}></div>
+            ))}
+          </div>
+          <dl class="mt-4 space-y-2 text-sm">
+            {revenueMetrics.map((m) => (
+              <div class="flex min-w-0 items-center justify-between gap-2 border-t border-paper-400 pt-2">
+                <dt class="min-w-0 truncate text-ink-600">{m.label}</dt>
+                <dd class="shrink-0 font-semibold">{m.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reporting engine -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">Reporting engine for GTM teams.</p>
+    <h2 class="mt-4 max-w-3xl font-display text-heading-sm font-semibold tracking-tight sm:text-heading-md">
+      The answer ready the moment you need it.
+    </h2>
+    <div class="mt-10 grid gap-4 sm:grid-cols-2">
+      {engineCards.map((card) => (
+        <article class="min-w-0 rounded-2xl border border-paper-500 bg-white p-6">
+          <div class="rounded-xl border border-paper-400 bg-paper-200 p-4" aria-hidden="true">
+            {card.mock === "group" && (
+              <div class="space-y-2">
+                <div class="flex gap-2">
+                  <span class="rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-600">Group by: Region</span>
+                  <span class="rounded-full bg-paper-300 px-2.5 py-1 text-xs font-semibold text-ink-600">Stage</span>
+                </div>
+                <div class="flex items-end gap-1.5 pt-2">
+                  {[40, 62, 48, 74, 58, 86].map((h) => (
+                    <div class="w-full rounded-t-sm bg-blue-500/80" style={`height: ${h}px`}></div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {card.mock === "funnel" && (
+              <div class="space-y-2">
+                {["Qualified", "Negotiation", "Closed won"].map((stage, i) => (
+                  <div class="flex items-center gap-2">
+                    <span class="w-24 shrink-0 text-xs font-medium text-ink-600">{stage}</span>
+                    <div class="h-3 rounded-full bg-blue-500/80" style={`width: ${88 - i * 26}%`}></div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {card.mock === "share" && (
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="rounded-full bg-ink-100 px-3 py-1.5 text-xs font-semibold text-white">Sales team</span>
+                <span class="rounded-full bg-ink-100 px-3 py-1.5 text-xs font-semibold text-white">RevOps</span>
+                <span class="rounded-full border border-ink-100 px-3 py-1.5 text-xs font-semibold text-ink-100">+ Share</span>
+                <span class="text-xs text-ink-700">Same numbers, every team</span>
+              </div>
+            )}
+            {card.mock === "board" && (
+              <div class="grid grid-cols-3 gap-2">
+                {["Pipeline", "Forecast", "Activity", "Revenue", "Health", "Goals"].map((tile) => (
+                  <div class="rounded-lg border border-paper-400 bg-white px-2 py-3 text-center text-xs font-semibold text-ink-600">
+                    {tile}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <h3 class="mt-5 font-display text-xl font-semibold">{card.title}</h3>
+          <p class="mt-2 leading-relaxed text-ink-600">{card.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Open the number -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <div class="grid items-center gap-10 lg:grid-cols-2">
+      <div class="min-w-0">
+        <h2 class="font-display text-heading-sm font-semibold tracking-tight sm:text-heading-md">Open the number.</h2>
+        <p class="mt-4 text-lg leading-relaxed text-ink-600">See how it moved, and the deals that moved it.</p>
+        <div class="mt-8 rounded-2xl border border-paper-500 bg-paper-200 p-5" aria-hidden="true">
+          <div class="flex items-center justify-between text-sm">
+            <span class="font-semibold">Weighted pipeline</span>
+            <span class="font-display text-xl font-semibold">$4.28M</span>
+          </div>
+          <div class="relative mt-4">
+            <div class="absolute left-0 right-0 top-[18px] border-t-2 border-dashed border-red-500/70"></div>
+            <span class="absolute right-0 top-0 text-xs font-semibold text-red-600">Goal $4.5M</span>
+            <div class="flex items-end gap-1.5 pt-8">
+              {[42, 50, 46, 60, 56, 68, 62, 78, 72, 88, 84, 96].map((h) => (
+                <div class="w-full rounded-t-sm bg-blue-500/80" style={`height: ${h}px`}></div>
+              ))}
+            </div>
+          </div>
+          <p class="mt-4 text-xs text-ink-700">Rewind to any day to compare periods and measure velocity.</p>
+        </div>
+      </div>
+      <ol class="min-w-0 space-y-8">
+        {historyItems.map((item) => (
+          <li class="flex gap-4">
+            <span class="font-display text-lg font-semibold text-blue-500">{item.n}</span>
+            <div class="min-w-0">
+              <h3 class="font-display text-xl font-semibold">{item.title}</h3>
+              <p class="mt-1 leading-relaxed text-ink-600">{item.copy}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Attio does the math -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <h2 class="font-display text-heading-sm font-semibold tracking-tight sm:text-heading-md">Attio does the math.</h2>
+    <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Context becomes leverage, turning raw data into computed values like weighted pipeline and lead scores.
+    </p>
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {mathCards.map((card) => (
+        <article class="min-w-0 rounded-2xl border border-paper-500 bg-white p-6">
+          <div class="flex items-end gap-1 rounded-xl border border-paper-400 bg-paper-200 p-4" aria-hidden="true">
+            {card.kind === "bars" ? (
+              card.bars.map((h) => (
+                <div class="w-full rounded-t-sm bg-blue-500/80" style={`height: ${Math.round(h * 0.6)}px`}></div>
+              ))
+            ) : (
+              card.bars.map((w, i) => (
+                <div
+                  class:list={[
+                    "h-6 rounded-full",
+                    i === 0 ? "bg-blue-500" : i === 1 ? "bg-blue-300" : "bg-paper-500",
+                  ]}
+                  style={`width: ${w}%`}
+                ></div>
+              ))
+            )}
+          </div>
+          <h3 class="mt-5 font-display text-xl font-semibold">{card.title}</h3>
+          <p class="mt-2 leading-relaxed text-ink-600">{card.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
