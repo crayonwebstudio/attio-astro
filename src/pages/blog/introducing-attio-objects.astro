@@ -1,0 +1,11 @@
+---
+import BlogPost from "../../components/BlogPost.astro";
+import posts from "../../data/posts.json";
+
+// Introducing Attio Objects, copy fetched live from https://attio.com/blog/introducing-attio-objects
+// on 2026-11-16 (HTTP 200). Data lives in src/data/posts.json.
+const post = posts.find((entry) => entry.slug === "introducing-attio-objects");
+if (!post) throw new Error("Missing post data for introducing-attio-objects");
+---
+
+<BlogPost post={post} />

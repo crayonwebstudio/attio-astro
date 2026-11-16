@@ -1,0 +1,11 @@
+---
+import BlogPost from "../../components/BlogPost.astro";
+import posts from "../../data/posts.json";
+
+// Attio does the math, copy fetched live from https://attio.com/blog/formula-attributes
+// on 2026-11-16 (HTTP 200). Data lives in src/data/posts.json.
+const post = posts.find((entry) => entry.slug === "formula-attributes");
+if (!post) throw new Error("Missing post data for formula-attributes");
+---
+
+<BlogPost post={post} />

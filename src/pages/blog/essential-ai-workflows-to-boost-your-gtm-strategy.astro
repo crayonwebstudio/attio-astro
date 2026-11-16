@@ -1,0 +1,11 @@
+---
+import BlogPost from "../../components/BlogPost.astro";
+import posts from "../../data/posts.json";
+
+// Essential AI workflows to boost your GTM strategy, copy fetched live from https://attio.com/blog/essential-ai-workflows-to-boost-your-gtm-strategy
+// on 2026-11-16 (HTTP 200). Data lives in src/data/posts.json.
+const post = posts.find((entry) => entry.slug === "essential-ai-workflows-to-boost-your-gtm-strategy");
+if (!post) throw new Error("Missing post data for essential-ai-workflows-to-boost-your-gtm-strategy");
+---
+
+<BlogPost post={post} />

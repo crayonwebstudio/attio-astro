@@ -1,0 +1,11 @@
+---
+import BlogPost from "../../components/BlogPost.astro";
+import posts from "../../data/posts.json";
+
+// What AI can’t change: Behind Attio’s latest brand campaign, copy fetched live from https://attio.com/blog/behind-attios-latest-brand-campaign
+// on 2026-11-16 (HTTP 200). Data lives in src/data/posts.json.
+const post = posts.find((entry) => entry.slug === "behind-attios-latest-brand-campaign");
+if (!post) throw new Error("Missing post data for behind-attios-latest-brand-campaign");
+---
+
+<BlogPost post={post} />

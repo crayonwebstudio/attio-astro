@@ -1,0 +1,11 @@
+---
+import BlogPost from "../../components/BlogPost.astro";
+import posts from "../../data/posts.json";
+
+// Inside the system that runs Attio’s GTM, copy fetched live from https://attio.com/blog/the-system-that-runs-our-gtm
+// on 2026-11-16 (HTTP 200). Data lives in src/data/posts.json.
+const post = posts.find((entry) => entry.slug === "the-system-that-runs-our-gtm");
+if (!post) throw new Error("Missing post data for the-system-that-runs-our-gtm");
+---
+
+<BlogPost post={post} />

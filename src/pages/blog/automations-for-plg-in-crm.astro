@@ -1,0 +1,11 @@
+---
+import BlogPost from "../../components/BlogPost.astro";
+import posts from "../../data/posts.json";
+
+// Workflows for product-led growth in CRM, copy fetched live from https://attio.com/blog/automations-for-plg-in-crm
+// on 2026-11-16 (HTTP 200). Data lives in src/data/posts.json.
+const post = posts.find((entry) => entry.slug === "automations-for-plg-in-crm");
+if (!post) throw new Error("Missing post data for automations-for-plg-in-crm");
+---
+
+<BlogPost post={post} />

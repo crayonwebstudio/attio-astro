@@ -1,0 +1,11 @@
+---
+import BlogPost from "../../components/BlogPost.astro";
+import posts from "../../data/posts.json";
+
+// Monitoring product-led growth metrics that matter, copy fetched live from https://attio.com/blog/monitoring-pls-metrics-that-matter
+// on 2026-11-16 (HTTP 200). Data lives in src/data/posts.json.
+const post = posts.find((entry) => entry.slug === "monitoring-pls-metrics-that-matter");
+if (!post) throw new Error("Missing post data for monitoring-pls-metrics-that-matter");
+---
+
+<BlogPost post={post} />

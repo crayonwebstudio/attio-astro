@@ -1,0 +1,11 @@
+---
+import BlogPost from "../../components/BlogPost.astro";
+import posts from "../../data/posts.json";
+
+// Attio raises $33 million in funding, copy fetched live from https://attio.com/blog/attio-raises-33-million-in-funding
+// on 2026-11-16 (HTTP 200). Data lives in src/data/posts.json.
+const post = posts.find((entry) => entry.slug === "attio-raises-33-million-in-funding");
+if (!post) throw new Error("Missing post data for attio-raises-33-million-in-funding");
+---
+
+<BlogPost post={post} />

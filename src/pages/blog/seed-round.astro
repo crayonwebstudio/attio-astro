@@ -1,0 +1,11 @@
+---
+import BlogPost from "../../components/BlogPost.astro";
+import posts from "../../data/posts.json";
+
+// Announcing our $7.7m seed round led by Point Nine, copy fetched live from https://attio.com/blog/seed-round
+// on 2026-11-16 (HTTP 200). Data lives in src/data/posts.json.
+const post = posts.find((entry) => entry.slug === "seed-round");
+if (!post) throw new Error("Missing post data for seed-round");
+---
+
+<BlogPost post={post} />

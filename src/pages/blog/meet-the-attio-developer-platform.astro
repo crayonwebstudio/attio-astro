@@ -1,0 +1,11 @@
+---
+import BlogPost from "../../components/BlogPost.astro";
+import posts from "../../data/posts.json";
+
+// Meet the Attio Developer Platform, copy fetched live from https://attio.com/blog/meet-the-attio-developer-platform
+// on 2026-11-16 (HTTP 200). Data lives in src/data/posts.json.
+const post = posts.find((entry) => entry.slug === "meet-the-attio-developer-platform");
+if (!post) throw new Error("Missing post data for meet-the-attio-developer-platform");
+---
+
+<BlogPost post={post} />

@@ -1,0 +1,11 @@
+---
+import BlogPost from "../../components/BlogPost.astro";
+import posts from "../../data/posts.json";
+
+// Attio raises $23.5m Series A round, copy fetched live from https://attio.com/blog/series-a-round
+// on 2026-11-16 (HTTP 200). Data lives in src/data/posts.json.
+const post = posts.find((entry) => entry.slug === "series-a-round");
+if (!post) throw new Error("Missing post data for series-a-round");
+---
+
+<BlogPost post={post} />

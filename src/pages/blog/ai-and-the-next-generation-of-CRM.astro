@@ -1,0 +1,11 @@
+---
+import BlogPost from "../../components/BlogPost.astro";
+import posts from "../../data/posts.json";
+
+// AI and the next generation of CRM, copy fetched live from https://attio.com/blog/ai-and-the-next-generation-of-CRM
+// on 2026-11-16 (HTTP 200). Data lives in src/data/posts.json.
+const post = posts.find((entry) => entry.slug === "ai-and-the-next-generation-of-CRM");
+if (!post) throw new Error("Missing post data for ai-and-the-next-generation-of-CRM");
+---
+
+<BlogPost post={post} />

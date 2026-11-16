@@ -1,0 +1,11 @@
+---
+import BlogPost from "../../components/BlogPost.astro";
+import posts from "../../data/posts.json";
+
+// Reporting 2.0: Powerful new features are here, copy fetched live from https://attio.com/blog/reporting-2-0
+// on 2026-11-16 (HTTP 200). Data lives in src/data/posts.json.
+const post = posts.find((entry) => entry.slug === "reporting-2-0");
+if (!post) throw new Error("Missing post data for reporting-2-0");
+---
+
+<BlogPost post={post} />
