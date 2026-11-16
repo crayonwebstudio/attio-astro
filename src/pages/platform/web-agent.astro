@@ -1,0 +1,328 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/platform/web-agent on 2026-11-16 (HTTP 200).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live hero is text only (H1, subcopy, CTAs), no hero image or eyebrow in the live HTML.
+// The 6 live Storyblok images map to the 3 "Context for your next move" items
+// (universal-context-captured, web-agent-workflow, web-agent-next-action) and the
+// 3 "You can always check" cards (web-agent-confidence, web-agent-reasoning,
+// web-agent-run-enrichment), in that order.
+const contextItems = [
+  {
+    title: "Lives on the record.",
+    copy: "Attributes, filled on every account, available to filter, sort, and segment.",
+    mockLabel: "Company record",
+    mock: [
+      { label: "Latest funding", value: "Series C, $125M" },
+      { label: "Headcount", value: "240 employees" },
+      { label: "Hiring", value: "12 open GTM roles" },
+      { label: "New exec", value: "CRO started last month" },
+    ],
+  },
+  {
+    title: "Runs in your workflows.",
+    copy: "Add Web Agent to any Workflow to find the background for any record.",
+    mockLabel: "Workflow",
+    mock: [
+      { label: "Trigger", value: "New company added" },
+      { label: "Web Agent", value: "Research the account" },
+      { label: "Update", value: "Write findings to record" },
+    ],
+  },
+  {
+    title: "Drives what happens next.",
+    copy: "Ready for the call booked, the trigger set, and the agent to run.",
+    mockLabel: "Next actions",
+    mock: [
+      { label: "Call booked", value: "Demo, Thursday 10:00 AM" },
+      { label: "Trigger set", value: "Funding news, alert the owner" },
+      { label: "Agent to run", value: "Briefing agent, before the call" },
+    ],
+  },
+];
+
+const checkCards = [
+  {
+    title: "It tells you when it's unsure.",
+    copy: "A confidence rating on every answer, so nothing looks more certain than it is.",
+    mockLabel: "Confidence",
+    mock: [
+      { label: "Latest funding round", value: "High, 92%" },
+      { label: "Hiring a CRO", value: "High, 88%" },
+      { label: "New office location", value: "Medium, 61%" },
+    ],
+  },
+  {
+    title: "It shows you where it looked.",
+    copy: "Open the reasoning and the sources behind any result in one click.",
+    mockLabel: "Sources",
+    mock: [
+      { label: "Source 1", value: "Company blog, funding announcement" },
+      { label: "Source 2", value: "Job board, 12 open roles" },
+      { label: "Source 3", value: "Press release, new CRO hire" },
+    ],
+  },
+  {
+    title: "You decide when it runs.",
+    copy: "One record, a whole column, or on a trigger inside a workflow.",
+    mockLabel: "Run scope",
+    mock: [
+      { label: "One record", value: "Research this account now" },
+      { label: "Whole column", value: "Enrich every company" },
+      { label: "On a trigger", value: "Run when a record is created" },
+    ],
+  },
+];
+
+const askCards = [
+  {
+    title: "Ask your own questions.",
+    copy: "If you can describe it, Web Agent can go find it.",
+    glyph: "?",
+  },
+  {
+    title: "Ship it yourself, today.",
+    copy: "Describe it to Ask Attio and it's running before your next meeting.",
+    glyph: "↗",
+  },
+  {
+    title: "Try, tweak, try again.",
+    copy: "Rewrite the instructions and run it again, as often or as little as you need.",
+    glyph: "↻",
+  },
+];
+
+const seatTabs = [
+  {
+    id: "sales",
+    label: "Sales",
+    title: "Before the call.",
+    copy: "The news, round, and new exec, already on the record.",
+    mock: [
+      { label: "News", value: "Raised a $125M Series C" },
+      { label: "Round", value: "Series C, closed last quarter" },
+      { label: "New exec", value: "CRO started last month" },
+    ],
+  },
+  {
+    id: "marketing",
+    label: "Marketing",
+    title: "Before the list.",
+    copy: "Build lists on live signals instead of stale fields.",
+    mock: [
+      { label: "Signal", value: "40+ open GTM roles" },
+      { label: "Signal", value: "Hiring a new CRO" },
+      { label: "Signal", value: "Funding round announced" },
+    ],
+  },
+  {
+    id: "success",
+    label: "Customer Success",
+    title: "Before the renewal.",
+    copy: "Company changes surfaced while you can still act.",
+    mock: [
+      { label: "Change", value: "New CTO appointed" },
+      { label: "Change", value: "Headcount up 30% this year" },
+      { label: "Change", value: "Product launch announced" },
+    ],
+  },
+  {
+    id: "revops",
+    label: "RevOps",
+    title: "Before the forecast.",
+    copy: "The same rules applied to every record in the system.",
+    mock: [
+      { label: "Rule", value: "Same questions, every account" },
+      { label: "Rule", value: "Same sources, every answer" },
+      { label: "Rule", value: "Same standard, every record" },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Web Agent | Attio"
+  description="The answers that matter aren't in any database. Web Agent researches the web for every record in your CRM and writes them back as data your team can act on."
+  finalCta="Ask more from CRM. Ask Attio."
+  finalCtaDemo
+>
+  <!-- Hero: text only on live, no hero image or eyebrow -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 pt-16 text-center sm:px-6 sm:pt-24">
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      One question. Every account.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Web Agent reads the open web and writes back a sourced answer for your records.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </div>
+  </section>
+
+  <!-- Context for your next move -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Context for your next move">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Context for your next move.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Ready for your agents and workflows.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {contextItems.map((item) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">{item.mockLabel}</p>
+            <ul class="mt-4 space-y-2">
+              {item.mock.map((row) => (
+                <li class="flex items-baseline gap-2 rounded-lg bg-white px-3 py-2 text-sm shadow-sm">
+                  <span class="shrink-0 text-xs font-semibold uppercase tracking-wide text-ink-700">{row.label}</span>
+                  <span class="text-ink-600">{row.value}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-semibold">{item.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{item.copy}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- You can always check -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="You can always check">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">You can always check.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Every answer arrives with its confidence, reasoning, and sources for you to review or rerun.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {checkCards.map((card) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">{card.mockLabel}</p>
+            <ul class="mt-4 space-y-2">
+              {card.mock.map((row) => (
+                <li class="flex items-baseline gap-2 rounded-lg bg-white px-3 py-2 text-sm shadow-sm">
+                  <span class="shrink-0 text-xs font-semibold uppercase tracking-wide text-ink-700">{row.label}</span>
+                  <span class="text-ink-600">{row.value}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- The only limit is what you think to ask -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="The only limit is what you think to ask">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">
+      The only limit is what you think to ask.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Anyone can build their own Web Agent.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {askCards.map((card) => (
+        <article class="rounded-2xl border border-paper-500 bg-white p-6">
+          <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-paper-200 text-lg font-semibold text-blue-600">
+            {card.glyph}
+          </span>
+          <h3 class="mt-4 font-display text-xl font-semibold">{card.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Every account, same standard -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Every account, same standard">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">
+      Every account, same standard.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Not just the ten someone had time for.
+    </p>
+    <div class="mt-10" data-seats>
+      <div class="flex flex-wrap gap-2" role="tablist" aria-label="Roles">
+        {seatTabs.map((tab, i) => (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={i === 0 ? "true" : "false"}
+            data-seat-tab={tab.id}
+            class:list={[
+              "rounded-full px-4 py-1.5 text-sm font-semibold",
+              i === 0
+                ? "bg-ink-100 text-white"
+                : "border border-paper-500 text-ink-600",
+            ]}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+      {seatTabs.map((tab, i) => (
+        <article data-seat-panel={tab.id} class:list={["mt-6 overflow-hidden rounded-2xl border border-paper-500 bg-white", i !== 0 && "hidden"]}>
+          <div class="grid gap-6 p-6 sm:grid-cols-2 sm:p-8">
+            <div>
+              <h3 class="font-display text-xl font-semibold">{tab.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-600">{tab.copy}</p>
+            </div>
+            <ul class="space-y-2">
+              {tab.mock.map((row) => (
+                <li class="flex items-baseline gap-2 rounded-lg bg-paper-200 px-3 py-2 text-sm">
+                  <span class="shrink-0 text-xs font-semibold uppercase tracking-wide text-ink-700">{row.label}</span>
+                  <span class="text-ink-600">{row.value}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const seats = document.querySelector("[data-seats]");
+  if (seats) {
+    const tabs = seats.querySelectorAll("[data-seat-tab]");
+    const panels = seats.querySelectorAll("[data-seat-panel]");
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const id = tab.getAttribute("data-seat-tab");
+        tabs.forEach((t) => {
+          const active = t === tab;
+          t.setAttribute("aria-selected", active ? "true" : "false");
+          t.classList.toggle("bg-ink-100", active);
+          t.classList.toggle("text-white", active);
+          t.classList.toggle("border", !active);
+          t.classList.toggle("border-paper-500", !active);
+          t.classList.toggle("text-ink-600", !active);
+        });
+        panels.forEach((p) => {
+          p.classList.toggle("hidden", p.getAttribute("data-seat-panel") !== id);
+        });
+      });
+    });
+  }
+</script>
