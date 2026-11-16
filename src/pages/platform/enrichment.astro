@@ -1,0 +1,312 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/platform/enrichment on 2026-11-16 (HTTP 200, 577KB).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live H1 is "Every record, already complete."; the eyebrow is "Enrichment".
+
+const leads = [
+  {
+    stage: "Unqualified",
+    count: 1,
+    cards: [
+      { name: "Halyard", meta: "Chicago, IL", rows: ["$8M revenue", "65 employees", "$11M Series A"], age: "2d" },
+      { name: "Brightloop", meta: "Portland, OR", rows: ["$2.4M revenue", "24 employees", "$4.5M Seed"], age: "1d" },
+      { name: "Vantora", meta: "Berlin, DE", rows: ["$12M revenue", "85 employees", "$18M Series A"], age: "4d" },
+      { name: "Fieldstone", meta: "Toronto, CA", rows: ["$4M revenue", "32 employees", "$7.5M Seed"], age: "6d" },
+    ],
+  },
+  {
+    stage: "Qualified",
+    count: 3,
+    cards: [
+      { name: "Corvina Labs", meta: "Austin, TX", rows: ["$18M revenue", "120 employees", "$42M Series B"], age: "3h" },
+      { name: "Lumenware", meta: "London, UK", rows: ["$52M revenue", "340 employees", "$64M Series C"], age: "9d" },
+      { name: "Pinelock", meta: "Denver, CO", rows: ["$9M revenue", "72 employees", "$12M Series A"], age: "12d" },
+    ],
+  },
+  {
+    stage: "Contacted",
+    count: 2,
+    cards: [
+      { name: "Northpeak", meta: "New York, NY", rows: ["$86M revenue", "520 employees", "$95M Series C"], age: "21d" },
+      { name: "Seabright", meta: "Sydney, AU", rows: ["$21M revenue", "150 employees", "$24M Series B"], age: "17d" },
+    ],
+  },
+];
+
+const readyCards = [
+  {
+    title: "Always current.",
+    copy: "When something changes, Attio updates the attribute automatically, so nobody has to remember.",
+  },
+  {
+    title: "Complete company detail.",
+    copy: "Location, employee range, funding raised, estimated ARR, and more. All from the domain.",
+  },
+  {
+    title: "Matched contacts.",
+    copy: "Name, job title, location, company, social media, and more. Just from an email address.",
+  },
+];
+
+const historyItems = [
+  {
+    title: "Connection strength.",
+    copy: "Attio grades how well your team knows an account, so you can prioritize.",
+  },
+  {
+    title: "Your warmest way in.",
+    copy: "Attio highlights the teammate with the most engagement, so intros and handoffs land with the right person.",
+  },
+  {
+    title: "All your interactions.",
+    copy: "Attio tracks every email and meeting, including what's next on the calendar.",
+  },
+];
+
+const workItems = [
+  {
+    title: "Route by fit.",
+    copy: "Send accounts to the right rep the moment they arrive.",
+  },
+  {
+    title: "Let lists build themselves.",
+    copy: "Segment by enriched fields, and the list updates when your data does.",
+  },
+  {
+    title: "Trigger on signal.",
+    copy: "Kick off a sequence when an account crosses a milestone.",
+  },
+  {
+    title: "Report on what's real.",
+    copy: "Slice your pipeline without any manual searching.",
+  },
+];
+
+const plugs = [
+  "Ask Attio",
+  "AI",
+  "Data model",
+  "Apps & integrations",
+  "Call Intelligence",
+  "Workflows",
+  "Sequences",
+  "Reporting",
+];
+---
+
+<BaseLayout
+  title="Enrichment | Attio"
+  description="Attio enriches every company and contact automatically, adds the relationship history your team already has, and keeps every record current without manual work."
+  finalCta="Ask more from CRM. Ask Attio."
+  finalCtaDemo
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">Enrichment</p>
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Every record, already complete.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Who they are, how you know them, and the answer to your next question, already waiting.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </div>
+  </section>
+
+  <!-- Hero mock: New leads board -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="New leads preview">
+    <div class="overflow-hidden rounded-2xl border border-paper-500 bg-paper-200 shadow-sm">
+      <div class="flex items-center gap-2 border-b border-paper-400 bg-white px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-500/70"></span>
+        <span class="h-3 w-3 rounded-full bg-[#f5bf42]"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500/70"></span>
+        <span class="ml-3 text-sm font-medium text-ink-600">New leads</span>
+        <span class="ml-auto rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-600">Enriched</span>
+      </div>
+      <div class="grid min-w-0 gap-4 p-4 sm:grid-cols-3 sm:p-6">
+        {leads.map((col) => (
+          <div class="min-w-0 rounded-xl border border-paper-400 bg-white p-4">
+            <div class="flex items-center justify-between">
+              <p class="text-sm font-semibold">{col.stage}</p>
+              <span class="flex h-6 w-6 items-center justify-center rounded-full bg-paper-300 text-xs font-semibold">
+                {col.count}
+              </span>
+            </div>
+            <div class="mt-3 space-y-3">
+              {col.cards.map((c) => (
+                <div class="rounded-lg border border-paper-400 bg-paper-200 p-3">
+                  <div class="flex items-baseline justify-between gap-2">
+                    <p class="min-w-0 truncate text-sm font-semibold">{c.name}</p>
+                    <span class="shrink-0 text-xs text-ink-700">{c.age}</span>
+                  </div>
+                  <p class="mt-0.5 text-xs text-ink-700">{c.meta}</p>
+                  <div class="mt-2 flex flex-wrap gap-1.5">
+                    {c.rows.map((r) => (
+                      <span class="rounded-full bg-white px-2 py-0.5 text-[11px] font-medium text-ink-600 ring-1 ring-paper-400">
+                        {r}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Ready before you ask -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight sm:text-heading-lg">
+      Ready before you ask.
+    </h2>
+    <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Attio matches every company and contact, then fills in the rest, with data drawn from hundreds of sources.
+    </p>
+    <div class="mt-10 grid gap-4 sm:grid-cols-3">
+      {readyCards.map((c) => (
+        <div class="min-w-0 rounded-2xl border border-paper-500 bg-paper-200 p-6">
+          <h3 class="font-display text-xl font-semibold">{c.title}</h3>
+          <p class="mt-3 leading-relaxed text-ink-600">{c.copy}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Records carry the real history -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight sm:text-heading-lg">
+      Records carry the real history.
+    </h2>
+    <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Attio enriches from your own email, calendar, and customer relationships.
+    </p>
+    <div class="mt-10 grid gap-4 sm:grid-cols-3">
+      {historyItems.map((c) => (
+        <div class="min-w-0 rounded-2xl border border-paper-500 bg-paper-200 p-6">
+          <h3 class="font-display text-xl font-semibold">{c.title}</h3>
+          <p class="mt-3 leading-relaxed text-ink-600">{c.copy}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Put your own spin on it -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight sm:text-heading-lg">
+      Put your own spin on it.
+    </h2>
+    <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Web Agent takes your questions and answers them for every record.
+    </p>
+    <div class="mt-10 overflow-hidden rounded-2xl border border-paper-500 bg-paper-200 shadow-sm">
+      <div class="flex items-center gap-2 border-b border-paper-400 bg-white px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-500/70"></span>
+        <span class="h-3 w-3 rounded-full bg-[#f5bf42]"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500/70"></span>
+        <span class="ml-3 text-sm font-medium text-ink-600">Web Agent</span>
+        <span class="ml-auto rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-600">Researching</span>
+      </div>
+      <div class="grid min-w-0 gap-4 p-4 sm:grid-cols-2 sm:p-6">
+        <div class="min-w-0 rounded-xl border border-paper-400 bg-white p-5">
+          <p class="text-xs font-semibold uppercase tracking-wide text-ink-700">Your question</p>
+          <p class="mt-2 font-display text-lg font-semibold leading-snug">
+            Which of our new leads raised a Series B in the last year?
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-ink-600">
+            Web Agent checks every record, then answers with the evidence attached.
+          </p>
+        </div>
+        <div class="min-w-0 rounded-xl border border-paper-400 bg-white p-5">
+          <p class="text-xs font-semibold uppercase tracking-wide text-ink-700">Answer for every record</p>
+          <dl class="mt-3 space-y-2 text-sm">
+            <div class="flex min-w-0 items-center justify-between gap-2 border-b border-paper-400 pb-2">
+              <dt class="min-w-0 truncate text-ink-600">Corvina Labs</dt>
+              <dd class="shrink-0 font-semibold">$42M Series B</dd>
+            </div>
+            <div class="flex min-w-0 items-center justify-between gap-2 border-b border-paper-400 pb-2">
+              <dt class="min-w-0 truncate text-ink-600">Lumenware</dt>
+              <dd class="shrink-0 font-semibold">$64M Series C</dd>
+            </div>
+            <div class="flex min-w-0 items-center justify-between gap-2 border-b border-paper-400 pb-2">
+              <dt class="min-w-0 truncate text-ink-600">Seabright</dt>
+              <dd class="shrink-0 font-semibold">$24M Series B</dd>
+            </div>
+            <div class="flex min-w-0 items-center justify-between gap-2">
+              <dt class="min-w-0 truncate text-ink-600">Northpeak</dt>
+              <dd class="shrink-0 font-semibold">$95M Series C</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <figure class="mx-auto max-w-3xl text-center">
+      <blockquote class="font-serif text-2xl leading-snug text-ink-100 sm:text-3xl">
+        "Attio's data enrichment capabilities make it really easy to identify potential leads and conduct highly targeted and customized outreach."
+      </blockquote>
+      <figcaption class="mt-6 text-sm font-semibold">Margaret Shen</figcaption>
+      <p class="mt-1 text-sm text-ink-700">Head of Business Operations, Modal</p>
+    </figure>
+  </section>
+
+  <!-- Enriched data that goes to work -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight sm:text-heading-lg">
+      Enriched data that goes to work.
+    </h2>
+    <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Every detail sharpens Universal Context, and is ready to filter, sort, report on, or trigger agents.
+    </p>
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {workItems.map((c) => (
+        <div class="min-w-0 rounded-2xl border border-paper-500 bg-paper-200 p-6">
+          <h3 class="font-display text-xl font-semibold">{c.title}</h3>
+          <p class="mt-3 leading-relaxed text-ink-600">{c.copy}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Attio plugs in -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight sm:text-heading-lg">
+      Attio plugs in. You take off.
+    </h2>
+    <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Work your way, from outreach to outcomes.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-3">
+      {plugs.map((p, i) => (
+        <a
+          href="/apps"
+          class="flex items-center gap-2 rounded-full border border-paper-500 bg-paper-200 px-5 py-3 text-sm font-semibold hover:bg-paper-300"
+        >
+          <span class="text-xs font-semibold text-blue-600">[{String(i + 1).padStart(2, "0")}]</span>
+          {p}
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
