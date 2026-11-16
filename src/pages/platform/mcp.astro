@@ -1,0 +1,355 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/platform/mcp on 2026-11-16 (HTTP 200).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live H1 is "MCP", used as the eyebrow, with the headline H2
+// "Ask anywhere. Act everywhere." as the single H1, same pattern as /platform/data.
+// The 5 hero prompts cycle letter by letter on live (each letter in its own span);
+// rebuilt here as a typewriter that cycles the same 5 phrases.
+// Live images map to sections in this order: mcp-showcase-transparent-3x.png
+// (alt "ChatGPT updating an Attio deal from meeting notes") sits under
+// "Your workspace, where you are."; mcp-update-records-3x.png,
+// mcp-search-calls-3x.png, mcp-add-tasks-3x.png sit on the 3
+// "Endless possibilities" cards; chatgpt.svg and claude.svg sit in
+// "Ready where you are."; mcp.svg, mcp-comments.svg, mcp-list-ai.svg and
+// mcp-locked.svg are the 4 icons on the "Ready where you are." cards.
+const prompts = [
+  "Find warm leads in Attio",
+  "Update that deal in Attio",
+  "Enrich accounts in Attio",
+  "Create a report in Attio",
+  "Search my notes in Attio",
+];
+
+const readyCards = [
+  {
+    glyph: "◈",
+    title: "Nothing gets lost in the handoff.",
+    copy: "Complete CRM context without opening a new tab.",
+  },
+  {
+    glyph: "💬",
+    title: "Speaks your language.",
+    copy: "No views to build, no filters to set. Get insights and take action in conversation.",
+  },
+  {
+    glyph: "☰",
+    title: "Full workspace access.",
+    copy: "Search, create, and update across your CRM records and activities.",
+  },
+  {
+    glyph: "🔒",
+    title: "Secure by design.",
+    copy: "Authenticate via OAuth with user-scoped permissions.",
+  },
+];
+
+const possibilityCards = [
+  {
+    title: "Update records.",
+    quote: "Update the deal value based on today's call",
+    mockLabel: "ChatGPT updating a deal",
+    mock: [
+      { label: "Deal", value: "GreenLeaf, $54,000" },
+      { label: "Update", value: "Stage moved to Negotiation" },
+      { label: "Note", value: "Logged from today's call" },
+    ],
+  },
+  {
+    title: "Search calls.",
+    quote: "Build a list of positive quotes from customers",
+    mockLabel: "Claude searching calls",
+    mock: [
+      { label: "Quote", value: "Attio is the best CRM we have used" },
+      { label: "From", value: "Discovery call, GreenLeaf" },
+      { label: "List", value: "12 positive quotes found" },
+    ],
+  },
+  {
+    title: "Add tasks.",
+    quote: "Create reminders for next steps on key deals",
+    mockLabel: "ChatGPT adding tasks",
+    mock: [
+      { label: "Task", value: "Send the security review" },
+      { label: "Due", value: "Friday, before the call" },
+      { label: "Deal", value: "GreenLeaf, Negotiation" },
+    ],
+  },
+];
+
+const connectSteps = [
+  {
+    n: "01",
+    title: "Find Attio.",
+    copy: "Select Attio from the list of connectors in the tool you want to work from.",
+  },
+  {
+    n: "02",
+    title: "Sign in.",
+    copy: "Authenticate with OAuth using the Attio account you already have.",
+  },
+  {
+    n: "03",
+    title: "Start working.",
+    copy: "Access follows what you can already see and do in Attio.",
+  },
+];
+---
+
+<BaseLayout
+  title="MCP | Attio"
+  description="Connect Attio to ChatGPT, Claude, Notion, and anything else that speaks MCP. Search records, update deals, log notes, and create tasks."
+  finalCta="Ask more from CRM. Ask Attio."
+  finalCtaDemo
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">MCP</p>
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Ask anywhere. Act everywhere.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Attio connects to the AI tools your team already has open.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </div>
+
+    <!-- Hero mock: AI tool prompt cycler -->
+    <div class="mx-auto mt-14 max-w-3xl overflow-hidden rounded-2xl border border-paper-500 bg-white text-left shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]">
+      <div class="flex items-center gap-2 border-b border-paper-400 bg-paper-200 px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-500"></span>
+        <span class="h-3 w-3 rounded-full bg-[#f5bf42]"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500"></span>
+        <span class="ml-3 text-xs font-medium text-ink-600">ChatGPT</span>
+      </div>
+      <div class="p-6 sm:p-8">
+        <p class="text-sm leading-relaxed text-ink-600">
+          Use Attio from your AI tools to find deals, log calls, and draft follow-ups.
+        </p>
+        <p class="mt-6 min-h-[3.5rem] rounded-xl border border-paper-500 bg-paper-200 px-4 py-3 font-mono text-sm font-medium sm:text-base">
+          <span data-mcp-prompt>{prompts[0]}</span><span class="animate-pulse text-blue-500">|</span>
+        </p>
+        <p class="mt-4 text-sm leading-relaxed text-ink-600">
+          Ask in plain language. Attio finds the record, takes the action, and writes it back.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ready where you are -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Ready where you are">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Ready where you are.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      ChatGPT, Claude, and everything else that speaks MCP.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <span class="rounded-full border border-paper-500 bg-white px-5 py-2 text-sm font-semibold">ChatGPT</span>
+      <span class="rounded-full border border-paper-500 bg-white px-5 py-2 text-sm font-semibold">Claude</span>
+      <span class="rounded-full border border-paper-500 bg-white px-5 py-2 text-sm font-semibold">Notion</span>
+    </div>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {readyCards.map((card) => (
+        <article class="rounded-2xl border border-paper-500 bg-white p-6">
+          <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-paper-200 text-lg font-semibold text-blue-600">
+            {card.glyph}
+          </span>
+          <h3 class="mt-4 font-display text-xl font-semibold">{card.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{card.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Your workspace, where you are -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Your workspace, where you are">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Your workspace, where you are.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Search records, log notes, create tasks, and update deals.
+    </p>
+    <div class="mx-auto mt-10 max-w-4xl overflow-hidden rounded-2xl border border-paper-500 bg-white text-left shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]">
+      <div class="flex items-center gap-2 border-b border-paper-400 bg-paper-200 px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-500"></span>
+        <span class="h-3 w-3 rounded-full bg-[#f5bf42]"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500"></span>
+        <span class="ml-3 text-xs font-medium text-ink-600">ChatGPT updating an Attio deal from meeting notes</span>
+      </div>
+      <div class="grid gap-6 p-6 sm:grid-cols-2 sm:p-8">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">ChatGPT</p>
+          <p class="mt-4 rounded-xl border border-paper-500 bg-paper-200 px-4 py-3 text-sm font-medium">
+            Update the GreenLeaf deal from today's call notes
+          </p>
+          <p class="mt-4 text-sm leading-relaxed text-ink-600">
+            The deal, the notes, and the next step, all updated without leaving the chat.
+          </p>
+        </div>
+        <ul class="space-y-3">
+          <li class="rounded-xl border border-paper-500 p-4">
+            <p class="text-xs font-semibold text-ink-700">DEAL UPDATED</p>
+            <p class="mt-1 text-sm font-medium">GreenLeaf, $54,000, moved to Negotiation</p>
+          </li>
+          <li class="rounded-xl border border-paper-500 p-4">
+            <p class="text-xs font-semibold text-ink-700">NOTE LOGGED</p>
+            <p class="mt-1 text-sm font-medium">Call summary saved to the GreenLeaf record</p>
+          </li>
+          <li class="rounded-xl border border-paper-500 p-4">
+            <p class="text-xs font-semibold text-ink-700">NEXT STEP SET</p>
+            <p class="mt-1 text-sm font-medium">Technical review booked for Thursday, 2:00 PM</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Endless possibilities for every team -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Endless possibilities for every team">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">
+      Endless possibilities for every team.
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Your AI tools can read from Attio and write back to it.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {possibilityCards.map((card) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">{card.mockLabel}</p>
+            <p class="mt-4 rounded-lg bg-white px-3 py-2 text-sm font-medium shadow-sm">"{card.quote}"</p>
+            <ul class="mt-4 space-y-2">
+              {card.mock.map((row) => (
+                <li class="flex items-baseline gap-2 text-sm">
+                  <span class="shrink-0 text-xs font-semibold uppercase tracking-wide text-ink-700">{row.label}</span>
+                  <span class="text-ink-600">{row.value}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-semibold">{card.title}</h3>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- How thousands of teams work -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 text-center sm:px-6" aria-label="How thousands of teams work">
+    <h2 class="mx-auto max-w-2xl font-display text-heading-md font-semibold tracking-tight">
+      How thousands of teams work.
+    </h2>
+    <p class="mx-auto mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      MCP is in daily use across Attio.
+    </p>
+    <p class="mt-10 font-display text-[72px] font-semibold leading-none tracking-tight sm:text-[100px]">583k+</p>
+    <p class="mt-4 text-lg text-ink-600">Daily average MCP calls from Attio workspaces.</p>
+  </section>
+
+  <!-- Connected in a click -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Connected in a click">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Connected in a click.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      No setup, no code, no waiting on anyone else.
+    </p>
+    <p class="mt-6">
+      <a
+        href="https://docs.attio.com"
+        class="text-sm font-semibold text-blue-500 underline underline-offset-4 hover:text-blue-600"
+      >
+        Read the docs
+      </a>
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {connectSteps.map((step) => (
+        <article class="rounded-2xl border border-paper-500 bg-white p-6">
+          <p class="font-display text-sm font-semibold text-blue-500">{step.n}</p>
+          <h3 class="mt-2 font-display text-xl font-semibold">{step.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{step.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Keep up to date, newsletter, no submission -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 text-center sm:px-6" aria-label="Keep up to date">
+    <h2 class="font-display text-heading-md font-semibold tracking-tight">Keep up to date.</h2>
+    <p class="mt-3 text-lg text-ink-600">Get the latest updates.</p>
+    <form id="mcp-newsletter-form" class="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row">
+      <label for="mcp-newsletter-email" class="sr-only">Your email address</label>
+      <input
+        id="mcp-newsletter-email"
+        type="email"
+        required
+        placeholder="Your email address"
+        class="flex-1 rounded-full border border-paper-500 px-5 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30"
+      />
+      <button type="submit" class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300">
+        Subscribe
+      </button>
+    </form>
+  </section>
+</BaseLayout>
+
+<script>
+  // Hero: cycle the 5 live prompts, typing each one out.
+  const promptEl = document.querySelector("[data-mcp-prompt]");
+  const prompts = [
+    "Find warm leads in Attio",
+    "Update that deal in Attio",
+    "Enrich accounts in Attio",
+    "Create a report in Attio",
+    "Search my notes in Attio",
+  ];
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (promptEl && !reduceMotion) {
+    let p = 0;
+    let i = prompts[0].length;
+    let deleting = true;
+    const tick = () => {
+      const full = prompts[p];
+      if (deleting) {
+        i -= 1;
+        if (i <= 0) {
+          deleting = false;
+          p = (p + 1) % prompts.length;
+        }
+      } else {
+        i += 1;
+        if (i >= prompts[p].length) {
+          deleting = true;
+          window.setTimeout(tick, 1800);
+          promptEl.textContent = prompts[p];
+          return;
+        }
+      }
+      promptEl.textContent = prompts[p].slice(0, Math.max(i, 0));
+      window.setTimeout(tick, deleting ? 30 : 55);
+    };
+    window.setTimeout(tick, 1800);
+  }
+
+  // Newsletter: no backend, same behaviour as the homepage form.
+  const form = document.querySelector("#mcp-newsletter-form");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const button = form.querySelector("button");
+      if (button) button.textContent = "Subscribed";
+    });
+  }
+</script>
