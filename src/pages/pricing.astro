@@ -7,13 +7,15 @@ const plans = [
     blurb: "For individuals to get started with Attio.",
     monthly: 0,
     annual: 0,
-    priceNote: "Free forever, up to 3 users.",
+    suffix: "",
+    priceNote: "Up to 3 users.",
     addUserMonthly: null,
     addUserAnnual: null,
     cta: "Start for free",
     ctaHref: "/go/welcome/sign-in",
     featured: false,
     badge: null,
+    listLabel: "Get started with:",
     features: [
       "Ask Attio, your personal agent",
       "Self-builds from email and calendar",
@@ -27,13 +29,15 @@ const plans = [
     blurb: "For small teams building their first sales process.",
     monthly: 50,
     annual: 40,
-    priceNote: "Per workspace, includes 1 user.",
+    suffix: "mo/workspace",
+    priceNote: "Includes 1 user.",
     addUserMonthly: 44,
     addUserAnnual: 35,
     cta: "Start for free",
     ctaHref: "/go/welcome/sign-in",
     featured: false,
     badge: null,
+    listLabel: null,
     features: [
       "Everything in Free, and:",
       "Email sharing and AI summaries",
@@ -48,13 +52,15 @@ const plans = [
     blurb: "For growing teams turning sales into a repeatable engine.",
     monthly: 125,
     annual: 100,
-    priceNote: "Per workspace, includes 1 user.",
+    suffix: "mo/workspace",
+    priceNote: "Includes 1 user.",
     addUserMonthly: 99,
     addUserAnnual: 79,
-    cta: "Start 14-day free trial",
+    cta: "Start for free",
     ctaHref: "/go/welcome/sign-in",
     featured: true,
     badge: "Most popular",
+    listLabel: null,
     features: [
       "Everything in Plus, and:",
       "Custom objects",
@@ -72,13 +78,15 @@ const plans = [
     blurb: "For teams and orgs running multiple GTM motions at scale.",
     monthly: 1000,
     annual: 1000,
-    priceNote: "Per workspace, includes 5 users, annual billing only.",
+    suffix: "mo/workspace",
+    priceNote: "Includes 5 users, annual billing.",
     addUserMonthly: 189,
     addUserAnnual: 189,
-    cta: "Talk to sales",
-    ctaHref: "/contact/sales",
+    cta: "Start for free",
+    ctaHref: "/go/welcome/sign-in",
     featured: false,
     badge: null,
+    listLabel: null,
     features: [
       "Everything in Pro, and:",
       "Unlimited objects",
@@ -97,52 +105,104 @@ const plans = [
 const check = "✓";
 const cross = "✕";
 
+// Compare matrix, verified live from https://attio.com/pricing on 2026-11-16
+// (div grid, aria-label Included / Not included, values in plan order Free, Plus, Pro, Ultra).
 const compareGroups = [
-  {
-    group: "Platform features",
-    rows: [
-      { label: "Ask Attio credits", free: "100", plus: "500", pro: "1,000", ultra: "2,500" },
-      { label: "Workspace credits", free: "250", plus: "1,500", pro: "10,000", ultra: "20,000" },
-      { label: "Records", free: "50,000", plus: "250,000", pro: "1,000,000", ultra: "3,000,000" },
-      { label: "Objects", free: "3", plus: "5", pro: "12", ultra: "Unlimited" },
-      { label: "File storage", free: "50 GB", plus: "50 GB", pro: "Unlimited", ultra: "Unlimited" },
-      { label: "Company enrichment", free: "Core profile", plus: "+ Headcount and ARR", pro: "+ Funding", ultra: "+ Funding" },
-      { label: "Reports", free: cross, plus: "15", pro: "100", ultra: "Unlimited" },
-      { label: "Report types", free: "Insights", plus: "+ Funnels and segments", pro: "+ Targets and trends", ultra: "+ Targets and trends" },
-      { label: "Rules", free: cross, plus: cross, pro: "8 per object", ultra: "Unlimited" },
-      { label: "Emails sent per user", free: "200/mo", plus: "1,000/mo", pro: "Unlimited", ultra: "Unlimited" },
-      { label: "Bulk email", free: "10 at once", plus: "50 at once", pro: "50 at once", ultra: "50 at once" },
-      { label: "Users", free: "Up to 3", plus: "Up to 10", pro: "No limit", ultra: "No limit" },
-      { label: "Teams", free: cross, plus: cross, pro: "Up to 10", ultra: "Unlimited" },
-    ],
-  },
   {
     group: "Agents and AI",
     rows: [
       { label: "Ask Attio", free: check, plus: check, pro: check, ultra: check },
-      { label: "Agents and workflows", free: check, plus: check, pro: check, ultra: check },
-      { label: "Custom agents", free: cross, plus: cross, pro: check, ultra: check },
+      { label: "AI agents", free: check, plus: check, pro: check, ultra: check },
       { label: "Call intelligence", free: cross, plus: cross, pro: check, ultra: check },
+      { label: "Ask Attio credits", free: "100", plus: "500", pro: "1,000", ultra: "2,500" },
+      { label: "Workspace credits", free: "250", plus: "1,500", pro: "10,000", ultra: "20,000" },
+      { label: "Additional workspace credits", free: cross, plus: "Starting at $85/$70/mo", pro: "Starting at $85/$70/mo", ultra: "Starting at $85/$70/mo" },
+    ],
+  },
+  {
+    group: "Automation",
+    rows: [
+      { label: "Workflows", free: check, plus: check, pro: check, ultra: check },
+      { label: "Agent and integration blocks", free: check, plus: check, pro: check, ultra: check },
+      { label: "SQL in workflows", free: cross, plus: cross, pro: cross, ultra: check },
       { label: "Sequences", free: cross, plus: cross, pro: check, ultra: check },
+    ],
+  },
+  {
+    group: "Context and data model",
+    rows: [
+      { label: "Records from email and calendar", free: check, plus: check, pro: check, ultra: check },
+      { label: "Records", free: "50,000", plus: "250,000", pro: "1,000,000", ultra: "3,000,000" },
+      { label: "Additional records", free: cross, plus: cross, pro: "$300/$240/mo per 1M records", ultra: "$300/$240/mo per 1M records" },
+      { label: "Objects", free: "3", plus: "5", pro: "12, then $500/$400/mo each", ultra: "Unlimited" },
+      { label: "Custom objects and relationships", free: cross, plus: cross, pro: check, ultra: check },
+      { label: "Formula attributes", free: cross, plus: cross, pro: check, ultra: check },
+      { label: "Record templates", free: cross, plus: cross, pro: check, ultra: check },
+      { label: "Record summaries", free: cross, plus: check, pro: check, ultra: check },
+      { label: "People enrichment", free: check, plus: check, pro: check, ultra: check },
+      { label: "File storage", free: "50 GB", plus: "50 GB", pro: "Unlimited", ultra: "Unlimited" },
+      { label: "Company enrichment", free: "Core profile", plus: "+ Headcount and ARR", pro: "+ Funding", ultra: "+ Funding" },
+    ],
+  },
+  {
+    group: "Communication intelligence",
+    rows: [
+      { label: "Communication intelligence", free: "Interactions and strength", plus: "+ Email and calendar", pro: "+ Next meeting", ultra: "+ Next meeting" },
+      { subheader: "Pipeline and activity" },
+      { label: "Activity tracking (beta)", free: "Emails and meetings", plus: "Manual logging", pro: "Custom + integrations", ultra: "Custom + integrations" },
+      { label: "Rules", free: cross, plus: cross, pro: "8 per object", ultra: "Unlimited" },
+      { label: "Rules by team", free: cross, plus: cross, pro: cross, ultra: check },
+      { label: "Reports", free: "3", plus: "15", pro: "100", ultra: "Unlimited" },
+      { label: "Report types", free: "Insights", plus: "+ Funnels and segments", pro: "+ Targets and trends", ultra: "+ Targets and trends" },
+    ],
+  },
+  {
+    group: "Email and calendar",
+    rows: [
+      { label: "Connected accounts per user", free: "1", plus: "1", pro: "2", ultra: "3+" },
+      { label: "Email sharing", free: "Subject lines and metadata", plus: "Full, workspace-wide", pro: "Full, by person or record", ultra: "Full, by person or record" },
+      { label: "Email privacy controls", free: "Personal blocklist", plus: "Personal blocklist", pro: "+ Workspace blocklist", ultra: "+ Workspace blocklist" },
+      { label: "Emails sent per user", free: "200/mo", plus: "1,000/mo", pro: "Unlimited", ultra: "Unlimited" },
+      { label: "Bulk email sending", free: "10 at once", plus: "50 at once", pro: "50 at once", ultra: "50 at once" },
+      { label: "Custom branding", free: cross, plus: check, pro: check, ultra: check },
+      { label: "Email summaries and labeling", free: cross, plus: check, pro: check, ultra: check },
+    ],
+  },
+  {
+    group: "Platform and developer",
+    rows: [
+      { label: "API and webhooks", free: check, plus: check, pro: check, ultra: check },
+      { label: "MCP server", free: check, plus: check, pro: check, ultra: check },
+      { label: "App SDK", free: check, plus: check, pro: check, ultra: check },
+      { label: "Apps and integrations", free: check, plus: check, pro: check, ultra: check },
+      { label: "Mobile apps", free: check, plus: check, pro: check, ultra: check },
+      { label: "SQL access through the API and MCP", free: cross, plus: cross, pro: cross, ultra: check },
+      { label: "Data connectors", free: cross, plus: cross, pro: cross, ultra: "1 included" },
     ],
   },
   {
     group: "Security and admin",
     rows: [
+      { label: "Users", free: "3", plus: "10", pro: "No limit", ultra: "No limit" },
+      { label: "Access permissions", free: "Everyone can view and edit", plus: "Workspace-wide", pro: "+ Team or person", ultra: "+ Team or person" },
+      { label: "Private lists", free: cross, plus: check, pro: check, ultra: check },
+      { label: "Teams", free: cross, plus: cross, pro: "Up to 10", ultra: "Unlimited" },
       { label: "Single sign-on (SSO)", free: cross, plus: cross, pro: "Governance add-on", ultra: check },
       { label: "User provisioning (SCIM)", free: cross, plus: cross, pro: "Governance add-on", ultra: check },
       { label: "Audit logs", free: cross, plus: cross, pro: "Governance add-on", ultra: check },
       { label: "Admin-only exports", free: cross, plus: cross, pro: "Governance add-on", ultra: check },
-      { label: "Advanced controls", free: cross, plus: cross, pro: cross, ultra: check },
+      { label: "Session management", free: cross, plus: cross, pro: cross, ultra: check },
+      { label: "Pay by invoice", free: cross, plus: cross, pro: check, ultra: check },
     ],
   },
   {
     group: "Support and services",
     rows: [
-      { label: "Data connectors", free: cross, plus: cross, pro: cross, ultra: "1 included" },
-      { label: "Migration help", free: cross, plus: check, pro: check, ultra: check },
+      { label: "Help center", free: check, plus: check, pro: check, ultra: check },
+      { label: "Chat and email support", free: check, plus: check, pro: check, ultra: check },
+      { label: "Priority support", free: cross, plus: cross, pro: check, ultra: check },
+      { label: "Migration services", free: cross, plus: "Talk to sales", pro: "Talk to sales", ultra: "Talk to sales" },
       { label: "Forward-deployed onboarding", free: cross, plus: cross, pro: cross, ultra: check },
-      { label: "14-day free trial of Pro", free: check, plus: check, pro: check, ultra: check },
     ],
   },
 ];
@@ -154,58 +214,59 @@ const creditPacks = [
   { credits: "50,000", annual: 475, monthly: 595 },
 ];
 
+// FAQ answers, verbatim from https://attio.com/pricing, fetched 2026-11-16.
 const faqs = [
   {
     q: "Does Attio have a free plan?",
-    a: "Yes. The Free plan costs nothing for up to three users, and includes Ask Attio, self-builds from email and calendar, automatic enrichment, agents and workflows, 50,000 records and 3 objects.",
+    a: "Yes. The Free plan costs nothing for up to three users. It includes Ask Attio, automatic enrichment, workflows, and email and calendar sync, with up to 50,000 records and three objects.",
   },
   {
     q: "Can I try Attio before I pay?",
-    a: "Yes. Every new workspace gets a 14-day free trial of Pro, with no card required to start.",
+    a: "Yes. Every new Attio workspace starts with a 14-day free trial of the Pro plan, with access to all Pro features. When the trial ends, admins can choose any plan, including Free.",
   },
   {
     q: "Is there a discount for paying annually?",
-    a: "Yes. Annual billing saves 20% on Plus and Pro compared with monthly billing. Ultra is billed annually only.",
+    a: "Yes. On Plus and Pro, paying annually costs about 20% less than paying monthly. Ultra is billed annually only.",
   },
   {
     q: "Which Attio plan is right for my team?",
-    a: "Free fits individuals getting started. Plus fits small teams building their first sales process. Pro fits growing teams turning sales into a repeatable engine. Ultra fits teams and orgs running multiple GTM motions at scale.",
+    a: "Free: For individuals getting started. Plus: For small teams of up to 10 users building their first sales process. Pro: For growing teams turning sales into a repeatable engine with advanced features like custom objects to model their business and activity tracking. Ultra: For teams and enterprises running complex GTM motions with people and agents, that need scale, controls, and governance.",
   },
   {
     q: "Can I get SSO on the Pro plan?",
-    a: "Yes, with the Governance add-on at $30 per user per month, billed annually. It adds SSO, SCIM, audit logs and advanced data controls on Pro. SSO is included with Ultra.",
+    a: "Yes. Pro teams can add SSO, SCIM, audit logs, and advanced data controls with the Governance add-on for $30 per user a month, billed annually. Governance is included with Ultra.",
   },
   {
     q: "Do I need to talk to sales to buy Ultra?",
-    a: "Yes. Ultra is an annual plan with forward-deployed onboarding, so talk to sales to get started.",
+    a: "No. Ultra is available for purchase on your own. Talk to sales if you want help with a migration or a security review.",
   },
   {
     q: "Can I change or cancel my plan at any time?",
-    a: "Yes. You can change plans in your workspace settings. Upgrades are prorated, and downgrades apply at your next renewal.",
+    a: "Yes. Admins can change plans at any time in workspace settings. Upgrades apply right away and are prorated, and downgrades take effect at the next renewal. If you cancel, your team keeps access until the end of the current billing period.",
   },
   {
     q: "How do credits work in Attio?",
-    a: "Ask Attio credits and workspace credits are included with each plan. Free includes 100 Ask Attio credits and 250 workspace credits, Plus includes 500 and 1,500, Pro includes 1,000 and 10,000, and Ultra includes 2,500 and 20,000.",
+    a: "Each user gets a monthly allowance of Ask Attio credits. Each workspace also gets a shared pool of workspace credits for workflows and AI features. When a user runs out of Ask Attio credits, Ask Attio can draw on workspace credits unless an admin sets a limit. With paid plans you can buy more workspace credits at any time.",
   },
   {
     q: "How much do additional credits cost?",
-    a: "Additional credits are sold in packs. A 5,000 credit pack is $70 per month on annual billing or $85 on monthly billing, 10,000 is $120 or $150, 25,000 is $260 or $330, and 50,000 is $475 or $595.",
+    a: "Paid plans can add workspace credits in monthly packs, and larger packs cost less per credit. Prices per month: 5,000 credits: $70 billed annually, or $85 billed monthly; 10,000 credits: $120 billed annually, or $150 billed monthly; 25,000 credits: $260 billed annually, or $330 billed monthly; 50,000 credits: $475 billed annually, or $595 billed monthly.",
   },
   {
     q: "What are my payment options?",
-    a: "You can pay by card on every plan. Pro and Ultra also support invoice, purchase order, ACH, check and wire.",
+    a: "All payments can be made via credit card. For our Pro and Ultra plans, we can issue invoices and will accept PO, ACH, check or wire.",
   },
   {
     q: "Does Attio offer discounts for startups?",
-    a: "Yes. Venture-backed startups with up to 10 users get 80% off annual Pro plus credits for year 1, and 30% off for year 2. Apply within 90 days of workspace creation.",
+    a: "Yes. Venture-backed startups with up to 10 users get 80% off the annual Pro plan and credits for the first year, and 30% off the second year. Apply within 90 days of creating your workspace.",
   },
   {
     q: "Can I use Attio with Claude, ChatGPT, or other AI tools?",
-    a: "Yes. Attio has an MCP server on every plan, and Ultra adds SQL querying through the API and MCP, so your AI tools can work with your CRM data.",
+    a: "Yes. Every plan includes the Attio MCP server, which connects AI tools that support the Model Context Protocol, such as Claude and ChatGPT, to your workspace. Ultra adds SQL access through MCP for exact answers across your data.",
   },
   {
     q: "Can Attio help me migrate from another CRM?",
-    a: "Yes. Migration help is included on paid plans, and Ultra includes forward-deployed engineer onboarding.",
+    a: "Yes. On paid plans, talk to sales for migration help. Ultra also includes onboarding with a forward-deployed engineer (FDE).",
   },
 ];
 ---
@@ -285,14 +346,16 @@ const faqs = [
                   {plan.annual}
                 </span>
               </span>
-              <span class={"text-sm " + (plan.featured ? "text-white/70" : "text-ink-600")}>/mo</span>
+              {plan.suffix && (
+                <span class={"text-sm " + (plan.featured ? "text-white/70" : "text-ink-600")}>{plan.suffix}</span>
+              )}
             </p>
             <p class={"mt-2 text-xs leading-relaxed " + (plan.featured ? "text-white/70" : "text-ink-600")}>
               {plan.priceNote}
             </p>
             {plan.addUserMonthly !== null && (
               <p class={"mt-1 text-xs " + (plan.featured ? "text-white/70" : "text-ink-600")}>
-                Add users{" "}
+                Add users for{" "}
                 <span
                   data-adduser-monthly={plan.addUserMonthly}
                   data-adduser-annual={plan.addUserAnnual}
@@ -313,7 +376,10 @@ const faqs = [
             >
               {plan.cta}
             </a>
-            <ul class="mt-6 space-y-2.5 text-sm">
+            {plan.listLabel && (
+              <p class="mt-6 text-sm font-semibold">{plan.listLabel}</p>
+            )}
+            <ul class="mt-3 space-y-2.5 text-sm">
               {plan.features.map((feature) => (
                 <li class="flex gap-2">
                   <span aria-hidden="true" class={plan.featured ? "text-blue-300" : "text-blue-500"}>
@@ -333,9 +399,9 @@ const faqs = [
   </section>
 
   <!-- Compare plans -->
-  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Compare plans">
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Compare plans and features">
     <h2 class="text-center font-display text-heading-sm font-semibold tracking-tight sm:text-heading-md">
-      Compare plans
+      Compare plans and features
     </h2>
     <p class="mx-auto mt-3 max-w-2xl text-center text-base leading-relaxed text-ink-600">
       Every plan starts free. Pick the one that fits where your team is going next.
@@ -360,17 +426,25 @@ const faqs = [
                     {group.group}
                   </th>
                 </tr>
-                {group.rows.map((row) => (
-                  <tr class="border-b border-paper-400 last:border-b-0">
-                    <th scope="row" class="px-4 py-3 text-left font-medium text-ink-600">
-                      {row.label}
-                    </th>
-                    <td class="px-4 py-3">{row.free}</td>
-                    <td class="px-4 py-3">{row.plus}</td>
-                    <td class="px-4 py-3">{row.pro}</td>
-                    <td class="px-4 py-3">{row.ultra}</td>
-                  </tr>
-                ))}
+                {group.rows.map((row) =>
+                  row.subheader ? (
+                    <tr class="bg-paper-200">
+                      <th scope="row" colspan="5" class="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wide text-ink-700">
+                        {row.subheader}
+                      </th>
+                    </tr>
+                  ) : (
+                    <tr class="border-b border-paper-400 last:border-b-0">
+                      <th scope="row" class="px-4 py-3 text-left font-medium text-ink-600">
+                        {row.label}
+                      </th>
+                      <td class="px-4 py-3">{row.free}</td>
+                      <td class="px-4 py-3">{row.plus}</td>
+                      <td class="px-4 py-3">{row.pro}</td>
+                      <td class="px-4 py-3">{row.ultra}</td>
+                    </tr>
+                  )
+                )}
               </>
             ))
           }
@@ -388,7 +462,7 @@ const faqs = [
       <div class="rounded-2xl border border-paper-500 p-6 sm:p-8">
         <h2 class="font-display text-heading-xs font-semibold tracking-tight">Additional credits</h2>
         <p class="mt-2 text-sm leading-relaxed text-ink-600">
-          Need more than your plan includes? Buy credit packs. Additional workspace credits start from $85/mo on monthly billing or $70/mo on annual billing.
+          Paid plans can add workspace credits in monthly packs, and larger packs cost less per credit. Additional workspace credits start from $85/mo on monthly billing or $70/mo on annual billing.
         </p>
         <table class="mt-6 w-full border-collapse text-sm">
           <thead>
@@ -414,7 +488,7 @@ const faqs = [
       <div class="rounded-2xl border border-paper-500 bg-ink-100 p-6 text-white sm:p-8">
         <h2 class="font-display text-heading-xs font-semibold tracking-tight">Governance add-on</h2>
         <p class="mt-2 text-sm leading-relaxed text-white/70">
-          $30 per user per month, billed annually, on Pro. Included with Ultra.
+          $30 per user a month, billed annually, on Pro. Included with Ultra.
         </p>
         <ul class="mt-6 space-y-2.5 text-sm">
           <li class="flex gap-2"><span aria-hidden="true" class="text-blue-300">✓</span><span>Single sign-on (SSO)</span></li>
@@ -439,7 +513,7 @@ const faqs = [
         Building a startup? Get 80% off Pro for year 1.
       </h2>
       <p class="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-ink-600">
-        Venture-backed startups with up to 10 users get 80% off annual Pro plus credits for year 1, and 30% off for year 2. Apply within 90 days of workspace creation.
+        Venture-backed startups with up to 10 users get 80% off the annual Pro plan and credits for the first year, and 30% off the second year. Apply within 90 days of creating your workspace.
       </p>
       <a
         href="/startups"
@@ -456,14 +530,23 @@ const faqs = [
       "When I first opened Attio, I instantly got the feeling this was the next generation of CRM."
     </blockquote>
     <p class="mt-6 text-sm font-semibold">Margaret Shen</p>
-    <p class="text-sm text-ink-700">Head of Business Operations, Modal</p>
+    <p class="text-sm text-ink-700">Head of Business Operations · Modal</p>
   </section>
 
   <!-- FAQ -->
   <section class="mx-auto max-w-[800px] px-4 pb-24 sm:px-6" aria-label="Frequently asked questions">
-    <h2 class="text-center font-display text-heading-sm font-semibold tracking-tight sm:text-heading-md">
-      Frequently asked questions
-    </h2>
+    <div class="flex flex-wrap items-end justify-between gap-3">
+      <h2 class="font-display text-heading-sm font-semibold tracking-tight sm:text-heading-md">
+        Frequently asked questions
+      </h2>
+      <button
+        type="button"
+        data-faq-expand-all
+        class="rounded-full border border-paper-500 px-4 py-2 text-sm font-semibold hover:bg-paper-200"
+      >
+        Expand all
+      </button>
+    </div>
     <div class="mt-10 space-y-3">
       {
         faqs.map((faq) => (
@@ -514,26 +597,24 @@ const faqs = [
       });
     });
 
-    // FAQ accordion: one open at a time.
+    // FAQ accordion: one open at a time, plus Expand all.
     const faqButtons = Array.from(document.querySelectorAll("[data-faq-button]"));
+    const setFaq = (button, open) => {
+      const panel = button.parentElement?.querySelector("[data-faq-panel]");
+      const icon = button.querySelector("[data-faq-icon]");
+      button.setAttribute("aria-expanded", String(open));
+      if (panel) panel.hidden = !open;
+      if (icon) icon.textContent = open ? "−" : "+";
+    };
     faqButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        const panel = button.parentElement?.querySelector("[data-faq-panel]");
-        const icon = button.querySelector("[data-faq-icon]");
         const isOpen = button.getAttribute("aria-expanded") === "true";
-        faqButtons.forEach((other) => {
-          other.setAttribute("aria-expanded", "false");
-          const otherPanel = other.parentElement?.querySelector("[data-faq-panel]");
-          if (otherPanel) otherPanel.hidden = true;
-          const otherIcon = other.querySelector("[data-faq-icon]");
-          if (otherIcon) otherIcon.textContent = "+";
-        });
-        if (!isOpen && panel) {
-          button.setAttribute("aria-expanded", "true");
-          panel.hidden = false;
-          if (icon) icon.textContent = "−";
-        }
+        faqButtons.forEach((other) => setFaq(other, false));
+        if (!isOpen) setFaq(button, true);
       });
+    });
+    document.querySelector("[data-faq-expand-all]")?.addEventListener("click", () => {
+      faqButtons.forEach((button) => setFaq(button, true));
     });
     void reduceMotion;
   </script>
