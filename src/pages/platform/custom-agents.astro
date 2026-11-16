@@ -1,0 +1,342 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/platform/custom-agents on 2026-11-16 (HTTP 200).
+// Product visuals are rebuilt as HTML/CSS mocks, no Attio images are hotlinked or copied.
+// Live H1 is "Custom Agents" (duplicated desktop/mobile); the page headline is the H2
+// "Put your best prompt to work.", used here as the single H1, per the /platform/data pattern.
+const heroAgents = [
+  { name: "Lead scoring agent", copy: "Find your next best customer.", glyph: "◎" },
+  { name: "Lead routing agent", copy: "Get every lead to the right person.", glyph: "→" },
+  { name: "Meeting prep agent", copy: "Walk into every call with context.", glyph: "◷" },
+  { name: "Customer health agent", copy: "Spot the signals. Stay a step ahead.", glyph: "♥" },
+];
+
+const thinkSteps = [
+  {
+    n: "01",
+    title: "Write it in plain language.",
+    copy: "Describe the job and the rules it follows. Start with a sentence.",
+    mockLabel: "Composer",
+    mock: ["Score every new lead against our ICP.", "Flag accounts hiring a CRO.", "Route enterprise fits to the AE team."],
+  },
+  {
+    n: "02",
+    title: "Choose the model and the reach.",
+    copy: "Claude, GPT, Gemini, plus the context and tools to run the task.",
+    mockLabel: "Model and tools",
+    mock: ["Claude", "GPT", "Gemini", "Universal Context", "MCP tools"],
+  },
+  {
+    n: "03",
+    title: "Get an answer you can act on.",
+    copy: "Structured fields the rest of your workflow can score, route, or draft from.",
+    mockLabel: "Structured answer",
+    mock: ["ICP fit: 92", "Segment: Enterprise", "Owner: Amelia Carter", "Next step: Draft outreach"],
+  },
+];
+
+const marqueeAgents = [
+  { name: "Lead Scorer Agent", copy: "Is this actually a fit? Scored against your own ICP.", glyph: "◎" },
+  { name: "Overnight Digest Agent", copy: "Decides what deserves your morning, and says why.", glyph: "☀" },
+  { name: "Meeting Prep Agent", copy: "Reads the notes, calls, and emails, then says what matters.", glyph: "◷" },
+  { name: "Competitor Watch Agent", copy: "Spots what changed on their site, and whether it matters.", glyph: "◉" },
+  { name: "Support Triage Agent", copy: "Reads the ticket, decides how urgent it is, sends it on.", glyph: "✉" },
+  { name: "Deal Risk Agent", copy: "Notices a deal has gone quiet, and works out why.", glyph: "⚑" },
+  { name: "Call Coach Agent", copy: "Grades the call against your own scorecard.", glyph: "✓" },
+  { name: "Win/Loss Notes Agent", copy: "Works out the real reason, in your categories.", glyph: "✎" },
+  { name: "Onboarding Plan Agent", copy: "Turns a kickoff call into the tasks that actually follow.", glyph: "▦" },
+  { name: "Expansion Signal Agent", copy: "Reads the usage, decides if it is an upsell, drafts the note.", glyph: "↗" },
+];
+
+const rowOne = marqueeAgents.slice(0, 5);
+const rowTwo = marqueeAgents.slice(5);
+
+const watchItems = [
+  {
+    title: "Every account, same standard.",
+    copy: "Not just the ten someone had time for.",
+    glyph: "▦",
+  },
+  {
+    title: "Runs as someone you name.",
+    copy: "With exactly their permissions, and nothing more.",
+    glyph: "⚿",
+  },
+  {
+    title: "Shows its work.",
+    copy: "With the agent log. See what it thought, what it called, and what it cost.",
+    glyph: "☰",
+  },
+  {
+    title: "Always in your hands.",
+    copy: "With the ability to pause, cancel, resume, or replay any time you want.",
+    glyph: "⏸",
+  },
+];
+---
+
+<BaseLayout
+  title="Custom agents | Attio"
+  description="Custom agents run the judgment calls only your team knows how to make, on every record, around the clock."
+  finalCta="Ask more from CRM. Ask Attio."
+  finalCtaDemo
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-blue-500">Custom Agents</p>
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Put your best prompt to work.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Describe the play once. Custom Agents run it on every record, around the clock.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Send me a demo
+      </a>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to sales
+      </a>
+    </div>
+
+    <!-- Hero product mock: agent board -->
+    <div class="mx-auto mt-14 max-w-3xl overflow-hidden rounded-2xl border border-paper-500 bg-white text-left shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]">
+      <div class="flex items-center gap-2 border-b border-paper-400 bg-paper-200 px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-500"></span>
+        <span class="h-3 w-3 rounded-full bg-[#f5bf42]"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500"></span>
+        <span class="ml-3 text-xs font-medium text-ink-600">Custom Agents</span>
+      </div>
+      <div class="p-6 sm:p-8" data-board>
+        <div class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Agent runs">
+          <button
+            type="button"
+            role="tab"
+            aria-selected="true"
+            data-board-tab="Running"
+            class="rounded-full bg-ink-100 px-4 py-1.5 text-sm font-semibold text-white"
+          >
+            Running
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected="false"
+            data-board-tab="Completed"
+            class="rounded-full border border-paper-500 px-4 py-1.5 text-sm font-semibold text-ink-600"
+          >
+            Completed
+          </button>
+        </div>
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+          {heroAgents.map((agent) => (
+            <article class="rounded-2xl border border-paper-500 bg-paper-200 p-5">
+              <div class="flex items-start justify-between gap-3">
+                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-lg text-blue-600 shadow-sm">
+                  {agent.glyph}
+                </span>
+                <span
+                  data-board-status
+                  class="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-semibold text-blue-600"
+                >
+                  Running
+                </span>
+              </div>
+              <h3 class="mt-4 font-display text-lg font-semibold">{agent.name}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-ink-600">{agent.copy}</p>
+            </article>
+          ))}
+        </div>
+        <p class="mt-6 text-xs leading-relaxed text-ink-700">
+          Drag an agent to move it, or select it and click a space to place it. Use arrow keys to
+          move, Home to restore its position, and Escape to deselect.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- You choose how it thinks -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="You choose how it thinks">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">You choose how it thinks.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Plain language in. Structured answers out.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {thinkSteps.map((step) => (
+        <article class="overflow-hidden rounded-2xl border border-paper-500 bg-white">
+          <div class="border-b border-paper-400 bg-paper-200 p-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">{step.mockLabel}</p>
+            <ul class="mt-4 space-y-2">
+              {step.mock.map((line) => (
+                <li class="rounded-lg bg-white px-3 py-2 text-sm leading-relaxed text-ink-600 shadow-sm">
+                  {line}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="p-6">
+            <p class="font-display text-sm font-semibold text-blue-500">{step.n}</p>
+            <h3 class="mt-2 font-display text-xl font-semibold">{step.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{step.copy}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- The judgment calls only your team knows how to make -->
+  <section class="overflow-hidden pb-20 pt-4" aria-label="The judgment calls only your team knows how to make">
+    <div class="mx-auto max-w-[1200px] px-4 sm:px-6">
+      <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+        The judgment calls only your team knows how to make.
+      </h2>
+      <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+        Running at a whole new scale.
+      </p>
+    </div>
+    <div class="marquee mt-10 space-y-4" aria-label="Custom agent cards">
+      <div class="overflow-hidden">
+        <div class="marquee-track flex w-max gap-4 pr-4">
+          {[...rowOne, ...rowOne].map((agent) => (
+            <article class="w-[300px] shrink-0 rounded-2xl border border-paper-500 bg-white p-5">
+              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-paper-200 text-lg text-blue-600">
+                {agent.glyph}
+              </span>
+              <h3 class="mt-4 font-display text-lg font-semibold">{agent.name}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-600">{agent.copy}</p>
+              <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-ink-700">Attio</p>
+            </article>
+          ))}
+        </div>
+      </div>
+      <div class="overflow-hidden">
+        <div class="marquee-track flex w-max gap-4 pr-4" style="animation-direction: reverse;">
+          {[...rowTwo, ...rowTwo].map((agent) => (
+            <article class="w-[300px] shrink-0 rounded-2xl border border-paper-500 bg-white p-5">
+              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-paper-200 text-lg text-blue-600">
+                {agent.glyph}
+              </span>
+              <h3 class="mt-4 font-display text-lg font-semibold">{agent.name}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-600">{agent.copy}</p>
+              <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-ink-700">Attio</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Already doing the work -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 text-center sm:px-6" aria-label="Already doing the work">
+    <h2 class="mx-auto max-w-2xl font-display text-heading-md font-semibold tracking-tight">
+      Already doing the work.
+    </h2>
+    <p class="mx-auto mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Thousands of agents are active in Attio as you read this.
+    </p>
+    <p class="mt-10 font-display text-[72px] font-semibold leading-none tracking-tight text-ink-100 sm:text-[96px]">
+      76k+
+    </p>
+    <p class="mt-3 text-sm font-semibold text-ink-600">Agents running in Attio</p>
+  </section>
+
+  <!-- Watch your agent work -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Watch your agent work">
+    <h2 class="max-w-2xl font-display text-heading-md font-semibold tracking-tight">Watch your agent work.</h2>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-600">
+      Every signal it reads, the tools it calls, and the judgment it makes.
+    </p>
+
+    <!-- Agent log mock -->
+    <div class="mt-10 overflow-hidden rounded-2xl border border-paper-500 bg-white shadow-[0_24px_64px_-24px_rgba(16,16,16,0.25)]">
+      <div class="flex items-center gap-2 border-b border-paper-400 bg-paper-200 px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-red-500"></span>
+        <span class="h-3 w-3 rounded-full bg-[#f5bf42]"></span>
+        <span class="h-3 w-3 rounded-full bg-green-500"></span>
+        <span class="ml-3 text-xs font-medium text-ink-600">Agent log, Lead Scorer Agent</span>
+        <span class="ml-auto rounded-full bg-green-500/10 px-2 py-0.5 text-xs font-semibold text-green-600">
+          Completed
+        </span>
+      </div>
+      <ol class="space-y-3 p-6 sm:p-8">
+        <li class="flex items-start gap-3 rounded-xl border border-paper-500 bg-paper-200 px-4 py-3">
+          <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-semibold text-blue-600">1</span>
+          <div>
+            <p class="text-sm font-semibold">Signal read</p>
+            <p class="mt-0.5 text-sm text-ink-600">New funding round, hiring a CRO, 40+ open GTM roles.</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-3 rounded-xl border border-paper-500 bg-paper-200 px-4 py-3">
+          <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-semibold text-blue-600">2</span>
+          <div>
+            <p class="text-sm font-semibold">Tool called</p>
+            <p class="mt-0.5 text-sm text-ink-600">search-notes-by-metadata, search-emails-by-metadata, update-record</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-3 rounded-xl border border-paper-500 bg-paper-200 px-4 py-3">
+          <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-semibold text-blue-600">3</span>
+          <div>
+            <p class="text-sm font-semibold">Judgment made</p>
+            <p class="mt-0.5 text-sm text-ink-600">ICP fit 92, Enterprise segment, routed to the AE team.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {watchItems.map((item, i) => (
+        <article class="rounded-2xl border border-paper-500 bg-white p-6">
+          <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-paper-200 text-lg text-blue-600">
+            {item.glyph}
+          </span>
+          {i === 0 ? (
+            <h2 class="mt-4 font-display text-xl font-semibold">{item.title}</h2>
+          ) : (
+            <h3 class="mt-4 font-display text-xl font-semibold">{item.title}</h3>
+          )}
+          <p class="mt-2 text-sm leading-relaxed text-ink-600">{item.copy}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const board = document.querySelector("[data-board]");
+  if (board) {
+    const tabs = board.querySelectorAll("[data-board-tab]");
+    const statuses = board.querySelectorAll("[data-board-status]");
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const state = tab.getAttribute("data-board-tab") || "Running";
+        tabs.forEach((t) => {
+          const active = t === tab;
+          t.setAttribute("aria-selected", active ? "true" : "false");
+          t.classList.toggle("bg-ink-100", active);
+          t.classList.toggle("text-white", active);
+          t.classList.toggle("border", !active);
+          t.classList.toggle("border-paper-500", !active);
+          t.classList.toggle("text-ink-600", !active);
+        });
+        statuses.forEach((s) => {
+          s.textContent = state;
+          const completed = state === "Completed";
+          s.classList.toggle("bg-green-500/10", completed);
+          s.classList.toggle("text-green-600", completed);
+          s.classList.toggle("bg-blue-100", !completed);
+          s.classList.toggle("text-blue-600", !completed);
+        });
+      });
+    });
+  }
+</script>
