@@ -1,0 +1,5769 @@
+[
+  {
+    "path": "/templates/product-led-growth/churn-monitor",
+    "category": "product-led-growth",
+    "categoryLabel": "Product-led growth",
+    "slug": "churn-monitor",
+    "name": "Churn monitor",
+    "title": "Churn monitor template | Attio",
+    "description": "Create an automatic task assignment system to make sure you reach out to customers who have just churned.",
+    "h1": "Reach out in time when your customer has churned.",
+    "useTemplate": "/go/_/automations/workflows/new?template=churn-monitor",
+    "integrations": [],
+    "objects": [
+      "Workspaces"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "churn-monitor.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template is embedded with a task assignment system that automatically appoints someone in your team to contact a recently-churned customer. It will allow you to gain immediate feedback from the user and potentially reestablish a connection with them."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Workspaces",
+                "b": true
+              },
+              {
+                "t": " object chosen that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Subscription Status",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated",
+                "b": true
+              },
+              {
+                "t": " block is will be activated every time you update the seat count attribute of the records in your Workspaces object. To make sure this is set up correctly, we will need to select the "
+              },
+              {
+                "t": "Workspaces",
+                "b": true
+              },
+              {
+                "t": " object and the attribute used to track the records’ "
+              },
+              {
+                "t": "subscription status",
+                "b": true
+              },
+              {
+                "t": "."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter",
+                "b": true
+              },
+              {
+                "t": " block decides which workspace records get passed to the next block. It detects for accounts where their "
+              },
+              {
+                "t": "Subscription Status",
+                "code": true
+              },
+              {
+                "t": " have been changed to "
+              },
+              {
+                "t": "Cancelled",
+                "code": true
+              },
+              {
+                "t": "."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Adjust Time",
+                "b": true
+              },
+              {
+                "t": " block allows you to offset the recorded cancellation date by one day. This will give the assignee a good amount of time to reach out. Both the numbers and the unit can be changed."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Round Robin",
+                "b": true
+              },
+              {
+                "t": " block is where you select a few people in your organization to enter into a round-robin task allocation system. This is to ensure a balanced task assignment."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Create Task",
+                "b": true
+              },
+              {
+                "t": " block automatically assigns a task to the person chosen by the round-robin task allocation, prompting them to reach out to the customer about their cancellation. You can give it a task description, due date ("
+              },
+              {
+                "t": "{Timestamp}",
+                "code": true
+              },
+              {
+                "t": "), and linked record ("
+              },
+              {
+                "t": "{Parent Record}",
+                "code": true
+              },
+              {
+                "t": ")."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/product-led-growth/mrr-watcher",
+    "category": "product-led-growth",
+    "categoryLabel": "Product-led growth",
+    "slug": "mrr-watcher",
+    "name": "MRR watcher",
+    "title": "MRR watcher template | Attio",
+    "description": "Instantly send an automated Slack message to your team when an account’s MRR has changed.",
+    "h1": "Get Slack updates on Monthly Recurring Revenue changes.",
+    "useTemplate": "/go/_/automations/workflows/new?template=mrr-watcher",
+    "integrations": [
+      {
+        "name": "Slack",
+        "href": "/help/reference/integrations/slack-integration",
+        "icon": "slack.svg"
+      }
+    ],
+    "objects": [
+      "Deals"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "mrr-watcher.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template provides live Slack updates about your customers’ MRR changes. By tracking this metric, you will be able to effectively assess the performance of your product."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Sales",
+                "b": true
+              },
+              {
+                "t": " processes list that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "MRR",
+                      "code": true
+                    },
+                    {
+                      "t": " currency attribute to track your workspaces’ MRR"
+                    }
+                  ]
+                },
+                {
+                  "segments": [
+                    {
+                      "t": "Subscription Status",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute"
+                    }
+                  ]
+                },
+                {
+                  "segments": [
+                    {
+                      "t": "Billed Seat Count",
+                      "code": true
+                    },
+                    {
+                      "t": " number attribute"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "segments": [
+              {
+                "t": "Slack integration",
+                "href": "/help/reference/integrations/slack-integration"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated",
+                "b": true
+              },
+              {
+                "t": " block will be activated every time you update the seat count attribute of the records in your Workspaces object. To make sure this is set up correctly, we will need to select the "
+              },
+              {
+                "t": "Workspaces",
+                "b": true
+              },
+              {
+                "t": " object and the attribute used to track an account’s "
+              },
+              {
+                "t": "MRR contribution.",
+                "b": true
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Formula",
+                "b": true
+              },
+              {
+                "t": " block detects the updated MRR attribute and calculates for a change. In this case, we are calculating for an increase, so an example series of input would be:"
+              }
+            ],
+            "codes": [
+              {
+                "text": "Description: Calculate MRR increase {New Value} - {Previous Value}",
+                "lang": "json"
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter",
+                "b": true
+              },
+              {
+                "t": " block decides which workspace records get passed to the next block. This filter is set to detect for workspace records where their MRRs have changed. We have outlined a recommended filter below:"
+              }
+            ],
+            "codes": [
+              {
+                "text": "{Result} [is not] 0",
+                "lang": "json"
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "If/Else",
+                "b": true
+              },
+              {
+                "t": " block will branch your workflow into two options, based on whether your attribute fulfills the filters set in this block. The condition set in this block is to check whether an increase has occurred. The reason we are using an If/Else block is to offer a place for the alternative answers, where the MRR has either decreased or been cancelled."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "4.1. "
+          },
+          {
+            "t": "If the filter was true",
+            "b": true
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "i.) The "
+          },
+          {
+            "t": "Post Message to Slack Channel",
+            "b": true
+          },
+          {
+            "t": " block sends a message to your designated Slack channel about the MRR increase. You can input whatever message you’d like, but here is an example that works:"
+          }
+        ]
+      },
+      {
+        "kind": "code",
+        "text": "MRR Increased Workspace {Record > Name} \nProduct <{Record > Billed Seat Count} x {Record > Product} MRR Contribution ~ {Previous Value}~→{New Value}",
+        "lang": "json"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "4.2. "
+          },
+          {
+            "t": "If the filter was false",
+            "b": true
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "i) This "
+          },
+          {
+            "t": "If/Else",
+            "b": true
+          },
+          {
+            "t": " block gets activated if the record MRR has not increased. This indicates that the status of your customer is either “Active” or “Cancelled”. This is a filter that checks for the subscription status. Here is an example filter input:"
+          }
+        ]
+      },
+      {
+        "kind": "code",
+        "text": "{Record} > Subscription Status[is] “Active”",
+        "lang": "json"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "i.i.) If the filter was true, a "
+          },
+          {
+            "t": "Post Message to Slack Channel",
+            "b": true
+          },
+          {
+            "t": " will be triggered, which sends a message to indicate the record’s MRR decrease. The example input is similar to that of the increase:"
+          }
+        ]
+      },
+      {
+        "kind": "code",
+        "text": "MRR Decreased\nWorkspace {Record > Name} Product <{Record > Billed Seat Count} x {Record > Product} MRR Contribution ~ {Previous Value}~→{New Value}",
+        "lang": "json"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "i.ii.) If the filter was false, a "
+          },
+          {
+            "t": "Post Message to Slack Channel",
+            "b": true
+          },
+          {
+            "t": " will also be activated. This is for the accounts who have cancelled their subscription (thus changing their MRR contribution). The example input for this is similar to the previous one:"
+          }
+        ]
+      },
+      {
+        "kind": "code",
+        "text": "MRR Decreased\nWorkspace {Record > Name} Product Cancelled MRR Contribution ~ {Previous Value}~→{New Value}",
+        "lang": "json"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/product-led-growth/seat-count-watcher",
+    "category": "product-led-growth",
+    "categoryLabel": "Product-led growth",
+    "slug": "seat-count-watcher",
+    "name": "Seat count watcher",
+    "title": "Seat count watcher template | Attio",
+    "description": "Get Slack updates on your workspace seat changes to gain insight about how users engage with your product.",
+    "h1": "Monitor your workspaces seat counts to track product performance.",
+    "useTemplate": "/go/_/automations/workflows/new?template=seat-count-watcher",
+    "integrations": [
+      {
+        "name": "Slack",
+        "href": "/help/reference/integrations/slack-integration",
+        "icon": "slack.svg"
+      }
+    ],
+    "objects": [
+      "Workspaces"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "seat-count-watcher.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template allows you to keep track of your workspace seat count in real-time. Sit back and let this workflow do the calculations for you."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Workspaces",
+                "b": true
+              },
+              {
+                "t": " object chosen that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Billed Seat Count",
+                      "code": true
+                    },
+                    {
+                      "t": " number attribute"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "segments": [
+              {
+                "t": "Slack integration",
+                "href": "/help/reference/integrations/slack-integration"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated",
+                "b": true
+              },
+              {
+                "t": " block is where you select your "
+              },
+              {
+                "t": "Workspaces",
+                "b": true
+              },
+              {
+                "t": " standard object and the attribute you use to track the records’ seat count."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Formula",
+                "b": true
+              },
+              {
+                "t": " block is where you give a mathematical formula for the workflow to calculate the seat count increase. This would be "
+              },
+              {
+                "t": "{New Value}",
+                "code": true
+              },
+              {
+                "t": " - "
+              },
+              {
+                "t": "{Previous Value}",
+                "code": true
+              },
+              {
+                "t": "."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter",
+                "b": true
+              },
+              {
+                "t": " block decides which workspace records get passed to the next block. It detects for a change in a record’s seat count. Only the workspaces with a change in their seat count will trigger the next block. We have put a condition of “"
+              },
+              {
+                "t": "{Result}",
+                "code": true
+              },
+              {
+                "t": " [is not] 0.”"
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "If/Else",
+                "b": true
+              },
+              {
+                "t": " block will branch your workflow into two, based on whether your attribute fulfills the filters set in this block. This filters for accounts with a seat number increase. To set this up correctly, we have put the condition as “"
+              },
+              {
+                "t": "{Result}",
+                "code": true
+              },
+              {
+                "t": " [greater than] 0”."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "5.1. "
+          },
+          {
+            "t": "If the filter was true",
+            "b": true
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "i.) The workflow will branch off to a "
+          },
+          {
+            "t": "Post Message to Slack Channel",
+            "b": true
+          },
+          {
+            "t": " block, where you can notify your team about the seat increase. An example message input would be:"
+          }
+        ]
+      },
+      {
+        "kind": "quote",
+        "segments": [
+          {
+            "t": "{Record}",
+            "code": true
+          },
+          {
+            "t": "'s seat count has been increased by "
+          },
+          {
+            "t": "{Result}",
+            "code": true
+          },
+          {
+            "t": "."
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "You may adjust this to your own use."
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "5.2. "
+          },
+          {
+            "t": "If the filter was false",
+            "b": true
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "i.) This indicates that the account’s seat count has dropped. Since the resulting number being funneled to this step is negative, we have implemented a "
+          },
+          {
+            "t": "Formula",
+            "b": true
+          },
+          {
+            "t": " to make sure the next step gets displayed correctly."
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "ii.) The "
+          },
+          {
+            "t": "Post Message to Slack Channel",
+            "b": true
+          },
+          {
+            "t": " block is where you notify your team about the seat decrease. An example message input would be:"
+          }
+        ]
+      },
+      {
+        "kind": "quote",
+        "segments": [
+          {
+            "t": "{Record}",
+            "code": true
+          },
+          {
+            "t": "'s seat count has been decreased by "
+          },
+          {
+            "t": "{Result}",
+            "code": true
+          },
+          {
+            "t": "."
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "You may adjust this to your own use."
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/product-led-sales/create-add-to-mixmax-button",
+    "category": "product-led-sales",
+    "categoryLabel": "Product-led sales",
+    "slug": "create-add-to-mixmax-button",
+    "name": "Create ‘Add to MixMax’ button",
+    "title": "Create ‘Add to MixMax’ button template | Attio",
+    "description": "Connect a chosen record to your MixMax sequence with an added command button.",
+    "h1": "Create an ‘Add to MixMax’ button to speed up your outreach process.",
+    "useTemplate": "/go/_/automations/workflows/new?template=add-to-mixmax-button",
+    "integrations": [
+      {
+        "name": "Mixmax",
+        "href": "/help/reference/integrations/mixmax-integration",
+        "icon": "mixmax.svg"
+      }
+    ],
+    "objects": [
+      "People"
+    ],
+    "updated": "November 10, 2023",
+    "heroImage": "add-to-mixmax-button.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "With this template, you can experience streamlined workflow while maintaining control over your MixMax sequence list."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "MixMax integration",
+                "href": "/help/reference/integrations/mixmax-integration"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Record Command",
+                "b": true
+              },
+              {
+                "t": " block is what adds an extra button to each Person profile. This workflow will only be triggered if you press this newly-added button."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Add to Sequence",
+                "b": true
+              },
+              {
+                "t": " block will then send the details of the Person to your designated "
+              },
+              {
+                "t": "MixMax",
+                "b": true
+              },
+              {
+                "t": " sequence."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/product-led-sales/plan-exceeded-tracker",
+    "category": "product-led-sales",
+    "categoryLabel": "Product-led sales",
+    "slug": "plan-exceeded-tracker",
+    "name": "Plan exceeded tracker",
+    "title": "Plan exceeded tracker template | Attio",
+    "description": "Set up a task generator that prompts you to contact the customers who have exceeded their plan seat limit.",
+    "h1": "Contact customers who have exceeded their plan’s limit.",
+    "useTemplate": "/go/_/automations/workflows/new?template=plan-exceeded-tracker",
+    "integrations": [],
+    "objects": [
+      "Workspaces"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "plan-exceeded-tracker.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template could be crucial for turning your free plan users into paying customers. While this data may seem like a mere statistic, it is often a powerful signal for increased interest. This workflow will help enhance your customer relationship game and make sure no deals slip through the cracks."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Workspaces",
+                "b": true
+              },
+              {
+                "t": " object chosen that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Billed Seat Count",
+                      "code": true
+                    },
+                    {
+                      "t": " number attribute"
+                    }
+                  ]
+                },
+                {
+                  "segments": [
+                    {
+                      "t": "Subscription Status",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute"
+                    }
+                  ]
+                },
+                {
+                  "segments": [
+                    {
+                      "t": "Product Package",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Customer Success",
+                "b": true
+              },
+              {
+                "t": " list that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Expansion",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Update",
+                "b": true
+              },
+              {
+                "t": " block will be activated every time you update the seat count attribute of the records in your Workspaces object. To make sure this is set up correctly, we will need to select the "
+              },
+              {
+                "t": "Workspaces",
+                "b": true
+              },
+              {
+                "t": " object and the attribute used to track an account’s "
+              },
+              {
+                "t": "billed seat count.",
+                "b": true
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter",
+                "b": true
+              },
+              {
+                "t": " block decides which customers get passed to the next block. This is where you set the criteria for the accounts that have exceeded their free plan. Here is an example series of filter input to make sure this workflow checks for the right accounts:"
+              }
+            ],
+            "codes": [
+              {
+                "text": "{Record} > {Product} [is] “Free” \nAND \n{New Value} [greater than] x AND \n{Record} > {Subscription Status} [is] “Active” \nAND {Record>List Entries} [not contains] “Customer Success”",
+                "lang": "json"
+              }
+            ],
+            "extra": [
+              [
+                {
+                  "t": "The purpose of these three filters is to check that the workspace record is currently on a Free Plan, has an "
+                },
+                {
+                  "t": "Active",
+                  "code": true
+                },
+                {
+                  "t": " subscription status, has exceeded the number of seats given on their Free Plan, and isn’t already in the list you’re adding to. These can all be adjustable to your own use."
+                }
+              ]
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Add Record to List",
+                "b": true
+              },
+              {
+                "t": " block is where you select a list for all filtered customers to be stored. These are customizable and you can pre-set items including the stage that these customers will be placed in and their primary CSM. For our workflow, we have directed these filtered customers to the Customer Success list and set our stage as "
+              },
+              {
+                "t": "Expansion",
+                "code": true
+              },
+              {
+                "t": "."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Adjust Time",
+                "b": true
+              },
+              {
+                "t": " block allows you to offset the recorded cancellation date by one day. This will give the assignee a good amount of time to reach out. In this block, you can input any number (e.g. 1 day) that you see fit. Both the numbers and the unit can be changed."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Create Task",
+                "b": true
+              },
+              {
+                "t": " block automatically assigns a task to your Primary CSM, prompting them to reach out to the customer their product package. You can set it by giving it a task description, due date ("
+              },
+              {
+                "t": "{Adjusted Timestamp}",
+                "code": true
+              },
+              {
+                "t": "), assignee, and a linked record. The linked record represents the customer that needs to be reach out to. Here is an example series of input for this block to run properly:"
+              }
+            ],
+            "codes": [
+              {
+                "text": "Task: Follow up with customer about their product plan. \nDue: {Adjusted Timestamp} Linked Records: Entry > {Record} Assignees: Entry > {Primary CSM}",
+                "lang": "json"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/revenue-operations/arr-projection",
+    "category": "revenue-operations",
+    "categoryLabel": "Revenue operations",
+    "slug": "arr-projection",
+    "name": "ARR Projection",
+    "title": "ARR Projection template | Attio",
+    "description": "Create a workflow that calculates and fills in your customers’ projected ARR.",
+    "h1": "Automatically update your customer’s Annual Recurring Revenue.",
+    "useTemplate": "/go/_/automations/workflows/new?template=arr-projection",
+    "integrations": [],
+    "objects": [
+      "Workspaces"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "arr-projection.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template references your customers’ updated MRR to calculate for a projected ARR. By using this workflow, you can relax and be assured that this ARR forecast is correct."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Workspaces",
+                "b": true
+              },
+              {
+                "t": " object chosen that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "MRR",
+                      "code": true
+                    },
+                    {
+                      "t": " currency attribute"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated",
+                "b": true
+              },
+              {
+                "t": " block will be activated every time you update the status attribute of the records in your Workspaces object. To make sure this is set up correctly, we will need to select the "
+              },
+              {
+                "t": "Workspaces",
+                "b": true
+              },
+              {
+                "t": " object and the attribute used to track an account’s "
+              },
+              {
+                "t": "MRR contribution",
+                "b": true
+              },
+              {
+                "t": "."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Formula",
+                "b": true
+              },
+              {
+                "t": " block detects the MRR update and does a calculation for the ARR. To ensure this formula calculates properly, multiply the updated MRR by 12, which will give you the projected revenue in a year. An example input of this would be:"
+              }
+            ],
+            "codes": [
+              {
+                "text": "Description: Calculate Projected ARR {New Value} x 12",
+                "lang": "json"
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Update Record",
+                "b": true
+              },
+              {
+                "t": " block automatically updates your customer’s projected ARR with the result from the calculation."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/revenue-operations/ltv-projection",
+    "category": "revenue-operations",
+    "categoryLabel": "Revenue operations",
+    "slug": "ltv-projection",
+    "name": "LTV Projection",
+    "title": "LTV Projection template | Attio",
+    "description": "Auto-calculate your customer’s projected LTV for an effective long-term revenue forecast.",
+    "h1": "Effortlessly update your customer’s projected Lifetime Value.",
+    "useTemplate": "/go/_/automations/workflows/new?template=ltv-projection",
+    "integrations": [],
+    "objects": [
+      "Workspaces"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "ltv-projection.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template does the maths for you to get the most up-to-date data on your customers’ value. The purpose of this workflow isn’t just about the numbers, but the insight it provides to maximize retention."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Workspaces",
+                "b": true
+              },
+              {
+                "t": " object chosen that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "MRR",
+                      "code": true
+                    },
+                    {
+                      "t": " currency attribute"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated",
+                "b": true
+              },
+              {
+                "t": " block will be activated every time you update the status attribute of the records in your Workspaces object. To make sure this is set up correctly, we will need to select the "
+              },
+              {
+                "t": "Workspaces",
+                "b": true
+              },
+              {
+                "t": " object and the attribute used to track an account’s "
+              },
+              {
+                "t": "MRR contribution",
+                "b": true
+              },
+              {
+                "t": "."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Formula",
+                "b": true
+              },
+              {
+                "t": " block detects the MRR update and does a calculation for the LTV. To get an accurate LTV projection, multiply the "
+              },
+              {
+                "t": "{New Value}",
+                "code": true
+              },
+              {
+                "t": " (updated MRR) by your Average Customer Lifespan in months."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Update Record",
+                "b": true
+              },
+              {
+                "t": " block automatically updates your customer’s projected LTV with the result from the calculation."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/revenue-operations/mql-scoring",
+    "category": "revenue-operations",
+    "categoryLabel": "Revenue operations",
+    "slug": "mql-scoring",
+    "name": "MQL Scoring",
+    "title": "MQL Scoring  template | Attio",
+    "description": "Automate your MQL scoring process to enhance sales efficiency and prioritize effectively.",
+    "h1": "Automate your MQL scoring process.",
+    "useTemplate": "/go/_/automations/workflows/new?template=mql-scoring",
+    "integrations": [
+      {
+        "name": "Slack",
+        "href": "/help/reference/integrations/slack-integration",
+        "icon": "slack.svg"
+      }
+    ],
+    "objects": [
+      "Companies"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "mql-scoring.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template helps detect all Marketing Qualified Leads by referencing your customers’ estimated ARR. With this automation, you won’t have to worry about missing quality leads because you’ll constantly be notified of high-priority leads."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Company",
+                "b": true
+              },
+              {
+                "t": " object chosen that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Estimated ARR",
+                      "code": true
+                    },
+                    {
+                      "t": " currency attribute"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Sales",
+                "b": true
+              },
+              {
+                "t": " list that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Leads",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute to keep track of your MQLs"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "segments": [
+              {
+                "t": "Slack integration",
+                "href": "/help/reference/integrations/slack-integration"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated",
+                "b": true
+              },
+              {
+                "t": " block will be activated every time you update the status attribute of the records in your Company object. To make sure this is set up correctly, we will need to select the "
+              },
+              {
+                "t": "Company",
+                "b": true
+              },
+              {
+                "t": " object and the attribute used to track an account’s "
+              },
+              {
+                "t": "Estimated ARR",
+                "b": true
+              },
+              {
+                "t": "."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter",
+                "b": true
+              },
+              {
+                "t": " block decides which company records get passed to the next block. It detects for a an increase in the record’s estimate ARR status and checks that the lead isn’t already in a list you use to track MQLs. You can add as many filters as you wish, but here’s an example set of filters that works:"
+              }
+            ],
+            "codes": [
+              {
+                "text": "{Estimated ARR} [is not] “$0-1M” \nAND \n{Estimated ARR} [not empty] \nAND \n{Record > List Entries} [not contains] “Sales”",
+                "lang": "json"
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Add Record to List",
+                "b": true
+              },
+              {
+                "t": " block is where you select a list for all filtered companies to be stored. These are customizable and you can pre-set items including the stage that these records will be placed in. For our workflow, we have directed these filtered customers to the Sales list and set our stage as "
+              },
+              {
+                "t": "Leads",
+                "code": true
+              },
+              {
+                "t": "."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Post Message to Slack",
+                "b": true
+              },
+              {
+                "t": " block sends a message about the estimated ARR change to your designated Slack channel. Here is an example message that you can input:"
+              }
+            ],
+            "codes": [
+              {
+                "text": "New MQL Lead Source: {Created entry > Lead Source} \nCompany: {Record > Name} Record: {Record > Record URL} Domain: {Record > Domains}",
+                "lang": "json"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/revenue-operations/product-package-change-monitor",
+    "category": "revenue-operations",
+    "categoryLabel": "Revenue operations",
+    "slug": "product-package-change-monitor",
+    "name": "Product package change monitor",
+    "title": "Product package change monitor template | Attio",
+    "description": "Create automatic Slack messages that outline your customers’ product package changes to get insight on your customer preferences.",
+    "h1": "Monitor product package changes in your Workspaces.",
+    "useTemplate": "/go/_/automations/workflows/new?template=product-package-change-monitor",
+    "integrations": [
+      {
+        "name": "Slack",
+        "href": "/help/reference/integrations/slack-integration",
+        "icon": "slack.svg"
+      }
+    ],
+    "objects": [
+      "Workspaces"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "product-package-change-monitor.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template uses AI to generate summaries for your customer product package changes and keeps you updated on Slack. By tracking these customer preference shifts, you will get to analyze the performance of each product package type."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Workspaces",
+                "b": true
+              },
+              {
+                "t": " object chosen that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Product Package",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "segments": [
+              {
+                "t": "Slack integration",
+                "href": "/help/reference/integrations/slack-integration"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated",
+                "b": true
+              },
+              {
+                "t": " block will be activated every time you update the status attribute of your Workspace records. To make sure this is set up correctly, we will need to select the "
+              },
+              {
+                "t": "Workspaces",
+                "b": true
+              },
+              {
+                "t": " object and the attribute used to track an account’s "
+              },
+              {
+                "t": "product package",
+                "b": true
+              },
+              {
+                "t": "."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Summarize Record",
+                "b": true
+              },
+              {
+                "t": " block is where AI comes in. Like using ChatGPT, you simply put a prompt to generate your response. Since we are focusing on summarizing a product package change, we would tell AI what attributes to outline. As an example:"
+              }
+            ],
+            "codes": [
+              {
+                "text": "Product Package Changed\nWrite a summary in the following format:\nOne short sentence summarizing how the {Record} has changed their product package from {Previous Value} to {New Value}.",
+                "lang": "json"
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Post Message to Channel",
+                "b": true
+              },
+              {
+                "t": " block sends the response AI generates to your designated Slack channel. Make sure you send the correct summary by putting the "
+              },
+              {
+                "t": "{Summary}",
+                "code": true
+              },
+              {
+                "t": " variable for the message input."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/revenue-operations/subscription-change-monitor",
+    "category": "revenue-operations",
+    "categoryLabel": "Revenue operations",
+    "slug": "subscription-change-monitor",
+    "name": "Subscription change monitor",
+    "title": "Subscription change monitor template | Attio",
+    "description": "Create automatic Slack messages that outline your customers’ subscription changes to to keep you up to date with your upgrades, downgrades, and churn.",
+    "h1": "Monitor your customers’ subscription changes.",
+    "useTemplate": "/go/_/automations/workflows/new?template=subscription-change-monitor",
+    "integrations": [
+      {
+        "name": "Slack",
+        "href": "/help/reference/integrations/slack-integration",
+        "icon": "slack.svg"
+      }
+    ],
+    "objects": [
+      "Workspaces"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "subscription-change-monitor.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template uses AI to generate summaries for your customer subscription changes and keeps you updated on Slack. Whether it’s an upgrade or downgrade, your team will always know and have time to respond when needed."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Workspaces",
+                "b": true
+              },
+              {
+                "t": " object chosen that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Subscription Status",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "segments": [
+              {
+                "t": "Slack integration",
+                "href": "/help/reference/integrations/slack-integration"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated",
+                "b": true
+              },
+              {
+                "t": " block will be activated every time you update the status attribute of your Workspace records. To make sure this is set up correctly, we will need to select the "
+              },
+              {
+                "t": "Workspaces",
+                "b": true
+              },
+              {
+                "t": " object and the attribute used to track an account’s "
+              },
+              {
+                "t": "subscription status",
+                "b": true
+              },
+              {
+                "t": "."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Summarize Record",
+                "b": true
+              },
+              {
+                "t": " block is where AI comes in. Like using ChatGPT, you simply put a prompt to generate your response. Since we are focusing on summarizing subscription changes, we would tell AI what attributes to outline. As an example:"
+              }
+            ],
+            "codes": [
+              {
+                "text": "Subscription State Changed\nPrevious subscription state was: {Previous Value} \nNew subscription state is: {New Value}\n\nWrite a summary in the following format: \nAction: Downgrade || Upgrade Summary: “One short sentence”",
+                "lang": "json"
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Post Message to Slack",
+                "b": true
+              },
+              {
+                "t": " block sends the response AI generates to your designated Slack channel. Make sure you send the correct summary by putting a "
+              },
+              {
+                "t": "{Summary}",
+                "code": true
+              },
+              {
+                "t": " variable for the message input."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/sales/add-closed-deals-to-mixmax-with-ai-and-slack",
+    "category": "sales",
+    "categoryLabel": "Sales",
+    "slug": "add-closed-deals-to-mixmax-with-ai-and-slack",
+    "name": "Add closed deals to MixMax with AI and Slack",
+    "title": "Add closed deals to MixMax with AI and Slack template | Attio",
+    "description": "Elevate your sales strategy with this AI-powered triage template and seamlessly integrate with MixMax for timely engagement with won deals.",
+    "h1": "Use AI and Slack to route your closed deals to MixMax.",
+    "useTemplate": "/go/_/automations/workflows/new?template=add-closed-deals-to-mixmax",
+    "integrations": [
+      {
+        "name": "Slack",
+        "href": "/help/reference/integrations/slack-integration",
+        "icon": "slack.svg"
+      },
+      {
+        "name": "Mixmax",
+        "href": "/help/reference/integrations/mixmax-integration",
+        "icon": "mixmax.svg"
+      }
+    ],
+    "objects": [
+      "Deals"
+    ],
+    "updated": "November 10, 2023",
+    "heroImage": "add-closed-deal-to-mixmax.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This AI-integrated template can effectively optimize your lead management. You will be able to extract useful deal details and execute on actionable points with MixMax to push your sales forward."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Won",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute for your won deals"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "segments": [
+              {
+                "t": "Slack integration",
+                "href": "/help/reference/integrations/slack-integration"
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "MixMax integration",
+                "href": "/help/reference/integrations/mixmax-integration"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated ",
+                "b": true
+              },
+              {
+                "t": "block is the first step to this workflow. This block will be activated every time you update the status attribute of your deals in your Deals object. To make sure this workflow runs properly, we will need to select the "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object and the "
+              },
+              {
+                "t": "Deal Stage",
+                "b": true
+              },
+              {
+                "t": " attribute used to track a deal’s progress."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter ",
+                "b": true
+              },
+              {
+                "t": "block decides which deals get passed to the next block. This is where you set the criteria of what counts as a won deal. In this instance, our requirement is for the deal attribute be moved to "
+              },
+              {
+                "t": "Won",
+                "code": true
+              },
+              {
+                "t": ", so only the qualified deals will trigger the next block. However, you can add more filters if you need to."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Summarize Record",
+                "b": true
+              },
+              {
+                "t": " block is where AI comes in. Like using ChatGPT, you simply put a prompt to generate your response. Since we are focusing on summarizing closed-won deals, we would tell AI what attributes to outline. For example, the Owner of the deal, name, value, and next steps."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Post Actions to Slack Channel",
+                "b": true
+              },
+              {
+                "t": " block not only sends the summarized response, but it also allows you to set action buttons for next steps. To make sure this is set up correctly, make sure to input the summary generated by AI into the message box, name your actions, and link your actions to the following blocks. In this instance, we are linking the actions to the MixMax sequences, one for high value deals and the other for low value deals. An example input would be:"
+              }
+            ],
+            "codes": [
+              {
+                "text": "Message: {Summary}\nAction 1: (Add to MixMax) high value sequence\nAction 2: (Add to MixMax) low value sequence\nNext step\nAction 1: Add to Sequence (high value)\nAction 2: Add to Sequence (low value)",
+                "lang": "json"
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Add to Sequence",
+                "b": true
+              },
+              {
+                "t": " blocks are the two actions we set in the previous step, which will be presented as buttons in the Slack message. Make sure your MixMax is linked with Attio and the correct sequences are chosen for the action points."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/sales/customer-renewal-date-autofill",
+    "category": "sales",
+    "categoryLabel": "Sales",
+    "slug": "customer-renewal-date-autofill",
+    "name": "Customer renewal date autofill",
+    "title": "Customer renewal date autofill template | Attio",
+    "description": "Fill in customer renewal dates without fault to keep your Customer Success List up to date.",
+    "h1": "Autofill a customer renewal date if it is empty.",
+    "useTemplate": "/go/_/automations/workflows/new?template=customer-renewal-date-autofill",
+    "integrations": [],
+    "objects": [
+      "Deals"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "customer-renewal-date-autofill.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template autofills your customer renewal dates efficiently when triggered. Using this workflow will help streamline your Customer Success operation and minimize any chance of oversight."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Customer Success",
+                "b": true
+              },
+              {
+                "t": " processes list that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Renewal Date",
+                      "code": true
+                    },
+                    {
+                      "t": " date attribute"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Record Added to List",
+                "b": true
+              },
+              {
+                "t": " block is the first step to this workflow. It gets triggered every time you create an entry in your "
+              },
+              {
+                "t": "Customer Success",
+                "b": true
+              },
+              {
+                "t": " list. To make sure this workflow retrieves the correct data and runs properly, we will need to select the list for Customer Success."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Delay ",
+                "b": true
+              },
+              {
+                "t": "block allows you to assign an amount of time for your Primary CSM to take action and update the renewal dates. In our example, we have inputed five minutes, but feel free to adjust it."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter ",
+                "b": true
+              },
+              {
+                "t": "block needs to be updated to check if your "
+              },
+              {
+                "t": "Renewal Date",
+                "code": true
+              },
+              {
+                "t": " attribute is filled. This filter will then refer back to your record entry. If the date is filled out within the given time, this workflow will end here. However, if it is not set, this workflow will continue."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Adjust Time ",
+                "b": true
+              },
+              {
+                "t": "block gets activated if the filter block detects an empty Renewal Date field. To make sure the date is autofilled correctly, this is where you set the default contract length for your customers. It is customizable, but we have set it to a year."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Update List Entry ",
+                "b": true
+              },
+              {
+                "t": "block is where the Renewal Date gets filled. To ensure this workflow works, we will need to select the same Customer Success list as we did in the first step and use the "
+              },
+              {
+                "t": "{Adjusted Timestamp}",
+                "code": true
+              },
+              {
+                "t": " for the "
+              },
+              {
+                "t": "Renewal Date",
+                "code": true
+              },
+              {
+                "t": " attribute."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/sales/ecv-and-pcd-reminder",
+    "category": "sales",
+    "categoryLabel": "Sales",
+    "slug": "ecv-and-pcd-reminder",
+    "name": "ECV and PCD reminder",
+    "title": "ECV and PCD reminder template | Attio",
+    "description": "Create a reminder to set an Estimated Contract Value and a Projected Close Date for a deal to monitor the progress of your Sales pipeline.",
+    "h1": "Remind your team to set an Estimated Contract Value and Projected Close Date.",
+    "useTemplate": "/go/_/automations/workflows/new?template=ecv-and-pcd-reminder",
+    "integrations": [],
+    "objects": [
+      "Deals"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "ecv-and-pcd.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template ensures you fill out the Estimated Contract Value and Projected Close Date for your deals. By sending automated reminders for this task, you will have the data you need to track the performance and progress of your sales strategies."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Sales",
+                "b": true
+              },
+              {
+                "t": " processes list that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Meeting",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute"
+                    }
+                  ]
+                },
+                {
+                  "segments": [
+                    {
+                      "t": "Proposal",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated ",
+                "b": true
+              },
+              {
+                "t": "block is the first step to this workflow. This block will be activated every time you update the status attribute of your deals in your Sales list. To make sure this workflow runs properly, we will need to specify the list for Sales and the status attribute used to track a deal’s progress. In most use cases, the list would be "
+              },
+              {
+                "t": "Sales,",
+                "b": true
+              },
+              {
+                "t": " and the attribute would be "
+              },
+              {
+                "t": "Stage.",
+                "b": true
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Delay ",
+                "b": true
+              },
+              {
+                "t": "block allows you to assign an amount of time for the deal Owner to add an Estimated Contract Value and/or a Projected Close Date."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "If/Else ",
+                "b": true
+              },
+              {
+                "t": "block will branch your workflow into two options, based on whether your attribute fulfills the filters set in this block. Assuming you have two separate stages for when you need to fill out your customer’s ECV and PCD, this block checks which stage your deal is moved to. In our case, we decided that an ECV should only be filled out when the deal is in the "
+              },
+              {
+                "t": "Meeting",
+                "code": true
+              },
+              {
+                "t": " stage, but this can be anything that works for you. To set this If/Else filter correctly, we will thus set the new stage value as "
+              },
+              {
+                "t": "Meeting",
+                "code": true
+              },
+              {
+                "t": ", and ECV as [empty]."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "4.1. "
+          },
+          {
+            "t": "If the filter was true",
+            "b": true
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "i.) The workflow will branch off to a "
+          },
+          {
+            "t": "Create Task ",
+            "b": true
+          },
+          {
+            "t": "block, where you can automatically assign a task to the Owner of the deal that prompts them to fill out an ECV. You can set up the task by giving it a name, due date, linked record (your parent record - the deal that had moved in stages), and an assignee."
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "4.2. "
+          },
+          {
+            "t": "If the filter was false",
+            "b": true
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "i.) A "
+          },
+          {
+            "t": "Filter ",
+            "b": true
+          },
+          {
+            "t": "block will be triggered. This is to check if your deal has been moved to the stage that needs a Projected Close Date set. In our instance, we decided that a PCD should only be filled out when a deal is in the "
+          },
+          {
+            "t": "Proposal",
+            "code": true
+          },
+          {
+            "t": " stage, but it is adjustable to your use. To set this filter correctly, we will set the new stage value as "
+          },
+          {
+            "t": "Proposal",
+            "code": true
+          },
+          {
+            "t": ", and PCD as [empty]. Any deal that has been moved to this designated stage will then activate the next block."
+          }
+        ]
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "ii.) If the deal satisfies the previous filter, the "
+          },
+          {
+            "t": "Create Task ",
+            "b": true
+          },
+          {
+            "t": "block will then be triggered, allowing you to assign a task to the Owner of the deal that prompts them to fill out a PCD. You can set up the task by giving it a name, due date, linked record ("
+          },
+          {
+            "t": "{Parent Record}",
+            "code": true
+          },
+          {
+            "t": "), and an assignee."
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/sales/ecv-reminder",
+    "category": "sales",
+    "categoryLabel": "Sales",
+    "slug": "ecv-reminder",
+    "name": "ECV reminder",
+    "title": "ECV reminder template | Attio",
+    "description": "Create a reminder to set an Estimated Contract Value for a deal to monitor the progress of your Sales pipeline.",
+    "h1": "Remind your team to set an Estimated Contract Value.",
+    "useTemplate": "/go/_/automations/workflows/new?template=ecv-reminder",
+    "integrations": [],
+    "objects": [
+      "Deals"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "ecv.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template ensures you fill out the Estimated Contract Value for your deals. By sending automated reminders for this task, you will have the data you need to track the performance and progress of your sales strategies."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Sales",
+                "b": true
+              },
+              {
+                "t": " processes list that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Meeting",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated",
+                "b": true
+              },
+              {
+                "t": " block is the first step to this workflow. This block will be activated every time you update the status attribute of your deals in your Sales list. To make sure this workflow runs properly, we will need to specify the list for Sales and the status attribute used to track a deal’s progress. In most use cases, the list would be "
+              },
+              {
+                "t": "Sales,",
+                "b": true
+              },
+              {
+                "t": " and the attribute would be "
+              },
+              {
+                "t": "Stage.",
+                "b": true
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Delay ",
+                "b": true
+              },
+              {
+                "t": "block allows you to assign an amount of time for the deal Owner to add an Estimated Contract Value."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter ",
+                "b": true
+              },
+              {
+                "t": "block checks if the deal doesn’t have its ECV filled and has been moved to a stage that requires one. In our case, we decided that an ECV should only be filled out when the deal is in the "
+              },
+              {
+                "t": "Meeting",
+                "code": true
+              },
+              {
+                "t": " stage, but this can be anything that works for you. To set this filter correctly, we will thus set the new stage value as "
+              },
+              {
+                "t": "Meeting",
+                "code": true
+              },
+              {
+                "t": ", and ECV as [empty]."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Create Task",
+                "b": true
+              },
+              {
+                "t": " block automatically assigns a task to the Owner of the deal that prompts them to fill out an ECV. You can set up the task by giving it a name, due date, linked record ("
+              },
+              {
+                "t": "{Parent Record}",
+                "code": true
+              },
+              {
+                "t": "), and an assignee."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/sales/lost-deal-reason-reminder",
+    "category": "sales",
+    "categoryLabel": "Sales",
+    "slug": "lost-deal-reason-reminder",
+    "name": "Lost deal reason reminder",
+    "title": "Lost deal reason reminder template | Attio",
+    "description": "Set up an automated reminder that prompts you to give an explanation for a lost deal to help with reporting.",
+    "h1": "Remind the team to give a reason for a lost deal.",
+    "useTemplate": "/go/_/automations/workflows/new?template=lost-deal-reason-reminder",
+    "integrations": [],
+    "objects": [
+      "Deals"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "lost-deal-reason-reminder.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template makes sure you fill out the reasons for all lost deals. The purpose of reminding the Owner for this task is to make sure your Attio workspace contains all the data needed for reporting, which can bring valuable insight to your GTM strategy."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Lost",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute for all your lost deals"
+                    }
+                  ]
+                },
+                {
+                  "segments": [
+                    {
+                      "t": "Lost Reason",
+                      "code": true
+                    },
+                    {
+                      "t": " select/multi-select attribute"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see several connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated ",
+                "b": true
+              },
+              {
+                "t": "block is the first step to this workflow. This block will be activated every time you update the status attribute of your deals in your Deals object. To make sure this workflow runs properly, we will need to select the "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object and the "
+              },
+              {
+                "t": "Deal Stage",
+                "b": true
+              },
+              {
+                "t": " attribute used to track a deal’s progress."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter",
+                "b": true
+              },
+              {
+                "t": " block decides which deals get passed to the next block. This is where you set the criteria of what counts as a lost deal. In this instance, our only requirement is for the deal attribute be moved to "
+              },
+              {
+                "t": "Lost",
+                "code": true
+              },
+              {
+                "t": ", so only the qualified deals will trigger the next block. However, you can add more filters if you need to."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Delay",
+                "b": true
+              },
+              {
+                "t": " block allows you to assign an amount of time for the lost deal Owner to add a closed-lost reason. This is adjustable, but in our example we have set it for five minutes."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter",
+                "b": true
+              },
+              {
+                "t": " block then checks if a closed-lost reason was added within the given time. To correctly set this up, you need to make sure your filter is set at "
+              },
+              {
+                "t": "Created Entry",
+                "code": true
+              },
+              {
+                "t": " > "
+              },
+              {
+                "t": "Lost Reason",
+                "code": true
+              },
+              {
+                "t": " > "
+              },
+              {
+                "t": "Empty",
+                "code": true
+              },
+              {
+                "t": "."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Create Task",
+                "b": true
+              },
+              {
+                "t": " block automatically assigns a task to the Owner, which prompts them to fill out the closed-lost reason. You can set up the task by giving it a name, due date, linked record ("
+              },
+              {
+                "t": "{Parent Record}",
+                "code": true
+              },
+              {
+                "t": "), and an assignee."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/sales/lost-deal-summary",
+    "category": "sales",
+    "categoryLabel": "Sales",
+    "slug": "lost-deal-summary",
+    "name": "Lost deal summary",
+    "title": "Lost deal summary template | Attio",
+    "description": "Set up a workflow that uses AI to sum up your lost deal for better insight.",
+    "h1": "Let AI help summarize your lost deal.",
+    "useTemplate": "/go/_/automations/workflows/new?template=lost-deal-summary",
+    "integrations": [
+      {
+        "name": "Slack",
+        "href": "/help/reference/integrations/slack-integration",
+        "icon": "slack.svg"
+      }
+    ],
+    "objects": [
+      "Deals"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "lost-deal-summary.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template is designed to offer and in-depth insight into your closed-lost deals with little effort. As AI does the heavy lifting, you will get more time to craft new strategies from these losses."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Lost",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute for your lost deals"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "segments": [
+              {
+                "t": "Slack integration",
+                "href": "/help/reference/integrations/slack-integration"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated ",
+                "b": true
+              },
+              {
+                "t": "block is the first step to this workflow. This block will be activated every time you update the status attribute of your deals in your Deals object. To make sure this workflow runs properly, we will need to select the "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object and the "
+              },
+              {
+                "t": "Deal Stage",
+                "b": true
+              },
+              {
+                "t": " attribute used to track a deal’s progress."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter ",
+                "b": true
+              },
+              {
+                "t": "block decides which deals get passed to the next block. This is where you set the criteria of what counts as a lost deal. In this instance, our requirement is for the deal attribute be moved to "
+              },
+              {
+                "t": "Lost",
+                "code": true
+              },
+              {
+                "t": ", so only the qualified deals will trigger the next block. However, you can add more filters if you need to."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Summarize Record",
+                "b": true
+              },
+              {
+                "t": " block is where AI comes in. Like using ChatGPT, you simply put a prompt to generate your response. Since we are focusing on summarizing lost deals, we would tell AI what attributes to outline. An example input would be:"
+              }
+            ],
+            "codes": [
+              {
+                "text": "Summarize in one sentence: {Record}'s Owner, name, value, and its lost reason.",
+                "lang": "json"
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Post Message to Slack Channel",
+                "b": true
+              },
+              {
+                "t": " block sends the AI response to your designated Slack channel. Make sure you add the "
+              },
+              {
+                "t": "Summary",
+                "code": true
+              },
+              {
+                "t": " variable from the Summarize Record step to your Slack message input."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/sales/pass-won-deals-to-customer-success",
+    "category": "sales",
+    "categoryLabel": "Sales",
+    "slug": "pass-won-deals-to-customer-success",
+    "name": "Pass won deals to Customer Success",
+    "title": "Pass won deals to Customer Success template | Attio",
+    "description": "Seamlessly pass all won deals to your Customer Success team for effective activation.",
+    "h1": "Pass won deals from Sales to Customer Success.",
+    "useTemplate": "/go/_/automations/workflows/new?template=pass-won-deals-to-customer-success",
+    "integrations": [],
+    "objects": [
+      "Deals"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "pass-won-deals-to-customer-success.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template is aimed at automating the process of passing won deals to your Customer Success team. This simple workflow gives you the power to enhance your customer activation by enabling timely engagement and providing accurate data. You will be on top of your Customer Success game as this will constantly keep you updated with the customers you aim to establish a deeper connection with."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Won",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute for all your won deals"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Customer Success",
+                "b": true
+              },
+              {
+                "t": " list that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Onboarding",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute for the triaged won deals"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see three connecting blocks in this template."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated ",
+                "b": true
+              },
+              {
+                "t": "block is the first step to this workflow. This block will be activated every time you update the status attribute of your deals in your Deals object. To make sure this workflow runs properly, we will need to select the "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object and the "
+              },
+              {
+                "t": "Deal Stage",
+                "b": true
+              },
+              {
+                "t": " attribute used to track a deal’s progress."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter ",
+                "b": true
+              },
+              {
+                "t": "block decides which deals get passed to the next block. This is where you set the criteria of what counts as a won deal. In this instance, our only requirement is for the deal attribute be moved to "
+              },
+              {
+                "t": "Won",
+                "code": true
+              },
+              {
+                "t": ", so only the qualified deals will trigger the next block. However, you can add more filters if you need to."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Add Record to List ",
+                "b": true
+              },
+              {
+                "t": "block is where you select a list for all filtered won deals to be stored. These are customizable and you can pre-set items including the stage that these deals will be placed in and their primary CSM. For our workflow, we have directed the won deals to be put into the "
+              },
+              {
+                "t": "Customer Success",
+                "b": true
+              },
+              {
+                "t": " list and set our Stage as "
+              },
+              {
+                "t": "Onboarding",
+                "code": true
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/sales/pcd-reminder",
+    "category": "sales",
+    "categoryLabel": "Sales",
+    "slug": "pcd-reminder",
+    "name": "PCD reminder",
+    "title": "PCD reminder template | Attio",
+    "description": "Create a reminder to set an Projected Close Date for a deal to monitor the progress of your Sales pipeline.",
+    "h1": "Remind your team to set a Projected Close Date.",
+    "useTemplate": "/go/_/automations/workflows/new?template=pcd-reminder",
+    "integrations": [],
+    "objects": [
+      "Deals"
+    ],
+    "updated": "November 24, 2025",
+    "heroImage": "pcd.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template ensures you fill out the Projected Close Dates for your deals. By sending automated reminders for this task, you will have the data you need to track the performance and progress of your sales strategies."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Sales",
+                "b": true
+              },
+              {
+                "t": " processes list that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Proposal",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated ",
+                "b": true
+              },
+              {
+                "t": "block is the first step to this workflow. This block will be activated every time you update the status attribute of your deals. To make sure this workflow runs properly, we will need to specify the Deals object and the status attribute used to track a deal’s progress. In most use cases, the object would be "
+              },
+              {
+                "t": "Deals,",
+                "b": true
+              },
+              {
+                "t": " and the attribute would be "
+              },
+              {
+                "t": "Stage.",
+                "b": true
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Delay ",
+                "b": true
+              },
+              {
+                "t": "block allows you to assign an amount of time for the deal Owner to add a Projected Close Date."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter ",
+                "b": true
+              },
+              {
+                "t": "block checks if the deal doesn’t have its PCD filled and has been moved to a stage that requires one. In our case, we decided that a PCD should only be filled out when the deal is in the "
+              },
+              {
+                "t": "Proposal",
+                "code": true
+              },
+              {
+                "t": " stage, but this can be anything that works for you. To set this filter correctly, we will thus set the new stage value as "
+              },
+              {
+                "t": "Proposal",
+                "code": true
+              },
+              {
+                "t": ", and PCD as [empty]."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Create Task ",
+                "b": true
+              },
+              {
+                "t": "block automatically assigns a task to the Owner of the deal that prompts them to fill out an PCD. You can set up the task by giving it a name, due date, linked record ("
+              },
+              {
+                "t": "{Parent Record}",
+                "code": true
+              },
+              {
+                "t": "), and an assignee."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/sales/round-robin-tasks-outreach",
+    "category": "sales",
+    "categoryLabel": "Sales",
+    "slug": "round-robin-tasks-outreach",
+    "name": "Round-robin tasks outreach",
+    "title": "Round-robin tasks outreach template | Attio",
+    "description": "Efficiently reach out to your closed-won deals by using round-robin tasks.",
+    "h1": "Contact closed-won deals using round-robin tasks.",
+    "useTemplate": "/go/_/automations/workflows/new?template=round-robin-outreach-task",
+    "integrations": [],
+    "objects": [
+      "Deals"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "round-robin.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template allows you to create a task allocator that makes sure you’re on top of your outreach game. By using round-robin tasks, work is distributed evenly among your team, ensuring no one is overwhelmed and every deal is contacted promptly."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Won",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute for your won deals"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated ",
+                "b": true
+              },
+              {
+                "t": "block is the first step to this workflow. This block will be activated every time you update the status attribute of your deals in your Deals object. To make sure this workflow runs properly, we will need to select the "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object and the "
+              },
+              {
+                "t": "Deal Stage",
+                "b": true
+              },
+              {
+                "t": " attribute used to track a deal’s progress."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter",
+                "b": true
+              },
+              {
+                "t": " block decides which deals get passed to the next block. This is where you set the criteria of what counts as a won deal. In this instance, our only requirement is for the deal attribute be moved to "
+              },
+              {
+                "t": "Won",
+                "code": true
+              },
+              {
+                "t": ", so only the qualified deals will trigger the next block. However, you can add more filters if you need to."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Adjust Time",
+                "b": true
+              },
+              {
+                "t": " block allows you to offset the recorded cancellation date by one day. This will give the assignee a good amount of time to reach out. In this block, you can input any number (e.g. 1 day) that you see fit. Both the numbers and the unit can be changed."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Round Robin",
+                "b": true
+              },
+              {
+                "t": " block is where you select a few people in your organization to enter into a round-robin task allocation system. This is to ensure a balanced task assignment."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Create Task",
+                "b": true
+              },
+              {
+                "t": " block automatically assigns a task to the person chosen by the round-robin task allocation. You can set it up by giving a task description, due date, and a linked-record. Here is an example series of input:"
+              }
+            ],
+            "codes": [
+              {
+                "text": "Task: Contact customer about the product \nDue: {Adjusted Timestamp} Linked Records: Entry > {Parent Record} \nAssignees: {Picked User}",
+                "lang": "json"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/sales/won-deal-notification",
+    "category": "sales",
+    "categoryLabel": "Sales",
+    "slug": "won-deal-notification",
+    "name": "Won deal notification",
+    "title": "Won deal notification template | Attio",
+    "description": "Notify and celebrate your won deals instantly with your team across your workspace.",
+    "h1": "Notify your team about a won deal.",
+    "useTemplate": "/go/_/automations/workflows/new?template=won-deal-notification",
+    "integrations": [],
+    "objects": [
+      "Deals"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "won-deal-notification.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template keeps your workspace updated and motivated with every won deal. Not only does it announce a won deal instantly, but it also uplifts your team with confetti. This makes sure that everyone is clear on team progress and celebrates all your victories."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Won",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute for all your won deals"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks in this template."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated ",
+                "b": true
+              },
+              {
+                "t": "block is the first step to this workflow. This block will be activated every time you update the status attribute of your deals in your Deals object. To make sure this workflow runs properly, we will need to select the "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object and the "
+              },
+              {
+                "t": "Deal Stage",
+                "b": true
+              },
+              {
+                "t": " attribute used to track a deal’s progress."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter ",
+                "b": true
+              },
+              {
+                "t": "block decides which deals get passed to the next block. This is where you set the criteria of what counts as a won deal. In this instance, our only requirement is for the deal attribute be moved to "
+              },
+              {
+                "t": "Won",
+                "code": true
+              },
+              {
+                "t": ", so only the qualified deals will trigger the next block. However, you can add more filters if you need to."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Celebration ",
+                "b": true
+              },
+              {
+                "t": "block releases confetti across your workspace."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "If/Else ",
+                "b": true
+              },
+              {
+                "t": "block is an optional one which allows you to branch the workflow into two options. What will be triggered next depends on whether your won deal has a value or not."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "In the case where "
+              },
+              {
+                "t": "If/Else ",
+                "b": true
+              },
+              {
+                "t": "is used, there are two "
+              },
+              {
+                "t": "Broadcast Message ",
+                "b": true
+              },
+              {
+                "t": "blocks connected. One represents the action to broadcast message without a deal value, and the other only gets triggered if there is a deal value. If you have removed the previous block, you can simply set a single message to be broadcasted. An example message would be:"
+              }
+            ],
+            "codes": [
+              {
+                "text": "Style: Success\nTarget: All users\nTitle: {Updated By} moved {Record > Deal Name} to Won\nDescription: Deal value - {Record > Deal Value}\nDuration: 10 seconds",
+                "lang": "json"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/sales/won-deal-slack-message",
+    "category": "sales",
+    "categoryLabel": "Sales",
+    "slug": "won-deal-slack-message",
+    "name": "Won deal Slack message",
+    "title": "Won deal Slack message template | Attio",
+    "description": "Instantly send an automated Slack message to your team when a deal is won.",
+    "h1": "Send a Slack message when a deal is won.",
+    "useTemplate": "/go/_/automations/workflows/new?template=won-deal-slack-message",
+    "integrations": [
+      {
+        "name": "Slack",
+        "href": "/help/reference/integrations/slack-integration",
+        "icon": "slack.svg"
+      }
+    ],
+    "objects": [
+      "Deals"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "won-deal-slack-message.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template uses Slack with your Attio workspace by making sure everyone knows about your won deals. Every small victory is a big deal, and you can use this workflow to celebrate with your team!"
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Won",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute for all your won deals"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "segments": [
+              {
+                "t": "Slack integration",
+                "href": "/help/reference/integrations/slack-integration"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated ",
+                "b": true
+              },
+              {
+                "t": "block is the first step to this workflow. This block will be activated every time you update the status attribute of your deals in your Deals object. To make sure this workflow runs properly, we will need to select the "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object and the "
+              },
+              {
+                "t": "Deal Stage",
+                "b": true
+              },
+              {
+                "t": " attribute used to track a deal’s progress."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter ",
+                "b": true
+              },
+              {
+                "t": "block decides which deals get passed to the next block. This is where you set the criteria of what counts as a won deal. In this instance, our only requirement is for the deal attribute be moved to "
+              },
+              {
+                "t": "Won",
+                "code": true
+              },
+              {
+                "t": ", so only the qualified deals will trigger the next block. However, you can add more filters if you need to."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "If/Else ",
+                "b": true
+              },
+              {
+                "t": "block is an optional one which allows you to branch the workflow into two options. What will be triggered next depends on whether your won deal has a value or not."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "In the case where "
+              },
+              {
+                "t": "If/Else",
+                "b": true
+              },
+              {
+                "t": " is used, there are two "
+              },
+              {
+                "t": "Post Message to Slack Channel",
+                "b": true
+              },
+              {
+                "t": " blocks connected. One represents the action to send message to Slack without a deal value, and other only gets triggered if there is a deal value. If you have removed the previous block, you can simply set a single message to be sent. An example message would be:"
+              }
+            ],
+            "codes": [
+              {
+                "text": "Title: {Updated by} moved {Record > Deal Name} to Won\nDescription: Deal value - {Record > Deal value}",
+                "lang": "json"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  },
+  {
+    "path": "/templates/sales/won-deal-summary",
+    "category": "sales",
+    "categoryLabel": "Sales",
+    "slug": "won-deal-summary",
+    "name": "Won deal summary",
+    "title": "Won deal summary template | Attio",
+    "description": "Set up a workflow that uses AI to outline your won deal and provide insight on what works in your sales strategy.",
+    "h1": "Let AI help summarize your won deal.",
+    "useTemplate": "/go/_/automations/workflows/new?template=won-deal-summary",
+    "integrations": [
+      {
+        "name": "Slack",
+        "href": "/help/reference/integrations/slack-integration",
+        "icon": "slack.svg"
+      }
+    ],
+    "objects": [
+      "Deals"
+    ],
+    "updated": "November 08, 2023",
+    "heroImage": "won-deal-summary.png",
+    "blocks": [
+      {
+        "kind": "h2",
+        "text": "Setup guide",
+        "id": "setup-guide"
+      },
+      {
+        "kind": "h3",
+        "text": "Overview",
+        "id": "overview"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "This template is designed to provide a concise overview of your closed-won deals. AI will help you extract details from each successful deal and give you a clear snapshot of what is driving your sales forward."
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "Prerequisites",
+        "id": "prerequisites"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "We have put together a list of prerequisites that are recommended for this workflow. This will be different depending on your usage, but you can use it for reference."
+          }
+        ]
+      },
+      {
+        "kind": "ul",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "A "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object that includes:"
+              }
+            ],
+            "sub": {
+              "kind": "ul",
+              "items": [
+                {
+                  "segments": [
+                    {
+                      "t": "Won",
+                      "code": true
+                    },
+                    {
+                      "t": " status attribute for your won deals"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "segments": [
+              {
+                "t": "Slack integration",
+                "href": "/help/reference/integrations/slack-integration"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "h3",
+        "text": "How to use this template",
+        "id": "how-to-use-this-template"
+      },
+      {
+        "kind": "p",
+        "segments": [
+          {
+            "t": "Once opened, you will see a series of connecting blocks."
+          }
+        ]
+      },
+      {
+        "kind": "ol",
+        "items": [
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Attribute Updated ",
+                "b": true
+              },
+              {
+                "t": "block is the first step to this workflow. This block will be activated every time you update the status attribute of your deals in your Deals object. To make sure this workflow runs properly, we will need to select the "
+              },
+              {
+                "t": "Deals",
+                "b": true
+              },
+              {
+                "t": " object and the "
+              },
+              {
+                "t": "Deal Stage",
+                "b": true
+              },
+              {
+                "t": " attribute used to track a deal’s progress."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Filter ",
+                "b": true
+              },
+              {
+                "t": "block decides which deals get passed to the next block. This is where you set the criteria of what counts as a won deal. In this instance, our requirement is for the deal attribute be moved to "
+              },
+              {
+                "t": "Won",
+                "code": true
+              },
+              {
+                "t": ", so only the qualified deals will trigger the next block. However, you can add more filters if you need to."
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Summarize Record",
+                "b": true
+              },
+              {
+                "t": " block is where AI comes in. Like using ChatGPT, you simply put a prompt to generate your response. Since we are focusing on summarizing won deals, we would tell AI what attributes to outline. An example input would be:"
+              }
+            ],
+            "codes": [
+              {
+                "text": "Summarize in one sentence: {Record}'s Owner, name, value, and its next steps.",
+                "lang": "json"
+              }
+            ]
+          },
+          {
+            "segments": [
+              {
+                "t": "The "
+              },
+              {
+                "t": "Post Message to Slack Channel",
+                "b": true
+              },
+              {
+                "t": " block sends the response AI generates to your designated Slack channel. Make sure you add the "
+              },
+              {
+                "t": "{Summary}",
+                "code": true
+              },
+              {
+                "t": " variable from the Summarize Record step to your Slack message input."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why can’t I access a specific list in my workflow?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "If you’d like your workflow to access a specific list you’ll need to make sure the workflow has access, just like if it was a workspace user. You can do this in the "
+              },
+              {
+                "t": "List access permissions settings",
+                "href": "/help/reference/users-and-permissions/list-access"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "q": "How are Automations billed?",
+        "blocks": [
+          {
+            "kind": "p",
+            "segments": [
+              {
+                "t": "Credits are the currency used to measure the resource consumption of your workflows. Most blocks consume a credit when run. Learn more by reading our "
+              },
+              {
+                "t": "Automations billing article",
+                "href": "/help/reference/automations/automations-billing"
+              },
+              {
+                "t": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "toc": [
+      "Overview",
+      "Prerequisites",
+      "How to use this template"
+    ]
+  }
+]

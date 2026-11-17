@@ -1,0 +1,11 @@
+---
+import WorkflowTemplate from "../../../components/WorkflowTemplate.astro";
+import templates from "../../../data/templates.json";
+
+// Create ‘Add to MixMax’ button, copy fetched live from https://attio.com/templates/product-led-sales/create-add-to-mixmax-button
+// on 2026-11-17 (HTTP 200). Data lives in src/data/templates.json.
+const entry = (templates as any[]).find((entry) => entry.path === "/templates/product-led-sales/create-add-to-mixmax-button");
+if (!entry) throw new Error("Missing template data for /templates/product-led-sales/create-add-to-mixmax-button");
+---
+
+<WorkflowTemplate entry={entry} />

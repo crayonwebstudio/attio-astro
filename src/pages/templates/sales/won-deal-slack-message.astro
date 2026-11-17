@@ -1,0 +1,11 @@
+---
+import WorkflowTemplate from "../../../components/WorkflowTemplate.astro";
+import templates from "../../../data/templates.json";
+
+// Won deal Slack message, copy fetched live from https://attio.com/templates/sales/won-deal-slack-message
+// on 2026-11-17 (HTTP 200). Data lives in src/data/templates.json.
+const entry = (templates as any[]).find((entry) => entry.path === "/templates/sales/won-deal-slack-message");
+if (!entry) throw new Error("Missing template data for /templates/sales/won-deal-slack-message");
+---
+
+<WorkflowTemplate entry={entry} />

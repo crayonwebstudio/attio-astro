@@ -1,0 +1,11 @@
+---
+import WorkflowTemplate from "../../../components/WorkflowTemplate.astro";
+import templates from "../../../data/templates.json";
+
+// Round-robin tasks outreach, copy fetched live from https://attio.com/templates/sales/round-robin-tasks-outreach
+// on 2026-11-17 (HTTP 200). Data lives in src/data/templates.json.
+const entry = (templates as any[]).find((entry) => entry.path === "/templates/sales/round-robin-tasks-outreach");
+if (!entry) throw new Error("Missing template data for /templates/sales/round-robin-tasks-outreach");
+---
+
+<WorkflowTemplate entry={entry} />

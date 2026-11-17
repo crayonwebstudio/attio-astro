@@ -1,0 +1,244 @@
+---
+import HelpSegments from "./HelpSegments.astro";
+
+// Shared block renderer for the 22 workflow template pages under
+// /templates/*.
+// Copy fetched live from https://attio.com/templates/* on 2026-11-17
+// (HTTP 200 each), stored in src/data/templates.json. All headings,
+// paragraphs, lists, code examples, and FAQ answers are live Attio copy.
+// Live em dashes are rendered as commas, per the no em dash rule. The
+// workflow diagram images on live are Storyblok photos, so the hero
+// diagram is rendered as a dark pinstripe panel labelled with the live
+// image filename title-cased, following the HelpBlocks figure pattern.
+// No Attio images, logos, or fonts are hotlinked or copied.
+
+interface Segment {
+  t: string;
+  b?: boolean;
+  i?: boolean;
+  code?: boolean;
+  href?: string;
+}
+
+interface CodeBlock {
+  text: string;
+  lang?: string;
+}
+
+interface ListItem {
+  segments: Segment[];
+  sub?: { kind: string; items: ListItem[] };
+  codes?: CodeBlock[];
+  extra?: Segment[][];
+}
+
+interface Block {
+  kind: string;
+  segments?: Segment[];
+  text?: string;
+  id?: string;
+  items?: ListItem[];
+  label?: string;
+  lang?: string;
+}
+
+interface Props {
+  blocks: Block[];
+}
+
+const { blocks } = Astro.props;
+
+function titleCase(label: string): string {
+  return label
+    .replace(/[-_]/g, " ")
+    .split(" ")
+    .map((word) => (word ? word[0].toUpperCase() + word.slice(1) : word))
+    .join(" ");
+}
+---
+
+{blocks.map((block) => {
+  if (block.kind === "h2") {
+    return (
+      <h2
+        id={block.id}
+        class="mt-16 scroll-mt-32 font-display text-[28px] font-semibold leading-tight tracking-tight first:mt-0 sm:text-[32px]"
+      >
+        {block.text}
+      </h2>
+    );
+  }
+  if (block.kind === "h3") {
+    return (
+      <h3 id={block.id} class="mt-12 scroll-mt-32 font-display text-xl font-semibold first:mt-0">
+        {block.text}
+      </h3>
+    );
+  }
+  if (block.kind === "h4") {
+    return (
+      <h4 id={block.id} class="mt-10 scroll-mt-32 font-display text-lg font-semibold first:mt-0">
+        {block.text}
+      </h4>
+    );
+  }
+  if (block.kind === "ul" || block.kind === "ol") {
+    return block.kind === "ul" ? (
+      <ul class="mt-5 space-y-2">
+        {block.items?.map((item) => (
+          <li class="flex items-baseline gap-x-3 leading-relaxed text-ink-100">
+            <span class="h-2 w-2 shrink-0 translate-y-[-1px] rounded-[2px] bg-ink-300" aria-hidden="true" />
+            <span class="min-w-0">
+              <HelpSegments segments={item.segments} />
+              {item.sub && item.sub.kind === "ul" && (
+                <ul class="mt-2 space-y-2">
+                  {item.sub.items.map((subItem) => (
+                    <li class="flex items-baseline gap-x-3 leading-relaxed text-ink-100">
+                      <span class="h-2 w-2 shrink-0 translate-y-[-1px] rounded-[2px] bg-ink-300" aria-hidden="true" />
+                      <span class="min-w-0">
+                        <HelpSegments segments={subItem.segments} />
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {item.sub && item.sub.kind === "ol" && (
+                <ol class="mt-2 list-decimal space-y-2 pl-6">
+                  {item.sub.items.map((subItem) => (
+                    <li class="leading-relaxed text-ink-100 marker:font-semibold">
+                      <HelpSegments segments={subItem.segments} />
+                    </li>
+                  ))}
+                </ol>
+              )}
+              {item.codes?.map((code) => (
+                <div class="relative mt-5 overflow-hidden rounded-xl bg-ink-50">
+                  {code.lang && (
+                    <p class="px-4 pt-4 text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
+                      {code.lang}
+                    </p>
+                  )}
+                  <pre class="max-h-[17rem] overflow-y-auto whitespace-pre-wrap px-4 pb-16 pt-4 font-mono text-xs leading-relaxed text-white/80">
+                    {code.text}
+                  </pre>
+                  <button
+                    type="button"
+                    data-copy
+                    class="absolute bottom-4 right-4 rounded-[10px] border border-white/20 bg-white/10 px-2.5 py-1.5 text-xs font-medium text-white backdrop-blur hover:bg-white/20"
+                  >
+                    Copy
+                  </button>
+                </div>
+              ))}
+              {item.extra?.map((extraSegments) => (
+                <p class="mt-5 leading-relaxed text-ink-100">
+                  <HelpSegments segments={extraSegments} />
+                </p>
+              ))}
+            </span>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <ol class="mt-5 list-decimal space-y-2 pl-6">
+        {block.items?.map((item) => (
+          <li class="leading-relaxed text-ink-100 marker:font-semibold">
+            <HelpSegments segments={item.segments} />
+            {item.sub && item.sub.kind === "ul" && (
+              <ul class="mt-2 space-y-2">
+                {item.sub.items.map((subItem) => (
+                  <li class="flex items-baseline gap-x-3 leading-relaxed text-ink-100">
+                    <span class="h-2 w-2 shrink-0 translate-y-[-1px] rounded-[2px] bg-ink-300" aria-hidden="true" />
+                    <span class="min-w-0">
+                      <HelpSegments segments={subItem.segments} />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {item.sub && item.sub.kind === "ol" && (
+              <ol class="mt-2 list-decimal space-y-2 pl-6">
+                {item.sub.items.map((subItem) => (
+                  <li class="leading-relaxed text-ink-100 marker:font-semibold">
+                    <HelpSegments segments={subItem.segments} />
+                  </li>
+                ))}
+              </ol>
+            )}
+            {item.codes?.map((code) => (
+              <div class="relative mt-5 overflow-hidden rounded-xl bg-ink-50">
+                {code.lang && (
+                  <p class="px-4 pt-4 text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
+                    {code.lang}
+                  </p>
+                )}
+                <pre class="max-h-[17rem] overflow-y-auto whitespace-pre-wrap px-4 pb-16 pt-4 font-mono text-xs leading-relaxed text-white/80">
+                  {code.text}
+                </pre>
+                <button
+                  type="button"
+                  data-copy
+                  class="absolute bottom-4 right-4 rounded-[10px] border border-white/20 bg-white/10 px-2.5 py-1.5 text-xs font-medium text-white backdrop-blur hover:bg-white/20"
+                >
+                  Copy
+                </button>
+              </div>
+            ))}
+            {item.extra?.map((extraSegments) => (
+              <p class="mt-5 leading-relaxed text-ink-100">
+                <HelpSegments segments={extraSegments} />
+              </p>
+            ))}
+          </li>
+        ))}
+      </ol>
+    );
+  }
+  if (block.kind === "quote") {
+    return (
+      <blockquote class="mt-10 border-l-2 border-paper-600 py-1 pl-5 font-medium leading-relaxed text-ink-600">
+        <HelpSegments segments={block.segments ?? []} />
+      </blockquote>
+    );
+  }
+  if (block.kind === "img") {
+    return (
+      <figure class="mt-10">
+        <div class="pinstripe-bg flex items-center justify-center overflow-hidden rounded-2xl bg-ink-50 px-6 py-12">
+          <p class="min-w-0 break-words text-center font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
+            {titleCase(block.label ?? "Attio")}
+          </p>
+        </div>
+      </figure>
+    );
+  }
+  if (block.kind === "code") {
+    return (
+      <div class="relative mt-10 overflow-hidden rounded-xl bg-ink-50">
+        {block.lang && (
+          <p class="px-4 pt-4 text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
+            {block.lang}
+          </p>
+        )}
+        <pre class="max-h-[17rem] overflow-y-auto whitespace-pre-wrap px-4 pb-16 pt-4 font-mono text-xs leading-relaxed text-white/80">
+          {block.text}
+        </pre>
+        <button
+          type="button"
+          data-copy
+          class="absolute bottom-4 right-4 rounded-[10px] border border-white/20 bg-white/10 px-2.5 py-1.5 text-xs font-medium text-white backdrop-blur hover:bg-white/20"
+        >
+          Copy
+        </button>
+      </div>
+    );
+  }
+  if (block.kind === "hr") {
+    return <hr class="my-10 border-t border-dashed border-paper-600" />;
+  }
+  return (
+    <p class="mt-5 leading-relaxed text-ink-100 first:mt-0">
+      <HelpSegments segments={block.segments ?? []} />
+    </p>
+  );
+})}

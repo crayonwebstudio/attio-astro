@@ -1,0 +1,240 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TemplateBlocks from "./TemplateBlocks.astro";
+
+// Shared layout for the 22 workflow template pages under /templates/*.
+// Copy fetched live from https://attio.com/templates/* on 2026-11-17
+// (HTTP 200 each), stored in src/data/templates.json. All titles,
+// descriptions, headings, paragraphs, lists, code examples, and FAQ
+// answers are live Attio copy. Live em dashes are rendered as commas,
+// per the no em dash rule. The workflow diagram images on live are
+// Storyblok photos, so the hero diagram is rendered as a dark pinstripe
+// panel labelled with the live image filename title-cased, following the
+// HelpBlocks figure pattern. Integration icons on live are Storyblok
+// SVGs, rendered here as text tiles with the live integration name. No
+// Attio images, logos, or fonts are hotlinked or copied. Live template
+// pages have no standard FinalCta ("Agentic revenue runs on Attio."
+// appears 0 times in the live HTML), so this layout hides the shared
+// FinalCta. The "Use template" button links to the live Attio app
+// template URL, as on live. The Table of Contents is the live one: the
+// three setup guide headings (Overview, Prerequisites, How to use this
+// template).
+
+interface Props {
+  entry: any;
+}
+
+const { entry } = Astro.props;
+
+const toc = (entry.blocks ?? []).filter((b: any) => b.kind === "h3");
+
+const ACRONYMS = new Set(["MRR", "ECV", "PCD", "ARR", "LTV", "MQL", "AI", "SQL", "API", "MCP", "CRM"]);
+
+function titleCase(label: string): string {
+  return label
+    .replace(/[-_]/g, " ")
+    .replace(/\.[a-z0-9]+$/i, "")
+    .split(" ")
+    .map((word) => {
+      if (!word) return word;
+      if (ACRONYMS.has(word.toUpperCase())) return word.toUpperCase();
+      return word[0].toUpperCase() + word.slice(1);
+    })
+    .join(" ");
+}
+---
+
+<BaseLayout title={entry.title} description={entry.description} hideFinalCta>
+  <div class="mx-auto max-w-[1200px] px-4 sm:px-6">
+    <!-- Breadcrumb -->
+    <nav class="flex h-9 items-center gap-1.5 pt-10 text-sm text-ink-600" aria-label="Breadcrumb">
+      <a href="/templates" class="hover:text-blue-500 hover:underline">
+        Templates
+      </a>
+      <span aria-hidden="true">/</span>
+      <span>{entry.categoryLabel}</span>
+      <span aria-hidden="true">/</span>
+      <span class="font-medium text-ink-100">{entry.name}</span>
+    </nav>
+
+    <!-- Header -->
+    <header class="mt-10">
+      <h1 class="font-display text-[40px] font-semibold leading-[1.05] tracking-tight text-ink-100 sm:text-[56px]">
+        {entry.h1}
+      </h1>
+      <p class="mt-6 max-w-[36em] text-lg leading-relaxed text-ink-600">{entry.description}</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href={entry.useTemplate}
+          class="inline-flex items-center justify-center rounded-[10px] bg-ink-100 px-4 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+        >
+          Use template
+        </a>
+        <a
+          href="/help/reference/automations"
+          class="inline-flex items-center justify-center rounded-[10px] border border-paper-500 bg-white px-4 py-2.5 text-sm font-semibold text-ink-100 transition-colors hover:border-ink-800"
+        >
+          Automations docs
+        </a>
+      </div>
+
+      <!-- Meta -->
+      <div class="mt-10 flex flex-wrap gap-x-12 gap-y-6">
+        {entry.integrations && entry.integrations.length > 0 && (
+          <div>
+            <h2 class="text-sm font-semibold text-ink-100">Integrations</h2>
+            <div class="mt-2 flex flex-wrap gap-2.5">
+              {entry.integrations.map((integration: any) => (
+                <a
+                  href={integration.href || undefined}
+                  class="flex items-center gap-2 rounded-[14px] border border-paper-500 bg-white px-3 py-2 text-sm font-semibold text-ink-100 transition-colors hover:border-ink-800"
+                >
+                  {integration.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+        {entry.objects && entry.objects.length > 0 && (
+          <div>
+            <h2 class="text-sm font-semibold text-ink-100">Objects</h2>
+            <ul class="mt-1 flex flex-col gap-y-1">
+              {entry.objects.map((object: string) => (
+                <li class="text-sm text-ink-600">{object}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {entry.updated && (
+          <div>
+            <h2 class="text-sm font-semibold text-ink-100">Last updated</h2>
+            <p class="mt-1 text-sm text-ink-600">{entry.updated}</p>
+          </div>
+        )}
+      </div>
+    </header>
+
+    <!-- Workflow diagram, rendered as a labelled mock panel -->
+    {entry.heroImage && (
+      <figure class="mt-12">
+        <div class="pinstripe-bg flex items-center justify-center overflow-hidden rounded-2xl bg-ink-50 px-6 py-16">
+          <p class="min-w-0 break-words text-center font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
+            {titleCase(entry.heroImage)}
+          </p>
+        </div>
+      </figure>
+    )}
+
+    <!-- Mobile Table of Contents -->
+    {toc.length > 0 && (
+      <section class="mt-10 border-y border-paper-500 py-6 xl:hidden" aria-label="Table of contents">
+        <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Table of Contents</p>
+        <ul class="mt-3 flex flex-col gap-1">
+          {toc.map((item: any) => (
+            <li>
+              <a
+                href={`#${item.id}`}
+                class="block w-fit rounded-md px-2 py-1.5 text-sm text-ink-600 hover:text-blue-500"
+              >
+                {item.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <!-- Body + desktop Table of Contents -->
+    <div class="grid gap-12 pt-12 xl:grid-cols-12 xl:pt-16">
+      <article class="min-w-0 xl:col-span-8" aria-label="Template guide">
+        <div class="max-w-prose">
+          <TemplateBlocks blocks={entry.blocks ?? []} />
+        </div>
+      </article>
+
+      {toc.length > 0 && (
+        <aside class="hidden xl:col-span-4 xl:block" aria-label="Table of contents">
+          <div class="sticky top-32">
+            <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink-700">Table of Contents</p>
+            <ul class="mt-3 flex flex-col gap-1 border-l border-paper-500 pl-4">
+              {toc.map((item: any) => (
+                <li>
+                  <a
+                    href={`#${item.id}`}
+                    class="block w-fit rounded-md px-2 py-1.5 text-sm text-ink-600 hover:text-blue-500"
+                  >
+                    {item.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
+      )}
+    </div>
+
+    <!-- Frequently asked questions -->
+    {entry.faq && entry.faq.length > 0 && (
+      <section class="mt-20 border-t border-paper-500 pb-24 pt-24" aria-label="Frequently asked questions">
+        <div class="flex items-start justify-between gap-4">
+          <h2 id="faq" class="font-display text-[28px] font-semibold leading-tight tracking-tight sm:text-[32px]">
+            Workflows FAQ
+          </h2>
+          <button
+            type="button"
+            data-expand-all
+            class="mt-2 shrink-0 rounded-[10px] border border-paper-500 bg-white px-3 py-1.5 text-sm font-semibold text-ink-100 transition-colors hover:border-ink-800"
+          >
+            Expand all
+          </button>
+        </div>
+        <div class="mt-6">
+          {entry.faq.map((item: any) => (
+            <details class="border-b border-paper-500 py-7 first:pt-0">
+              <summary class="flex cursor-pointer items-start justify-between gap-x-6 text-left font-semibold text-ink-100">
+                {item.q}
+                <span class="mt-1 shrink-0 text-lg font-normal leading-none text-ink-700" aria-hidden="true">+</span>
+              </summary>
+              <div class="pr-2 pt-3 text-base text-ink-600 lg:pr-16">
+                <TemplateBlocks blocks={item.blocks ?? []} />
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+
+  <script>
+    // Copy buttons on code cards.
+    document.querySelectorAll("button[data-copy]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const card = button.closest("div");
+        const pre = card ? card.querySelector("pre") : null;
+        if (!pre) return;
+        try {
+          await navigator.clipboard.writeText(pre.textContent ?? "");
+          button.textContent = "Copied";
+          setTimeout(() => {
+            button.textContent = "Copy";
+          }, 2000);
+        } catch {
+          button.textContent = "Copy failed";
+        }
+      });
+    });
+
+    // FAQ Expand all / Collapse all.
+    const expandButton = document.querySelector("[data-expand-all]");
+    if (expandButton) {
+      expandButton.addEventListener("click", () => {
+        const details = Array.from(document.querySelectorAll("section[aria-label='Frequently asked questions'] details"));
+        const allOpen = details.every((d) => (d as HTMLDetailsElement).open);
+        details.forEach((d) => {
+          (d as HTMLDetailsElement).open = !allOpen;
+        });
+        expandButton.textContent = allOpen ? "Expand all" : "Collapse all";
+      });
+    }
+  </script>
+</BaseLayout>

@@ -1,0 +1,11 @@
+---
+import WorkflowTemplate from "../../../components/WorkflowTemplate.astro";
+import templates from "../../../data/templates.json";
+
+// PCD reminder, copy fetched live from https://attio.com/templates/sales/pcd-reminder
+// on 2026-11-17 (HTTP 200). Data lives in src/data/templates.json.
+const entry = (templates as any[]).find((entry) => entry.path === "/templates/sales/pcd-reminder");
+if (!entry) throw new Error("Missing template data for /templates/sales/pcd-reminder");
+---
+
+<WorkflowTemplate entry={entry} />

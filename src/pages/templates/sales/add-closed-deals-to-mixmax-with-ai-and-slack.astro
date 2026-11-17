@@ -1,0 +1,11 @@
+---
+import WorkflowTemplate from "../../../components/WorkflowTemplate.astro";
+import templates from "../../../data/templates.json";
+
+// Add closed deals to MixMax with AI and Slack, copy fetched live from https://attio.com/templates/sales/add-closed-deals-to-mixmax-with-ai-and-slack
+// on 2026-11-17 (HTTP 200). Data lives in src/data/templates.json.
+const entry = (templates as any[]).find((entry) => entry.path === "/templates/sales/add-closed-deals-to-mixmax-with-ai-and-slack");
+if (!entry) throw new Error("Missing template data for /templates/sales/add-closed-deals-to-mixmax-with-ai-and-slack");
+---
+
+<WorkflowTemplate entry={entry} />
