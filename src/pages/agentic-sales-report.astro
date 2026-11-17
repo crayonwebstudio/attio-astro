@@ -1,0 +1,119 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/agentic-sales-report on 2026-11-17
+// (HTTP 200). Live H1 is "Report" (small label); the big headline is the H2
+// "The State of Agentic Sales.". This is the only singleton page with the
+// standard FinalCta, with the demo form, so finalCtaDemo is used. The report
+// form (companyEmail, Submit, privacy note) and its success copy ("You're all
+// set." / "The State of Agentic Sales, 2026 is on its way to your inbox.") are
+// the live strings, as already used on the agentic-readiness result pages.
+// The report cover is a CSS mock panel, not the live Storyblok SVG.
+---
+
+<BaseLayout
+  title="The State of Agentic Sales. | Attio"
+  description="This report covers what an agentic sales strategy looks like: what foundations are necessary, where to deploy agents first, and the signals and metrics that tell you it is working."
+  finalCtaDemo
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-16 pt-16 sm:px-6 sm:pt-24">
+    <h1 class="text-sm font-semibold uppercase tracking-[0.2em] text-ink-700">Report</h1>
+    <h2 class="mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      The State of Agentic Sales.
+    </h2>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      This report covers what an agentic sales strategy looks like: what foundations are necessary, where to
+      deploy agents first, and the signals and metrics that tell you it&rsquo;s working.
+    </p>
+  </section>
+
+  <!-- Report form -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Get the full report">
+    <div class="grid gap-10 lg:grid-cols-2 lg:gap-16">
+      <!-- Report cover: CSS mock panel, live Storyblok SVG not copied -->
+      <div class="pinstripe-bg relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-xl bg-ink-50">
+        <div class="absolute inset-0 flex flex-col items-start justify-between p-6 text-white">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">Attio</p>
+          <div>
+            <p class="font-display text-2xl font-semibold leading-tight">The State of Agentic Sales, 2026</p>
+            <p class="mt-2 text-sm text-white/70">The full report</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 class="font-display text-heading-sm font-semibold tracking-tight">Get the full report.</h2>
+        <p class="mt-3 leading-relaxed text-ink-600">
+          The State of Agentic Sales, 2026, sent straight to your inbox.
+        </p>
+        <form class="report-form mt-6" novalidate>
+          <label for="report-email" class="sr-only">Your work email</label>
+          <input
+            id="report-email"
+            name="companyEmail"
+            type="email"
+            placeholder="Your work email"
+            autocomplete="email"
+            class="w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 placeholder:text-ink-700 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+          />
+          <p class="report-error mt-2 hidden text-sm font-medium text-red-500" role="alert">
+            Please enter a valid email address
+          </p>
+          <button
+            type="submit"
+            class="mt-4 w-full rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-400"
+          >
+            Submit
+          </button>
+          <p class="mt-3 text-xs leading-relaxed text-ink-600">
+            By submitting, you agree to receive marketing emails from Attio. You can unsubscribe at any
+            time. See our
+            <a href="/legal/privacy" class="underline underline-offset-2 hover:text-blue-500">Privacy Policy</a>.
+          </p>
+        </form>
+        <div class="report-success hidden" role="status">
+          <h3 class="font-display text-xl font-semibold">You&rsquo;re all set.</h3>
+          <p class="mt-2 leading-relaxed text-ink-600">
+            The State of Agentic Sales, 2026 is on its way to your inbox.
+          </p>
+        </div>
+        <h2 class="mt-12 font-display text-heading-sm font-semibold tracking-tight">What you&rsquo;ll get:</h2>
+        <ul class="mt-6 space-y-4">
+          {
+            [
+              "Practical frameworks for running your first agentic experiment",
+              "How to build more robust workflows to orchestrate your best plays, on every account",
+              "The Agentic Sales Readiness Audit, with personalized next steps based on how you\u2019ve scored",
+            ].map((item) => (
+              <li class="flex items-start gap-3 leading-relaxed text-ink-600">
+                <span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" aria-hidden="true" />
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll(".report-form").forEach((form) => {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const input = form.querySelector('input[name="companyEmail"]') as HTMLInputElement;
+        const error = form.querySelector(".report-error") as HTMLElement;
+        const value = input.value.trim();
+        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+        if (!valid) {
+          error.classList.remove("hidden");
+          input.focus();
+          return;
+        }
+        error.classList.add("hidden");
+        form.classList.add("hidden");
+        const section = form.closest("section");
+        section?.querySelector(".report-success")?.classList.remove("hidden");
+      });
+    });
+  </script>
+</BaseLayout>

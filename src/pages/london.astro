@@ -1,0 +1,383 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import grid from "../data/london-grid.json";
+
+// Copy fetched live from https://attio.com/london on 2026-11-17 (HTTP 200).
+// Live H1 is "Crossword Answers" (plain, no class) with the big headline as
+// the H2 "Built in London". The crossword is 12 columns by 11 rows (132
+// cells, 36 letter cells); the 8 words and their positions were verified by
+// crossing letters against the live grid, with no conflicts. The answers
+// section copy is live, including the live typo "Know for the Chatham House
+// Rule". Live has no standard FinalCta, so hideFinalCta is used. Click a
+// cell and type to fill it; Reveal shows the selected cell's letter, Reset
+// clears the grid. Progress is kept in localStorage.
+const rows = 11;
+const cols = 12;
+const cellsByRow: Record<number, typeof grid> = {};
+for (const cell of grid) {
+  (cellsByRow[cell.row] ||= []).push(cell);
+}
+
+const clues = [
+  {
+    n: "1",
+    dir: "DOWN",
+    word: "CHATHAM HOUSE",
+    clue: "Institute famous for its strict rule of non attribution.",
+    body: [
+      "The Royal Institute of International Affairs, founded in 1920.",
+      "Know for the Chatham House Rule, where anything said in a meeting can be used, but cannot be attributed to the speaker.",
+    ],
+  },
+  {
+    n: "2",
+    dir: "DOWN",
+    word: "COLOSSUS",
+    clue: "Code breaking giant, secretly engineered in a Post Office.",
+    body: [
+      "The world's first programmable electronic computer, built in 1943 to break the Lorenz cipher used by German High Command.",
+      "Tommy Flowers designed and built it at the Post Office Research Station in Dollis Hill, North West London. It remained classified until the 1970s.",
+    ],
+  },
+  {
+    n: "3",
+    dir: "ACROSS",
+    word: "ALPHAFOLD",
+    clue: "Solved a 50 year protein problem.",
+    body: [
+      "A deep learning system from Google DeepMind that predicts the 3D structure of proteins from their amino acid sequence, developed in their King's Cross office.",
+      "By 2022 it had predicted structures for over 200 million proteins, and in 2024 earned Demis Hassabis and John Jumper the Nobel Prize in Chemistry.",
+    ],
+  },
+  {
+    n: "4",
+    dir: "DOWN",
+    word: "LEO",
+    clue: "The world's first business computer, built by a tea shop company.",
+    body: [
+      "The Lyons Electronic Office: the first computer used for routine business work, which ran its first job in November 1951.",
+      "Built by J. Lyons & Co, the teashop and catering empire, at their Cadby Hall headquarters in Hammersmith. Its first task was valuing the company's weekly bakery output.",
+    ],
+  },
+  {
+    n: "5",
+    dir: "ACROSS",
+    word: "ATM",
+    clue: "Asks for four digits.",
+    body: [
+      "The world's first cash machine, installed at Barclays' Enfield Town branch on June 27, 1967.",
+      "Designed by John Shepherd-Barron of De La Rue. He originally wanted a six-digit PIN; his wife could only remember four, so four it became.",
+    ],
+  },
+  {
+    n: "5",
+    dir: "DOWN",
+    word: "ATTIO",
+    clue: "The agentic CRM.",
+    body: ["The agentic CRM, built in London and used by over 30,000 customers in more than 130 countries."],
+  },
+  {
+    n: "6",
+    dir: "ACROSS",
+    word: "THE TUBE",
+    clue: "A Victorian trench that millions enter daily.",
+    body: [
+      "The world's first underground railway, opened between Paddington and Farringdon on January 10, 1863.",
+      "Built by cut-and-cover: dig a trench down the road, roof it over, run trains through it. Opening day moved 38,000 passengers. Today, the network carries around 1.35 billion people a year.",
+    ],
+  },
+  {
+    n: "7",
+    dir: "ACROSS",
+    word: "THE IISS",
+    clue: "World-leading authority on global security and military conflict.",
+    body: [
+      "The International Institute for Strategic Studies, founded in 1958 and headquartered at Arundel House on Temple Place.",
+      "Its annual Military Balance is the reference work for the world's armed forces, read by every defence ministry, intelligence agency, and serious foreign correspondent.",
+    ],
+  },
+];
+
+const clueStarts: Record<string, { row: number; col: number }> = {
+  "1": { row: 0, col: 4 },
+  "2": { row: 0, col: 7 },
+  "3": { row: 1, col: 1 },
+  "4": { row: 1, col: 2 },
+  "5": { row: 6, col: 2 },
+  "6": { row: 6, col: 6 },
+  "7": { row: 9, col: 2 },
+};
+---
+
+<BaseLayout
+  title="Built in London | Attio"
+  description="Attio is the agentic CRM born in London, the city that built most of the world's firsts."
+  hideFinalCta
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 sm:px-6 sm:pt-24">
+    <h1 class="text-sm font-semibold uppercase tracking-[0.2em] text-ink-700">Crossword Answers</h1>
+    <h2 class="mt-6 font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Built in London
+    </h2>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Attio is the agentic CRM born in London, the city that built most of the world&rsquo;s firsts.
+    </p>
+  </section>
+
+  <!-- Crossword -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="London crossword">
+    <div class="mx-auto max-w-[560px]">
+      <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Jump to a clue">
+        {
+          ["1", "2", "3", "4", "5", "6", "7"].map((n) => (
+            <button
+              type="button"
+              data-clue-jump={n}
+              class="flex h-10 w-10 items-center justify-center rounded-full border border-ink-100 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+            >
+              {n}
+            </button>
+          ))
+        }
+      </div>
+      <div
+        id="crossword"
+        class="mt-6 grid aspect-[12/11] w-full grid-cols-12 gap-px overflow-hidden rounded-xl border border-paper-500 bg-paper-500"
+        role="grid"
+        aria-label="London crossword grid"
+        tabindex="0"
+      >
+        {
+          Array.from({ length: rows }, (_, r) =>
+            (cellsByRow[r] || []).map((cell) =>
+              cell.blank ? (
+                <div class="bg-ink-100" role="presentation" aria-hidden="true" />
+              ) : (
+                <button
+                  type="button"
+                  class="crossword-cell relative flex items-center justify-center bg-white text-lg font-semibold uppercase text-ink-100 hover:bg-paper-200 focus:bg-blue-300/30 focus:outline-none"
+                  data-row={cell.row}
+                  data-col={cell.col}
+                  data-letter={cell.letter}
+                  data-num={cell.num ?? ""}
+                  aria-label={`Reveal letter${cell.num ? `, clue ${cell.num}` : ""}`}
+                >
+                  {cell.num && (
+                    <span class="absolute left-1 top-0.5 text-[9px] font-medium leading-none text-ink-700">
+                      {cell.num}
+                    </span>
+                  )}
+                  <span class="cell-value" aria-hidden="true" />
+                </button>
+              )
+            )
+          )
+        }
+      </div>
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        <button
+          type="button"
+          id="crossword-reveal"
+          class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+        >
+          Reveal
+        </button>
+        <button
+          type="button"
+          id="crossword-reset"
+          class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+        >
+          Reset
+        </button>
+        <p id="crossword-status" class="hidden text-sm font-medium text-ink-600" role="status">
+          Crossword complete.
+        </p>
+      </div>
+      <p class="mt-4 text-sm leading-relaxed text-ink-700">
+        Click a square and type a letter to fill it in. Select a number above to jump to a clue.
+      </p>
+    </div>
+  </section>
+
+  <!-- Crossword answers -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Crossword answers">
+    <div class="flex items-start justify-between gap-4">
+      <h2 class="font-display text-[28px] font-semibold leading-tight tracking-tight sm:text-[32px]">
+        Crossword answers.
+      </h2>
+      <button
+        type="button"
+        data-expand-all
+        class="mt-2 shrink-0 rounded-[10px] border border-paper-500 bg-white px-3 py-1.5 text-sm font-semibold text-ink-100 transition-colors hover:border-ink-800"
+      >
+        Expand all
+      </button>
+    </div>
+    <div class="mt-6">
+      {
+        clues.map((clue) => (
+          <details class="border-b border-paper-500 py-7 first:pt-0">
+            <summary class="flex cursor-pointer items-start justify-between gap-x-6 text-left font-semibold text-ink-100">
+              {clue.clue}
+              <span class="mt-1 shrink-0 text-lg font-normal leading-none text-ink-700" aria-hidden="true">
+                +
+              </span>
+            </summary>
+            <div class="pr-2 pt-3 lg:pr-16">
+              <p class="text-sm font-semibold uppercase tracking-[0.15em] text-blue-500">
+                {clue.word} ({clue.n} {clue.dir})
+              </p>
+              {clue.body.map((para) => (
+                <p class="mt-3 text-base leading-relaxed text-ink-600">{para}</p>
+              ))}
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Hiring -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="We're hiring in London">
+    <h2 class="font-display text-heading-md font-semibold tracking-tight">We&rsquo;re hiring in London</h2>
+    <p class="mt-4 text-lg leading-relaxed text-ink-600">Join the team building from our HQ</p>
+    <div class="mt-6">
+      <a
+        href="/careers"
+        class="inline-block rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Learn more
+      </a>
+    </div>
+    <p class="mt-6 text-base leading-relaxed text-ink-600">There are no open positions right now.</p>
+  </section>
+
+  <!-- Keep up to date -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Keep up to date">
+    <h2 class="font-display text-heading-md font-semibold tracking-tight">Keep up to date.</h2>
+    <p class="mt-4 text-lg leading-relaxed text-ink-600">Get the latest updates on what we&rsquo;re building.</p>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        [
+          { name: "LinkedIn", body: "Keep up to date with what the team is building.", href: "https://linkedin.com/company/attio" },
+          { name: "X", body: "Stay in the loop with what we're working on.", href: "https://x.com/attio" },
+          { name: "Blog", body: "Be the first to get new Attio updates.", href: "/blog" },
+          { name: "Changelog", body: "Stay on top of all releases and new features.", href: "/changelog" },
+        ].map((card) => (
+          <a
+            href={card.href}
+            class="block rounded-2xl border border-paper-500 bg-white p-8 hover:border-ink-800"
+          >
+            <h3 class="font-display text-2xl font-semibold tracking-tight">{card.name}</h3>
+            <p class="mt-3 leading-relaxed text-ink-600">{card.body}</p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <script define:vars={{ clueStarts }}>
+    // Expand all for the answers accordion.
+    const expandButton = document.querySelector("[data-expand-all]");
+    if (expandButton) {
+      expandButton.addEventListener("click", () => {
+        const details = Array.from(
+          document.querySelectorAll("section[aria-label='Crossword answers'] details")
+        );
+        const allOpen = details.every((d) => d.open);
+        details.forEach((d) => {
+          d.open = !allOpen;
+        });
+        expandButton.textContent = allOpen ? "Expand all" : "Collapse all";
+      });
+    }
+
+    // Crossword: click to select, type to fill, Reveal shows the selected
+    // cell's letter, Reset clears. Progress persists in localStorage.
+    const STORAGE_KEY = "london-crossword-v1";
+    const gridEl = document.getElementById("crossword");
+    const statusEl = document.getElementById("crossword-status");
+    const cells = Array.from(document.querySelectorAll(".crossword-cell"));
+    let selected = null;
+    let entries = {};
+    try {
+      entries = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    } catch {
+      entries = {};
+    }
+    const keyOf = (row, col) => `${row},${col}`;
+    const save = () => {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+      } catch {}
+    };
+    const render = () => {
+      cells.forEach((cell) => {
+        const value = cell.querySelector(".cell-value");
+        const entered = entries[keyOf(cell.dataset.row, cell.dataset.col)];
+        value.textContent = entered || "";
+        const isSelected = selected === cell;
+        cell.classList.toggle("bg-blue-300/30", isSelected);
+        cell.classList.toggle("ring-2", isSelected);
+        cell.classList.toggle("ring-blue-500", isSelected);
+        cell.classList.toggle("ring-inset", isSelected);
+      });
+      const allFilled = cells.every(
+        (cell) => entries[keyOf(cell.dataset.row, cell.dataset.col)] === cell.dataset.letter
+      );
+      statusEl.classList.toggle("hidden", !allFilled);
+    };
+    const selectCell = (cell) => {
+      selected = cell;
+      render();
+    };
+    cells.forEach((cell) => {
+      cell.addEventListener("click", () => selectCell(cell));
+    });
+    document.querySelectorAll("[data-clue-jump]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const start = clueStarts[button.dataset.clueJump];
+        if (!start) return;
+        const target = cells.find(
+          (cell) => cell.dataset.row === String(start.row) && cell.dataset.col === String(start.col)
+        );
+        if (target) {
+          selectCell(target);
+          target.focus();
+        }
+      });
+    });
+    gridEl.addEventListener("keydown", (event) => {
+      if (!selected) return;
+      const key = event.key;
+      if (/^[a-zA-Z]$/.test(key)) {
+        event.preventDefault();
+        entries[keyOf(selected.dataset.row, selected.dataset.col)] = key.toUpperCase();
+        save();
+        const idx = cells.indexOf(selected);
+        const next = cells.slice(idx + 1).find((c) => !entries[keyOf(c.dataset.row, c.dataset.col)]);
+        if (next) selected = next;
+        render();
+      } else if (key === "Backspace") {
+        event.preventDefault();
+        delete entries[keyOf(selected.dataset.row, selected.dataset.col)];
+        save();
+        render();
+      }
+    });
+    document.getElementById("crossword-reveal").addEventListener("click", () => {
+      const target = selected || cells.find((c) => !entries[keyOf(c.dataset.row, c.dataset.col)]);
+      if (!target) return;
+      entries[keyOf(target.dataset.row, target.dataset.col)] = target.dataset.letter;
+      save();
+      render();
+    });
+    document.getElementById("crossword-reset").addEventListener("click", () => {
+      entries = {};
+      save();
+      render();
+    });
+    render();
+  </script>
+</BaseLayout>

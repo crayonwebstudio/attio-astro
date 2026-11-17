@@ -1,0 +1,431 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PartnersFaq from "../components/PartnersFaq.astro";
+
+// Copy fetched live from https://attio.com/startups on 2026-11-17 (HTTP 200).
+// Live has two H1 elements ("Startup program" eyebrow and the benefits
+// headline "80% off Attio. Benefits built for startups."); per this build's
+// one-H1-per-page rule the eyebrow is rendered as a paragraph and the
+// benefits headline is the single H1. The big hero headline is the H2 "Attio
+// for startups.". Live has no standard FinalCta, so hideFinalCta is used.
+// images. The Apply dialog form (fields, placeholders, options, error
+// strings, success copy) is from the live page's i18n dictionary and its JS
+// chunk: funding round Pre-seed / Seed / Series A / Series B, amount raised
+// $0 to $500k through $7.5M+, team size 1 to 5 through 101+, year founded is
+// a number input. The form has no backend; submit shows the live success
+// copy client-side only. The Apply trigger button is not in the live static
+// HTML (the dialog renders client-side), so an Apply button is placed in the
+// hero to open the dialog. The 12th partner logo file is frame-1073713414.svg
+// with no readable name, so it is rendered as a wordmark tile labelled with
+// its filename.
+const faqs = [
+  {
+    q: "Is Attio the right fit if we don't have a sales team yet?",
+    a: "<p>A lot of early-stage founders are using CRM as a founder-led sales tool. Attio works just as well for a founder managing relationships solo as it does for a full GTM team. Many of our startup customers start with one or two users and scale up as they grow.</p>",
+  },
+  {
+    q: "Can I switch to Attio if I'm already on HubSpot or Salesforce?",
+    a: "<p>Yes. Attio makes it straightforward to migrate your data from HubSpot, Salesforce, Pipedrive, <a href=\"/help/reference/imports-exports/migrate-data-from-another-crm\">and more</a>. Most teams are up and running in a matter of hours, not weeks.</p>",
+  },
+  {
+    q: "What perks do Startup Program members get access to?",
+    a: "<p>Members get exclusive deals on tools built for high-growth startups. That includes discounts on products like Mercury, Linear, Notion, Intercom, Sentry, Apollo, Miro, and more. You can browse the full catalogue once you're in the program.</p>",
+  },
+  {
+    q: "Who is eligible for the Attio startup program?",
+    a: "<p>Startups that meet all the following criteria: VC-backed or affiliated with one of our Startup Partners, signed up within the last 90 days, and incorporated less than 5 years ago.</p><p>This discount is valid for workspaces of up to 10 seats.</p>",
+  },
+  {
+    q: "What happens when I apply?",
+    a: "<p>A member of our team will be in touch to confirm your eligibility and get you started.</p>",
+  },
+  {
+    q: "I've already created an Attio workspace, can I still apply?",
+    a: "<p>Yes, you can apply within your first 90 days of creating a workspace.</p>",
+  },
+  {
+    q: "Does Attio have an API or MCP server?",
+    a: "<p>Yes to both. Attio has a REST API, an App SDK, and an MCP server, so you can connect your GTM stack, build custom automations, or plug Attio directly into AI coding agents and automation tools. It's all documented at <a href=\"/platform/developers\">attio.com/platform/developers</a>.</p>",
+  },
+  {
+    q: "Does Attio integrate with the tools we're already using?",
+    a: "<p>Yes, Attio connects with the tools most early-stage teams already run on. That includes Clay, Slack, Granola, Zapier, Gmail, Google Calendar, <a href=\"/apps\">and more</a>. You can browse the full app store at <a href=\"/apps\">attio.com/apps</a>. If you need something custom, the <a href=\"/platform/developers\">API and SDK</a> are there too.</p>",
+  },
+  {
+    q: "What is an agentic CRM?",
+    a: "<p>An agentic CRM is a CRM that uses AI natively, not as a bolt-on. Attio is built this way from the ground up: AI that researches and enriches records, surfaces signals, automates outreach, and lets you search and update your CRM in plain language.</p>",
+  },
+];
+
+const heroLogos = ["Modal", "Obvious", "Granola", "Railway", "Passionfroot", "Wispr Flow", "Listen Labs", "Public"];
+const partnerLogos = [
+  "Y Combinator",
+  "Accel",
+  "Sequoia",
+  "Lightspeed",
+  "a16z",
+  "Benchmark",
+  "Redpoint",
+  "Index",
+  "Khosla",
+  "First Round",
+  "Google Ventures",
+  "Partner",
+];
+const perks = [
+  { name: "Linear", detail: "3 months free" },
+  { name: "Notion", detail: "6 months free" },
+  { name: "Mercury", detail: "Startup perk" },
+  { name: "Intercom", detail: "Startup perk" },
+];
+const cards = [
+  { title: "Ask Attio. Get answers.", body: "Search, update, and create with AI." },
+  { title: "Built around your business.", body: "No rigid templates. No workarounds." },
+  { title: "Up and running in minutes.", body: "Sync your email and calendar immediately." },
+  { title: "From zero to IPO.", body: "Built to scale with you." },
+];
+---
+
+<BaseLayout
+  title="Startup Program | Attio"
+  description="Build on the CRM for the next generation. Get 80% off Attio and benefits to help your startup grow."
+  hideFinalCta
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-16 pt-16 text-center sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-ink-700">Startup program</p>
+    <h2 class="mx-auto mt-6 max-w-3xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Attio for startups.
+    </h2>
+    <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Build on the CRM for the next generation. Get 80% off Attio and benefits to help your startup grow.
+    </p>
+    <div class="mt-8">
+      <button
+        type="button"
+        data-apply-open
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Apply
+      </button>
+    </div>
+    <div class="mx-auto mt-16 flex max-w-4xl flex-wrap items-center justify-center gap-x-8 gap-y-4 text-lg font-semibold text-ink-700">
+      {heroLogos.map((logo) => <span>{logo}</span>)}
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Startup program benefits">
+    <h1 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      80% off Attio. Benefits built for startups.
+    </h1>
+    <ul class="mt-8 max-w-3xl space-y-3 text-lg leading-relaxed text-ink-600">
+      <li class="flex items-start gap-3">
+        <span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" aria-hidden="true" />
+        80% off the annual Pro plan and credits for the first year
+      </li>
+      <li class="flex items-start gap-3">
+        <span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" aria-hidden="true" />
+        30% off the second year
+      </li>
+      <li class="flex items-start gap-3">
+        <span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" aria-hidden="true" />
+        Dedicated onboarding support
+      </li>
+      <li class="flex items-start gap-3">
+        <span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" aria-hidden="true" />
+        Perks from tools startups love, including 3 months of Linear and 6 months of Notion for free
+      </li>
+    </ul>
+    <p class="mt-6 max-w-3xl leading-relaxed text-ink-600">
+      Startups must be venture-backed or affiliated with one of our Startup Partners to qualify.
+    </p>
+  </section>
+
+  <!-- The CRM that grows as fast as you do -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="The CRM that grows as fast as you do">
+    <h2 class="font-display text-heading-md font-semibold tracking-tight">The CRM that grows as fast as you do.</h2>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">
+      Attio is the agentic CRM built for how startups actually work, flexible enough to fit your motion today,
+      powerful enough to scale with you tomorrow.
+    </p>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        cards.map((card) => (
+          <div class="rounded-2xl border border-paper-500 bg-white p-8">
+            <h3 class="font-display text-2xl font-semibold tracking-tight">{card.title}</h3>
+            <p class="mt-3 leading-relaxed text-ink-600">{card.body}</p>
+          </div>
+        ))
+      }
+    </div>
+    <blockquote class="mx-auto mt-16 max-w-3xl text-center">
+      <p class="font-display text-2xl font-medium leading-snug tracking-tight sm:text-3xl">
+        &ldquo;When I first opened Attio, I instantly got the feeling that this was the start of the next
+        generation of CRM.&rdquo;
+      </p>
+      <p class="mt-4 text-base font-semibold">
+        Margaret Shen <span class="font-normal text-ink-600">, Head of Business Operations, Modal</span>
+      </p>
+    </blockquote>
+  </section>
+
+  <!-- Startup Program partners -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Startup Program partners">
+    <h2 class="font-display text-heading-md font-semibold tracking-tight">Some of Our Startup Program partners.</h2>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">
+      We&rsquo;ve teamed up with the world's top venture firms and accelerators to give their portfolio
+      companies access to Attio.
+    </p>
+    <div class="mt-10 flex flex-wrap items-center gap-x-10 gap-y-4 text-xl font-semibold text-ink-700">
+      {partnerLogos.map((logo) => <span>{logo}</span>)}
+    </div>
+    <p class="mt-8 max-w-3xl leading-relaxed text-ink-600">
+      To qualify for the Startup Program, you must be venture backed or affiliated with one of our Startup
+      Partners.
+    </p>
+  </section>
+
+  <!-- Perks -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="Startup perks">
+    <h2 class="font-display text-heading-md font-semibold tracking-tight">
+      The tools you&rsquo;re already building with. At a fraction of the cost.
+    </h2>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">
+      Approved startups get access to perks from the products powering the best teams, including Linear, Notion,
+      Intercom, and more.
+    </p>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        perks.map((perk) => (
+          <div class="rounded-2xl border border-paper-500 bg-white p-8 text-center">
+            <p class="font-display text-2xl font-semibold tracking-tight">{perk.name}</p>
+            <p class="mt-2 text-sm font-medium text-ink-600">{perk.detail}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <PartnersFaq items={faqs} />
+
+  <!-- Apply dialog -->
+  <dialog id="apply-dialog" class="w-full max-w-lg rounded-2xl border border-paper-500 bg-white p-8 shadow-xl backdrop:bg-ink-100/50">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <h2 class="font-display text-2xl font-semibold tracking-tight">Apply for the Startup Program</h2>
+        <p class="mt-2 leading-relaxed text-ink-600">
+          Eligible startups get a discount and a demo with the sales team.
+        </p>
+      </div>
+      <button
+        type="button"
+        data-apply-close
+        class="shrink-0 rounded-full border border-paper-500 px-3 py-1.5 text-sm font-semibold text-ink-100 hover:border-ink-800"
+        aria-label="Close dialog"
+      >
+        Close
+      </button>
+    </div>
+    <form id="apply-form" class="mt-6 space-y-5" novalidate>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label for="apply-first" class="block text-sm font-semibold text-ink-100">First name</label>
+          <input
+            id="apply-first"
+            name="firstName"
+            type="text"
+            placeholder="e.g. Julia"
+            class="mt-2 w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 placeholder:text-ink-700 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+          />
+          <p class="apply-error mt-2 hidden text-sm font-medium text-red-500" role="alert" data-error="firstName">
+            Please enter your first name
+          </p>
+        </div>
+        <div>
+          <label for="apply-last" class="block text-sm font-semibold text-ink-100">Last name</label>
+          <input
+            id="apply-last"
+            name="lastName"
+            type="text"
+            placeholder="e.g. Arowa"
+            class="mt-2 w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 placeholder:text-ink-700 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+          />
+          <p class="apply-error mt-2 hidden text-sm font-medium text-red-500" role="alert" data-error="lastName">
+            Please enter your last name
+          </p>
+        </div>
+      </div>
+      <div>
+        <label for="apply-email" class="block text-sm font-semibold text-ink-100">Company email</label>
+        <input
+          id="apply-email"
+          name="companyEmail"
+          type="email"
+          placeholder="e.g. julia@example.com"
+          autocomplete="email"
+          class="mt-2 w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 placeholder:text-ink-700 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+        />
+        <p class="apply-error mt-2 hidden text-sm font-medium text-red-500" role="alert" data-error="companyEmail">
+          Please enter your work email
+        </p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label for="apply-amount" class="block text-sm font-semibold text-ink-100">Total amount raised</label>
+          <select
+            id="apply-amount"
+            name="totalAmountRaised"
+            class="mt-2 w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+          >
+            <option value="">Select</option>
+            <option value="$0 to $500k">$0 to $500k</option>
+            <option value="$500k to $1M">$500k to $1M</option>
+            <option value="$1M to $2.5M">$1M to $2.5M</option>
+            <option value="$2.5M to $5M">$2.5M to $5M</option>
+            <option value="$5M to $7.5M">$5M to $7.5M</option>
+            <option value="$7.5M+">$7.5M+</option>
+          </select>
+          <p class="apply-error mt-2 hidden text-sm font-medium text-red-500" role="alert" data-error="totalAmountRaised">
+            Please select total amount raised
+          </p>
+        </div>
+        <div>
+          <label for="apply-round" class="block text-sm font-semibold text-ink-100">Latest funding round</label>
+          <select
+            id="apply-round"
+            name="fundingRound"
+            class="mt-2 w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+          >
+            <option value="">Select</option>
+            <option value="Pre-seed">Pre-seed</option>
+            <option value="Seed">Seed</option>
+            <option value="Series A">Series A</option>
+            <option value="Series B">Series B</option>
+          </select>
+          <p class="apply-error mt-2 hidden text-sm font-medium text-red-500" role="alert" data-error="fundingRound">
+            Please select a funding round
+          </p>
+        </div>
+      </div>
+      <div>
+        <label for="apply-investors" class="block text-sm font-semibold text-ink-100">Investors</label>
+        <input
+          id="apply-investors"
+          name="investors"
+          type="text"
+          placeholder="e.g. Redpoint Ventures, angels, or bootstrapped"
+          class="mt-2 w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 placeholder:text-ink-700 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+        />
+        <p class="apply-error mt-2 hidden text-sm font-medium text-red-500" role="alert" data-error="investors">
+          Please tell us who your investors are
+        </p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label for="apply-team" class="block text-sm font-semibold text-ink-100">Team size</label>
+          <select
+            id="apply-team"
+            name="teamSize"
+            class="mt-2 w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+          >
+            <option value="">Select</option>
+            <option value="1 to 5">1 to 5</option>
+            <option value="6 to 10">6 to 10</option>
+            <option value="11 to 20">11 to 20</option>
+            <option value="21 to 50">21 to 50</option>
+            <option value="51 to 100">51 to 100</option>
+            <option value="101+">101+</option>
+          </select>
+          <p class="apply-error mt-2 hidden text-sm font-medium text-red-500" role="alert" data-error="teamSize">
+            Please select a team size
+          </p>
+        </div>
+        <div>
+          <label for="apply-year" class="block text-sm font-semibold text-ink-100">Year founded</label>
+          <input
+            id="apply-year"
+            name="yearFounded"
+            type="number"
+            min="1900"
+            max="2026"
+            placeholder="e.g. 2023"
+            class="mt-2 w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 placeholder:text-ink-700 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+          />
+          <p class="apply-error mt-2 hidden text-sm font-medium text-red-500" role="alert" data-error="yearFounded">
+            Please select year founded
+          </p>
+        </div>
+      </div>
+      <div>
+        <label for="apply-usecase" class="block text-sm font-semibold text-ink-100">Use case</label>
+        <textarea
+          id="apply-usecase"
+          name="useCase"
+          rows="3"
+          maxlength="1000"
+          placeholder="What will you use Attio for?"
+          class="mt-2 w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 placeholder:text-ink-700 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+        ></textarea>
+        <p class="apply-error mt-2 hidden text-sm font-medium text-red-500" role="alert" data-error="useCase">
+          Please describe your use case
+        </p>
+      </div>
+      <button
+        type="submit"
+        class="w-full rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-400"
+      >
+        Apply
+      </button>
+    </form>
+    <div id="apply-success" class="mt-6 hidden" role="status">
+      <h3 class="font-display text-xl font-semibold">We&rsquo;ve received your submission.</h3>
+      <p class="mt-2 leading-relaxed text-ink-600">
+        Your Startup Program application is with our team. They&rsquo;ll be in touch soon.
+      </p>
+    </div>
+  </dialog>
+
+  <script>
+    const dialog = document.getElementById("apply-dialog");
+    document.querySelector("[data-apply-open]")?.addEventListener("click", () => dialog.showModal());
+    document.querySelector("[data-apply-close]")?.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    // Apply form: client-side validation with the live error strings, no
+    // backend. A valid submit shows the live success copy.
+    const form = document.getElementById("apply-form");
+    const success = document.getElementById("apply-success");
+    const showError = (name, show) => {
+      const el = form.querySelector(`[data-error="${name}"]`);
+      if (el) el.classList.toggle("hidden", !show);
+    };
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const get = (name) => String(data.get(name) || "").trim();
+      let valid = true;
+      const checks = [
+        ["firstName", get("firstName").length > 0],
+        ["lastName", get("lastName").length > 0],
+        ["companyEmail", /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(get("companyEmail"))],
+        ["totalAmountRaised", get("totalAmountRaised").length > 0],
+        ["fundingRound", get("fundingRound").length > 0],
+        ["investors", get("investors").length > 0],
+        ["teamSize", get("teamSize").length > 0],
+        ["yearFounded", /^\d{4}$/.test(get("yearFounded"))],
+        ["useCase", get("useCase").length > 0],
+      ];
+      checks.forEach(([name, ok]) => {
+        showError(name, !ok);
+        if (!ok) valid = false;
+      });
+      if (!valid) return;
+      form.classList.add("hidden");
+      success.classList.remove("hidden");
+    });
+  </script>
+</BaseLayout>

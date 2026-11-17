@@ -1,0 +1,188 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/download on 2026-11-17 (HTTP 200).
+// Live H1 is "Desktop & mobile", in a header before main, with no subcopy.
+// Live has no standard FinalCta ("Agentic revenue runs on Attio." appears 0
+// times in the live HTML), so hideFinalCta is used. Download links are the
+// live destinations. The iOS and Android rows each have a QR-code button that
+// opens a dialog on live; the dialogs render here with real QR codes generated
+// from the live store URLs (public/qr/attio-ios.svg and attio-android.svg),
+// not copied images.
+---
+
+<BaseLayout
+  title="Downloads | Attio"
+  description="Download Attio for desktop and mobile, the Chrome extension, and the Slack agent."
+  hideFinalCta
+>
+  <!-- Hero: H1 lives in a header before main on live, with no subcopy -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 sm:px-6 sm:pt-24">
+    <h1 class="font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Desktop &amp; mobile
+    </h1>
+  </section>
+
+  <div class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
+    <!-- Attio for desktop -->
+    <section class="border-t border-paper-500 py-12" aria-label="Attio for desktop">
+      <h2 class="font-display text-heading-sm font-semibold tracking-tight">Attio for desktop.</h2>
+      <p class="mt-3 text-lg leading-relaxed text-ink-600">macOS application.</p>
+      <ul class="mt-8 space-y-4">
+        <li class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-paper-500 bg-white px-6 py-5">
+          <p class="text-base font-medium">macOS [Apple Silicon]</p>
+          <a
+            href="/go/desktop-app/download/darwin/aarch64"
+            class="rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+          >
+            Download
+          </a>
+        </li>
+        <li class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-paper-500 bg-white px-6 py-5">
+          <p class="text-base font-medium">macOS [Intel]</p>
+          <a
+            href="/go/desktop-app/download/darwin/x86_64"
+            class="rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+          >
+            Download
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Attio for mobile -->
+    <section class="border-t border-paper-500 py-12" aria-label="Attio for mobile">
+      <h2 class="font-display text-heading-sm font-semibold tracking-tight">Attio for mobile.</h2>
+      <p class="mt-3 text-lg leading-relaxed text-ink-600">iOS and Android.</p>
+      <ul class="mt-8 space-y-4">
+        <li class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-paper-500 bg-white px-6 py-5">
+          <p class="text-base font-medium">iOS</p>
+          <div class="flex items-center gap-3">
+            <button
+              type="button"
+              data-qr-open="ios"
+              class="rounded-full border border-ink-100 px-5 py-2.5 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+              aria-label="Show QR code for the iOS app"
+            >
+              QR code
+            </button>
+            <a
+              href="https://apps.apple.com/app/attio/id1511545395"
+              class="rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+            >
+              App Store
+            </a>
+          </div>
+        </li>
+        <li class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-paper-500 bg-white px-6 py-5">
+          <p class="text-base font-medium">Android</p>
+          <div class="flex items-center gap-3">
+            <button
+              type="button"
+              data-qr-open="android"
+              class="rounded-full border border-ink-100 px-5 py-2.5 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+              aria-label="Show QR code for the Android app"
+            >
+              QR code
+            </button>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.attio"
+              class="rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+            >
+              Play Store
+            </a>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Attio extension -->
+    <section class="border-t border-paper-500 py-12" aria-label="Attio extension">
+      <h2 class="font-display text-heading-sm font-semibold tracking-tight">Attio extension.</h2>
+      <p class="mt-3 text-lg leading-relaxed text-ink-600">Google Chrome.</p>
+      <ul class="mt-8 space-y-4">
+        <li class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-paper-500 bg-white px-6 py-5">
+          <p class="text-base font-medium">Google Chrome</p>
+          <a
+            href="https://chrome.google.com/webstore/detail/attio/legacbojjmajoedfolbjlekjjkepadph/"
+            class="rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+          >
+            Install
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Attio for Slack -->
+    <section class="border-t border-paper-500 py-12" aria-label="Attio for Slack">
+      <h2 class="font-display text-heading-sm font-semibold tracking-tight">Attio for Slack.</h2>
+      <p class="mt-3 text-lg leading-relaxed text-ink-600">Slack agent.</p>
+      <ul class="mt-8 space-y-4">
+        <li class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-paper-500 bg-white px-6 py-5">
+          <p class="text-base font-medium">Slack</p>
+          <a
+            href="https://attio.com/apps/slack"
+            class="rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+          >
+            Install
+          </a>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- QR dialogs: real QR codes generated from the live store URLs -->
+  <dialog id="qr-dialog" class="rounded-2xl border border-paper-500 bg-white p-8 shadow-xl backdrop:bg-ink-100/50">
+    <div class="flex w-full max-w-xs flex-col items-center gap-4 text-center">
+      <img id="qr-image" src="/qr/attio-ios.svg" alt="QR code to download Attio" class="h-48 w-48" />
+      <p id="qr-label" class="text-base font-medium">Scan to download Attio for iOS</p>
+      <a id="qr-link" href="https://apps.apple.com/app/attio/id1511545395" class="text-sm font-semibold text-blue-500 underline underline-offset-2">
+        Open in the App Store
+      </a>
+      <button
+        type="button"
+        data-qr-close
+        class="mt-2 rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Close
+      </button>
+    </div>
+  </dialog>
+</BaseLayout>
+
+<script>
+  const dialog = document.getElementById("qr-dialog") as HTMLDialogElement;
+  const qrImage = document.getElementById("qr-image") as HTMLImageElement;
+  const qrLabel = document.getElementById("qr-label") as HTMLParagraphElement;
+  const qrLink = document.getElementById("qr-link") as HTMLAnchorElement;
+  const targets: Record<string, { img: string; label: string; href: string; linkText: string }> = {
+    ios: {
+      img: "/qr/attio-ios.svg",
+      label: "Scan to download Attio for iOS",
+      href: "https://apps.apple.com/app/attio/id1511545395",
+      linkText: "Open in the App Store",
+    },
+    android: {
+      img: "/qr/attio-android.svg",
+      label: "Scan to download Attio for Android",
+      href: "https://play.google.com/store/apps/details?id=com.attio",
+      linkText: "Open in the Play Store",
+    },
+  };
+  document.querySelectorAll("[data-qr-open]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const key = (button as HTMLElement).dataset.qrOpen || "ios";
+      const target = targets[key];
+      if (!target) return;
+      qrImage.src = target.img;
+      qrLabel.textContent = target.label;
+      qrLink.href = target.href;
+      qrLink.textContent = target.linkText;
+      dialog.showModal();
+    });
+  });
+  document.querySelector("[data-qr-close]")?.addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+</script>

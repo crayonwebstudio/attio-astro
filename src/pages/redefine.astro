@@ -1,0 +1,119 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Copy fetched live from https://attio.com/redefine on 2026-11-17 (HTTP 200).
+// Live H1 is "Customer relationship magic." with the eyebrow "CRM" plus "abbr."
+// above it. Live has no standard FinalCta ("Agentic revenue runs on Attio."
+// appears 0 times in the live HTML), so hideFinalCta is used.
+// The blob image on live is rendered as a CSS mock panel, not copied.
+---
+
+<BaseLayout
+  title="Redefining CRM | Attio"
+  description="The time has come to redefine CRM. A CRM that works for you, not the other way around."
+  hideFinalCta
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-16 pt-16 text-center sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-ink-700">
+      CRM <span class="normal-case tracking-normal">abbr.</span>
+    </p>
+    <h1 class="mx-auto mt-6 max-w-4xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Customer relationship magic.
+    </h1>
+    <!-- Blob image: CSS mock panel, live image not copied -->
+    <div class="mx-auto mt-14 flex min-h-[280px] max-w-4xl items-center justify-center overflow-hidden rounded-2xl border border-paper-500 bg-ink-100 px-6 py-16 sm:min-h-[360px]">
+      <div class="flex flex-col items-center gap-4 text-center">
+        <p class="font-display text-4xl font-semibold tracking-tight text-white sm:text-5xl">attio</p>
+        <p class="max-w-md text-sm leading-relaxed text-white/70">
+          Customer relationship magic, rendered as a placeholder panel. The live blob image is not copied.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The time has come -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="The time has come to redefine CRM">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      The time has come to redefine CRM.
+    </h2>
+    <div class="mt-6 max-w-3xl space-y-5 text-lg leading-relaxed text-ink-600">
+      <p>
+        For more than twenty years, businesses have faced an impossible choice with CRM: power or simplicity.
+      </p>
+      <p>
+        Complex systems that could do anything, or simple tools that couldn&rsquo;t scale. Most would use
+        spreadsheets, until they had no choice.
+      </p>
+      <p>We were told, that&rsquo;s just how CRM works.</p>
+      <p>
+        The paradigm was built for a different era: when the internet was dial-up, when AI was science fiction,
+        when business moved in months, not minutes.
+      </p>
+      <p>Times have changed.</p>
+      <p>Today&rsquo;s businesses deserve better than yesterday&rsquo;s CRM.</p>
+      <p>They deserve magic. Real magic, the kind that makes the impossible feel inevitable.</p>
+    </div>
+  </section>
+
+  <!-- What does customer relationship magic mean? -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="What does customer relationship magic mean?">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      What does customer relationship magic mean?
+    </h2>
+    <div class="mt-6 max-w-3xl space-y-5 text-lg leading-relaxed text-ink-600">
+      <p>It means flipping the script: a CRM that works for you, not the other way around.</p>
+      <p>
+        It means building a CRM for how business actually works today, not how it worked two decades ago.
+      </p>
+      <p>
+        It means rejecting the false trade-off that power must mean complexity, and an intuitive experience must
+        mean limitation.
+      </p>
+      <p>It means:</p>
+    </div>
+    <ol class="mt-10 grid gap-6 sm:grid-cols-2">
+      {
+        [
+          { n: "[1]", title: "Setup should be instant.", body: "Because your time is for strategy, not data entry." },
+          { n: "[2]", title: "Power should feel effortless.", body: "Because you control your tools, not the other way around." },
+          { n: "[3]", title: "Your CRM should adapt to you.", body: "Because your business model and workflows are unique." },
+          { n: "[4]", title: "AI should be foundational.", body: "Because it\u2019s not just a feature, AI changes everything." },
+        ].map((item) => (
+          <li class="rounded-2xl border border-paper-500 bg-white p-8">
+            <p class="text-sm font-semibold text-blue-500">{item.n}</p>
+            <h3 class="mt-3 font-display text-2xl font-semibold tracking-tight">{item.title}</h3>
+            <p class="mt-3 leading-relaxed text-ink-600">{item.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <!-- Closing -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="This is customer relationship magic">
+    <h2 class="max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      This is customer relationship magic.
+    </h2>
+    <div class="mt-6 max-w-3xl space-y-5 text-lg leading-relaxed text-ink-600">
+      <p>That&rsquo;s why we&rsquo;re here. That&rsquo;s what we&rsquo;re building:</p>
+      <p class="font-display text-2xl font-semibold tracking-tight text-ink-100 sm:text-3xl">
+        A CRM that works for you, not the other way around.
+      </p>
+    </div>
+    <div class="mt-10 flex flex-wrap gap-3">
+      <a
+        href="/go/welcome/sign-in"
+        class="rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Start for free
+      </a>
+      <a
+        href="/contact/sales"
+        class="rounded-full border border-ink-100 px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+      >
+        Talk to sales
+      </a>
+    </div>
+  </section>
+</BaseLayout>

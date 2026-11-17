@@ -1,0 +1,243 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import expertsData from "../data/experts.json";
+
+// Copy fetched live from https://attio.com/experts on 2026-11-17 (HTTP 200 with
+// a browser user agent; plain curl returns 403). The page is a PartnerPage.io
+// directory embed, but its 29 partner cards are fully rendered in the live
+// HTML, so all names, tiers, ratings, descriptions, and detail links are
+// live copy. Live has no standard FinalCta, so hideFinalCta is used. Tier
+// badge and partner logo images are rendered as text tiles, not copied.
+// Partner detail links point to /experts/partner/<slug> as on live; those
+// detail pages are not in this build's scope. The sort control shows the
+// live label "Sort by Tier and review count"; the extra sort options in the
+// dropdown could not be verified from live static HTML or JS, so the menu
+// offers the verified default plus review count and name sorts.
+type Partner = {
+  href: string;
+  tier: string;
+  name: string;
+  rating: string | null;
+  desc: string;
+};
+
+const partners: Partner[] = expertsData.partners as Partner[];
+
+const tierRank: Record<string, number> = { Elite: 0, Advanced: 1, Core: 2 };
+
+function parseRating(rating: string | null): { score: string | null; count: number } {
+  if (!rating) return { score: null, count: 0 };
+  const m = rating.match(/^([\d.]+) \((\d+)\)$/);
+  if (!m) return { score: null, count: 0 };
+  return { score: m[1], count: Number(m[2]) };
+}
+
+function parseDesc(desc: string): { intro: string; bullets: string[] } {
+  const parts = desc.split(" * ").map((p) => p.trim()).filter(Boolean);
+  if (parts.length <= 1) return { intro: desc, bullets: [] };
+  return { intro: parts[0], bullets: parts.slice(1) };
+}
+
+const initials = (name: string) =>
+  name
+    .replace(/[®™]/g, "")
+    .split(/[\s&-]+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0].toUpperCase())
+    .join("");
+
+const sorted = [...partners].sort((a, b) => {
+  const tierDiff = (tierRank[a.tier] ?? 9) - (tierRank[b.tier] ?? 9);
+  if (tierDiff !== 0) return tierDiff;
+  return parseRating(b.rating).count - parseRating(a.rating).count;
+});
+---
+
+<BaseLayout
+  title="Hire an expert | Attio"
+  description="Elevate your GTM with an expert. Attio Experts help you migrate, build, and scale your CRM and GTM systems."
+  hideFinalCta
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 sm:px-6 sm:pt-24">
+    <h1 class="max-w-3xl font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Elevate your GTM with an expert.
+    </h1>
+    <div class="mt-8">
+      <a
+        href="/experts/matchmaking"
+        class="inline-block rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300"
+      >
+        Hire an expert
+      </a>
+    </div>
+  </section>
+
+  <!-- Directory -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6" aria-label="Expert partners">
+    <div class="flex flex-wrap items-center gap-3">
+      <div class="relative min-w-0 flex-1">
+        <label for="expert-search" class="sr-only">Search partners or keywords</label>
+        <input
+          id="expert-search"
+          type="search"
+          placeholder="Search partners or keywords"
+          class="w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 placeholder:text-ink-700 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+        />
+      </div>
+      <div class="relative">
+        <button
+          type="button"
+          id="sort-button"
+          class="flex items-center gap-2 rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm font-medium text-ink-100 hover:border-ink-800"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+        >
+          <span class="text-ink-700">Sort by</span>
+          <span id="sort-label">Tier and review count</span>
+          <span aria-hidden="true" class="text-ink-700">v</span>
+        </button>
+        <div
+          id="sort-menu"
+          class="absolute right-0 z-10 mt-2 hidden w-56 rounded-xl border border-paper-500 bg-white py-2 shadow-lg"
+          role="listbox"
+          aria-label="Sort partners"
+        >
+          <button type="button" data-sort="tier" role="option" aria-selected="true" class="block w-full px-4 py-2.5 text-left text-sm font-medium hover:bg-paper-200">
+            Tier and review count
+          </button>
+          <button type="button" data-sort="reviews" role="option" aria-selected="false" class="block w-full px-4 py-2.5 text-left text-sm font-medium hover:bg-paper-200">
+            Review count
+          </button>
+          <button type="button" data-sort="name" role="option" aria-selected="false" class="block w-full px-4 py-2.5 text-left text-sm font-medium hover:bg-paper-200">
+            Name (A to Z)
+          </button>
+        </div>
+      </div>
+    </div>
+    <p id="expert-count" class="mt-4 text-sm font-medium text-ink-600">
+      {partners.length} experts
+    </p>
+
+    <div id="expert-grid" class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {
+        sorted.map((partner) => {
+          const rating = parseRating(partner.rating);
+          const desc = parseDesc(partner.desc);
+          return (
+            <a
+              href={partner.href}
+              class="expert-card flex flex-col rounded-2xl border border-paper-500 bg-white p-8 hover:border-ink-800"
+              data-name={partner.name.toLowerCase()}
+              data-desc={partner.desc.toLowerCase()}
+              data-tier={tierRank[partner.tier] ?? 9}
+              data-reviews={rating.count}
+            >
+              <div class="flex items-start justify-between gap-3">
+                <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-ink-100 font-display text-base font-semibold text-white">
+                  {initials(partner.name)}
+                </span>
+                <span class="rounded-full bg-paper-200 px-3 py-1 text-xs font-semibold text-ink-700">
+                  {partner.tier}
+                </span>
+              </div>
+              <h2 class="mt-5 font-display text-2xl font-semibold tracking-tight">{partner.name}</h2>
+              <p class="mt-2 text-sm font-medium text-ink-600">
+                {rating.score ? (
+                  <>
+                    <span class="text-ink-100">{rating.score}</span> ({rating.count})
+                  </>
+                ) : (
+                  "(0)"
+                )}
+              </p>
+              <p class="mt-4 text-sm leading-relaxed text-ink-600">{desc.intro}</p>
+              {desc.bullets.length > 0 && (
+                <ul class="mt-4 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-ink-600">
+                  {desc.bullets.map((bullet) => (
+                    <li>{bullet}</li>
+                  ))}
+                </ul>
+              )}
+            </a>
+          );
+        })
+      }
+    </div>
+    <p id="expert-empty" class="mt-6 hidden text-base leading-relaxed text-ink-600">
+      No experts match your search.
+    </p>
+
+    <!-- Let us match you -->
+    <div class="mt-16 rounded-2xl border border-paper-500 bg-ink-100 p-8 text-white sm:p-12">
+      <h2 class="font-display text-heading-sm font-semibold tracking-tight">Let us match you</h2>
+      <p class="mt-3 max-w-xl leading-relaxed text-white/80">
+        Attio will do all the work to match you with the best Experts.
+      </p>
+      <div class="mt-6">
+        <a
+          href="/experts/matchmaking"
+          class="inline-block rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-300"
+        >
+          Get matched
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const grid = document.getElementById("expert-grid");
+    const cards = Array.from(grid.querySelectorAll(".expert-card"));
+    const search = document.getElementById("expert-search");
+    const countEl = document.getElementById("expert-count");
+    const emptyEl = document.getElementById("expert-empty");
+    const sortButton = document.getElementById("sort-button");
+    const sortMenu = document.getElementById("sort-menu");
+    const sortLabel = document.getElementById("sort-label");
+    let sortMode = "tier";
+
+    const apply = () => {
+      const q = search.value.trim().toLowerCase();
+      const visible = cards.filter((card) => {
+        const match =
+          !q || card.dataset.name.includes(q) || card.dataset.desc.includes(q);
+        card.classList.toggle("hidden", !match);
+        return match;
+      });
+      const ordered = [...visible].sort((a, b) => {
+        if (sortMode === "reviews") return Number(b.dataset.reviews) - Number(a.dataset.reviews);
+        if (sortMode === "name") return a.dataset.name.localeCompare(b.dataset.name);
+        const tierDiff = Number(a.dataset.tier) - Number(b.dataset.tier);
+        if (tierDiff !== 0) return tierDiff;
+        return Number(b.dataset.reviews) - Number(a.dataset.reviews);
+      });
+      ordered.forEach((card) => grid.appendChild(card));
+      countEl.textContent = `${visible.length} expert${visible.length === 1 ? "" : "s"}`;
+      emptyEl.classList.toggle("hidden", visible.length > 0);
+    };
+
+    search.addEventListener("input", apply);
+
+    sortButton.addEventListener("click", () => {
+      const open = sortMenu.classList.toggle("hidden");
+      sortButton.setAttribute("aria-expanded", String(!open));
+    });
+    document.addEventListener("click", (event) => {
+      if (!sortMenu.classList.contains("hidden") && !event.target.closest("#sort-button") && !event.target.closest("#sort-menu")) {
+        sortMenu.classList.add("hidden");
+        sortButton.setAttribute("aria-expanded", "false");
+      }
+    });
+    sortMenu.querySelectorAll("[data-sort]").forEach((option) => {
+      option.addEventListener("click", () => {
+        sortMode = option.dataset.sort;
+        sortLabel.textContent = option.textContent.trim();
+        sortMenu.querySelectorAll("[data-sort]").forEach((o) => o.setAttribute("aria-selected", String(o === option)));
+        sortMenu.classList.add("hidden");
+        sortButton.setAttribute("aria-expanded", "false");
+        apply();
+      });
+    });
+  </script>
+</BaseLayout>

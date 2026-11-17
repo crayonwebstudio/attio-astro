@@ -1,0 +1,372 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import quotesOrdered from "../data/nextgen-quotes-ordered.json";
+
+// Copy fetched live from https://attio.com/next-gen on 2026-11-17 (HTTP 200).
+// Long-form article page. Live H1 is "The next generation" with the big
+// headline as the H2 "AI is here, and it's going to revolutionize CRM.". The
+// two quote carousels are live: the intro carousel cycles 5 people (Sahil
+// Mansuri's quote shown first), the final carousel cycles 71 people (Kyle
+// Coleman's quote shown first). All 71 quotes were verified against the
+// live page's own JS data chunk, in live DOM order. Live has no standard
+// FinalCta, so hideFinalCta is used; the page closes with its own "Ready to
+// build your team's dream CRM?" section with a demo email form. Live em
+// dashes in article copy are rendered as commas, per the build rule.
+type Quote = { company: string; name: string; quote: string; title: string };
+const allQuotes: Quote[] = quotesOrdered as Quote[];
+const introNames = ["Sahil Mansuri", "Mehdi Boudoukhane", "Greg Isenberg", "Chris Koehler", "Rosalyn Santa Elena"];
+const introQuotes = introNames
+  .map((name) => allQuotes.find((q) => q.name === name))
+  .filter((q): q is Quote => Boolean(q));
+
+const cleanQuote = (quote: string) => quote.replace(/\u2014/g, ",");
+const quoteParas = (quote: string) =>
+  cleanQuote(quote)
+    .split(/\n+/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+---
+
+<BaseLayout
+  title="AI & the next generation | Attio"
+  description="AI is here, and it is going to revolutionize CRM. The world's largest B2B software category is about to get disrupted in a massive way."
+  hideFinalCta
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
+    <h1 class="font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      The next generation
+    </h1>
+    <h2 class="mx-auto mt-6 max-w-3xl font-display text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+      AI is here, and it&rsquo;s going to revolutionize CRM.
+    </h2>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      The world&rsquo;s largest B2B software category is about to get disrupted in a massive way.
+    </p>
+  </section>
+
+  <!-- Intro quote carousel -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="What leaders say about AI and CRM">
+    <div class="mx-auto max-w-3xl text-center">
+      <blockquote id="intro-quote" class="font-display text-2xl font-medium leading-snug tracking-tight sm:text-3xl">
+        {quoteParas(introQuotes[0].quote).map((para) => <p class="mt-3 first:mt-0">&ldquo;{para}&rdquo;</p>)}
+      </blockquote>
+      <p id="intro-author" class="mt-6 text-base font-semibold">
+        {introQuotes[0].name} <span class="font-normal text-ink-600">, {introQuotes[0].title}, {introQuotes[0].company}</span>
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3" role="group" aria-label="Choose a quote">
+        {
+          introQuotes.map((q, i) => (
+            <button
+              type="button"
+              data-intro-quote={i}
+              class={`intro-person rounded-full border px-4 py-2 text-sm font-semibold ${i === 0 ? "border-ink-100 bg-ink-100 text-white" : "border-ink-100 text-ink-100 hover:bg-paper-200"}`}
+              aria-pressed={i === 0 ? "true" : "false"}
+            >
+              {q.name}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Article -->
+  <article class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="font-display text-heading-md font-semibold tracking-tight">A new paradigm for CRM</h2>
+      <div class="mt-6 space-y-5 text-lg leading-relaxed text-ink-600">
+        <p>
+          AI is here, and it promises to be even more exponential, seismic, and revolutionary for CRM than the
+          internet was.
+        </p>
+        <p>
+          Imagine a world where your CRM is not just a manual system of record, but also an autonomous system of
+          action. It&rsquo;s a living, breathing entity that understands your business context inside and out,
+          perfectly matching your business model.
+        </p>
+        <p>
+          It&rsquo;s more than the center of your stack. Your CRM is constantly working in the background,
+          ingesting both structured and unstructured data from every interaction. Every email, every call, every
+          meeting, every product interaction, is presented to you in a way that naturally makes sense for your
+          business.
+        </p>
+        <p>
+          In this world, the CRM is now where you can architect your entire GTM strategy. You can build and
+          deploy intelligent systems that were previously unthinkable.
+        </p>
+        <p>
+          Every single go-to-market process becomes automated and scaleable, even those you thought were
+          impossible to scale because they required human judgment and nuance.
+        </p>
+        <p>
+          Imagine your most brilliant revenue ops teammate, your most meticulous analyst, and your most intuitive
+          sales rep all rolled into one tireless, ever-present entity.
+        </p>
+        <p>That&rsquo;s your new CRM in the AI era.</p>
+        <p>
+          It&rsquo;s working alongside you 24/7, building the engine for your GTM strategy under your direction,
+          giving you support on your sales calls, and helping you make decisions with the entire context of your
+          business.
+        </p>
+      </div>
+      <blockquote class="mt-12 border-l-2 border-blue-500 pl-6">
+        <p class="font-display text-2xl font-medium leading-snug tracking-tight">
+          &ldquo;In the AI era, CRMs will be data-driven, autonomous go-to-market engines doing all the heavy
+          lifting of the sales organization.&rdquo;
+        </p>
+        <p class="mt-4 text-base font-semibold">Hanna Larsson <span class="font-normal text-ink-600">, Founder &amp; CEO, Huntrs</span></p>
+      </blockquote>
+
+      <h2 class="mt-16 font-display text-heading-md font-semibold tracking-tight">
+        Intelligent agents: The driving force of your go-to-market engine
+      </h2>
+      <div class="mt-6 space-y-5 text-lg leading-relaxed text-ink-600">
+        <p>
+          Every stellar go-to-market team automates as many of its processes as they can. Eventually, however,
+          they hit a limit. There are important processes that require human judgment, heavy thinking, and
+          multiple steps.
+        </p>
+        <p>
+          Not anymore. In this new world, intelligent agents will execute on your strategy. These aren&rsquo;t
+          simple automation tools, nor are they anthropomorphized bots. Instead, they are sophisticated AI
+          entities that are human-like in their decision making. They understand context, learn from experience,
+          and make nuanced decisions.
+        </p>
+        <p>
+          Imagine having a fleet of these agents at your disposal, each one capable of performing complex tasks
+          proactively and automatically. Every process that once required human input is now scalable. New
+          processes, ones you thought impossible to implement, are now within reach.
+        </p>
+        <p>
+          As these intelligent agents drive your go-to-market engine in the background, you&rsquo;re free to focus
+          on what truly matters: the high-impact, strategic work that propels your company to the next level.
+        </p>
+      </div>
+      <blockquote class="mt-12 border-l-2 border-blue-500 pl-6">
+        <p class="font-display text-2xl font-medium leading-snug tracking-tight">
+          &ldquo;CRM in the AI era means less button clicking and more real work getting done. It will help you
+          proactively go to market instead of reacting to what the market chooses to tell you.&rdquo;
+        </p>
+        <p class="mt-4 text-base font-semibold">Matt Volm <span class="font-normal text-ink-600">, CEO, RevOps Co-op</span></p>
+      </blockquote>
+
+      <h3 class="mt-16 font-display text-heading-sm font-semibold tracking-tight">A true system of action</h3>
+      <div class="mt-6 space-y-5 text-lg leading-relaxed text-ink-600">
+        <p>
+          Picture this: your CEO has just tasked you with building a GTM motion to boost product upsells. Instead
+          of spending weeks analyzing data and configuring complex workflows, you simply ask your CRM:
+          &ldquo;Show me our top PQLs for upsell opportunities based on product usage.&rdquo;
+        </p>
+        <p>
+          Within seconds, your agents begin to do their work. Your CRM presents you with a comprehensive list of
+          PQLs, each with a detailed profile including their usage patterns, engagement metrics, and potential
+          value from upgrading. These agents have intelligently scored and ranked these leads based on multiple
+          factors, not just product data, but also their recent announcements, context of emails, and more. This
+          gives you a clear picture of your best upsell opportunities.
+        </p>
+        <p>With just a simple command, you ask your CRM to &ldquo;prepare an upsell campaign for these PQLs.&rdquo;</p>
+        <p>Instantly, your CRM springs into action:</p>
+      </div>
+      <ol class="mt-8 space-y-4">
+        {
+          [
+            "It segments the PQLs into different tiers based on their likelihood to convert and potential deal size.",
+            "For each tier, it crafts personalized email sequences, drawing on each user\u2019s product history, interactions with support and success, and data on the web.",
+            "It automatically sets up a new pipeline specifically for PQL upsells, with stages tailored to this data-driven sales cycle.",
+            "It creates and assigns tasks to your sales team, complete with detailed briefings on each PQL.",
+          ].map((step, i) => (
+            <li class="flex items-start gap-4 rounded-2xl border border-paper-500 bg-white p-6">
+              <span class="font-display text-sm font-semibold text-blue-500">0{i + 1}</span>
+              <p class="leading-relaxed text-ink-600">{step}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="mt-8 text-lg leading-relaxed text-ink-600">
+        You&rsquo;ve just created a new, automated GTM motion in minutes.
+      </p>
+      <blockquote class="mt-12 border-l-2 border-blue-500 pl-6">
+        <p class="font-display text-2xl font-medium leading-snug tracking-tight">
+          &ldquo;As AI advances, CRMs will become the single source of truth and action for a company&rsquo;s GTM
+          strategy. Every process will flow through an AI-enriched system, tracking a customer&rsquo;s entire
+          lifecycle from end to end.&rdquo;
+        </p>
+        <p class="mt-4 text-base font-semibold">Adrian Alfieri <span class="font-normal text-ink-600">, Founder &amp; CEO, Verbatim</span></p>
+      </blockquote>
+      <p class="mt-12 text-lg leading-relaxed text-ink-600">
+        From here, your sales team can focus on what they do best: sell. As they drive revenue forward, your CRM
+        continues to provide them with support every step of the way:
+      </p>
+      <ul class="mt-6 space-y-3 text-lg leading-relaxed text-ink-600">
+        <li class="flex items-start gap-3">
+          <span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" aria-hidden="true" />
+          It schedules calls and preps your reps with all the relevant information for each PQL.
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" aria-hidden="true" />
+          During calls, it listens in, providing real-time suggestions based on the prospect&rsquo;s responses.
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" aria-hidden="true" />
+          It automatically updates records, tracks engagement, and adjusts lead scores based on interactions.
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" aria-hidden="true" />
+          When a deal closes, it seamlessly handles the backend processes, updating subscriptions in Stripe,
+          sending confirmation emails, and updating all relevant records
+        </li>
+      </ul>
+      <blockquote class="mt-12 border-l-2 border-blue-500 pl-6">
+        <p class="font-display text-2xl font-medium leading-snug tracking-tight">
+          &ldquo;CRM will evolve from a system of record to a system of action, intelligently performing tasks
+          to enhance both individual and business outcomes.&rdquo;
+        </p>
+        <p class="mt-4 text-base font-semibold">Alex Bard <span class="font-normal text-ink-600">, Managing Director, Redpoint Ventures</span></p>
+      </blockquote>
+
+      <h2 class="mt-16 font-display text-heading-md font-semibold tracking-tight">
+        A system of record. A system of context. A system of action.
+      </h2>
+      <div class="mt-6 space-y-5 text-lg leading-relaxed text-ink-600">
+        <p>Not just a tool, not just a platform, but a true partner in driving your business growth.</p>
+        <p>This is the next generation CRM, and this is what we&rsquo;re building at Attio.</p>
+      </div>
+      <p class="mt-8">
+        <a href="/blog/ai-and-the-next-generation-of-CRM" class="font-semibold text-blue-500 underline underline-offset-2 hover:text-blue-600">
+          Read more about our product vision
+        </a>
+      </p>
+    </div>
+  </article>
+
+  <!-- Final quote carousel -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="What leaders say about the future of CRM">
+    <div class="mx-auto max-w-3xl text-center">
+      <blockquote id="final-quote" class="font-display text-2xl font-medium leading-snug tracking-tight sm:text-3xl">
+        {quoteParas(allQuotes[0].quote).map((para) => <p class="mt-3 first:mt-0">&ldquo;{para}&rdquo;</p>)}
+      </blockquote>
+      <p id="final-author" class="mt-6 text-base font-semibold">
+        {allQuotes[0].name} <span class="font-normal text-ink-600">, {allQuotes[0].title}, {allQuotes[0].company}</span>
+      </p>
+      <div class="mt-8 flex max-h-64 flex-wrap items-center justify-center gap-2 overflow-y-auto" role="group" aria-label="Choose a quote">
+        {
+          allQuotes.map((q, i) => (
+            <button
+              type="button"
+              data-final-quote={i}
+              class={`final-person rounded-full border px-3 py-1.5 text-xs font-semibold ${i === 0 ? "border-ink-100 bg-ink-100 text-white" : "border-ink-100 text-ink-100 hover:bg-paper-200"}`}
+              aria-pressed={i === 0 ? "true" : "false"}
+            >
+              {q.name}
+            </button>
+          ))
+        }
+      </div>
+      <p class="mt-10 text-sm leading-relaxed text-ink-700">
+        Illustrations by <a href="https://www.jonnyruzzo.com/" class="font-semibold text-ink-100 underline underline-offset-2">Jonny Ruzzo</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Closing -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-24 text-center sm:px-6" aria-label="Ready to build your team's dream CRM?">
+    <h2 class="mx-auto max-w-3xl font-display text-heading-md font-semibold tracking-tight">
+      Ready to build your team&rsquo;s dream CRM?
+    </h2>
+    <div class="mx-auto mt-8 flex max-w-xl flex-col items-center gap-3 sm:flex-row">
+      <a
+        href="/go/welcome/sign-in"
+        class="w-full rounded-full bg-ink-100 px-6 py-3 text-sm font-semibold text-white hover:bg-ink-300 sm:w-auto"
+      >
+        Try for free
+      </a>
+      <form id="demo-form" class="flex w-full flex-1 gap-2" novalidate>
+        <label for="demo-email" class="sr-only">Your email address</label>
+        <input
+          id="demo-email"
+          name="email"
+          type="email"
+          placeholder="Your email address"
+          autocomplete="email"
+          class="min-w-0 flex-1 rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 placeholder:text-ink-700 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+        />
+        <button
+          type="submit"
+          class="shrink-0 rounded-full border border-ink-100 px-5 py-3 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+        >
+          Send me a demo
+        </button>
+      </form>
+      <a href="/contact/sales" class="px-4 py-3 text-sm font-semibold text-ink-100 underline underline-offset-4">
+        Talk to Sales
+      </a>
+    </div>
+    <p id="demo-error" class="mt-3 hidden text-sm font-medium text-red-500" role="alert">
+      Please enter a valid email address
+    </p>
+    <p id="demo-success" class="mt-3 hidden text-base font-semibold text-ink-100" role="status">
+      We&rsquo;ll be in touch soon!
+    </p>
+  </section>
+
+  <script define:vars={{ introQuotes, allQuotes }}>
+    const clean = (text) => text.replace(/\u2014/g, ",");
+    const renderQuote = (el, authorEl, quote) => {
+      const paras = clean(quote.quote)
+        .split(/\n+/)
+        .map((p) => p.trim())
+        .filter(Boolean);
+      el.innerHTML = paras.map((p) => `<p class="mt-3 first:mt-0">&ldquo;${p}&rdquo;</p>`).join("");
+      authorEl.innerHTML = `${quote.name} <span class="font-normal text-ink-600">, ${quote.title}, ${quote.company}</span>`;
+    };
+    const paintButtons = (buttons, activeIdx) => {
+      buttons.forEach((button, i) => {
+        const active = i === activeIdx;
+        button.setAttribute("aria-pressed", String(active));
+        button.classList.toggle("bg-ink-100", active);
+        button.classList.toggle("text-white", active);
+      });
+    };
+
+    const introQuoteEl = document.getElementById("intro-quote");
+    const introAuthorEl = document.getElementById("intro-author");
+    const introButtons = Array.from(document.querySelectorAll("[data-intro-quote]"));
+    introButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const idx = Number(button.dataset.introQuote);
+        renderQuote(introQuoteEl, introAuthorEl, introQuotes[idx]);
+        paintButtons(introButtons, idx);
+      });
+    });
+
+    const finalQuoteEl = document.getElementById("final-quote");
+    const finalAuthorEl = document.getElementById("final-author");
+    const finalButtons = Array.from(document.querySelectorAll("[data-final-quote]"));
+    finalButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const idx = Number(button.dataset.finalQuote);
+        renderQuote(finalQuoteEl, finalAuthorEl, allQuotes[idx]);
+        paintButtons(finalButtons, idx);
+      });
+    });
+
+    // Demo form: client-side only, no backend.
+    const demoForm = document.getElementById("demo-form");
+    const demoEmail = document.getElementById("demo-email");
+    const demoError = document.getElementById("demo-error");
+    const demoSuccess = document.getElementById("demo-success");
+    demoForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(demoEmail.value.trim());
+      if (!valid) {
+        demoError.classList.remove("hidden");
+        demoEmail.focus();
+        return;
+      }
+      demoError.classList.add("hidden");
+      demoForm.classList.add("hidden");
+      demoSuccess.classList.remove("hidden");
+    });
+  </script>
+</BaseLayout>

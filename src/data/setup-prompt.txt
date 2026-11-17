@@ -1,0 +1,90 @@
+You are an expert in CRM strategy and the Attio platform. I'm a startup on Attio's Startup Plan and I need help designing my Attio workspace from scratch. Please guide me through a structured setup conversation.
+
+About my business:
+- Company name: [your company name]
+- What we do: [brief description of your product/service]
+- Stage: [pre-revenue / early revenue / scaling]
+- Team size using Attio: [e.g. 2–5 people]
+- Primary go-to-market motion: [sales-led / product-led / community-led / mix]
+
+The key things I need help with:
+
+1. DATA MODEL
+Attio's data model is built around Objects (types of things you track), Attributes (fields on those objects), and Lists (process-specific subsets of records).
+Standard objects Attio gives you by default: Companies, People, Deals, Workspaces (accounts), Users (product users).
+
+Please help me think through:
+a) Which objects are likely to be useful? Based on my GTM motion, which default objects make sense to start with? Are there any custom objects that might be worth considering given what I've described?
+b) What attributes might I add to each object? What stages could work for my pipeline? What fields are commonly useful at my stage for tracking deals, companies, and any custom objects?
+c) How might my objects relate to each other? For example: should Deals link to Companies AND People? Are there other relationships that could be valuable given my setup?
+d) Where does customer data typically live post-close? What are the options , Attio's built-in Workspaces/Users objects vs. a custom Customers object , and what are the tradeoffs for a startup at my stage?
+e) Which processes might work better as Lists? Lists can work well for things like fundraising pipeline, investor outreach, recruiting, customer onboarding, and renewals , they let you add process-specific stages and attributes without adding complexity to your core objects.
+
+Based on my answers, please suggest:
+- A starting data model (objects + any custom objects that seem relevant)
+- Possible pipeline stages for my Deals (or equivalent) object
+- 5–8 attributes to consider for each object, each with: attribute name, attribute type (text, number, select, multi-select, date, checkbox, relationship, currency, URL, email, phone, or record reference), and a one-line description of what it tracks
+- Lists that could be useful given my processes
+- Relationship attributes worth considering
+
+Where my description leaves things ambiguous, flag it and suggest a sensible default rather than leaving it open-ended , I can always adjust once I'm in the product.
+
+2. WORKFLOWS & AUTOMATION
+Attio workflows let you automate actions when records change , e.g. notify Slack, create tasks, enroll contacts in email sequences, send HTTP requests to external tools.
+
+Common first workflows for startups:
+- Notify Slack when a deal moves to a stage
+- Create a follow-up task when a deal is created
+- Add a closed-won company to a customer list automatically
+- Enroll a new inbound lead in a welcome email sequence
+- Alert the team when a deal has had no activity for 14 days
+
+Based on my go-to-market motion and process, suggest:
+- 3–5 workflows that seem like a good starting point
+- The trigger and key actions for each one
+- Any sequences (multi-step email automations) that could be useful
+
+3. VIEWS & REPORTING
+Views help my team navigate data efficiently. Reports track the metrics that matter.
+
+Please suggest:
+- Useful views to set up for each object (e.g. kanban by stage, table filtered by owner, sorted by last interaction)
+- 2–3 reports worth building early (e.g. pipeline by stage and owner, deals closed this month, lead source breakdown)
+- Any Ask Attio prompts worth saving for recurring questions (e.g. "Which deals haven't had activity in 14 days?")
+
+4. INTEGRATIONS
+Attio integrates natively with: Gmail/Outlook (email + calendar sync), Slack, Granola, Typeform, LinkedIn, and more. It also supports API, webhooks, Zapier, and n8n for custom connections. The Attio MCP connects AI tools like Claude directly to the CRM.
+
+My current tech stack: [list the tools your team uses , e.g. Gmail, Slack, Notion, Stripe, etc.]
+
+Based on my stack, tell me:
+- Which integrations are likely most valuable to set up early and why
+- Whether a native integration, Zapier, or the API makes more sense for each tool
+- Whether the Attio MCP might be useful for my team
+
+OUTPUT FORMAT
+Please structure your response as:
+
+1. Suggested Data Model
+- Objects to use (and why they fit my description)
+- Custom objects to consider (if any seem relevant)
+- Pipeline stages for Deals (or equivalent)
+- Attributes to consider per object, each with: attribute name, attribute type, and a one-line description
+- Lists worth creating
+- Relationship attributes to consider
+
+2. Workflows to Consider
+- Workflow name, trigger, and actions for each
+
+3. Views & Reports
+- Views to create per object
+- Reports to build
+- Ask Attio prompts to save
+
+4. Integration Priority
+- Integration name, method (native/Zapier/API), and reason
+
+5. Where to Start
+- A suggested sequence for building this out , framed as a starting point, not a strict plan
+
+Where my description doesn't give you enough to go on, make a reasonable assumption for a startup at my stage and note what you assumed. I'd rather have a concrete suggestion I can push back on than an open question.

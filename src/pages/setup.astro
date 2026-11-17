@@ -1,0 +1,512 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import promptTemplate from "../data/setup-prompt.txt?raw";
+
+// Copy fetched live from https://attio.com/setup on 2026-11-17 (HTTP 200).
+// Live H1 is "Attio Setup Playbook" with the eyebrow "/ Setup playbook". The
+// AI prompt generator template (5,351 characters) is the live template,
+// captured verbatim from the live page; the form fields update it as you
+// type and Copy copies it to the clipboard. All 5 phases and all 28
+// checklist items (titles, descriptions, Learn more links) are live copy.
+// Live has no standard FinalCta, so hideFinalCta is used. Checklist state
+// persists in localStorage so you can pick up where you left off.
+// Live em dashes in section copy are rendered as commas, per the build rule.
+type ChecklistLink = { label: string; href: string };
+type ChecklistItem = { id: string; title: string; body: string; links?: ChecklistLink[] };
+type Phase = { id: string; title: string; intro: string; items: ChecklistItem[] };
+
+const phases: Phase[] = [
+  {
+    id: "data-model",
+    title: "Data model",
+    intro:
+      "Your data model defines the structure of your Attio workspace, the objects (data types like Companies, Deals or Customers), the attributes on each, and how they relate to each other. The core decisions are: what your pipeline looks like, whether you need custom objects beyond Attio's standard objects, and where customer data lives after a deal closes.",
+    items: [
+      {
+        id: "data-model--primary-use-case",
+        title: "Decide your primary use case",
+        body: "Sales, customer success, or a mix? Your answer determines which default objects you'll actually need.",
+      },
+      {
+        id: "data-model--ai-prompt",
+        title: "Use the AI prompt above to get a personalised data model recommendation",
+        body: "Fill in your business details and paste the prompt into Claude or ChatGPT. The output will give you recommended objects, attributes, pipeline stages, and relationship structure, use it as your blueprint before building anything in Attio. It will also suggest relevant use cases and integrations which you can action in the later steps of the playbook.",
+      },
+      {
+        id: "data-model--deals-object",
+        title: "Set up the Deals object for your pipeline tracking",
+        body: "Attio's Deals object is built for tracking opportunities. Use the attributes and stages your team uses today.",
+      },
+      {
+        id: "data-model--custom-objects",
+        title: "Decide which data types (if any) need a custom object, then create them",
+        body: "Custom objects let you track data that doesn't fit into Attio's standard objects (Companies, People, Deals, Users and Workspaces). Create one when a data type (like invoices, products or partnerships) has its own specific attributes, needs two-way relationships to other objects, or would clutter existing objects if added there. If you're unsure, start with the defaults and add a custom object later.",
+        links: [
+          { label: "Custom objects", href: "/help/reference/managing-your-data/objects/create-and-manage-custom-objects" },
+          { label: "Relationship attributes", href: "/help/reference/managing-your-data/attributes/relationship-attributes" },
+        ],
+      },
+      {
+        id: "data-model--post-close",
+        title: "Decide where customer data lives after a deal closes",
+        body: "Attio has two built-in objects for this: Workspaces (accounts) and Users (the individual people using your product). These are designed to be populated with live product data via API or reverse ETL. Alternatively, create a custom Customers or Accounts object for your CS team.",
+        links: [
+          { label: "Workspaces & Users objects", href: "/help/reference/attio-101/attios-data-model/define-your-data-model-objects-lists-and-views#workspaces-and-users-objects" },
+        ],
+      },
+      {
+        id: "data-model--customer-attributes",
+        title: "Add the attributes your CS or account management team needs on the customer record",
+        body: "Common post-close attributes: contract start/end date, status, subscription value, number of seats, activity.",
+        links: [
+          { label: "Create & manage attributes", href: "/help/reference/managing-your-data/attributes/create-manage-attributes" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "data-migration",
+    title: "Data migration",
+    intro:
+      "Get your existing data into Attio, whether it's from a spreadsheet or another CRM. The main decisions are how much data you want to bring over, whether you need to clean up the data beforehand, and which import method to use.",
+    items: [
+      {
+        id: "data-migration--import-method",
+        title: "Decide your import method: CSV, Import2, API, or migration expert",
+        body: "CSV is best for straightforward imports of companies, people, and deals. Import2 handles structured CRM migrations automatically. The Attio API gives you full control for custom data. An Attio Expert is the fastest route for complex or large migrations.",
+        links: [
+          { label: "Migrate data from another CRM", href: "/help/reference/imports-exports/migrate-data-from-another-crm" },
+        ],
+      },
+      {
+        id: "data-migration--import2-clean",
+        title: "If using Import2: delete all existing records and remove all mailbox syncs first",
+        body: "Import2 creates new records, it won't update or merge with records that already exist in your workspace. Start with a clean workspace to ensure all data is migrated over.",
+      },
+      {
+        id: "data-migration--csv-guide",
+        title: "Read the CSV import guide, check required attributes, unique fields, and formatting rules",
+        body: "Every object has required fields and unique identifier fields (e.g. domain for Companies, email for People) and formatting matters. Review the guide before preparing your file.",
+        links: [{ label: "CSV imports", href: "/help/reference/imports-exports/csv-imports" }],
+      },
+      {
+        id: "data-migration--api-import2",
+        title: "Use the API or Import2 to migrate records that can't be imported via CSV",
+        body: "CSV imports cover records and their attributes. Notes, tasks, and comments cannot be imported via CSV, use the Attio API to script these yourself, or use a migration partner. The same API approach can be used to create any record type programmatically.",
+        links: [{ label: "Find a migration expert", href: "/experts" }],
+      },
+    ],
+  },
+  {
+    id: "integrations",
+    title: "Integrations",
+    intro:
+      "Integrations connect Attio to the rest of your tech stack, syncing communications, product data, billing and any other tools your team relies on.",
+    items: [
+      {
+        id: "integrations--mailbox",
+        title: "Connect your mailbox and call recorder",
+        body: "Connect your mailbox in your Account Settings and choose your visibility setting: Full access (others can read full email body), Subject + metadata, or Metadata only. Enable the call recorder to automatically record external meetings.",
+        links: [{ label: "Sharing emails", href: "/help/reference/email-calendar/sharing-emails" }],
+      },
+      {
+        id: "integrations--block-lists",
+        title: "Set up personal block lists for any emails you want to keep off your own records",
+        body: "Add email addresses you don't want showing up on CRM records. Each team member needs to do this individually, block lists are per user, not workspace wide.",
+      },
+      {
+        id: "integrations--slack",
+        title: "Connect Slack to get Attio context directly in your Slack with Ask Attio",
+        body: "Query your Attio data directly in Slack chats and send key updates to Slack via workflows.",
+        links: [{ label: "Slack app", href: "/help/reference/apps/communication-apps/slack-app" }],
+      },
+      {
+        id: "integrations--native",
+        title: "Install any other native integrations your team uses",
+        body: "In Apps & integrations, search for tools you already use.",
+        links: [{ label: "Browse all integrations", href: "/apps" }],
+      },
+      {
+        id: "integrations--custom",
+        title: "For tools without a native integration: set up a custom connection via API, webhooks, or no/low-code tools like Zapier or n8n",
+        body: "Use Attio's workflow HTTP request block to push data to external tools on trigger, use a no-code automation platform to sync records bidirectionally, or create a custom script using the API. Choose the approach that matches your team's technical comfort.",
+      },
+      {
+        id: "integrations--product-usage",
+        title: "Sync customer product usage data to Workspaces and Users via API, rETL, or Segment",
+        body: "Populate Attio's Workspaces (accounts) and Users (individual users of those accounts) with live data directly from your product or data warehouse. This gives your GTM teams real-time product context alongside their CRM data.",
+      },
+      {
+        id: "integrations--mcp",
+        title: "Connect Attio to Claude or your AI tool of choice via the MCP",
+        body: "The Attio MCP lets AI agents read and write directly to your CRM, enabling automated data enrichment, bulk updates, and AI-powered workflows.",
+        links: [{ label: "Attio MCP", href: "/help/reference/attio-ai/attio-mcp" }],
+      },
+    ],
+  },
+  {
+    id: "daily-use-cases",
+    title: "Daily use cases",
+    intro:
+      "These are the tasks and processes your team runs every day. Create views and reports to surface key data, lists to manage specific processes, automations for repetitive tasks, and AI to run tasks and surface insights on demand.",
+    items: [
+      {
+        id: "daily-use-cases--views",
+        title: "Create views for the most common tasks and processes",
+        body: "For Deals: create a kanban board view by stage, a table view of all active deals, and views filtered by deal owner. For Workspaces or Users: filter by product usage data to create views that surface expansion opportunities or churn risk.",
+        links: [{ label: "Views", href: "/help/reference/managing-your-data/views" }],
+      },
+      {
+        id: "daily-use-cases--lists",
+        title: "Decide which processes or subsets of records should have their own list",
+        body: "Lists are ideal for managing specific processes with their own stages and attributes, attributes added to a list only apply to records in that list. Common examples: fundraising, recruiting, customer success, customer onboarding.",
+        links: [{ label: "Lists", href: "/help/reference/managing-your-data/lists" }],
+      },
+      {
+        id: "daily-use-cases--workflows",
+        title: "Identify the most-repeated manual tasks your team does today and build workflows for them",
+        body: "Common first workflows: notify Slack when a deal is won, enroll a new lead to an email sequence, set follow-up reminders for stale deals.",
+        links: [{ label: "Workflows", href: "/help/reference/automations/workflows" }],
+      },
+      {
+        id: "daily-use-cases--sequences",
+        title: "Decide which repeating email patterns could be turned into a sequence",
+        body: "Automate email sending and follow-ups. Common use cases: inbound lead outreach, welcome emails when a contact is onboarded. People can be enrolled to a sequence manually, or automate it with a workflow.",
+        links: [{ label: "Sequences", href: "/help/reference/automations/sequences" }],
+      },
+      {
+        id: "daily-use-cases--reports",
+        title: "Build your first reports on the metrics that matter most",
+        body: "Example: active pipeline by deal stage and deal owner. Select Insight report, set metric to deal value, grouped by deal stage and segmented by deal owner. Toggle off stacked bars and non-active stages (e.g. hold, won, lost) to keep the view clean.",
+      },
+    ],
+  },
+  {
+    id: "training-rollout",
+    title: "Team training & rollout",
+    intro:
+      "Once you've completed your setup, it's time to onboard the rest of your team and ensure they know how to use Attio in their day to day.",
+    items: [
+      {
+        id: "training-rollout--record-layouts",
+        title: "Configure record page layouts for each object",
+        body: "Go to each object and customise the record page layout so the most important attributes are highlighted. Select your widgets, create sections to group attributes, and add tabs for related records. This determines what the team sees when they open any company, person, or deal record.",
+        links: [
+          { label: "Configure record pages", href: "/help/reference/managing-your-data/records/configure-record-pages" },
+        ],
+      },
+      {
+        id: "training-rollout--templates",
+        title: "Set up templates: emails, notes, Ask Attio prompts, and call insight templates",
+        body: "Templates save the team time and ensure consistency. Create email templates for common outreach, note templates for meeting formats, shared Ask Attio prompts for recurring questions, and call insight templates to extract consistent data from recordings.",
+        links: [
+          { label: "Note templates", href: "/help/reference/productivity-collaborating/notes#note-templates" },
+          { label: "Call insight templates", href: "/help/reference/productivity-collaborating/call-intelligence/create-insight-templates-for-call-recordings" },
+          { label: "Email templates", href: "/help/reference/email-calendar/send-emails-in-attio#email-templates" },
+        ],
+      },
+      {
+        id: "training-rollout--documentation",
+        title: "Document the key setup and processes the team needs to know",
+        body: "Write up which objects and lists exist and what they're for, which workflows are running in the background and which ones the team needs to trigger, which integrations are set up, and where to log things (e.g. notes go on the company record).",
+        links: [{ label: "Attio Academy", href: "/help/academy" }],
+      },
+      {
+        id: "training-rollout--invite-users",
+        title: "Invite your users and have each person connect their email and call recorder",
+        body: "Go to Workspace settings → Members and teams. Once they're in, each person can connect their mailbox and enable the call recorder.",
+        links: [
+          { label: "Manage members & admins", href: "/help/reference/workspace-settings-billing/manage-members-and-admins" },
+        ],
+      },
+      {
+        id: "training-rollout--walkthrough",
+        title: "Run a live walkthrough in the first week",
+        body: "Centre your training around how the team needs to work on a daily basis. They don't need to know how you set up an integration, but they'll need to know where that data goes and what they should do with it.",
+      },
+      {
+        id: "training-rollout--support",
+        title: "Share support resources with the whole team",
+        body: "Let the team know: the ? icon in Attio opens the support chat and links to the Help Center and Academy, they can join the Community for workshops and sign up to the Changelog to stay up to date with new features.",
+        links: [
+          { label: "Help center", href: "/help" },
+          { label: "Community", href: "https://attio.community" },
+          { label: "Changelog", href: "/changelog" },
+        ],
+      },
+    ],
+  },
+];
+
+const totalSteps = phases.reduce((sum, phase) => sum + phase.items.length, 0);
+---
+
+<BaseLayout
+  title="Setup playbook | Attio"
+  description="Five phases to take your workspace from empty to fully adopted. Work through each step, check it off as you go, and pick up right where you left off."
+  hideFinalCta
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 pt-16 sm:px-6 sm:pt-24">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-ink-700">/ Setup playbook</p>
+    <h1 class="mt-6 font-display text-[56px] font-semibold leading-[1.05] tracking-tight sm:text-[72px]">
+      Attio Setup Playbook
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl">
+      Five phases to take your workspace from empty to fully adopted. Work through each step, check it off as
+      you go, and pick up right where you left off.
+    </p>
+    <p id="setup-progress" class="mt-6 text-sm font-semibold text-ink-100" role="status">
+      0 of {totalSteps} steps complete
+    </p>
+  </section>
+
+  <!-- Table of Contents -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-12 sm:px-6" aria-label="Table of Contents">
+    <h2 class="font-display text-heading-sm font-semibold tracking-tight">Table of Contents</h2>
+    <div class="mt-6 flex flex-wrap gap-3">
+      {
+        phases.map((phase) => (
+          <a
+            href={`#${phase.id}`}
+            class="rounded-full border border-ink-100 px-5 py-2.5 text-sm font-semibold text-ink-100 hover:bg-paper-200"
+          >
+            {phase.title}
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- AI prompt generator -->
+  <section class="mx-auto max-w-[1200px] px-4 pb-20 sm:px-6" aria-label="AI prompt generator">
+    <div class="rounded-2xl border border-paper-500 bg-paper-200 p-6 sm:p-10">
+      <p class="max-w-3xl leading-relaxed text-ink-600">
+        Fill in your details below and the prompt updates as you type. Then copy it into Claude or ChatGPT to
+        get a personalised data model recommendation, your blueprint for the steps below.
+      </p>
+      <div class="mt-8 grid gap-6 lg:grid-cols-2">
+        <div class="space-y-5">
+          <div>
+            <label for="prompt-company" class="block text-sm font-semibold text-ink-100">Company name</label>
+            <input
+              id="prompt-company"
+              type="text"
+              placeholder="Your company name"
+              class="mt-2 w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 placeholder:text-ink-700 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+            />
+          </div>
+          <div>
+            <label for="prompt-stage" class="block text-sm font-semibold text-ink-100">Stage</label>
+            <select
+              id="prompt-stage"
+              class="mt-2 w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+            >
+              <option value="">Pre-revenue / early revenue / scaling</option>
+              <option value="Pre-revenue">Pre-revenue</option>
+              <option value="Early revenue">Early revenue</option>
+              <option value="Scaling">Scaling</option>
+            </select>
+          </div>
+          <div>
+            <label for="prompt-what" class="block text-sm font-semibold text-ink-100">What you do</label>
+            <textarea
+              id="prompt-what"
+              rows="3"
+              placeholder="Brief description of your product/service"
+              class="mt-2 w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 placeholder:text-ink-700 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+            ></textarea>
+          </div>
+          <div>
+            <label for="prompt-team" class="block text-sm font-semibold text-ink-100">Team size on Attio</label>
+            <select
+              id="prompt-team"
+              class="mt-2 w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+            >
+              <option value="">E.g. 2-5 people</option>
+              <option value="1 to 5">1 to 5</option>
+              <option value="6 to 10">6 to 10</option>
+              <option value="11 to 20">11 to 20</option>
+              <option value="21 to 50">21 to 50</option>
+              <option value="51 to 100">51 to 100</option>
+              <option value="101+">101+</option>
+            </select>
+          </div>
+          <div>
+            <label for="prompt-gtm" class="block text-sm font-semibold text-ink-100">Go-to-market motion</label>
+            <select
+              id="prompt-gtm"
+              class="mt-2 w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+            >
+              <option value="">Sales-led / product-led / community-led / mix</option>
+              <option value="Sales-led">Sales-led</option>
+              <option value="Product-led">Product-led</option>
+              <option value="Community-led">Community-led</option>
+              <option value="Mix">Mix</option>
+            </select>
+          </div>
+          <div>
+            <label for="prompt-tools" class="block text-sm font-semibold text-ink-100">Your current tech stack</label>
+            <textarea
+              id="prompt-tools"
+              rows="3"
+              placeholder="List the tools your team uses, e.g. Gmail, Slack, Notion, Stripe, etc."
+              class="mt-2 w-full rounded-[10px] border border-paper-500 bg-white px-4 py-3 text-sm text-ink-100 placeholder:text-ink-700 focus:border-blue-500 focus:outline-none focus:ring-[3px] focus:ring-blue-300"
+            ></textarea>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center justify-between gap-3">
+            <p class="text-sm font-semibold text-ink-100">Your prompt</p>
+            <button
+              type="button"
+              id="prompt-copy"
+              class="rounded-full bg-ink-100 px-5 py-2.5 text-sm font-semibold text-white hover:bg-ink-300"
+            >
+              Copy
+            </button>
+          </div>
+          <pre
+            id="prompt-preview"
+            class="mt-3 max-h-[560px] flex-1 overflow-auto whitespace-pre-wrap rounded-xl border border-paper-500 bg-white p-5 text-sm leading-relaxed text-ink-600"
+          >{promptTemplate}</pre>
+          <p id="prompt-count" class="mt-3 text-sm font-medium text-ink-600" role="status">
+            {promptTemplate.length.toLocaleString()} characters
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phases -->
+  {
+    phases.map((phase) => (
+      <section id={phase.id} class="mx-auto max-w-[1200px] scroll-mt-32 px-4 pb-20 sm:px-6" aria-label={phase.title}>
+        <h2 class="font-display text-heading-md font-semibold tracking-tight">{phase.title}</h2>
+        <p class="mt-4 max-w-3xl text-lg leading-relaxed text-ink-600">{phase.intro}</p>
+        <ul class="mt-8 space-y-4">
+          {phase.items.map((item) => (
+            <li class="rounded-2xl border border-paper-500 bg-white p-6 sm:p-8" data-step={item.id}>
+              <div class="flex items-start gap-4">
+                <button
+                  type="button"
+                  class="checklist-toggle mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-ink-800 bg-white text-base font-semibold text-white hover:border-blue-500"
+                  role="checkbox"
+                  aria-checked="false"
+                  aria-label={`Mark "${item.title}" as complete`}
+                />
+                <div class="min-w-0">
+                  <p class="text-base font-semibold leading-relaxed text-ink-100">{item.title}</p>
+                  <p class="mt-2 text-base leading-relaxed text-ink-600">{item.body}</p>
+                  {item.links && (
+                    <p class="mt-3 text-sm font-medium">
+                      <span class="text-ink-700">Learn more</span>{" "}
+                      {item.links.map((link, i) => (
+                        <>
+                          {i > 0 && <span class="text-ink-700">, </span>}
+                          <a href={link.href} class="text-blue-500 underline underline-offset-2 hover:text-blue-600">
+                            {link.label}
+                          </a>
+                        </>
+                      ))}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+
+  <script define:vars={{ promptTemplate, totalSteps }}>
+    // Prompt generator: live template with the form values substituted in.
+    const companyInput = document.getElementById("prompt-company");
+    const stageInput = document.getElementById("prompt-stage");
+    const whatInput = document.getElementById("prompt-what");
+    const teamInput = document.getElementById("prompt-team");
+    const gtmInput = document.getElementById("prompt-gtm");
+    const toolsInput = document.getElementById("prompt-tools");
+    const preview = document.getElementById("prompt-preview");
+    const countEl = document.getElementById("prompt-count");
+    const copyButton = document.getElementById("prompt-copy");
+
+    const renderPrompt = () => {
+      let text = promptTemplate;
+      text = text.replace("[your company name]", companyInput.value.trim() || "[your company name]");
+      text = text.replace(
+        "[brief description of your product/service]",
+        whatInput.value.trim() || "[brief description of your product/service]"
+      );
+      text = text.replace(
+        "[pre-revenue / early revenue / scaling]",
+        stageInput.value || "[pre-revenue / early revenue / scaling]"
+      );
+      text = text.replace("[e.g. 2\u20135 people]", teamInput.value ? `${teamInput.value} people` : "[e.g. 2\u20135 people]");
+      text = text.replace(
+        "[sales-led / product-led / community-led / mix]",
+        gtmInput.value || "[sales-led / product-led / community-led / mix]"
+      );
+      text = text.replace(
+        "[list the tools your team uses, e.g. Gmail, Slack, Notion, Stripe, etc.]",
+        toolsInput.value.trim() || "[list the tools your team uses, e.g. Gmail, Slack, Notion, Stripe, etc.]"
+      );
+      preview.textContent = text;
+      countEl.textContent = `${text.length.toLocaleString()} characters`;
+    };
+    [companyInput, stageInput, whatInput, teamInput, gtmInput, toolsInput].forEach((el) => {
+      el.addEventListener("input", renderPrompt);
+      el.addEventListener("change", renderPrompt);
+    });
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(preview.textContent);
+        copyButton.textContent = "Copied";
+      } catch {
+        copyButton.textContent = "Copy failed";
+      }
+      setTimeout(() => {
+        copyButton.textContent = "Copy";
+      }, 2000);
+    });
+
+    // Checklist: toggle, persist in localStorage, update the progress line.
+    const STORAGE_KEY = "setup-playbook-v1";
+    const progressEl = document.getElementById("setup-progress");
+    let done = new Set();
+    try {
+      done = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"));
+    } catch {
+      done = new Set();
+    }
+    const updateProgress = () => {
+      progressEl.textContent = `${done.size} of ${totalSteps} steps complete`;
+    };
+    document.querySelectorAll("[data-step]").forEach((item) => {
+      const id = item.dataset.step;
+      const toggle = item.querySelector(".checklist-toggle");
+      const paint = () => {
+        const isDone = done.has(id);
+        toggle.setAttribute("aria-checked", String(isDone));
+        toggle.textContent = isDone ? "\u2713" : "";
+        toggle.classList.toggle("bg-blue-500", isDone);
+        toggle.classList.toggle("border-blue-500", isDone);
+      };
+      paint();
+      toggle.addEventListener("click", () => {
+        if (done.has(id)) {
+          done.delete(id);
+        } else {
+          done.add(id);
+        }
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify([...done]));
+        } catch {}
+        paint();
+        updateProgress();
+      });
+    });
+    updateProgress();
+  </script>
+</BaseLayout>
